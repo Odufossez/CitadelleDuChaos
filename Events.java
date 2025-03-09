@@ -1188,6 +1188,7 @@ public class Events {
     public void event265() {
         event169();
     }
+    public void event266() {}
     public void event267() {
         event156();
     }
