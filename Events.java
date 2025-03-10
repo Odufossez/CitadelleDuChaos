@@ -221,7 +221,9 @@ public class Events {
         }
     }
     public void event26() {}
-    public void event27() {}
+    public void event27() {
+        event206();
+    }
     public void event28() {
         switch (choice){
             case 1: event2(); break;
@@ -270,7 +272,11 @@ public class Events {
             default: System.exit(1);
         }
     }
-    public void event39() {}
+    public void event39() {
+        switch (choice){
+            
+        }
+    }
     public void event40() {
         switch(choice) {
             case 1: event243(); break;
@@ -335,7 +341,14 @@ public class Events {
         }
     }
     public void event53() {}
-    public void event54() {}
+    public void event54() {
+        switch (choice){
+            case 1: event287(); break;
+            case 2: event160(); break;
+            case 3: event27(); break;
+            default: System.exit(1);
+        }
+    }
     public void event55() {
         switch (choice){
             case 1: event10(); break;
@@ -434,14 +447,23 @@ public class Events {
     public void event81() {
         event251();
     }
-    public void event82() {}
+    public void event82() {
+        //game over
+    }
     public void event83() {
         event245();
     }
     public void event84() {
         event234();
     }
-    public void event85() {}
+    public void event85() {
+        switch (choice){
+            case 1: event395(); break;
+            case 2: event248(); break;
+            case 3: event322(); break;
+            default: System.exit(1);
+        }
+    }
     public void event86() {
         event251();
     }
@@ -613,7 +635,13 @@ public class Events {
             default: System.exit(1);
         }
     }
-    public void event133() {}
+    public void event133() {
+        switch (choice){
+            case 1: event82(); break;
+            case 2: event206(); break;
+            default: System.exit(1);
+        }
+    }
     public void event134() {
         switch (choice){
             case 1: event169(); break;
@@ -737,7 +765,9 @@ public class Events {
     public void event159() {
         event323();
     }
-    public void event160() {}
+    public void event160() {
+        event206();
+    }
 
     public void event161() {
         switch (choice){
@@ -843,8 +873,22 @@ public class Events {
         event99();
     }
 
-    public void event181() {}
-    public void event182() {}
+    public void event181() {
+        switch (choice) {
+            case 1: event54(); break;
+            case 2: event25(); break;
+            default: System.exit(1);
+        }
+    }
+    public void event182() {
+        switch (choice){
+            case 1: event85(); break;
+            case 2: event395(); break;
+            case 3: event322(); break;
+            case 4: event248(); break;
+            default: System.exit(1);
+        }
+    }
     public void event183() {}
     public void event184() {}
     public void event185() {
@@ -937,6 +981,9 @@ public class Events {
             case 2: event309(); break;
             default: System.exit(1);
         }
+    }
+    public void event206() {
+        event182();
     }
     public void event207() {
         event188();
@@ -1076,6 +1123,13 @@ public class Events {
             default: System.exit(1);
         }
     }
+    public void event239() {
+        switch (choice){
+            case 1: event379(); break;
+            case 2: event82(); break;
+            default: System.exit(1);
+        }
+    }
 
     public void event242() {
         switch (choice){
@@ -1110,6 +1164,13 @@ public class Events {
         event174();
     }
     public void event247() {}
+    public void event248() {
+        switch (choice){
+            case 1: event103(); break;
+            case 2: break; //game over
+            default: System.exit(1);
+        }
+    }
     public void event249() {
         switch (choice){
             case 1: event392(); break;
@@ -1118,6 +1179,9 @@ public class Events {
         }
     }
 
+    public void event250() {
+        //game over
+    }
     public void event251() {
         switch (choice){
             case 1: event222(); break;
@@ -1188,7 +1252,13 @@ public class Events {
     public void event265() {
         event169();
     }
-    public void event266() {}
+    public void event266() {
+        switch (choice){
+            case 1: event54(); break;
+            case 2: event310(); break;
+            default: System.exit(1);
+        }
+    }
     public void event267() {
         event156();
     }
@@ -1278,6 +1348,14 @@ public class Events {
     }
     public void event286() {
         event140();
+    }
+    public void event287() {
+        switch (choice){
+            case 1: event25(); break;
+            case 2: event27(); break;
+            case 3: event160(); break;
+            default: System.exit(1);
+        }
     }
     public void event288() {
         switch (choice){
@@ -1380,7 +1458,14 @@ public class Events {
             default: System.exit(1);
         }
     }
-    public void event310() {}
+    public void event310() {
+        switch (choice){
+            case 1: event181(); break;
+            case 2: event250(); break;
+            case 3: event393(); break;
+            default: System.exit(1);
+        }
+    }
 
     public void event311(){
         switch (choice){
@@ -1420,6 +1505,14 @@ public class Events {
         switch (choice){
             case 1: event269(); break;
             case 2: event339(); break;
+            default: System.exit(1);
+        }
+    }
+    public void event322() {
+        switch (choice){
+            case 1: event39(); break;
+            case 2: event168(); break;
+            case 3: event291(); break;
             default: System.exit(1);
         }
     }
@@ -1613,7 +1706,9 @@ public class Events {
         //-4 pv
         event209();
     }
-    public void event379() {}
+    public void event379() {
+        event206();
+    }
     public void event380() {
         event213();
     }
@@ -1670,11 +1765,24 @@ public class Events {
     public void event392() {
         event196();
     }
-    public void event393() {}
+    public void event393() {
+        switch (choice){
+            case 1: event27(); break;
+            case 2: event25(); break;
+            default: System.exit(1);
+        }
+    }
     public void event394() {
         event251();
     }
-    public void event395() {}
+    public void event395() {
+        switch (choice){
+            case 1: event85(); break;
+            case 2: event322(); break;
+            case 3: event248(); break;
+            default: System.exit(1);
+        }
+    }
     public void event396() {}
     public void event397() {
         event69();
