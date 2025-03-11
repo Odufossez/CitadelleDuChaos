@@ -1,4 +1,3 @@
-import java.util.Random;
 import java.util.Scanner;
 
 /**
@@ -101,9 +100,11 @@ public class Events {
     }
     public void event3() {
         switch (choice){
-            case 1: event327();  break;
-            case 2: event59(); break;
+            case 1: event327(); break;
+            case 2: event59();  break;
             case 3: event236(); break;
+            case 4: event286(); break;
+            case 5: event366(); break;
             default: System.exit(1);
         }
     }
@@ -147,6 +148,7 @@ public class Events {
             case 2: event262(); break;
             case 3: event128(); break;
             case 4: event152(); break;
+            case 5: event16(); break;
             default: System.exit(1);
         }
     }
@@ -261,7 +263,9 @@ public class Events {
         event241();
     }
 
-    public void event31() {}
+    public void event31() {
+        event169();
+    }
     public void event32() {
         event251();
     }
@@ -381,7 +385,9 @@ public class Events {
             default: System.exit(1);
         }
     }
-    public void event53() {}
+    public void event53() {
+        event194();
+    }
     public void event54() {
         switch (choice){
             case 1: event287(); break;
@@ -457,7 +463,9 @@ public class Events {
     public void event65() {
         //game over
     }
-    public void event66() {}
+    public void event66() {
+        event270();
+    }
     public void event67() {
         switch (choice){
             case 1: event143(); break;
@@ -465,7 +473,14 @@ public class Events {
             default: System.exit(1);
         }
     }
-    public void event68() {}
+    public void event68() {
+        switch (choice){
+            case 1: event207(); break;
+            case 2: event22(); break;
+            case 3: event354(); break;
+            default: System.exit(1);
+        }
+    }
     public void event69() {
         event193();
     }
@@ -625,7 +640,14 @@ public class Events {
             default: System.exit(1);
         }
     }
-    public void event102() {}
+    public void event102() {
+        switch (choice){
+            case 1: event183(); break;
+            case 2: event396(); break;
+            case 3: event270(); break;
+            default: System.exit(1);
+        }
+    }
     public void event103() {
         //game over
     }
@@ -678,7 +700,9 @@ public class Events {
             default: System.exit(1);
         }
     }
-    public void event114() {}
+    public void event114() {
+        event218();
+    }
     public void event115() {
         event373();
     }
@@ -726,13 +750,22 @@ public class Events {
     public void event126() {
         event316();
     }
-    public void event127() {}
+    public void event127() {
+        switch (choice){
+            case 1: event53(); break;
+            case 2: event387(); break;
+            case 3: event240(); break;
+            case 4: event194(); break;
+            default: System.exit(1);
+        }
+    }
     public void event128() {
         switch (choice){
             case 1: event262(); break;
             case 2: event36(); break;
             case 3: event152(); break;
             case 4: event336(); break;
+            default: System.exit(1);
         }
     }
     public void event129() {
@@ -746,7 +779,9 @@ public class Events {
         event333();
     }
 
-    public void event131() {}
+    public void event131() {
+        event348();
+    }
     public void event132() {
         switch (choice){
             case 1: event18(); break;
@@ -785,6 +820,7 @@ public class Events {
         switch (choice){
             case 1: event14(); break;
             case 2: event383(); break;
+            default: System.exit(1);
         }
     }
     public void event138() {
@@ -1055,7 +1091,9 @@ public class Events {
             default: System.exit(1);
         }
     }
-    public void event183() {}
+    public void event183() {
+        event270();
+    }
     public void event184() {
         //game over
     }
@@ -1113,6 +1151,9 @@ public class Events {
             default: System.exit(1);
         }
     }
+    public void event194() {
+        //game over
+    }
     public void event195() {
         event377();
     }
@@ -1141,10 +1182,13 @@ public class Events {
         switch (choice){
             case 1: event237(); break;
             case 2: event98(); break;
+            default: System.exit(1);
         }
     }
 
-    public void event201() {}
+    public void event201() {
+        event270();
+    }
     public void event202() {
         //Game Over
     }
@@ -1242,8 +1286,17 @@ public class Events {
     public void event219() {
         event95();
     }
-    public void event220() {}
+    public void event220() {
+        switch (choice){
+            case 1: event243(); break;
+            case 2: event2(); break;
+            default: System.exit(1);
+        }
+    }
 
+    public void event221() {
+        event127();
+    }
     public void event222() {
         switch (choice){
             case 1: event137(); break;
@@ -1352,6 +1405,9 @@ public class Events {
             default: System.exit(1);
         }
     }
+    public void event240() {
+        event6();
+    }
 
     public void event241(){
         event77();
@@ -1388,7 +1444,9 @@ public class Events {
     public void event246() {
         event174();
     }
-    public void event247() {}
+    public void event247() {
+        event234();
+    }
     public void event248() {
         switch (choice){
             case 1: event103(); break;
@@ -1447,6 +1505,7 @@ public class Events {
             case 1: event237(); break;
             case 2: event357(); break;
             case 3: event200(); break;
+            default: System.exit(1);
         }
     }
     public void event259() {
@@ -1501,6 +1560,13 @@ public class Events {
             default: System.exit(1);
         }
     }
+    public void event270() {
+        switch (choice){
+            case 1: event185(); break;
+            case 2: event23(); break;
+            default: System.exit(1);
+        }
+    }
 
     public void event271() {
         switch (choice){
@@ -1532,7 +1598,11 @@ public class Events {
         }
     }
     public void event275() {
-        event272();
+        switch (choice){
+            case 1: event272(); break;
+            case 2: event399(); break;
+            default: System.exit(1);
+        }
     }
     public void event276() {
         switch (choice){
@@ -1775,7 +1845,12 @@ public class Events {
         }
     }
     public void event318() {
-        event277();
+        switch (choice) {
+            case 1: event277(); break;
+            case 2: event117(); break;
+            case 3: event381(); break;
+            default: System.exit(1);
+        }
     }
     public void event319() {
         event333();
@@ -1818,7 +1893,13 @@ public class Events {
     public void event325() {
         event177();
     }
-    public void event326() {}
+    public void event326() {
+        switch (choice){
+            case 1: event84(); break;
+            case 2: event31(); break;
+            default: System.exit(1);
+        }
+    }
     public void event327() {
         event366();
     }
@@ -1830,7 +1911,9 @@ public class Events {
             default: System.exit(1);
         }
     }
-    public void event329() {}
+    public void event329() {
+        event221();
+    }
     public void event330() {
         switch (choice){
             case 1: event208(); break;
@@ -1866,7 +1949,9 @@ public class Events {
             default: System.exit(1);
         }
     }
-    public void event337() {}
+    public void event337() {
+        event400();
+    }
     public void event338() {
         event90();
     }
@@ -1906,7 +1991,9 @@ public class Events {
             default: System.exit(1);
         }
     }
-    public void event345() {}
+    public void event345() {
+        event140();
+    }
     public void event346() {
         switch (choice){
             case 1: event2(); break;
@@ -1923,6 +2010,7 @@ public class Events {
             case 2: event207(); break;
             case 3: event22(); break;
             case 4: event354(); break;
+            default: System.exit(1);
         }
     }
     public void event349() {
@@ -2133,7 +2221,7 @@ public class Events {
         }
     }
     public void event387() {
-
+        event6();
     }
     public void event388() {
         event157();
@@ -2178,13 +2266,19 @@ public class Events {
             default: System.exit(1);
         }
     }
-    public void event396() {}
+    public void event396() {
+        event183();
+    }
     public void event397() {
         event69();
     }
     public void event398() {
         event79();
     }
-    public void event399() {}
-    public void event400() {}
+    public void event399() {
+        event272();
+    }
+    public void event400() {
+        //good ending
+    }
 }
