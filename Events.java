@@ -79,6 +79,7 @@ public class Events {
         }
     }
     public static void event3() {
+
         switch (choice){
             case 1: event327(); break;
             case 2: event59();  break;
@@ -132,7 +133,7 @@ public class Events {
             default: System.exit(1);
         }
     }
-    public void event12() {
+    public static void event12() {
         switch (choice){
             case 1: event274();  break;
             case 2: event335(); break;
@@ -293,7 +294,7 @@ public class Events {
     public static void event41() {
         event257();
     }
-    public void event42() {
+    public static void event42() {
         switch (choice){
             case 1: event138(); break;
             case 2: event91(); break;
@@ -336,7 +337,7 @@ public class Events {
             default: System.exit(1);
         }
     }
-    public void event48() {
+    public static void event48() {
         switch (choice){
             case 1: event199(); break;
             case 2: event232(); break;
@@ -365,17 +366,11 @@ public class Events {
             default: System.exit(1);
         }
     }
-<<<<<<< Updated upstream
     public static void event53() {
         event194();
     }
     public static void event54() {
-=======
-    public void event53() {
-        event194();
-    }
-    public void event54() {
->>>>>>> Stashed changes
+
         switch (choice){
             case 1: event287(); break;
             case 2: event160(); break;
@@ -432,7 +427,7 @@ public class Events {
     public static void event62() {
         event140();
     }
-    public void event63() {
+    public static void event63() {
         switch (choice){
             case 1: event263(); break;
             case 2: event135(); break;
@@ -450,17 +445,11 @@ public class Events {
     public static void event65() {
         //game over
     }
-<<<<<<< Updated upstream
+
     public static void event66() {
         event270();
     }
     public static void event67() {
-=======
-    public void event66() {
-        event270();
-    }
-    public void event67() {
->>>>>>> Stashed changes
         switch (choice){
             case 1: event143(); break;
             case 2: event226(); break;
@@ -634,11 +623,8 @@ public class Events {
             default: System.exit(1);
         }
     }
-<<<<<<< Updated upstream
+
     public static void event102() {
-=======
-    public void event102() {
->>>>>>> Stashed changes
         switch (choice){
             case 1: event183(); break;
             case 2: event396(); break;
@@ -646,11 +632,8 @@ public class Events {
             default: System.exit(1);
         }
     }
-<<<<<<< Updated upstream
+
     public static void event103() {
-=======
-    public void event103() {
->>>>>>> Stashed changes
         //game over
     }
     public static void event104() {
@@ -728,7 +711,7 @@ public class Events {
         event95();
     }
 
-    public void event121() {
+    public static void event121() {
         event257();
     }
     public static void event122() {
@@ -752,11 +735,7 @@ public class Events {
     public static void event126() {
         event316();
     }
-<<<<<<< Updated upstream
     public static void event127() {
-=======
-    public void event127() {
->>>>>>> Stashed changes
         switch (choice){
             case 1: event53(); break;
             case 2: event387(); break;
@@ -765,11 +744,7 @@ public class Events {
             default: System.exit(1);
         }
     }
-<<<<<<< Updated upstream
     public static void event128() {
-=======
-    public void event128() {
->>>>>>> Stashed changes
         switch (choice){
             case 1: event262(); break;
             case 2: event36(); break;
@@ -1101,17 +1076,11 @@ public class Events {
             default: System.exit(1);
         }
     }
-<<<<<<< Updated upstream
+
     public static void event183() {
         event270();
     }
     public static void event184() {
-=======
-    public void event183() {
-        event270();
-    }
-    public void event184() {
->>>>>>> Stashed changes
         //game over
     }
     public static void event185() {
@@ -1168,17 +1137,10 @@ public class Events {
             default: System.exit(1);
         }
     }
-<<<<<<< Updated upstream
     public static void event194() {
         //game over
     }
     public static void event195() {
-=======
-    public void event194() {
-        //game over
-    }
-    public void event195() {
->>>>>>> Stashed changes
         event377();
     }
     public static void event196() {
@@ -1202,7 +1164,7 @@ public class Events {
     public static void event199() {
         //game over
     }
-    public void event200() {
+    public static void event200() {
         switch (choice){
             case 1: event237(); break;
             case 2: event98(); break;
@@ -1210,17 +1172,10 @@ public class Events {
         }
     }
 
-<<<<<<< Updated upstream
     public static void event201() {
         event270();
     }
     public static void event202() {
-=======
-    public void event201() {
-        event270();
-    }
-    public void event202() {
->>>>>>> Stashed changes
         //Game Over
     }
     public static void event203() {
@@ -1230,7 +1185,7 @@ public class Events {
             default: System.exit(1);
         }
     }
-    public void event204() {
+    public static void event204() {
         event73();
     }
     public static void event205() {
@@ -1317,11 +1272,7 @@ public class Events {
     public static void event219() {
         event95();
     }
-<<<<<<< Updated upstream
     public static void event220() {
-=======
-    public void event220() {
->>>>>>> Stashed changes
         switch (choice){
             case 1: event243(); break;
             case 2: event2(); break;
@@ -1329,17 +1280,10 @@ public class Events {
         }
     }
 
-<<<<<<< Updated upstream
     public static void event221() {
         event127();
     }
     public static void event222() {
-=======
-    public void event221() {
-        event127();
-    }
-    public void event222() {
->>>>>>> Stashed changes
         switch (choice){
             case 1: event137(); break;
             case 2: event14(); break;
@@ -1447,18 +1391,15 @@ public class Events {
             default: System.exit(1);
         }
     }
-<<<<<<< Updated upstream
+
     public static void event240() {
-=======
-    public void event240() {
->>>>>>> Stashed changes
         event6();
     }
 
     public static void event241(){
         event77();
     }
-    public void event242() {
+    public static void event242() {
         switch (choice){
             case 1: event24(); break;
             case 2: event105(); break;
@@ -1490,17 +1431,10 @@ public class Events {
     public static void event246() {
         event174();
     }
-<<<<<<< Updated upstream
     public static void event247() {
         event234();
     }
     public static void event248() {
-=======
-    public void event247() {
-        event234();
-    }
-    public void event248() {
->>>>>>> Stashed changes
         switch (choice){
             case 1: event103(); break;
             case 2: break; //game over
@@ -1515,7 +1449,7 @@ public class Events {
         }
     }
 
-    public void event250() {
+    public static void event250() {
         //game over
     }
     public static void event251() {
@@ -1526,7 +1460,7 @@ public class Events {
             default: System.exit(1);
         }
     }
-    public void event252() {
+    public static void event252() {
         event229();
     }
     public static void event253() {
@@ -1561,9 +1495,6 @@ public class Events {
             default: System.exit(1);
         }
     }
-<<<<<<< Updated upstream
-    public static void event259() {
-=======
     public void event258() {
         switch (choice){
             case 1: event140(); break;
@@ -1571,8 +1502,7 @@ public class Events {
             default: System.exit(1);
         }
     }
-    public void event259() {
->>>>>>> Stashed changes
+    public static void event259() {
         event218();
     }
     public static void event260() {
@@ -1595,7 +1525,7 @@ public class Events {
     public static void event262() {
         event180();
     }
-    public void event263() {
+    public static void event263() {
         event326();
     }
     public static void event264() {
@@ -1625,11 +1555,7 @@ public class Events {
             default: System.exit(1);
         }
     }
-<<<<<<< Updated upstream
     public static void event270() {
-=======
-    public void event270() {
->>>>>>> Stashed changes
         switch (choice){
             case 1: event185(); break;
             case 2: event23(); break;
@@ -1644,7 +1570,7 @@ public class Events {
             default: System.exit(1);
         }
     }
-    public void event272() {
+    public static void event272() {
         switch (choice) {
             case 1: event95(); break;
             case 2: event242(); break;
@@ -1659,7 +1585,7 @@ public class Events {
             default: System.exit(1);
         }
     }
-    public void event274() {
+    public static void event274() {
         switch (choice){
             case 1: event353(); break;
             case 2: event277(); break;
@@ -1777,7 +1703,7 @@ public class Events {
         }
     }
 
-    public void event291() {
+    public static void event291() {
         event328();
     }
     public static void event292() {
@@ -1818,24 +1744,14 @@ public class Events {
     public static void event299() {
         event237();
     }
-<<<<<<< Updated upstream
-
     public static void event300() {
-=======
-    public void event300() {
->>>>>>> Stashed changes
         switch (choice){
             case 1: event244(); break;
             case 2: event346(); break;
             default: System.exit(1);
         }
     }
-<<<<<<< Updated upstream
     public static void event301() {
-=======
-
-    public void event301() {
->>>>>>> Stashed changes
         event323();
     }
     public static void event302() {
@@ -1852,7 +1768,7 @@ public class Events {
             default: System.exit(1);
         }
     }
-    public void event305() {
+    public static void event305() {
         event64();
     }
     public static void event306() {
@@ -1865,7 +1781,7 @@ public class Events {
     public static void event307() {
         event177();
     }
-    public void event308() {
+    public static void event308() {
         event257();
     }
     public static void event309() {
@@ -1884,7 +1800,7 @@ public class Events {
         }
     }
 
-    public void event311(){
+    public static void event311(){
         switch (choice){
             case 1: event61(); break;
             case 2: event178(); break;
@@ -1904,7 +1820,7 @@ public class Events {
     public static void event314() {
         event191();
     }
-    public void event315() {
+    public static void event315() {
         event191();
     }
     public static void event316() {
@@ -1922,26 +1838,18 @@ public class Events {
             default: System.exit(1);
         }
     }
-<<<<<<< Updated upstream
     public static void event318() {
-        switch (choice) {
-            case 1: event277(); break;
-            case 2: event117(); break;
-            case 3: event381(); break;
-=======
-    public void event318() {
         switch (choice){
             case 1: event381(); break;
             case 2: event117(); break;
             case 3: event277(); break;
->>>>>>> Stashed changes
             default: System.exit(1);
         }
     }
     public static void event319() {
         event333();
     }
-    public void event320() {
+    public static void event320() {
         switch (choice){
             case 1: event113(); break;
             case 2: event332(); break;
@@ -1979,23 +1887,14 @@ public class Events {
     public static void event325() {
         event177();
     }
-<<<<<<< Updated upstream
     public static void event326() {
-        switch (choice){
-=======
-    public void event326() {
         switch (choice) {
->>>>>>> Stashed changes
             case 1: event84(); break;
             case 2: event31(); break;
             default: System.exit(1);
         }
     }
-<<<<<<< Updated upstream
     public static void event327() {
-=======
-    public void event327() {
->>>>>>> Stashed changes
         event366();
     }
     public static void event328() {
@@ -2006,14 +1905,10 @@ public class Events {
             default: System.exit(1);
         }
     }
-<<<<<<< Updated upstream
     public static void event329() {
-=======
-    public void event329() {
->>>>>>> Stashed changes
         event221();
     }
-    public void event330() {
+    public static void event330() {
         switch (choice){
             case 1: event208(); break;
             case 2: event119(); break;
@@ -2024,7 +1919,7 @@ public class Events {
     public static void event331() {
         event265();
     }
-    public void event332() {
+    public static void event332() {
         switch (choice){
             case 1: event80(); break;
             case 2: event48(); break;
@@ -2051,7 +1946,7 @@ public class Events {
     public static void event337() {
         event400();
     }
-    public void event338() {
+    public static void event338() {
         event90();
     }
     public static void event339() {
@@ -2062,7 +1957,7 @@ public class Events {
         }
     }
 
-    public void event340 () {
+    public static void event340() {
         switch (choice){
             case 1: event64(); break;
             case 2: event62(); break;
@@ -2073,7 +1968,7 @@ public class Events {
         //formule magique
         event209();
     }
-    public void event342() {
+    public static void event342() {
         //game over
     }
     public static void event343() {
@@ -2119,7 +2014,7 @@ public class Events {
         event218();
     }
 
-    public void event351() {
+    public static void event351() {
         event400();
     }
     public static void event352() {
@@ -2137,10 +2032,10 @@ public class Events {
     public static void event354() {
         event188();
     }
-    public void event355() {
+    public static void event355() {
         event351();
     }
-    public void event356() {
+    public static void event356() {
         switch (choice){
             case 1: event146(); break;
             case 2: event185(); break;
@@ -2148,30 +2043,21 @@ public class Events {
             default: System.exit(1);
         }
     }
-    public void event357() {
+    public static void event357() {
         event200();
     }
-<<<<<<< Updated upstream
-    public static void event359() {
-        event29();
-    }
-=======
->>>>>>> Stashed changes
-    public void event358() {
+
+    public static void event358() {
         switch (choice) {
             case 1: event148(); break;
             case 2: event256(); break;
             default: System.exit(1);
         }
     }
-<<<<<<< Updated upstream
-    public static void event360() {
-=======
-    public void event359() {
+    public static void event359() {
         event29();
     }
-    public void event360() {
->>>>>>> Stashed changes
+    public static void event360() {
         switch (choice){
             case 1: event229(); break;
             case 2: event184(); break;
@@ -2226,7 +2112,7 @@ public class Events {
     public static void event368() {
         event15();
     }
-    public void event369() {
+    public static void event369() {
         //game over
     }
     public static void event370() {
@@ -2290,7 +2176,7 @@ public class Events {
         event213();
     }
 
-    public void event381() {
+    public static void event381() {
         event400();
     }
     public static void event382() {
@@ -2322,7 +2208,7 @@ public class Events {
             default: System.exit(1);
         }
     }
-    public void event386() {
+    public static void event386() {
         switch (choice){
             case 1: event204(); break;
             case 2: event108(); break;
@@ -2357,7 +2243,7 @@ public class Events {
     public static void event392() {
         event196();
     }
-    public void event393() {
+    public static void event393() {
         switch (choice){
             case 1: event27(); break;
             case 2: event25(); break;
@@ -2368,37 +2254,34 @@ public class Events {
         event251();
     }
     public static void event395() {
-        switch (choice){
-            case 1: event85(); break;
-            case 2: event322(); break;
-            case 3: event248(); break;
-            default: System.exit(1);
+        switch (choice) {
+            case 1:
+                event85();
+                break;
+            case 2:
+                event322();
+                break;
+            case 3:
+                event248();
+                break;
+            default:
+                System.exit(1);
         }
     }
-<<<<<<< Updated upstream
     public static void event396() {
         event183();
     }
     public static void event397() {
-=======
-    public void event396() {
-        event183();
+
     }
-    public void event397() {
->>>>>>> Stashed changes
-        event69();
-    }
-    public static void event398() {
+    public static void event398 () {
         event79();
     }
-    public void event399() {
+    public static void event399() {
         event272();
     }
-<<<<<<< Updated upstream
-    public static void event400() {
+    public static void event400 () {
         //good ending
     }
-=======
-    public void event400() {}
->>>>>>> Stashed changes
 }
+
