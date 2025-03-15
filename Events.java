@@ -1,41 +1,29 @@
 import java.io.IOException;
 import java.util.Scanner;
 
-/**
- * ERROR STATUS :
- * 1 : WRONG INPUT CHOICE
- */
 
 public class Events {
     static Scanner input = new Scanner(System.in);
     static int choice;
+    static String pathToEvents = "CitadelleDuChaos/events_texts/";
+    static String pathToChoices = "CitadelleDuChaos/choices_text/";
 
     public static void intro() throws IOException {
-        Affichage.affichage("CitadelleDuChaos/ressources/Event_Intro_text.txt");
+        Affichage.affichage(pathToEvents+"Event_Intro_text.txt");
+        Affichage.afficheSuite();
+        while(!Affichage.detectClickSuite()){
+            continue;
+        }
         event1();
     }
-    public static void event1(){
-        System.out.println("""
-                Le soleil se couche ; et tandis que l'obscurité s'installe, vous entreprenez l'escalade de la montagne
-                en direction de la silhouette menaçante qui se dresse dans la nuit. La Citadelle du Chaos se trouve à moins
-                d'une heure de marche. À quelque distance des remparts, vous vous arrêtez pour vous reposer et la Citadelle
-                vous semble alors un immense et redoutable fantôme auquel il serait impossible d'échapper. Vous contemplez
-                cette masse imposante et un frisson de peur vous parcourt l'échiné. Vous avez honte cependant d'éprouver
-                cette crainte et, avec une froide détermination, vous continuez à grimper jusqu'au portail d'entrée
-                dont vous savez qu'il est surveillé par des gardes. En même temps, vous réfléchissez à ce que vous allez
-                dire. Vous avez pensé à vous faire passer pour un herboriste venu soigner l'un des gardes atteint de fièvre.
-                Vous pourriez également vous présenter comme un marchand ou un artisan - un charpentier par exemple.
-                Vous pourriez même vous prétendre un vagabond en quête d'un abri pour la nuit. Tout en réfléchissant à
-                ces trois mensonges, vous atteignez le sentier qui mène au portail. Deux flambeaux brûlent de chaque côté de la herse.
-                À mesure que vous avancez, vous percevez des grognements étouffés et vous distinguez bientôt deux créatures hybrides.
-                À gauche, il s'agit d'un animal repoussant à la tête de chien posée sur un corps de grand singe. Du côté
-                opposé se tient son contraire : un monstre à tête de singe et au corps de molosse. Ce dernier s'avance
-                vers vous, s'arrête à quelques mètres, puis, se dressant sur ses pattes de derrière, vous demande qui vous êtes.
-                Quelle réponse allez-vous faire ?
-                """);
-
-        System.out.println("\n\n1. Prétendre être un herboriste  2. Se faire passer pour un marchand  3.Demander l'hospitalité pour la nuit");
-        choice = input.nextInt();
+    public static void event1() throws IOException {
+        Affichage.affichage(pathToEvents+"Event_1_text.txt");
+        Affichage.afficheTriple(pathToChoices+"event1_choice1.txt",pathToChoices+"event1_choice2.txt",
+                pathToChoices+"event1_choice3.txt");
+        while(Affichage.detectClickTriple() == 0){
+            continue;
+        }
+        choice = Affichage.detectClickTriple();
         switch (choice){
             case 1: event261(); break;
             case 2: event230(); break;
