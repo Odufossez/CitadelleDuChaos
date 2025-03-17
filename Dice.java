@@ -6,7 +6,7 @@ public class Dice {
         return rand.nextInt(6)+1;
     }
 
-    public int doubleDice(){
+    public static int doubleDice(){
         Random rand = new Random();
         return rand.nextInt(6)+1 + rand.nextInt(6)+1;
     }

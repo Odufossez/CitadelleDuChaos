@@ -1,7 +1,12 @@
 public class Monster {
-    public String name;
-    public int habiliy;
-    public int vitality;
+    private String name;
+    private int habiliy;
+    private int vitality;
+
+    public Monster(int habiliy, int vitality) {
+        this.habiliy = habiliy;
+        this.vitality = vitality;
+    }
 
     public void setName(String n_name) {
         name = n_name;
@@ -13,6 +18,18 @@ public class Monster {
 
     public void setVitality(int n_v) {
         vitality = n_v;
+    }
+
+    public int getHabiliy() {
+        return habiliy;
+    }
+
+    public int getVitality() {
+        return vitality;
+    }
+
+    public boolean checkVitality(){
+        return getVitality() > 0;
     }
 
     public String toString(){

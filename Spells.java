@@ -40,4 +40,8 @@ public class Spells {
         spells[11][0] = "12";
         spells[11][1] = "Télépathie";
     }
+
+    public String getSpellName(int spell){
+        return spells[spell][0];
+    }
 }

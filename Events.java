@@ -3,12 +3,19 @@ import java.util.Scanner;
 
 
 public class Events {
-    static Scanner input = new Scanner(System.in);
-    static int choice;
-    static String pathToEvents = "CitadelleDuChaos/events_texts/";
-    static String pathToChoices = "CitadelleDuChaos/choices_text/";
+    static private int choice;
+    static private final String pathToEvents = "CitadelleDuChaos/events_texts/";
+    static private final String pathToChoices = "CitadelleDuChaos/choices_text/";
+    static private String currentEvent;
+
+    public static String getCurrentEvent(){
+        return currentEvent;
+    }
+
+    public static void setCurrentEvent(String currentEvent){}
 
     public static void intro() throws IOException {
+        currentEvent = "intro";
         Affichage.affichage(pathToEvents+"Event_Intro_text.txt");
         Affichage.afficheSuite();
         while(!Affichage.detectClickSuite()){
@@ -17,6 +24,7 @@ public class Events {
         event1();
     }
     public static void event1() throws IOException {
+        currentEvent = "event1";
         Affichage.affichage(pathToEvents+"Event_1_text.txt");
         Affichage.afficheTriple(pathToChoices+"event1_choice1.txt",pathToChoices+"event1_choice2.txt",
                 pathToChoices+"event1_choice3.txt");
@@ -32,6 +40,7 @@ public class Events {
         }
     }
     public static void event2() {
+        currentEvent = "event2";
         switch (choice){
             case 1: event142(); break;
             case 2: event343(); break;

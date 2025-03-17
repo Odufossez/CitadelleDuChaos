@@ -10,6 +10,7 @@ import java.nio.file.Path;
 
 public class Affichage {
     static int suiteY;
+    static int precY = 1060;
     static int choiceY;
 
     /**
@@ -56,11 +57,22 @@ public class Affichage {
         } else return false;
     }
 
+    //public static boolean detectClickPrec(){}
+
+    public static void afficheMenuPrincipal(){}
+
+    public static void afficheCreationPerso(){}
+
     /**
      * Fonction pour afficher la flèche permettant de passer à la suite
      */
     public static void afficheSuite(){
-        /* Triangle suite du texte*/
+        StdDraw.line(1000 ,suiteY-200,1000,suiteY-60); //coté vertical du triangle
+        StdDraw.line(1000 , suiteY-60 , 1200 , suiteY-140); // coté diagonal haut
+        StdDraw.line(1000 , suiteY-200 , 1200 ,  suiteY-140); //coté diagonal bas
+    }
+
+    public static void affichePrec(){
         StdDraw.line(1000 ,suiteY-200,1000,suiteY-60); //coté vertical du triangle
         StdDraw.line(1000 , suiteY-60 , 1200 , suiteY-140); // coté diagonal haut
         StdDraw.line(1000 , suiteY-200 , 1200 ,  suiteY-140); //coté diagonal bas

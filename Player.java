@@ -1,12 +1,15 @@
 public class Player {
-    public String pseudo;
-    public int hability;
-    public int  vitality;
-    public int magic;
-    public int gold;
-    public int luck;
+    private String pseudo;
+    private int hability;
+    private int currentHab;
+    private int  vitality;
+    private int  currentVit;
+    private int magic;
+    private int gold;
+    private int luck;
+    private int[] spells;
 
-    public String[] inventory;
+    private String[] inventory;
 
     public void setNewPlayer(String n_pseudo , int  p_hability, int p_vitality, int p_magic, int p_gold , int p_luck){
         pseudo = n_pseudo;
@@ -15,14 +18,43 @@ public class Player {
         magic = p_magic;
         gold = 0;
         luck = p_luck;
+        spells = new int[magic];
     }
 
-    public int[] setSpells(int magic){
-        int[] spells = new int[magic];
+    public int getCurrentVitality(){
+        return currentVit;
+    }
+    public int getVitality(){
+        return vitality;
+    }
+    public void setCurrentVitality(int vit){
+        currentVit = vit;
+    }
 
+    public int getMagic(){
+        return magic;
+    }
+
+    public  int getGold(){return  gold;}
+
+    public int  getCurrentHab(){
+        return currentHab;
+    }
+    public int getHability(){return  hability;}
+
+    public int[] setSpells(){
         //remplir le grimoire avec la colonne [n][0]
 
         return spells;
+    }
+    public int[] getSpells(){return spells;}
+
+    public String getPseudo(){
+        return pseudo;
+    }
+
+    public String[] getInventory(){
+        return inventory;
     }
 
     public String toString(){
