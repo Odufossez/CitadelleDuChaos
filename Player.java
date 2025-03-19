@@ -30,10 +30,12 @@ public class Player {
     public void setCurrentVitality(int vit){
         currentVit = vit;
     }
+    public void setVitality(int vitality) {this.vitality = vitality;}
 
     public int getMagic(){
         return magic;
     }
+    public void setMagic(int magic) {this.magic = magic;}
 
     public  int getGold(){return  gold;}
 
@@ -41,6 +43,7 @@ public class Player {
         return currentHab;
     }
     public int getHability(){return  hability;}
+    public void setHability(int hability) {this.hability = hability;}
 
     public int[] setSpells(){
         //remplir le grimoire avec la colonne [n][0]

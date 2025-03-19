@@ -1,24 +1,18 @@
 import java.awt.Font;
+import java.awt.event.MouseEvent;
 import java.io.BufferedReader;
-import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Path;
-
 
 
 public class Affichage {
-    static int suiteY;
-    static int precY = 1060;
-    static int choiceY;
+    private static int suiteY;
+    private static int choiceY;
 
     /**
-     * Affichage du texte narratif de l'event en cours
-     * @param path : string menant au fichier .txt contenant le texte
-     * @throws IOException : gestion d'une erreur sur le path
+     * Initialisation des paramètres d'affichage de la fenêtre StdDraw
      */
-    public static void affichage(String path) throws IOException {
+    public static void paramAffichage() {
         StdDraw.clear();
         /*  Paramétrage de la police et de la fenêtre */
         Font font = new Font("Arial", Font.BOLD , 15);
@@ -29,6 +23,16 @@ public class Affichage {
 
         StdDraw.setTitle("Citadelle du Chaos");
         StdDraw.setFont(font);
+    }
+
+    /**
+     * Affichage du texte narratif d'event en cours
+     * @param path : string menant au fichier .txt contenant le texte
+     * @throws IOException : gestion d'une erreur sur le path
+     */
+    public static void affichageNarration(String path) throws IOException {
+
+        paramAffichage();
 
         /* Affichage du texte fourni par @path */
 
@@ -45,23 +49,59 @@ public class Affichage {
         }
     }
 
-    /**
-     * Détecte le clicque au bon endroit pour afficher une suite sans choix possible
-     * @return un boolean confirmant que le clic a été effectué au bon endroit
-     */
-    public static boolean detectClickSuite(){
-        if (StdDraw.isMousePressed() &&
-                (StdDraw.mouseX()>=1000 && StdDraw.mouseX()<=1200) &&
-                (StdDraw.mouseY()>=suiteY-200 && StdDraw.mouseY()<=suiteY-60)){
-            return true;
-        } else return false;
-    }
-
-    //public static boolean detectClickPrec(){}
-
     public static void afficheMenuPrincipal(){}
 
-    public static void afficheCreationPerso(){}
+    public static int detectClickMainMenu(){return 0;}
+
+    public static void afficheCreationPerso() throws IOException {
+        paramAffichage();
+        Font font = new Font("Arial", Font.BOLD , 25);
+        StdDraw.setFont(font);
+        StdDraw.text(100,1000 , "Création du personnage");
+
+        font = new Font("Arial" , Font.PLAIN , 15);
+        StdDraw.setFont(font);
+
+        int x=-1000 , y=500;
+        int playerHab = Dice.soloDice()+6;
+        int playerEnd = Dice.doubleDice() +12;
+        int playerLuck = Dice.soloDice() + 6;
+        int playerMagic = Dice.doubleDice() + 6;
+
+        StdDraw.text(x,y , "Force du personnage (habilité au combat) : ");
+        StdDraw.text(x+450, y , Integer.toString(playerHab));
+        y-=40;
+        StdDraw.text(x,y , "Endurance du personnage (nombre de points de vie) : ");
+        StdDraw.text(x+450,y, Integer.toString(playerEnd));
+        y-=40; //ligne du dessous
+        StdDraw.text(x,y , "Chance: ");
+        StdDraw.text(x+450,y, Integer.toString(playerLuck));
+        y-=40;
+        StdDraw.text(x,y,"Formules magiques possibles : ");
+        StdDraw.text(x+450,y,Integer.toString(playerMagic));
+        y-=100;
+
+        font = new Font("Arial" , Font.BOLD , 20);
+        StdDraw.setFont(font);
+        StdDraw.text(x,y,"Voulez vous relancer les dés ? (Les valeurs changeront)");
+        y-=140;
+
+        font = new Font("Arial" , Font.PLAIN , 20);
+        StdDraw.text(x,y,"a. Oui, relancer");
+        StdDraw.text(x+500,y,"e. Non, continuer");
+
+        while(!StdDraw.hasNextKeyTyped()){continue;}
+        switch (StdDraw.nextKeyTyped()){
+            case 'a': afficheCreationPerso(); break; //oui
+            case 'e':
+                Player player = new Player();
+                player.setVitality(playerEnd);
+                player.setHability(playerHab);
+                player.setMagic(playerMagic);
+                Events.intro(); break; //non //TODO remplacer intro par écran de choix des sorts
+            default: System.exit(1);
+        }
+    }
 
     /**
      * Fonction pour afficher la flèche permettant de passer à la suite
@@ -72,27 +112,28 @@ public class Affichage {
         StdDraw.line(1000 , suiteY-200 , 1200 ,  suiteY-140); //coté diagonal bas
     }
 
+    /**
+     * Fonction pour afficher la flèche permettant de revenir en arrière notamment dans la création du grimoire
+     */
     public static void affichePrec(){
-        StdDraw.line(1000 ,suiteY-200,1000,suiteY-60); //coté vertical du triangle
-        StdDraw.line(1000 , suiteY-60 , 1200 , suiteY-140); // coté diagonal haut
-        StdDraw.line(1000 , suiteY-200 , 1200 ,  suiteY-140); //coté diagonal bas
+        StdDraw.line(-1000 ,suiteY-200,-1000,suiteY-60); //coté vertical du triangle
+        StdDraw.line(-1000 , suiteY-60 , -1200 , suiteY-140); // coté diagonal haut
+        StdDraw.line(-1000 , suiteY-200 , -1200 ,  suiteY-140); //coté diagonal bas
     }
 
     /**
-     * Affichage des cases de choix correspondant à l'évenement en cours comportant 2 choix
+     * Affichage des cases de choix correspondant à l'événement en cours comportant 2 choix
      * @param choice1 : path vers le txt du choix 1
      * @param choice2 : path vers le txt du choix 2
-     * @return indice de choix
      */
-    public static int afficheDouble(String choice1 , String choice2){
+    public static void afficheDouble(String choice1 , String choice2){
         StdDraw.rectangle(-1000,-1000,1000,500);
         StdDraw.rectangle(1000,-1000,1000,500);
 
-        return  0;
     }
 
     /**
-     * Affichage des cases de choix correspondant à l'évenement en cours comportant 3 choix
+     * Affichage des cases de choix correspondant à l'événement en cours comportant 3 choix
      * @param choice1 : path vers le txt du choix 1
      * @param choice2 : path vers le txt du choix 2
      * @param choice3 : path vers le txt du choix 3
@@ -138,47 +179,34 @@ public class Affichage {
         }
     }
 
-    public static int detectClickTriple(){
-        if (StdDraw.isMousePressed()){
-            if ((StdDraw.mouseX()>=-1920 && StdDraw.mouseX()<=-640) &&
-                    (StdDraw.mouseY()>=-1000 && StdDraw.mouseY()<=-500)){
-                return 1;
-            } else if ((StdDraw.mouseX()>=-640 && StdDraw.mouseX()<=-0) &&
-                    (StdDraw.mouseY()>=-1000 && StdDraw.mouseY()<=-500)){
-                return 2;
-            } else if ((StdDraw.mouseX()>=0 && StdDraw.mouseX()<=640) &&
-                    (StdDraw.mouseY()>=-1000 && StdDraw.mouseY()<=-500)) {
-                return 3;
-            }
-        }
-        return 0;
-    }
-
     /**
-     * Affichage des cases de choix correspondant à l'évenement en cours comportant 4 choix
+     * Affichage des cases de choix correspondant à l'événement en cours comportant 4 choix
      * @param choice1 : path vers le txt du choix 1
      * @param choice2 : path vers le txt du choix 2
      * @param choice3 : path vers le txt du choix 3
      * @param choice4 : path vers le txt du choix 4
-     * @return indice du choix fait
      */
-    public static int afficheQuad(String choice1 , String choice2, String choice3 , String choice4){
+    public static void afficheQuad(String choice1 , String choice2, String choice3 , String choice4){
         StdDraw.rectangle(-1920,-1000,960,500);
         StdDraw.rectangle(-960,-1000,960,500);
         StdDraw.rectangle(0,-1000,960,500);
         StdDraw.rectangle(960,-1000,960,500);
-
-        return 0;
     }
 
-    public static int afficheCinq(String choice1 , String choice2, String choice3 , String choice4 , String choice5){
+    /**
+     * Affichage des cases de choix correspondant à l'événement en cours comportant 4 choix
+     * @param choice1 : path vers le txt du choix 1
+     * @param choice2 : path vers le txt du choix 2
+     * @param choice3 : path vers le txt du choix 3
+     * @param choice4 : path vers le txt du choix 4
+     * @param choice5 : path vers le txt du choix 5
+     */
+    public static void afficheCinq(String choice1 , String choice2, String choice3 , String choice4 , String choice5){
         int halfWidht = 768;
         StdDraw.rectangle(-1920,-1000,halfWidht,500);
         StdDraw.rectangle(-1152,-1000,halfWidht,500);
         StdDraw.rectangle(-384,-1000,halfWidht,500);
         StdDraw.rectangle(384,-1000,halfWidht,500);
         StdDraw.rectangle(1152,-1000,halfWidht,500);
-
-        return 0;
     }
 }

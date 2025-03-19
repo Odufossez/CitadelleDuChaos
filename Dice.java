@@ -1,7 +1,7 @@
 import java.util.Random;
 
 public class Dice {
-    public int soloDice(){
+    public static int soloDice(){
         Random rand = new Random();
         return rand.nextInt(6)+1;
     }

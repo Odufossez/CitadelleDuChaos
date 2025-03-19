@@ -1,5 +1,4 @@
 import java.io.IOException;
-import java.util.Scanner;
 
 
 public class Events {
@@ -16,26 +15,26 @@ public class Events {
 
     public static void intro() throws IOException {
         currentEvent = "intro";
-        Affichage.affichage(pathToEvents+"Event_Intro_text.txt");
+        Affichage.affichageNarration(pathToEvents+"Event_Intro_text.txt");
         Affichage.afficheSuite();
-        while(!Affichage.detectClickSuite()){
+        while(!StdDraw.hasNextKeyTyped()){
             continue;
         }
+        StdDraw.nextKeyTyped();
         event1();
     }
     public static void event1() throws IOException {
         currentEvent = "event1";
-        Affichage.affichage(pathToEvents+"Event_1_text.txt");
+        Affichage.affichageNarration(pathToEvents+"Event_1_text.txt");
         Affichage.afficheTriple(pathToChoices+"event1_choice1.txt",pathToChoices+"event1_choice2.txt",
                 pathToChoices+"event1_choice3.txt");
-        while(Affichage.detectClickTriple() == 0){
+        while(!StdDraw.hasNextKeyTyped()){
             continue;
         }
-        choice = Affichage.detectClickTriple();
-        switch (choice){
-            case 1: event261(); break;
-            case 2: event230(); break;
-            case 3: event20(); break;
+        switch (StdDraw.nextKeyTyped()){
+            case '&': event261(); break;
+            case 'é': event230(); break;
+            case '"': event20(); break;
             default: System.exit(1);
         }
     }
