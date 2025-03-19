@@ -93,15 +93,24 @@ public class Affichage {
         while(!StdDraw.hasNextKeyTyped()){continue;}
         switch (StdDraw.nextKeyTyped()){
             case 'a': afficheCreationPerso(); break; //oui
-            case 'e':
+            case 'e': //non
                 Player player = new Player();
                 player.setVitality(playerEnd);
                 player.setHability(playerHab);
                 player.setMagic(playerMagic);
-                Events.intro(); break; //non //TODO remplacer intro par écran de choix des sorts
+                Events.intro(); break; //TODO remplacer intro par écran de choix des sorts
             default: System.exit(1);
         }
     }
+
+    /**
+     * Affichage de la fenêtre pour ajouter les sorts au grimoire
+     */
+    //TODO reprendre des cycloïdes pour l'affichage différé des sorts et des indices
+    public static void afficheMakeGrimoire(){
+
+    }
+
 
     /**
      * Fonction pour afficher la flèche permettant de passer à la suite
