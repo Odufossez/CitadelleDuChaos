@@ -3,8 +3,8 @@ import java.io.IOException;
 
 public class Events {
     static private int choice;
-    static private final String pathToEvents = "CitadelleDuChaos/events_texts/";
-    static private final String pathToChoices = "CitadelleDuChaos/choices_text/";
+    static private final String pathToEvents = "ressources/events_texts/";
+    static private final String pathToChoices = "ressources/choices_text/";
     static private String currentEvent;
 
     public static String getCurrentEvent(){
