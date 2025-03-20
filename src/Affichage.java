@@ -108,7 +108,9 @@ public class Affichage {
      */
     //TODO reprendre des cycloïdes pour l'affichage différé des sorts et des indices
     public static void afficheMakeGrimoire(){
+        StdDraw.enableDoubleBuffering();
 
+        StdDraw.show();
     }
 
 
@@ -137,7 +139,30 @@ public class Affichage {
      */
     public static void afficheDouble(String choice1 , String choice2){
         StdDraw.rectangle(-1000,-1000,1000,500);
+        choiceY=-800;
+        try(FileReader fileReader = new FileReader(choice1);
+            BufferedReader buff = new BufferedReader(fileReader)){
+            String line;
+            while ((line = buff.readLine()) != null) {
+                StdDraw.text(-1020,choiceY,line);
+                choiceY=choiceY-40;
+            }
+        } catch (IOException e) {
+            System.exit(2);
+        }
+
         StdDraw.rectangle(1000,-1000,1000,500);
+        choiceY=-800;
+        try(FileReader fileReader = new FileReader(choice2);
+            BufferedReader buff = new BufferedReader(fileReader)){
+            String line;
+            while ((line = buff.readLine()) != null) {
+                StdDraw.text(1040,choiceY,line);
+                choiceY=choiceY-40;
+            }
+        } catch (IOException e) {
+            System.exit(2);
+        }
 
     }
 
@@ -197,8 +222,44 @@ public class Affichage {
      */
     public static void afficheQuad(String choice1 , String choice2, String choice3 , String choice4){
         StdDraw.rectangle(-1920,-1000,960,500);
+        choiceY=-800;
+        try(FileReader fileReader = new FileReader(choice1);
+            BufferedReader buff = new BufferedReader(fileReader)){
+            String line;
+            while ((line = buff.readLine()) != null) {
+                StdDraw.text(-1800,choiceY,line);
+                choiceY=choiceY-40;
+            }
+        } catch (IOException e) {
+            System.exit(2);
+        }
+
         StdDraw.rectangle(-960,-1000,960,500);
+        choiceY=-800;
+        try(FileReader fileReader = new FileReader(choice2);
+            BufferedReader buff = new BufferedReader(fileReader)){
+            String line;
+            while ((line = buff.readLine()) != null) {
+                StdDraw.text(-900,choiceY,line);
+                choiceY=choiceY-40;
+            }
+        } catch (IOException e) {
+            System.exit(2);
+        }
+
         StdDraw.rectangle(0,-1000,960,500);
+        choiceY=-800;
+        try(FileReader fileReader = new FileReader(choice1);
+            BufferedReader buff = new BufferedReader(fileReader)){
+            String line;
+            while ((line = buff.readLine()) != null) {
+                StdDraw.text(200,choiceY,line);
+                choiceY=choiceY-40;
+            }
+        } catch (IOException e) {
+            System.exit(2);
+        }
+
         StdDraw.rectangle(960,-1000,960,500);
     }
 
