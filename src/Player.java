@@ -1,24 +1,38 @@
 public class Player {
-    private String pseudo;
-    private int hability;
-    private int currentHab;
-    private int  vitality;
-    private int  currentVit;
-    private int magic;
-    private int gold;
-    private int luck;
-    private int[] spells;
+    private static String pseudo; //TODO V1.1
+    private static int hability;
+    private static int currentHab;
+    private static int  vitality;
+    private static int  currentVit;
+    private static int magic;
+    private static int gold;
+    private static int luck;
+    private static int[] spellBook;
 
     private String[] inventory;
 
-    public void setNewPlayer(String n_pseudo , int  p_hability, int p_vitality, int p_magic, int p_gold , int p_luck){
-        pseudo = n_pseudo;
-        hability = p_hability;
-        vitality = p_vitality;
-        magic = p_magic;
-        gold = 0;
-        luck = p_luck;
-        spells = new int[magic];
+    /**
+     * Method that returns a Player with the caracteristics that were passed on parameters
+     * @param p_hability
+     * @param p_vitality
+     * @param p_magic : settles the lenght of the magic book
+     * @param p_gold
+     * @param p_luck
+     * @return a Player
+     */
+    public Player setNewPlayer(int p_hability, int p_vitality, int p_magic, int p_gold, int p_luck){
+
+        this.hability = p_hability;
+        this.vitality = p_vitality;
+        this.magic = p_magic;
+        this.gold = 0;
+        this.luck = p_luck;
+        this.spellBook = new int[magic];
+        for (int i=0;i<magic;i++){
+            spellBook[i] = 13;
+        }
+
+        return this;
     }
 
     public int getCurrentVitality(){
@@ -45,20 +59,51 @@ public class Player {
     public int getHability(){return  hability;}
     public void setHability(int hability) {this.hability = hability;}
 
-    public int[] setSpells(){
-        //remplir le grimoire avec la colonne [n][0]
-
-        return spells;
-    }
-    public int[] getSpells(){return spells;}
-
     public String getPseudo(){
         return pseudo;
     }
-
     public String[] getInventory(){
         return inventory;
     }
+
+    /**
+     * Renvoie les indices des sorts qui ont été choisi. Il faut la combiner avec la méthode Spells.getSpellName(indice)
+     * @return un grimoire d'indice
+     */
+    public int[] getSpells(){
+        return this.spellBook;
+    }
+    public boolean grimoireIsFull(){
+        for (int i = 0 ; i<this.getMagic() ; i++){
+            if (spellBook[i]==0) return false;
+        }
+        return true;
+    }
+
+    /**
+     * Compte le nombre de fois qu'un sort donné est présent dans le grimoire
+     * @param index l'indice du sort à compter
+     * @return le compte du sort index
+     */
+    public int getCountSpell(int index){
+        int count = 0;
+        for(int i=0 ; i<this.getMagic() ; i++){
+            if(spellBook[i]==index) count++;
+        }
+        return count;
+    }
+
+    /**
+     * Put the spell's index into the grimoire's index placed into parameters
+     * @param sort
+     * @param index
+     */
+    public void setSpelltInGrimoire(int sort , int index){
+        this.spellBook[index]=sort;
+    }
+
+
+
 
     public String toString(){
         return "Nom: " + pseudo + " -hability : " + hability + " -vitality: " + vitality + " -luck: " + luck + " -magic: " + magic;

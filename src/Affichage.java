@@ -9,20 +9,30 @@ public class Affichage {
     private static int suiteY;
     private static int choiceY;
 
+    private static final Font bold25 = new Font("Arial", Font.BOLD , 25);
+
+    private static final Font bold15 = new Font("Arial", Font.BOLD , 15);
+    private static final Font plain15 = new Font("Arial" , Font.PLAIN , 15);
+
+    private static final Font bold20 = new Font("Arial" , Font.BOLD , 20);
+    private static final Font plain20 = new Font("Arial" , Font.PLAIN , 20);
+
+    private static final Font plain18 = new Font("Arial", Font.PLAIN , 18);
+    private static final Font bold18 = new Font("Arial", Font.BOLD , 18);
+
     /**
      * Initialisation des paramètres d'affichage de la fenêtre StdDraw
      */
     public static void paramAffichage() {
         StdDraw.clear();
         /*  Paramétrage de la police et de la fenêtre */
-        Font font = new Font("Arial", Font.BOLD , 15);
         StdDraw.setXscale(-1920,1920);
         StdDraw.setYscale(-1080,1080);
         StdDraw.setCanvasSize(1920,1080); //full screen
         suiteY = 1060;
 
         StdDraw.setTitle("Citadelle du Chaos");
-        StdDraw.setFont(font);
+        StdDraw.setFont(bold15);
     }
 
     /**
@@ -51,16 +61,18 @@ public class Affichage {
 
     public static void afficheMenuPrincipal(){}
 
-    public static int detectClickMainMenu(){return 0;}
-
+    /**
+     * Gestion de l'affichage du menu de création de perso
+     * @throws IOException
+     */ //TODO potentiellement revoir l'affichage (v1.01)
     public static void afficheCreationPerso() throws IOException {
         paramAffichage();
-        Font font = new Font("Arial", Font.BOLD , 25);
-        StdDraw.setFont(font);
+
+        StdDraw.setFont(bold25);
         StdDraw.text(100,1000 , "Création du personnage");
 
-        font = new Font("Arial" , Font.PLAIN , 15);
-        StdDraw.setFont(font);
+
+        StdDraw.setFont(plain15);
 
         int x=-1000 , y=500;
         int playerHab = Dice.soloDice()+6;
@@ -81,12 +93,12 @@ public class Affichage {
         StdDraw.text(x+450,y,Integer.toString(playerMagic));
         y-=100;
 
-        font = new Font("Arial" , Font.BOLD , 20);
-        StdDraw.setFont(font);
+
+        StdDraw.setFont(bold20);
         StdDraw.text(x,y,"Voulez vous relancer les dés ? (Les valeurs changeront)");
         y-=140;
 
-        font = new Font("Arial" , Font.PLAIN , 20);
+
         StdDraw.text(x,y,"a. Oui, relancer");
         StdDraw.text(x+500,y,"e. Non, continuer");
 
@@ -95,10 +107,8 @@ public class Affichage {
             case 'a': afficheCreationPerso(); break; //oui
             case 'e': //non
                 Player player = new Player();
-                player.setVitality(playerEnd);
-                player.setHability(playerHab);
-                player.setMagic(playerMagic);
-                Events.intro(); break; //TODO remplacer intro par écran de choix des sorts
+                player.setNewPlayer(playerHab,playerEnd,playerMagic,0,playerLuck);
+                afficheMakeGrimoire(player); break;
             default: System.exit(1);
         }
     }
@@ -106,11 +116,68 @@ public class Affichage {
     /**
      * Affichage de la fenêtre pour ajouter les sorts au grimoire
      */
-    //TODO reprendre des cycloïdes pour l'affichage différé des sorts et des indices
-    public static void afficheMakeGrimoire(){
-        StdDraw.enableDoubleBuffering();
+    public static void afficheMakeGrimoire(Player player) throws IOException {
+        char tabAlphabet[] = { 'a' , 'b' , 'c' , 'd' , 'e' , 'f' , 'g' ,'h','i','j','k','l','m','n','o'};
+        Spells spells = new Spells();
+        int counterSpells = 0;
 
-        StdDraw.show();
+        do {
+            StdDraw.clear();
+            paramAffichage();
+            affichePrec();
+            StdDraw.setFont(bold25);
+            StdDraw.text(0,1000 , "Grimoire");
+
+            //liste des sorts avec les descriptions
+            int x = -1200 , y = 800;
+            for (int i=0 ; i<12 ; i++){
+                StdDraw.setFont(bold18);
+                StdDraw.textLeft(x,y , tabAlphabet[i] + " " + Spells.getSpellName(i));
+                x=1800;
+                StdDraw.setFont(plain18);
+                StdDraw.textRight(x,y, Spells.getSpellDescription(i));
+                y-=100;
+                x = -1200;
+            }
+
+            //Construction du tableau de quantité de sorts actuels
+            x = -1800;
+            y = -500;
+            for (int i=0 ; i<12 ; i++){
+                StdDraw.setFont(bold15);
+                StdDraw.textLeft(x,y , Spells.getSpellName(i));
+                StdDraw.setFont(plain15);
+                y-=40;
+                StdDraw.textRight(x,y, Integer.toString(player.getCountSpell(i)));
+                y+=40;
+                x+=300;
+            }
+
+            while(!StdDraw.hasNextKeyTyped()){continue;} //attendre une touche
+            switch (StdDraw.nextKeyTyped()){ //TODO DEBUG
+                case 'a' : player.setSpelltInGrimoire(0,counterSpells); counterSpells++; break;
+                case 'b' : player.setSpelltInGrimoire(1,counterSpells); counterSpells++; break;
+                case 'c' : player.setSpelltInGrimoire(2,counterSpells); counterSpells++; break;
+                case 'd' : player.setSpelltInGrimoire(3,counterSpells); counterSpells++; break;
+                case 'e' : player.setSpelltInGrimoire(4,counterSpells); counterSpells++; break;
+                case 'f' : player.setSpelltInGrimoire(5,counterSpells); counterSpells++; break;
+                case 'g' : player.setSpelltInGrimoire(6,counterSpells); counterSpells++; break;
+                case 'h' : player.setSpelltInGrimoire(7,counterSpells); counterSpells++; break;
+                case 'i' : player.setSpelltInGrimoire(8,counterSpells); counterSpells++; break;
+                case 'j' : player.setSpelltInGrimoire(9,counterSpells); counterSpells++; break;
+                case 'k' : player.setSpelltInGrimoire(10,counterSpells); counterSpells++; break;
+                case 'l' : player.setSpelltInGrimoire(11,counterSpells); counterSpells++; break;
+                case 'w' : if(counterSpells>0){
+                    counterSpells-- ;
+                    player.setSpelltInGrimoire(13,counterSpells);
+                    } else {
+                        afficheCreationPerso();
+                    }
+                    break;
+                default: break;
+            }
+
+        }while(!player.grimoireIsFull());
     }
 
 
@@ -121,6 +188,7 @@ public class Affichage {
         StdDraw.line(1000 ,suiteY-200,1000,suiteY-60); //coté vertical du triangle
         StdDraw.line(1000 , suiteY-60 , 1200 , suiteY-140); // coté diagonal haut
         StdDraw.line(1000 , suiteY-200 , 1200 ,  suiteY-140); //coté diagonal bas
+        StdDraw.text(1100 , suiteY-60 , "é");
     }
 
     /**
@@ -130,8 +198,10 @@ public class Affichage {
         StdDraw.line(-1000 ,suiteY-200,-1000,suiteY-60); //coté vertical du triangle
         StdDraw.line(-1000 , suiteY-60 , -1200 , suiteY-140); // coté diagonal haut
         StdDraw.line(-1000 , suiteY-200 , -1200 ,  suiteY-140); //coté diagonal bas
+        StdDraw.text(-1050 , suiteY-140 , "w");
     }
 
+    //TODO pour la v1.01 aligner sur le centre du rectangle.
     /**
      * Affichage des cases de choix correspondant à l'événement en cours comportant 2 choix
      * @param choice1 : path vers le txt du choix 1
@@ -227,7 +297,7 @@ public class Affichage {
             BufferedReader buff = new BufferedReader(fileReader)){
             String line;
             while ((line = buff.readLine()) != null) {
-                StdDraw.text(-1800,choiceY,line);
+                StdDraw.text(-1500,choiceY,line);
                 choiceY=choiceY-40;
             }
         } catch (IOException e) {
@@ -240,7 +310,7 @@ public class Affichage {
             BufferedReader buff = new BufferedReader(fileReader)){
             String line;
             while ((line = buff.readLine()) != null) {
-                StdDraw.text(-900,choiceY,line);
+                StdDraw.text(-500,choiceY,line);
                 choiceY=choiceY-40;
             }
         } catch (IOException e) {
@@ -249,11 +319,11 @@ public class Affichage {
 
         StdDraw.rectangle(0,-1000,960,500);
         choiceY=-800;
-        try(FileReader fileReader = new FileReader(choice1);
+        try(FileReader fileReader = new FileReader(choice3);
             BufferedReader buff = new BufferedReader(fileReader)){
             String line;
             while ((line = buff.readLine()) != null) {
-                StdDraw.text(200,choiceY,line);
+                StdDraw.text(500,choiceY,line);
                 choiceY=choiceY-40;
             }
         } catch (IOException e) {
@@ -261,6 +331,18 @@ public class Affichage {
         }
 
         StdDraw.rectangle(960,-1000,960,500);
+        choiceY=-800;
+        try(FileReader fileReader = new FileReader(choice4);
+            BufferedReader buff = new BufferedReader(fileReader)){
+            String line;
+            while ((line = buff.readLine()) != null) {
+                StdDraw.text(1300,choiceY,line);
+                choiceY=choiceY-40;
+            }
+        } catch (IOException e) {
+            System.exit(2);
+        }
+
     }
 
     /**
@@ -274,9 +356,69 @@ public class Affichage {
     public static void afficheCinq(String choice1 , String choice2, String choice3 , String choice4 , String choice5){
         int halfWidht = 768;
         StdDraw.rectangle(-1920,-1000,halfWidht,500);
+        choiceY=-800;
+        try(FileReader fileReader = new FileReader(choice1);
+            BufferedReader buff = new BufferedReader(fileReader)){
+            String line;
+            while ((line = buff.readLine()) != null) {
+                StdDraw.text(-1500,choiceY,line);
+                choiceY=choiceY-40;
+            }
+        } catch (IOException e) {
+            System.exit(2);
+        }
+
         StdDraw.rectangle(-1152,-1000,halfWidht,500);
+        choiceY=-800;
+        try(FileReader fileReader = new FileReader(choice2);
+            BufferedReader buff = new BufferedReader(fileReader)){
+            String line;
+            while ((line = buff.readLine()) != null) {
+                StdDraw.text(-900,choiceY,line);
+                choiceY=choiceY-40;
+            }
+        } catch (IOException e) {
+            System.exit(2);
+        }
+
         StdDraw.rectangle(-384,-1000,halfWidht,500);
+        choiceY=-800;
+        try(FileReader fileReader = new FileReader(choice3);
+            BufferedReader buff = new BufferedReader(fileReader)){
+            String line;
+            while ((line = buff.readLine()) != null) {
+                StdDraw.text(0,choiceY,line);
+                choiceY=choiceY-40;
+            }
+        } catch (IOException e) {
+            System.exit(2);
+        }
+
         StdDraw.rectangle(384,-1000,halfWidht,500);
+        choiceY=-800;
+        try(FileReader fileReader = new FileReader(choice4);
+            BufferedReader buff = new BufferedReader(fileReader)){
+            String line;
+            while ((line = buff.readLine()) != null) {
+                StdDraw.text(900,choiceY,line);
+                choiceY=choiceY-40;
+            }
+        } catch (IOException e) {
+            System.exit(2);
+        }
+
         StdDraw.rectangle(1152,-1000,halfWidht,500);
+        choiceY=-800;
+        try(FileReader fileReader = new FileReader(choice5);
+            BufferedReader buff = new BufferedReader(fileReader)){
+            String line;
+            while ((line = buff.readLine()) != null) {
+                StdDraw.text(1500,choiceY,line);
+                choiceY=choiceY-40;
+            }
+        } catch (IOException e) {
+            System.exit(2);
+        }
+
     }
 }
