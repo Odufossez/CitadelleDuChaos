@@ -154,7 +154,7 @@ public class Affichage {
             }
 
             while(!StdDraw.hasNextKeyTyped()){continue;} //attendre une touche
-            switch (StdDraw.nextKeyTyped()){ //TODO DEBUG
+            switch (StdDraw.nextKeyTyped()){
                 case 'a' : player.setSpelltInGrimoire(0,counterSpells); counterSpells++; break;
                 case 'b' : player.setSpelltInGrimoire(1,counterSpells); counterSpells++; break;
                 case 'c' : player.setSpelltInGrimoire(2,counterSpells); counterSpells++; break;
@@ -167,17 +167,30 @@ public class Affichage {
                 case 'j' : player.setSpelltInGrimoire(9,counterSpells); counterSpells++; break;
                 case 'k' : player.setSpelltInGrimoire(10,counterSpells); counterSpells++; break;
                 case 'l' : player.setSpelltInGrimoire(11,counterSpells); counterSpells++; break;
-                case 'w' : if(counterSpells>0){
-                    counterSpells-- ;
-                    player.setSpelltInGrimoire(13,counterSpells);
+                case 'w' : {
+                    if (counterSpells>0){
+                        counterSpells--;
+                        player.setSpelltInGrimoire(13,counterSpells);
                     } else {
                         afficheCreationPerso();
                     }
                     break;
-                default: break;
+                }
+                default: continue;
             }
 
         }while(!player.grimoireIsFull());
+
+
+    }
+
+    public static void confirmScreen(Player player){
+        afficheSuite();
+
+        StdDraw.setFont(bold25);
+        StdDraw.text(0,1000 , "Résumé");
+        StdDraw.setFont(plain18);
+        //StdDraw.textLeft();
     }
 
 
