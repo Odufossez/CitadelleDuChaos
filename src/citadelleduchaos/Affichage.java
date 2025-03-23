@@ -1,4 +1,6 @@
 package citadelleduchaos;
+import jdk.jfr.Event;
+
 import java.awt.Font;
 import java.awt.event.MouseEvent;
 import java.io.BufferedReader;
@@ -189,7 +191,7 @@ public class Affichage {
      * Affiche un écran qui résume les choix précédents et permet de changer seulement les sorts ou tous les rolls
      * @param player
      */
-    public static void confirmScreen(Player player){
+    public static void confirmScreen(Player player) throws IOException {
         afficheSuite();
 
         StdDraw.setFont(bold25);
@@ -219,6 +221,13 @@ public class Affichage {
         StdDraw.textRight(x,y, "Endurance : " + player.getVitality());
         y-=40;
         StdDraw.textRight(x,y, "Chance : " + player.getLuck());
+
+        while (!StdDraw.hasNextKeyTyped()){continue;}
+        switch (StdDraw.nextKeyTyped()){
+            case 'x' : Events.intro(); break;
+            case 'w' : afficheMakeGrimoire(player); break;
+            default: break;
+        }
     }
 
 
@@ -229,7 +238,7 @@ public class Affichage {
         StdDraw.line(1000 ,suiteY-200,1000,suiteY-60); //coté vertical du triangle
         StdDraw.line(1000 , suiteY-60 , 1200 , suiteY-140); // coté diagonal haut
         StdDraw.line(1000 , suiteY-200 , 1200 ,  suiteY-140); //coté diagonal bas
-        StdDraw.text(1100 , suiteY-60 , "é");
+        StdDraw.text(1050 , suiteY-140 , "x");
     }
 
     /**
