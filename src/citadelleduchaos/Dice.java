@@ -1,3 +1,4 @@
+package citadelleduchaos;
 import java.util.Random;
 
 public class Dice {

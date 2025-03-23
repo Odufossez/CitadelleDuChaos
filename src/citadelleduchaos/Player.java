@@ -1,3 +1,5 @@
+package citadelleduchaos;
+
 public class Player {
     private static String pseudo; //TODO V1.1
     private static int hability;
@@ -45,6 +47,8 @@ public class Player {
         currentVit = vit;
     }
     public void setVitality(int vitality) {this.vitality = vitality;}
+
+    public int getLuck(){ return luck; }
 
     public int getMagic(){
         return magic;

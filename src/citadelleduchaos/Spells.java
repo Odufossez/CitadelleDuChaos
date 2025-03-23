@@ -1,3 +1,5 @@
+package citadelleduchaos;
+
 public class Spells {
     private static String[][] spells;
 

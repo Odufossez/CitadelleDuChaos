@@ -1,3 +1,5 @@
+package citadelleduchaos;
+
 public class Sauvegarde {
     private String saveName;
 

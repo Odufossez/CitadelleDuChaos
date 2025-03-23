@@ -1,3 +1,5 @@
+package citadelleduchaos;
+
 public class Combat {
 
     private int eventNumber;

@@ -1,9 +1,9 @@
+package citadelleduchaos;
 import java.awt.Font;
 import java.awt.event.MouseEvent;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
-
 
 public class Affichage {
     private static int suiteY;
@@ -127,6 +127,9 @@ public class Affichage {
             affichePrec();
             StdDraw.setFont(bold25);
             StdDraw.text(0,1000 , "Grimoire");
+            StdDraw.setFont(bold15);
+            StdDraw.text(-1500,-900 , "Sorts disponibles : " + player.getMagic());
+            StdDraw.text(-1500 , -860 , "Sorts sélectionnés : " + counterSpells);
 
             //liste des sorts avec les descriptions
             int x = -1200 , y = 800;
@@ -180,17 +183,42 @@ public class Affichage {
             }
 
         }while(!player.grimoireIsFull());
-
-
     }
 
+    /**
+     * Affiche un écran qui résume les choix précédents et permet de changer seulement les sorts ou tous les rolls
+     * @param player
+     */
     public static void confirmScreen(Player player){
         afficheSuite();
 
         StdDraw.setFont(bold25);
         StdDraw.text(0,1000 , "Résumé");
         StdDraw.setFont(plain18);
-        //StdDraw.textLeft();
+        StdDraw.textLeft(-1200,800 , "ëtes vous satisfait de cette construction ?");
+
+        //Affichage du résumé des sorts
+        StdDraw.setFont(bold18);
+        StdDraw.textLeft(-1200 , 600 , "Sorts");
+        StdDraw.setFont(plain15);
+        int x = -1200 , y = 400;
+        for (int i=0 ; i<12 ; i++){
+            if(player.getCountSpell(i)>0){
+                StdDraw.textLeft(x,y , Spells.getSpellName(i) + " " + player.getCountSpell(i));
+                y-=40;
+            }
+        }
+
+        //Affichage des caractéristiques du personnage
+        StdDraw.setFont(bold18);
+        StdDraw.textRight(1200 , 600 , "Caractéristiques");
+        StdDraw.setFont(plain15);
+        x = 1200 ; y = 400;
+        StdDraw.textRight(x,y , "Habilité : " + player.getHability());
+        y-=40;
+        StdDraw.textRight(x,y, "Endurance : " + player.getVitality());
+        y-=40;
+        StdDraw.textRight(x,y, "Chance : " + player.getLuck());
     }
 
 
