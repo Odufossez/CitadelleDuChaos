@@ -1,8 +1,6 @@
 package citadelleduchaos;
-import jdk.jfr.Event;
 
 import java.awt.Font;
-import java.awt.event.MouseEvent;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
@@ -10,6 +8,8 @@ import java.io.IOException;
 public class Affichage {
     private static int suiteY;
     private static int choiceY;
+
+    private static Player player;
 
     private static final Font bold25 = new Font("Arial", Font.BOLD , 25);
 
@@ -22,6 +22,8 @@ public class Affichage {
     private static final Font plain18 = new Font("Arial", Font.PLAIN , 18);
     private static final Font bold18 = new Font("Arial", Font.BOLD , 18);
 
+    private static final Font bold32 = new Font("Arial", Font.BOLD , 32);
+
     /**
      * Initialisation des paramètres d'affichage de la fenêtre StdDraw
      */
@@ -30,6 +32,7 @@ public class Affichage {
         /*  Paramétrage de la police et de la fenêtre */
         StdDraw.setXscale(-1920,1920);
         StdDraw.setYscale(-1080,1080);
+        StdDraw.setCanvasSize(1920,1080);
 
         suiteY = 1060;
 
@@ -42,7 +45,7 @@ public class Affichage {
      * @param path : string menant au fichier .txt contenant le texte
      * @throws IOException : gestion d'une erreur sur le path
      */
-    public static void affichageNarration(String path) throws IOException {
+    public static void narration(String path) throws IOException {
 
         paramAffichage();
 
@@ -61,13 +64,13 @@ public class Affichage {
         }
     }
 
-    public static void afficheMenuPrincipal(){}
+    public static void mainMenu(){}
 
     /**
      * Gestion de l'affichage du menu de création de perso
      * @throws IOException
      */ //TODO potentiellement revoir l'affichage (v1.01)
-    public static void afficheCreationPerso() throws IOException {
+    public static void creationPerso() throws IOException {
         paramAffichage();
 
         StdDraw.setFont(bold25);
@@ -106,11 +109,10 @@ public class Affichage {
 
         while(!StdDraw.hasNextKeyTyped()){continue;}
         switch (StdDraw.nextKeyTyped()){
-            case 'a': afficheCreationPerso(); break; //oui
-            case 'e': //non
-                Player player = new Player();
+            case 'a': creationPerso(); break; //oui - reroll
+            case 'e': //non - continuer
                 player.setNewPlayer(playerHab,playerEnd,playerMagic,0,playerLuck);
-                afficheMakeGrimoire(player); break;
+                afficheMakeGrimoire(); break;
             default: System.exit(1);
         }
     }
@@ -118,7 +120,7 @@ public class Affichage {
     /**
      * Affichage de la fenêtre pour ajouter les sorts au grimoire
      */
-    public static void afficheMakeGrimoire(Player player) throws IOException {
+    public static void afficheMakeGrimoire() throws IOException {
         char tabAlphabet[] = { 'a' , 'b' , 'c' , 'd' , 'e' , 'f' , 'g' ,'h','i','j','k','l','m','n','o'};
         Spells spells = new Spells();
         int counterSpells = 0;
@@ -126,7 +128,7 @@ public class Affichage {
         do {
             StdDraw.clear();
             paramAffichage();
-            affichePrec();
+            arrowPrev();
             StdDraw.setFont(bold25);
             StdDraw.text(0,1000 , "Grimoire");
             StdDraw.setFont(bold15);
@@ -177,22 +179,22 @@ public class Affichage {
                         counterSpells--;
                         player.setSpelltInGrimoire(13,counterSpells);
                     } else {
-                        afficheCreationPerso();
+                        creationPerso();
                     }
                     break;
                 }
                 default: continue;
             }
-
         }while(!player.grimoireIsFull());
+
     }
 
     /**
      * Affiche un écran qui résume les choix précédents et permet de changer seulement les sorts ou tous les rolls
      * @param player
      */
-    public static void confirmScreen(Player player) throws IOException {
-        afficheSuite();
+    public static void confirmScreen() throws IOException {
+        arrowNext();
 
         StdDraw.setFont(bold25);
         StdDraw.text(0,1000 , "Résumé");
@@ -224,17 +226,23 @@ public class Affichage {
 
         while (!StdDraw.hasNextKeyTyped()){continue;}
         switch (StdDraw.nextKeyTyped()){
-            case 'x' : Events.intro(); break;
-            case 'w' : afficheMakeGrimoire(player); break;
+            case 'x' : {
+                Events.intro();
+                //todo create save
+                break;
+            }
+            case 'w' : afficheMakeGrimoire(); break;
             default: break;
         }
     }
 
 
+    /* --------------------------------- FLECHES DE NAV --------------------------------------------------------- */
+
     /**
      * Fonction pour afficher la flèche permettant de passer à la suite
      */
-    public static void afficheSuite(){
+    public static void arrowNext(){
         StdDraw.line(1000 ,suiteY-200,1000,suiteY-60); //coté vertical du triangle
         StdDraw.line(1000 , suiteY-60 , 1200 , suiteY-140); // coté diagonal haut
         StdDraw.line(1000 , suiteY-200 , 1200 ,  suiteY-140); //coté diagonal bas
@@ -244,12 +252,16 @@ public class Affichage {
     /**
      * Fonction pour afficher la flèche permettant de revenir en arrière notamment dans la création du grimoire
      */
-    public static void affichePrec(){
+    public static void arrowPrev(){
         StdDraw.line(-1000 ,suiteY-200,-1000,suiteY-60); //coté vertical du triangle
         StdDraw.line(-1000 , suiteY-60 , -1200 , suiteY-140); // coté diagonal haut
         StdDraw.line(-1000 , suiteY-200 , -1200 ,  suiteY-140); //coté diagonal bas
         StdDraw.text(-1050 , suiteY-140 , "w");
     }
+
+
+
+    /*---------------------------- AFFICHAGE DES ENCARDS DE CHOIX --------------------------------------- */
 
     //TODO pour la v1.01 aligner sur le centre du rectangle.
     /**
@@ -257,7 +269,7 @@ public class Affichage {
      * @param choice1 : path vers le txt du choix 1
      * @param choice2 : path vers le txt du choix 2
      */
-    public static void afficheDouble(String choice1 , String choice2){
+    public static void choiceDouble(String choice1 , String choice2){
         StdDraw.rectangle(-1000,-1000,1000,500);
         choiceY=-800;
         try(FileReader fileReader = new FileReader(choice1);
@@ -292,7 +304,7 @@ public class Affichage {
      * @param choice2 : path vers le txt du choix 2
      * @param choice3 : path vers le txt du choix 3
      */
-    public static void afficheTriple(String choice1 , String choice2, String choice3){
+    public static void choiceTriple(String choice1 , String choice2, String choice3){
         StdDraw.rectangle(-1920,-1000,1280,500);
         choiceY=-800;
         try(FileReader fileReader = new FileReader(choice1);
@@ -340,7 +352,7 @@ public class Affichage {
      * @param choice3 : path vers le txt du choix 3
      * @param choice4 : path vers le txt du choix 4
      */
-    public static void afficheQuad(String choice1 , String choice2, String choice3 , String choice4){
+    public static void choiceQuad(String choice1 , String choice2, String choice3 , String choice4){
         StdDraw.rectangle(-1920,-1000,960,500);
         choiceY=-800;
         try(FileReader fileReader = new FileReader(choice1);
@@ -403,7 +415,7 @@ public class Affichage {
      * @param choice4 : path vers le txt du choix 4
      * @param choice5 : path vers le txt du choix 5
      */
-    public static void afficheCinq(String choice1 , String choice2, String choice3 , String choice4 , String choice5){
+    public static void choiceFive(String choice1 , String choice2, String choice3 , String choice4 , String choice5){
         int halfWidht = 768;
         StdDraw.rectangle(-1920,-1000,halfWidht,500);
         choiceY=-800;
@@ -470,5 +482,31 @@ public class Affichage {
             System.exit(2);
         }
 
+    }
+
+    public static void choiceSaveLoad(){
+        StdDraw.setPenRadius(0.005);
+        StdDraw.setFont(bold32);
+        int y = 100;
+
+        //Slot 1
+        StdDraw.rectangle(-1300,y,350,660);
+        StdDraw.text(-1300 , y+430 , "1" );
+        if(player.getCurrentEvent() >= 0){
+
+        } else {
+
+        }
+
+        //Slot 2
+        StdDraw.rectangle(0,100,350,660);
+        StdDraw.text(0 , y+430 , "2" );
+
+        //Slot 3
+        StdDraw.rectangle(1300,100,350,660);
+        StdDraw.text(1300 , y+430 , "3" );
+
+
+        StdDraw.setPenRadius();
     }
 }

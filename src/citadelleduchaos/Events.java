@@ -6,18 +6,21 @@ public class Events {
     static private int choice;
     static private final String pathToEvents = "ressources/events_texts/";
     static private final String pathToChoices = "ressources/choices_text/";
-    static private int currentEvent;
+    static private Player player;
 
-    public static int getCurrentEvent(){
-        return currentEvent;
+    /**
+     * Instanciation des events avec le joueur qui a été créée.
+     * @param player
+     */
+    public Events(Player player){
+        this.player = player;
     }
 
-    public static void setCurrentEvent(int currentEvent){}
 
     public static void intro() throws IOException {
-        currentEvent = 0;
-        Affichage.affichageNarration(pathToEvents+"Event_Intro_text.txt");
-        Affichage.afficheSuite();
+        player.setCurrentEvent(0);
+        Affichage.narration(pathToEvents+"Event_Intro_text.txt");
+        Affichage.arrowNext();
         while(!StdDraw.hasNextKeyTyped()){
             continue;
         }
@@ -25,9 +28,9 @@ public class Events {
         event1();
     }
     public static void event1() throws IOException {
-        currentEvent = 1;
-        Affichage.affichageNarration(pathToEvents+"Event_1_text.txt");
-        Affichage.afficheTriple(pathToChoices+"event1_choice1.txt",pathToChoices+"event1_choice2.txt",
+        player.setCurrentEvent(1);
+        Affichage.narration(pathToEvents+"Event_1_text.txt");
+        Affichage.choiceTriple(pathToChoices+"event1_choice1.txt",pathToChoices+"event1_choice2.txt",
                 pathToChoices+"event1_choice3.txt");
         while(!StdDraw.hasNextKeyTyped()){
             continue;
@@ -40,9 +43,9 @@ public class Events {
         }
     }
     public static void event2() throws IOException {
-        currentEvent = 2;
-        Affichage.affichageNarration(pathToEvents+"Event_2_text.txt");
-        Affichage.afficheDouble(pathToChoices+"event2_choice1.txt",pathToChoices+"event2_choice2.txt");
+        player.setCurrentEvent(2);
+        Affichage.narration(pathToEvents+"Event_2_text.txt");
+        Affichage.choiceDouble(pathToChoices+"event2_choice1.txt",pathToChoices+"event2_choice2.txt");
         while(!StdDraw.hasNextKeyTyped()){
             continue;
         }
@@ -53,7 +56,7 @@ public class Events {
         }
     }
     public static void event3() throws IOException {
-        currentEvent = 3;
+        player.setCurrentEvent(3);
         switch (choice){
             case 1: event327(); break;
             case 2: event59();  break;

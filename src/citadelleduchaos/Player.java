@@ -4,12 +4,13 @@ public class Player {
     private static String pseudo; //TODO V1.1
     private static int hability;
     private static int currentHab;
-    private static int  vitality;
-    private static int  currentVit;
+    private static int vitality;
+    private static int currentVit;
     private static int magic;
     private static int gold;
     private static int luck;
     private static int[] spellBook;
+    static private int currentEvent;
 
     private String[] inventory;
 
@@ -37,6 +38,9 @@ public class Player {
         return this;
     }
 
+    public void setCurrentEvent(int p_event){this.currentEvent = p_event;}
+    public int getCurrentEvent(){return this.currentEvent;}
+
     public int getCurrentVitality(){
         return currentVit;
     }
@@ -49,6 +53,8 @@ public class Player {
     public void setVitality(int vitality) {this.vitality = vitality;}
 
     public int getLuck(){ return luck; }
+    public void setLuck(int luck) {this.luck = luck;}
+    public void decreaseLuck(){this.luck--;}
 
     public int getMagic(){
         return magic;
@@ -66,6 +72,8 @@ public class Player {
     public String getPseudo(){
         return pseudo;
     }
+
+    //todo à réformat pour mettre des int -> copier le modèle sur les sorts
     public String[] getInventory(){
         return inventory;
     }
@@ -105,6 +113,7 @@ public class Player {
     public void setSpelltInGrimoire(int sort , int index){
         this.spellBook[index]=sort;
     }
+
 
 
 
