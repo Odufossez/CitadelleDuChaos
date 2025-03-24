@@ -1,7 +1,5 @@
-import citadelleduchaos.Affichage;
-import citadelleduchaos.Player;
-import citadelleduchaos.Spells;
-import citadelleduchaos.StdDraw;
+import citadelleduchaos.*;
+
 import org.junit.Test;
 import org.junit.jupiter.api.Assertions;
 

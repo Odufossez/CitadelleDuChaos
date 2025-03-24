@@ -30,7 +30,7 @@ public class Affichage {
         /*  Paramétrage de la police et de la fenêtre */
         StdDraw.setXscale(-1920,1920);
         StdDraw.setYscale(-1080,1080);
-        StdDraw.setCanvasSize(1920,1080); //full screen
+
         suiteY = 1060;
 
         StdDraw.setTitle("Citadelle du Chaos");
