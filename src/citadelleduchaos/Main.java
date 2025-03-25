@@ -11,6 +11,7 @@ import java.io.IOException;
 public class Main {
     public static void main(String[] args) throws IOException {
         Affichage.paramAffichage();
-        Affichage.choiceSaveLoad();
+        Affichage.creationPerso();
+
     }
 }

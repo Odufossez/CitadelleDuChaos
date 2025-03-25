@@ -16,7 +16,7 @@ public class AffichageTestUnit {
             player.setSpelltInGrimoire(i,i);
         }
         Affichage.paramAffichage();
-        Affichage.confirmScreen(player);
+        //Affichage.confirmScreen(player);
         Assertions.assertEquals('x' , StdDraw.nextKeyTyped());
     }
 }

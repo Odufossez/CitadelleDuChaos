@@ -1,5 +1,7 @@
 package citadelleduchaos;
 
+import java.util.ArrayList;
+
 public class Player {
     private static String pseudo; //TODO V1.1
     private static int hability;
@@ -12,7 +14,7 @@ public class Player {
     private static int[] spellBook;
     static private int currentEvent;
 
-    private String[] inventory;
+    private static ArrayList<Integer> inventory = new ArrayList<Integer>() ;
 
     /**
      * Method that returns a Player with the caracteristics that were passed on parameters
@@ -30,10 +32,6 @@ public class Player {
         this.magic = p_magic;
         this.gold = 0;
         this.luck = p_luck;
-        this.spellBook = new int[magic];
-        for (int i=0;i<magic;i++){
-            spellBook[i] = 13;
-        }
 
         return this;
     }
@@ -74,22 +72,54 @@ public class Player {
     }
 
     //todo à réformat pour mettre des int -> copier le modèle sur les sorts
-    public String[] getInventory(){
+
+    /**
+     * Renvoie les indices des objets mis en inventaire. Il faut la combiner avec la méthode Stuff.getStuffName(indice)
+     * @return une liste de int représentant les indices des objets dans l'inventaire
+     */
+    public ArrayList<Integer> getInventory(){
         return inventory;
+    }
+    public void setInventory(int indiceObjet) { inventory.add(indiceObjet);}
+    /**
+     * Savoir si l'objet recherché est dans l'inventaire
+     * @param indiceObjet que l'on cherche
+     * @return vrai si trouvé sinon faux
+     */
+    public boolean isInventory(int indiceObjet){
+        return inventory.contains(indiceObjet);
     }
 
     /**
      * Renvoie les indices des sorts qui ont été choisi. Il faut la combiner avec la méthode Spells.getSpellName(indice)
      * @return un grimoire d'indice
      */
+    public void setSpellBook(){
+        this.spellBook = new int[magic];
+        for (int i=0;i<magic;i++){
+            spellBook[i] = 13;
+        }
+    }
     public int[] getSpells(){
         return this.spellBook;
     }
     public boolean grimoireIsFull(){
         for (int i = 0 ; i<this.getMagic() ; i++){
-            if (spellBook[i]==0) return false;
+            if (spellBook[i]==13) return false;
         }
         return true;
+    }
+
+    /**
+     * Savoir si un sort est dans le grimoire
+     * @param sort : indice du sort que l'on cherche
+     * @return true si le sort est trouvé, false sinon
+     */
+    public boolean isInSpellBook(int sort){
+        for (int i = 0 ; i<this.getMagic() ; i++){
+            if (spellBook[i]==sort) return true;
+        }
+        return false;
     }
 
     /**

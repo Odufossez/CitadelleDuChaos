@@ -111,6 +111,7 @@ public class Affichage {
         switch (StdDraw.nextKeyTyped()){
             case 'a': creationPerso(); break; //oui - reroll
             case 'e': //non - continuer
+                player = new Player();
                 player.setNewPlayer(playerHab,playerEnd,playerMagic,0,playerLuck);
                 afficheMakeGrimoire(); break;
             default: System.exit(1);
@@ -123,6 +124,7 @@ public class Affichage {
     public static void afficheMakeGrimoire() throws IOException {
         char tabAlphabet[] = { 'a' , 'b' , 'c' , 'd' , 'e' , 'f' , 'g' ,'h','i','j','k','l','m','n','o'};
         Spells spells = new Spells();
+        player.setSpellBook();
         int counterSpells = 0;
 
         do {
@@ -191,7 +193,6 @@ public class Affichage {
 
     /**
      * Affiche un écran qui résume les choix précédents et permet de changer seulement les sorts ou tous les rolls
-     * @param player
      */
     public static void confirmScreen() throws IOException {
         arrowNext();
