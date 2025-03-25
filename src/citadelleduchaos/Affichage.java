@@ -492,11 +492,7 @@ public class Affichage {
         //Slot 1
         StdDraw.rectangle(-1300,y,350,660);
         StdDraw.text(-1300 , y+430 , "1" );
-        if(player.getCurrentEvent() >= 0){
 
-        } else {
-
-        }
 
         //Slot 2
         StdDraw.rectangle(0,100,350,660);

@@ -1,8 +1,14 @@
 package citadelleduchaos;
 
+import java.io.FileWriter;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+
 public class Sauvegarde {
     private String saveName;
-    private String savePath;
+    private String savePath = "ressources/saves/save_";
     private int indiceSave; //1 à 3
 
     /**
@@ -16,7 +22,15 @@ public class Sauvegarde {
 
     public Sauvegarde(){}
 
-    public void newSave(int indiceSave){}
+    public void newSave(Player player) throws IOException {
+        String dataPlayer="test";
+        Path path = Paths.get(savePath + indiceSave + ".txt");
+        Files.createFile(path);
+
+        FileWriter writer = new FileWriter(savePath + indiceSave + ".txt");
+        dataPlayer = Integer.toString(player.getVitality()) + " " + Integer.toString(player.getCurrentVitality()) +
+                " " + player.getHability() + " " + player.getCurrentHab() + " " + player.getLuck() + " " + player.getGold();
+    }
 
     public void loadSave(){}
 
