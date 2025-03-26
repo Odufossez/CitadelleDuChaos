@@ -5,16 +5,13 @@ public class Monster {
     private int habiliy;
     private int vitality;
 
-    public Monster(int habiliy, int vitality) {
-        this.habiliy = habiliy;
-        this.vitality = vitality;
-    }
+    public Monster() {}
 
     public void setName(String n_name) {
         name = n_name;
     }
 
-    public void setHabiliy(int n_h) {
+    public void setHability(int n_h) {
         habiliy = n_h;
     }
 
@@ -22,7 +19,7 @@ public class Monster {
         vitality = n_v;
     }
 
-    public int getHabiliy() {
+    public int getHability() {
         return habiliy;
     }
 
@@ -30,8 +27,17 @@ public class Monster {
         return vitality;
     }
 
-    public boolean checkVitality(){
-        return getVitality() > 0;
+    public void isTouchedInCombat() {
+        int curVit = this.getVitality();
+        setVitality(curVit - 2);
+    }
+
+    /**
+     *
+     * @return true si le monstre est mort
+     */
+    public boolean isDead(){
+        return getVitality() <= 0;
     }
 
     public String toString(){

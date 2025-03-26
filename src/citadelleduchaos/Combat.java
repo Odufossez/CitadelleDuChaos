@@ -1,41 +1,33 @@
 package citadelleduchaos;
 
 public class Combat {
+    private Player player;
+    private Monster monster;
 
-    private int eventNumber;
-    private int nbEnnemies;
-
-    public Combat(){
-        int eventNumber = 0;
-        int nbEnnemies = 1;
+    public Combat(Player player, Monster monster) {
+        this.player = player;
+        this.monster = monster;
     }
 
-    public Combat(int nbEnnemies , int eventNumber,int hab, int vit){
-        this.eventNumber = eventNumber;
-        this.nbEnnemies = nbEnnemies;
+    public String toString(){
+        return player.toString() + " " + monster.toString();
     }
 
-    public boolean isWon(){
-        return this.nbEnnemies == 0;
+    public int playerTurn(int attack){
+        return player.getCurrentHab()+attack;
     }
 
-    public int playerTurn(Player player){
-        int hab = player.getHability();
-        return Dice.doubleDice()+hab;
+    public int monsterTurn(int attack){
+        return monster.getHability()+attack;
     }
 
-    public int monsterTurn(Monster monster){
-        int hab = monster.getHabiliy();
-        return Dice.doubleDice()+hab;
-    }
+    public void fight(){
+        if (monsterTurn(Dice.doubleDice()) > playerTurn(Dice.doubleDice())){
+            player.isTouchedInCombat();
+        }
 
-    public int fight(int playerAttack , int monsterAttack , Monster monster , Player player){
-        if (playerAttack > monsterAttack){
-            return monster.getVitality()-2;
-        } else if (playerAttack < monsterAttack){
-            return player.getVitality() -2;
-        } else {
-            return -1;
+        if (monsterTurn(Dice.doubleDice()) < playerTurn(Dice.doubleDice())){
+            monster.isTouchedInCombat();
         }
     }
 }

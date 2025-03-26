@@ -56,4 +56,19 @@ public class PlayerUnitTest {
         ply.decreaseLuck();
         Assertions.assertEquals(1,ply.getLuck());
     }
+
+    @Test
+    public void testIsTouchedInCombat(){
+        ply.setVitality(4);
+        Assertions.assertEquals(4,ply.getCurrentVitality());
+        ply.isTouchedInCombat();
+        Assertions.assertEquals(2,ply.getCurrentVitality());
+    }
+
+    @Test
+    public void testSetVitality(){
+        ply.setVitality(2);
+        Assertions.assertEquals(2,ply.getVitality());
+        Assertions.assertEquals(2,ply.getCurrentVitality());
+    }
 }

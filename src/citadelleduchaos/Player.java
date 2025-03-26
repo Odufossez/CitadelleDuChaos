@@ -1,5 +1,7 @@
 package citadelleduchaos;
 
+import org.mockito.stubbing.Answer;
+
 import java.util.ArrayList;
 
 public class Player {
@@ -15,6 +17,11 @@ public class Player {
     static private int currentEvent;
 
     private static ArrayList<Integer> inventory = new ArrayList<Integer>() ;
+
+    /**
+     * Constructor
+     */
+    public Player(){}
 
     /**
      * Method that returns a Player with the caracteristics that were passed on parameters
@@ -36,6 +43,7 @@ public class Player {
         return this;
     }
 
+
     public void setCurrentEvent(int p_event){this.currentEvent = p_event;}
     public int getCurrentEvent(){return this.currentEvent;}
 
@@ -48,7 +56,10 @@ public class Player {
     public void setCurrentVitality(int vit){
         currentVit = vit;
     }
-    public void setVitality(int vitality) {this.vitality = vitality;}
+    public void setVitality(int vitality) {
+        this.vitality = vitality;
+        this.currentVit = vitality;
+    }
 
     public int getLuck(){ return luck; }
     public void setLuck(int luck) {this.luck = luck;}
@@ -65,13 +76,14 @@ public class Player {
         return currentHab;
     }
     public int getHability(){return  hability;}
-    public void setHability(int hability) {this.hability = hability;}
+    public void setHability(int hability) {
+        this.hability = hability;
+        this.currentHab = hability;
+    }
 
     public String getPseudo(){
         return pseudo;
     }
-
-    //todo à réformat pour mettre des int -> copier le modèle sur les sorts
 
     /**
      * Renvoie les indices des objets mis en inventaire. Il faut la combiner avec la méthode Stuff.getStuffName(indice)
@@ -137,11 +149,16 @@ public class Player {
 
     /**
      * Put the spell's index into the grimoire's index placed into parameters
-     * @param sort
-     * @param index
+     * @param sort index du sort
+     * @param index index à lequel le mettre
      */
     public void setSpelltInGrimoire(int sort , int index){
         this.spellBook[index]=sort;
+    }
+
+    public void isTouchedInCombat(){
+        int curVit = this.getCurrentVitality();
+        this.setCurrentVitality(curVit-2);
     }
 
 
@@ -149,7 +166,8 @@ public class Player {
 
 
     public String toString(){
-        return "Nom: " + pseudo + " -hability : " + hability + " -vitality: " + vitality + " -luck: " + luck + " -magic: " + magic;
+        return "Nom: " + pseudo + " -hability : " + hability + " -vitality: " + vitality + " -luck: " + luck +
+                " -magic: " + magic;
     }
 
 
