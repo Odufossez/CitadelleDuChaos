@@ -10,13 +10,6 @@ import java.io.IOException;
 //non défintif
 public class Main {
     public static void main(String[] args) throws IOException {
-        Player ply = new Player();
-        Monster mst = new Monster();
 
-        ply.setHability(10);
-        mst.setHability(6);
-        Combat cmb = new Combat(ply, mst);
-
-        System.out.println(cmb.toString());
     }
 }

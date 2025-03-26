@@ -71,4 +71,12 @@ public class PlayerUnitTest {
         Assertions.assertEquals(2,ply.getVitality());
         Assertions.assertEquals(2,ply.getCurrentVitality());
     }
+
+    @Test
+    public void testIsDead(){
+        ply.setCurrentVitality(1);
+        Assertions.assertFalse(ply.isDead());
+        ply.setCurrentVitality(0);
+        Assertions.assertTrue(ply.isDead());
+    }
 }

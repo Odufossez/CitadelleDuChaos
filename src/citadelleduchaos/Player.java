@@ -1,7 +1,4 @@
 package citadelleduchaos;
-
-import org.mockito.stubbing.Answer;
-
 import java.util.ArrayList;
 
 public class Player {
@@ -59,6 +56,10 @@ public class Player {
     public void setVitality(int vitality) {
         this.vitality = vitality;
         this.currentVit = vitality;
+    }
+
+    public boolean isDead(){
+        return this.getCurrentVitality() <= 0;
     }
 
     public int getLuck(){ return luck; }

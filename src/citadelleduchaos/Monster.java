@@ -10,11 +10,13 @@ public class Monster {
     public void setName(String n_name) {
         name = n_name;
     }
+    public String getName() {
+        return name;
+    }
 
     public void setHability(int n_h) {
         habiliy = n_h;
     }
-
     public void setVitality(int n_v) {
         vitality = n_v;
     }
@@ -22,7 +24,6 @@ public class Monster {
     public int getHability() {
         return habiliy;
     }
-
     public int getVitality() {
         return vitality;
     }

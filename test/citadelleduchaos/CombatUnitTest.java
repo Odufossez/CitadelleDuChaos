@@ -1,13 +1,9 @@
 import citadelleduchaos.Combat;
-import citadelleduchaos.Dice;
 import citadelleduchaos.Monster;
 import citadelleduchaos.Player;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
-import org.mockito.Mock;
-import org.mockito.Mockito;
-
 
 class CombatUnitTest {
     Combat cmb;
