@@ -12,6 +12,7 @@ public class Player {
     private static int luck;
     private static int[] spellBook;
     static private int currentEvent;
+    static private int indiceSave;
 
     private static ArrayList<Integer> inventory = new ArrayList<Integer>() ;
 
@@ -29,17 +30,20 @@ public class Player {
      * @param p_luck
      * @return a Player
      */
-    public Player setNewPlayer(int p_hability, int p_vitality, int p_magic, int p_gold, int p_luck){
+    public Player(int p_hability, int p_vitality, int p_magic, int p_gold, int p_luck){
 
-        this.hability = p_hability;
-        this.vitality = p_vitality;
+        setHability(p_hability);
+        setVitality(p_vitality);
         this.magic = p_magic;
-        this.gold = 0;
+        setSpellBook();
+        this.gold = p_gold;
         this.luck = p_luck;
-
-        return this;
     }
 
+    public void setIndiceSave(int indiceSave){this.indiceSave = indiceSave;}
+    public int getIndiceSave(){
+        return indiceSave;
+    }
 
     public void setCurrentEvent(int p_event){this.currentEvent = p_event;}
     public int getCurrentEvent(){return this.currentEvent;}
@@ -71,10 +75,18 @@ public class Player {
     }
     public void setMagic(int magic) {this.magic = magic;}
 
+    public void setGold(int gold) {this.gold = gold;}
     public  int getGold(){return  gold;}
 
+    /**
+     * Les méthodes liées à l'habilité
+     * @return l'habilité actuelle
+     */
     public int  getCurrentHab(){
         return currentHab;
+    }
+    public void setCurrentHab(int currentHab){
+        Player.currentHab = currentHab;
     }
     public int getHability(){return  hability;}
     public void setHability(int hability) {
@@ -94,6 +106,7 @@ public class Player {
         return inventory;
     }
     public void setInventory(int indiceObjet) { inventory.add(indiceObjet);}
+
     /**
      * Savoir si l'objet recherché est dans l'inventaire
      * @param indiceObjet que l'on cherche
@@ -161,6 +174,7 @@ public class Player {
         int curVit = this.getCurrentVitality();
         this.setCurrentVitality(curVit-2);
     }
+
 
 
 

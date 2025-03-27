@@ -111,8 +111,7 @@ public class Affichage {
         switch (StdDraw.nextKeyTyped()){
             case 'a': creationPerso(); break; //oui - reroll
             case 'e': //non - continuer
-                player = new Player();
-                player.setNewPlayer(playerHab,playerEnd,playerMagic,0,playerLuck);
+                player = new Player(playerHab,playerEnd,playerMagic,0,playerLuck);
                 afficheMakeGrimoire(); break;
             default: System.exit(1);
         }
@@ -123,8 +122,7 @@ public class Affichage {
      */
     public static void afficheMakeGrimoire() throws IOException {
         char tabAlphabet[] = { 'a' , 'b' , 'c' , 'd' , 'e' , 'f' , 'g' ,'h','i','j','k','l','m','n','o'};
-        Spells spells = new Spells();
-        player.setSpellBook();
+        new Spells();
         int counterSpells = 0;
 
         do {

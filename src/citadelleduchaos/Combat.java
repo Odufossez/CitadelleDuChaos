@@ -21,13 +21,15 @@ public class Combat {
         return monster.getHability()+attack;
     }
 
-    public void fight(){
-        if (monsterTurn(Dice.doubleDice()) > playerTurn(Dice.doubleDice())){
+    public String fight(int monsterAtk , int playerAtk){
+        if (monsterTurn(monsterAtk) > playerTurn(playerAtk)){
             player.isTouchedInCombat();
-        }
-
-        if (monsterTurn(Dice.doubleDice()) < playerTurn(Dice.doubleDice())){
+            return "Le monstre vous a touché !";
+        } else if (monsterTurn(monsterAtk) < playerTurn(playerAtk)){
             monster.isTouchedInCombat();
+            return "Vous avez touché le monstre !";
+        } else {
+            return "Vous avez paré vos attaques mutuelles ! ";
         }
     }
 }
