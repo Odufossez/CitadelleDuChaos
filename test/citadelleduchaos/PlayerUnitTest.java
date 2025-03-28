@@ -1,6 +1,6 @@
-import citadelleduchaos.Player;
-import citadelleduchaos.Spells;
-import citadelleduchaos.Stuff;
+import Methods.Player;
+import Tools.Spells;
+import Tools.Stuff;
 import org.junit.Test;
 import org.junit.jupiter.api.Assertions;
 

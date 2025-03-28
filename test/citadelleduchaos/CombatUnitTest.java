@@ -1,6 +1,6 @@
-import citadelleduchaos.Combat;
-import citadelleduchaos.Monster;
-import citadelleduchaos.Player;
+import Methods.Combat;
+import Methods.Monster;
+import Methods.Player;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;

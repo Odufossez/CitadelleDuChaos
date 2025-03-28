@@ -1,4 +1,3 @@
-package Visual;
 /******************************************************************************
  *  Compilation:  javac StdDraw.java
  *  Execution:    java StdDraw
@@ -25,22 +24,56 @@ package Visual;
  *       images and strings
  *
  ******************************************************************************/
+package Tools;
+import java.awt.BasicStroke;
+import java.awt.Color;
+import java.awt.Component;
+import java.awt.FileDialog;
+import java.awt.Font;
+import java.awt.FontMetrics;
+import java.awt.Graphics;
+import java.awt.Graphics2D;
+import java.awt.Image;
+import java.awt.MediaTracker;
+import java.awt.RenderingHints;
+import java.awt.Toolkit;
 
-import javax.imageio.ImageIO;
-import javax.swing.*;
-import java.awt.*;
-import java.awt.event.*;
-import java.awt.geom.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
+import java.awt.event.MouseMotionListener;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
+
+import java.awt.geom.Arc2D;
+import java.awt.geom.Ellipse2D;
+import java.awt.geom.GeneralPath;
+import java.awt.geom.Line2D;
+import java.awt.geom.Rectangle2D;
+
 import java.awt.image.BufferedImage;
+
 import java.io.File;
 import java.io.IOException;
+
 import java.net.MalformedURLException;
+import java.net.URL;
 import java.net.URI;
 import java.net.URISyntaxException;
-import java.net.URL;
+
 import java.util.LinkedList;
-import java.util.NoSuchElementException;
 import java.util.TreeSet;
+import java.util.NoSuchElementException;
+import javax.imageio.ImageIO;
+
+import javax.swing.ImageIcon;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JMenu;
+import javax.swing.JMenuBar;
+import javax.swing.JMenuItem;
+import javax.swing.KeyStroke;
 
 /**
  *  The {@code StdDraw} class provides static methods for creating drawings
@@ -666,10 +699,10 @@ public final class StdDraw implements ActionListener, MouseListener, MouseMotion
     private static Graphics2D offscreen, onscreen;
 
     // singleton for callbacks: avoids generation of extra .class files
-    private static Tools.StdDraw std = new Tools.StdDraw();
+    private static StdDraw std = new StdDraw();
 
     // the frame for drawing to the screen
-    private static JFrame frame;
+    public static JFrame frame;
 
     // is the JFrame visible (upon calling draw())?
     private static boolean isJFrameVisible = true;
@@ -687,7 +720,7 @@ public final class StdDraw implements ActionListener, MouseListener, MouseMotion
     private static TreeSet<Integer> keysDown = new TreeSet<Integer>();
 
     // singleton pattern: client can't instantiate
-    private StdDraw() { }
+    public StdDraw() { }
 
 
     // static initializer
@@ -946,8 +979,8 @@ public final class StdDraw implements ActionListener, MouseListener, MouseMotion
     private static double  scaleY(double y) { return height * (ymax - y) / (ymax - ymin); }
     private static double factorX(double w) { return w * width  / Math.abs(xmax - xmin);  }
     private static double factorY(double h) { return h * height / Math.abs(ymax - ymin);  }
-    private static double   userX(double x) { return xmin + x * (xmax - xmin) / width;    }
-    private static double   userY(double y) { return ymax - y * (ymax - ymin) / height;   }
+    public static double   userX(double x) { return xmin + x * (xmax - xmin) / width;    }
+    public static double   userY(double y) { return ymax - y * (ymax - ymin) / height;   }
 
 
     /**
@@ -1097,7 +1130,7 @@ public final class StdDraw implements ActionListener, MouseListener, MouseMotion
      */
     public static void setFont(Font font) {
         validateNotNull(font, "font");
-        Tools.StdDraw.setFont(font);
+        StdDraw.font = font;
     }
 
 
@@ -1504,14 +1537,14 @@ public final class StdDraw implements ActionListener, MouseListener, MouseMotion
 
         // in case file is inside a .jar (classpath relative to StdDraw)
         if (icon.getImageLoadStatus() != MediaTracker.COMPLETE) {
-            URL url = Tools.StdDraw.class.getResource(filename);
+            URL url = StdDraw.class.getResource(filename);
             if (url != null)
                 icon = new ImageIcon(url);
         }
 
         // in case file is inside a .jar (classpath relative to root of jar)
         if (icon.getImageLoadStatus() != MediaTracker.COMPLETE) {
-            URL url = Tools.StdDraw.class.getResource("/" + filename);
+            URL url = StdDraw.class.getResource("/" + filename);
             if (url == null) throw new IllegalArgumentException("could not read image: '" + filename + "'");
             icon = new ImageIcon(url);
         }
@@ -1937,13 +1970,13 @@ public final class StdDraw implements ActionListener, MouseListener, MouseMotion
      */
     @Override
     public void actionPerformed(ActionEvent event) {
-        FileDialog chooser = new FileDialog(Tools.StdDraw.frame, "Use a .png or .jpg extension", FileDialog.SAVE);
+        FileDialog chooser = new FileDialog(StdDraw.frame, "Use a .png or .jpg extension", FileDialog.SAVE);
         chooser.setVisible(true);
         String selectedDirectory = chooser.getDirectory();
         String selectedFilename = chooser.getFile();
         if (selectedDirectory != null && selectedFilename != null) {
             try {
-                Tools.StdDraw.save(selectedDirectory + selectedFilename);
+                StdDraw.save(selectedDirectory + selectedFilename);
             }
             catch (IllegalArgumentException e) {
                 System.err.println(e.getMessage());
@@ -2033,8 +2066,8 @@ public final class StdDraw implements ActionListener, MouseListener, MouseMotion
     @Override
     public void mousePressed(MouseEvent event) {
         synchronized (MOUSE_LOCK) {
-            mouseX = Tools.StdDraw.userX(event.getX());
-            mouseY = Tools.StdDraw.userY(event.getY());
+            mouseX = StdDraw.userX(event.getX());
+            mouseY = StdDraw.userY(event.getY());
             isMousePressed = true;
         }
     }
@@ -2055,8 +2088,8 @@ public final class StdDraw implements ActionListener, MouseListener, MouseMotion
     @Override
     public void mouseDragged(MouseEvent event)  {
         synchronized (MOUSE_LOCK) {
-            mouseX = Tools.StdDraw.userX(event.getX());
-            mouseY = Tools.StdDraw.userY(event.getY());
+            mouseX = StdDraw.userX(event.getX());
+            mouseY = StdDraw.userY(event.getY());
         }
     }
 
@@ -2066,8 +2099,8 @@ public final class StdDraw implements ActionListener, MouseListener, MouseMotion
     @Override
     public void mouseMoved(MouseEvent event) {
         synchronized (MOUSE_LOCK) {
-            mouseX = Tools.StdDraw.userX(event.getX());
-            mouseY = Tools.StdDraw.userY(event.getY());
+            mouseX = StdDraw.userX(event.getX());
+            mouseY = StdDraw.userY(event.getY());
         }
     }
 
@@ -2201,26 +2234,26 @@ public final class StdDraw implements ActionListener, MouseListener, MouseMotion
      * @param args the command-line arguments
      */
     public static void main(String[] args) {
-        Tools.StdDraw.square(0.2, 0.8, 0.1);
-        Tools.StdDraw.filledSquare(0.8, 0.8, 0.2);
-        Tools.StdDraw.circle(0.8, 0.2, 0.2);
+        StdDraw.square(0.2, 0.8, 0.1);
+        StdDraw.filledSquare(0.8, 0.8, 0.2);
+        StdDraw.circle(0.8, 0.2, 0.2);
 
-        Tools.StdDraw.setPenColor(Tools.StdDraw.BOOK_RED);
-        Tools.StdDraw.setPenRadius(0.02);
-        Tools.StdDraw.arc(0.8, 0.2, 0.1, 200, 45);
+        StdDraw.setPenColor(StdDraw.BOOK_RED);
+        StdDraw.setPenRadius(0.02);
+        StdDraw.arc(0.8, 0.2, 0.1, 200, 45);
 
         // draw a blue diamond
-        Tools.StdDraw.setPenRadius();
-        Tools.StdDraw.setPenColor(Tools.StdDraw.BOOK_BLUE);
+        StdDraw.setPenRadius();
+        StdDraw.setPenColor(StdDraw.BOOK_BLUE);
         double[] x = { 0.1, 0.2, 0.3, 0.2 };
         double[] y = { 0.2, 0.3, 0.2, 0.1 };
-        Tools.StdDraw.filledPolygon(x, y);
+        StdDraw.filledPolygon(x, y);
 
         // text
-        Tools.StdDraw.setPenColor(Tools.StdDraw.BLACK);
-        Tools.StdDraw.text(0.2, 0.5, "black text");
-        Tools.StdDraw.setPenColor(Tools.StdDraw.WHITE);
-        Tools.StdDraw.text(0.8, 0.8, "white text");
+        StdDraw.setPenColor(StdDraw.BLACK);
+        StdDraw.text(0.2, 0.5, "black text");
+        StdDraw.setPenColor(StdDraw.WHITE);
+        StdDraw.text(0.8, 0.8, "white text");
     }
 
 }

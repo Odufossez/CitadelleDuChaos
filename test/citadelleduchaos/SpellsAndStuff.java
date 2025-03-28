@@ -1,5 +1,5 @@
-import citadelleduchaos.Spells;
-import citadelleduchaos.Stuff;
+import Tools.Spells;
+import Tools.Stuff;
 import org.junit.Test;
 import org.junit.jupiter.api.Assertions;
 
