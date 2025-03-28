@@ -13,11 +13,12 @@ public class Sauvegarde {
     private String saveName;
     private String savePath = "ressources/saves/save_";
     private int indiceSave; //1 à 3
+    FileWriter writer;
 
     /**
      * FICHIER DE SAUVEGARDE
-     * player's name TODO v1.x
-     * 1.player's vitality currentVit hability currentHab , magic , luck gold
+     * player's name TODO v1.01
+     * 1.player's vitality currentVit hability currentHab , magic , luck , gold
      * 2.current event
      * 3.items in line
      * 4.spell's util in line
@@ -25,11 +26,26 @@ public class Sauvegarde {
 
     public Sauvegarde(){}
 
-    public void newSave(Player player) throws IOException {
-        indiceSave = player.getIndiceSave();
+    public void createSave(int indiceSave) throws IOException{
+        Path path = Paths.get(savePath + indiceSave + ".txt");
+        Files.createFile(path);
+
+        try{
+            writer = new FileWriter(savePath + indiceSave + ".txt");
+        }catch(IOException e){
+            System.out.println("La sauvegarde ne peut pas se créer");
+            throw new IOException(e.getMessage());
+        }
+    }
+
+    /**
+     * Pour la création d'une sauvegarde d'une partie déjà existante
+     * @param indiceSave
+     * @throws IOException
+     */
+    public void newSave(int indiceSave , Player player) throws IOException {
         Path path = Paths.get(savePath + indiceSave + ".txt");
         String dataPlayer = "";
-        FileWriter writer;
 
         Files.deleteIfExists(path);
         Files.createFile(path);
@@ -37,19 +53,15 @@ public class Sauvegarde {
         //todo voir pour le fichier disparaisse pas
         try{
             writer = new FileWriter(savePath + indiceSave + ".txt");
-            System.out.println("writer ok");
         }catch(IOException e){
             System.out.println("La sauvegarde ne peut pas se créer");
             throw new IOException(e.getMessage());
         }
 
-
-
         try{
             dataPlayer = Integer.toString(player.getVitality()) + " " + Integer.toString(player.getCurrentVitality()) +
                 " " + player.getHability() + " " + player.getCurrentHab() + " " + player.getMagic() + " "
                     + player.getLuck() + " " + player.getGold() + "\n";
-            System.out.println(dataPlayer);
             writer.write(dataPlayer);
 
 
@@ -77,8 +89,15 @@ public class Sauvegarde {
         }
     }
 
+    /**
+     * chargement des paramètres d'une partie
+     * @param indiceSave
+     * @return
+     * @throws IOException
+     */
     public Player loadSave(int indiceSave) throws IOException {
         Player ply = new Player();
+        ply.setIndiceSave(indiceSave); //réassociation du joueur avec le fichier
         int tabCarac[] = new int[7];
         ArrayList<Integer> items = new ArrayList<>();
         ArrayList<Integer> spells = new ArrayList<>();
@@ -132,5 +151,26 @@ public class Sauvegarde {
         return ply;
     }
 
+    /**
+     * Récupère le numéro de l'évènement associé à indiceSave
+     * @param indiceSave le numéro de la sauvegarde
+     * @return numEvent le numéro de l'évent
+     */
+    public int getCurrentEvent(int indiceSave) throws FileNotFoundException {
+        try{
+            File saveFile = new File(savePath + indiceSave + ".txt");
+            Scanner rdFile = new Scanner(saveFile);
+            String line;
+            Scanner rdLine = null;
+            for (int i = 0; i <2 ; i++) {
+                line = rdFile.nextLine();
+                rdLine = new Scanner(line);
+            }
+
+            return rdLine.nextInt();
+        }catch (FileNotFoundException e){
+            return -1;
+        }
+    }
 
 }

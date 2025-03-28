@@ -1,34 +1,39 @@
 package citadelleduchaos;
 
 import java.awt.Font;
-import java.io.BufferedReader;
-import java.io.FileReader;
-import java.io.IOException;
+import java.io.*;
 
 public class Affichage {
+
+    private static Sauvegarde save = new Sauvegarde();
+    private static File file;
+
     private static int suiteY;
     private static int choiceY;
 
     private static Player player;
 
-    private static final Font bold25 = new Font("Arial", Font.BOLD , 25);
+    public static final Font bold25 = new Font("Arial", Font.BOLD , 25);
 
-    private static final Font bold15 = new Font("Arial", Font.BOLD , 15);
-    private static final Font plain15 = new Font("Arial" , Font.PLAIN , 15);
+    public static final Font bold15 = new Font("Arial", Font.BOLD , 15);
+    public static final Font plain15 = new Font("Arial" , Font.PLAIN , 15);
 
-    private static final Font bold20 = new Font("Arial" , Font.BOLD , 20);
-    private static final Font plain20 = new Font("Arial" , Font.PLAIN , 20);
+    public static final Font bold20 = new Font("Arial" , Font.BOLD , 20);
+    public static final Font plain20 = new Font("Arial" , Font.PLAIN , 20);
 
-    private static final Font plain18 = new Font("Arial", Font.PLAIN , 18);
-    private static final Font bold18 = new Font("Arial", Font.BOLD , 18);
+    public static final Font plain18 = new Font("Arial", Font.PLAIN , 18);
+    public static final Font bold18 = new Font("Arial", Font.BOLD , 18);
 
-    private static final Font bold32 = new Font("Arial", Font.BOLD , 32);
+    public static final Font bold32 = new Font("Arial", Font.BOLD , 32);
+
+
+    //TODO REFORMAT POUR DISSOCIER LES MÉTHODES DE CRÉATION DE JOUEUR
 
     /**
      * Initialisation des paramètres d'affichage de la fenêtre StdDraw
      */
-    public static void paramAffichage() {
-        StdDraw.clear();
+    Affichage() {
+        StdDraw.enableDoubleBuffering();
         /*  Paramétrage de la police et de la fenêtre */
         StdDraw.setXscale(-1920,1920);
         StdDraw.setYscale(-1080,1080);
@@ -47,8 +52,6 @@ public class Affichage {
      */
     public static void narration(String path) throws IOException {
 
-        paramAffichage();
-
         /* Affichage du texte fourni par @path */
 
         try(FileReader fileReader = new FileReader(path);
@@ -65,176 +68,6 @@ public class Affichage {
     }
 
     public static void mainMenu(){}
-
-    /**
-     * Gestion de l'affichage du menu de création de perso
-     * @throws IOException
-     */ //TODO potentiellement revoir l'affichage (v1.01)
-    public static void creationPerso() throws IOException {
-        paramAffichage();
-
-        StdDraw.setFont(bold25);
-        StdDraw.text(100,1000 , "Création du personnage");
-
-
-        StdDraw.setFont(plain15);
-
-        int x=-1000 , y=500;
-        int playerHab = Dice.soloDice()+6;
-        int playerEnd = Dice.doubleDice() +12;
-        int playerLuck = Dice.soloDice() + 6;
-        int playerMagic = Dice.doubleDice() + 6;
-
-        StdDraw.text(x,y , "Force du personnage (habilité au combat) : ");
-        StdDraw.text(x+450, y , Integer.toString(playerHab));
-        y-=40;
-        StdDraw.text(x,y , "Endurance du personnage (nombre de points de vie) : ");
-        StdDraw.text(x+450,y, Integer.toString(playerEnd));
-        y-=40; //ligne du dessous
-        StdDraw.text(x,y , "Chance: ");
-        StdDraw.text(x+450,y, Integer.toString(playerLuck));
-        y-=40;
-        StdDraw.text(x,y,"Formules magiques possibles : ");
-        StdDraw.text(x+450,y,Integer.toString(playerMagic));
-        y-=100;
-
-
-        StdDraw.setFont(bold20);
-        StdDraw.text(x,y,"Voulez vous relancer les dés ? (Les valeurs changeront)");
-        y-=140;
-
-
-        StdDraw.text(x,y,"a. Oui, relancer");
-        StdDraw.text(x+500,y,"e. Non, continuer");
-
-        while(!StdDraw.hasNextKeyTyped()){continue;}
-        switch (StdDraw.nextKeyTyped()){
-            case 'a': creationPerso(); break; //oui - reroll
-            case 'e': //non - continuer
-                player = new Player(playerHab,playerEnd,playerMagic,0,playerLuck);
-                afficheMakeGrimoire(); break;
-            default: System.exit(1);
-        }
-    }
-
-    /**
-     * Affichage de la fenêtre pour ajouter les sorts au grimoire
-     */
-    public static void afficheMakeGrimoire() throws IOException {
-        char tabAlphabet[] = { 'a' , 'b' , 'c' , 'd' , 'e' , 'f' , 'g' ,'h','i','j','k','l','m','n','o'};
-        new Spells();
-        int counterSpells = 0;
-
-        do {
-            StdDraw.clear();
-            paramAffichage();
-            arrowPrev();
-            StdDraw.setFont(bold25);
-            StdDraw.text(0,1000 , "Grimoire");
-            StdDraw.setFont(bold15);
-            StdDraw.text(-1500,-900 , "Sorts disponibles : " + player.getMagic());
-            StdDraw.text(-1500 , -860 , "Sorts sélectionnés : " + counterSpells);
-
-            //liste des sorts avec les descriptions
-            int x = -1200 , y = 800;
-            for (int i=0 ; i<12 ; i++){
-                StdDraw.setFont(bold18);
-                StdDraw.textLeft(x,y , tabAlphabet[i] + " " + Spells.getSpellName(i));
-                x=1800;
-                StdDraw.setFont(plain18);
-                StdDraw.textRight(x,y, Spells.getSpellDescription(i));
-                y-=100;
-                x = -1200;
-            }
-
-            //Construction du tableau de quantité de sorts actuels
-            x = -1800;
-            y = -500;
-            for (int i=0 ; i<12 ; i++){
-                StdDraw.setFont(bold15);
-                StdDraw.textLeft(x,y , Spells.getSpellName(i));
-                StdDraw.setFont(plain15);
-                y-=40;
-                StdDraw.textRight(x,y, Integer.toString(player.getCountSpell(i)));
-                y+=40;
-                x+=300;
-            }
-
-            while(!StdDraw.hasNextKeyTyped()){continue;} //attendre une touche
-            switch (StdDraw.nextKeyTyped()){
-                case 'a' : player.setSpelltInGrimoire(0,counterSpells); counterSpells++; break;
-                case 'b' : player.setSpelltInGrimoire(1,counterSpells); counterSpells++; break;
-                case 'c' : player.setSpelltInGrimoire(2,counterSpells); counterSpells++; break;
-                case 'd' : player.setSpelltInGrimoire(3,counterSpells); counterSpells++; break;
-                case 'e' : player.setSpelltInGrimoire(4,counterSpells); counterSpells++; break;
-                case 'f' : player.setSpelltInGrimoire(5,counterSpells); counterSpells++; break;
-                case 'g' : player.setSpelltInGrimoire(6,counterSpells); counterSpells++; break;
-                case 'h' : player.setSpelltInGrimoire(7,counterSpells); counterSpells++; break;
-                case 'i' : player.setSpelltInGrimoire(8,counterSpells); counterSpells++; break;
-                case 'j' : player.setSpelltInGrimoire(9,counterSpells); counterSpells++; break;
-                case 'k' : player.setSpelltInGrimoire(10,counterSpells); counterSpells++; break;
-                case 'l' : player.setSpelltInGrimoire(11,counterSpells); counterSpells++; break;
-                case 'w' : {
-                    if (counterSpells>0){
-                        counterSpells--;
-                        player.setSpelltInGrimoire(13,counterSpells);
-                    } else {
-                        creationPerso();
-                    }
-                    break;
-                }
-                default: continue;
-            }
-        }while(!player.grimoireIsFull());
-
-    }
-
-    /**
-     * Affiche un écran qui résume les choix précédents et permet de changer seulement les sorts ou tous les rolls
-     */
-    public static void confirmScreen() throws IOException {
-        arrowNext();
-
-        StdDraw.setFont(bold25);
-        StdDraw.text(0,1000 , "Résumé");
-        StdDraw.setFont(plain18);
-        StdDraw.textLeft(-1200,800 , "ëtes vous satisfait de cette construction ?");
-
-        //Affichage du résumé des sorts
-        StdDraw.setFont(bold18);
-        StdDraw.textLeft(-1200 , 600 , "Sorts");
-        StdDraw.setFont(plain15);
-        int x = -1200 , y = 400;
-        for (int i=0 ; i<12 ; i++){
-            if(player.getCountSpell(i)>0){
-                StdDraw.textLeft(x,y , Spells.getSpellName(i) + " " + player.getCountSpell(i));
-                y-=40;
-            }
-        }
-
-        //Affichage des caractéristiques du personnage
-        StdDraw.setFont(bold18);
-        StdDraw.textRight(1200 , 600 , "Caractéristiques");
-        StdDraw.setFont(plain15);
-        x = 1200 ; y = 400;
-        StdDraw.textRight(x,y , "Habilité : " + player.getHability());
-        y-=40;
-        StdDraw.textRight(x,y, "Endurance : " + player.getVitality());
-        y-=40;
-        StdDraw.textRight(x,y, "Chance : " + player.getLuck());
-
-        while (!StdDraw.hasNextKeyTyped()){continue;}
-        switch (StdDraw.nextKeyTyped()){
-            case 'x' : {
-                Events.intro();
-                //todo create save
-                break;
-            }
-            case 'w' : afficheMakeGrimoire(); break;
-            default: break;
-        }
-    }
-
 
     /* --------------------------------- FLECHES DE NAV --------------------------------------------------------- */
 
@@ -257,8 +90,6 @@ public class Affichage {
         StdDraw.line(-1000 , suiteY-200 , -1200 ,  suiteY-140); //coté diagonal bas
         StdDraw.text(-1050 , suiteY-140 , "w");
     }
-
-
 
     /*---------------------------- AFFICHAGE DES ENCARDS DE CHOIX --------------------------------------- */
 
@@ -483,10 +314,21 @@ public class Affichage {
 
     }
 
-    public static void choiceSaveLoad(){
+
+    /* ------------------------- SAUVEGARDES ----------------------------------------------------- */
+
+    /**
+     * Affichage du menu de choix d'une sauvegarde déjà existante
+     * todo handle un choix sur une save vide (créer une nouvelle save)
+     * todo afficher 
+     * @throws FileNotFoundException
+     */
+    public static void choiceSaveLoad() throws IOException {
         StdDraw.setPenRadius(0.005);
         StdDraw.setFont(bold32);
         int y = 100;
+        int decalageX = 290;
+        int decalageY = 40;
 
         //Slot 1
         StdDraw.rectangle(-1300,y,350,660);
@@ -501,7 +343,79 @@ public class Affichage {
         StdDraw.rectangle(1300,100,350,660);
         StdDraw.text(1300 , y+430 , "3" );
 
-
+        //--------------------- AFFICHAGE TEXTE -----------------//
         StdDraw.setPenRadius();
+        StdDraw.setFont(plain18);
+        
+        //Premiere save
+        StdDraw.textLeft(-1300-decalageX, y-decalageY , "Event en cours :" +
+                traitementReturnCurrentEvent(save.getCurrentEvent(1)));
+        StdDraw.textLeft(-1300-decalageX , y-decalageY*2 , "Nom du personnage : " + " wip" );
+
+        //snd save
+        StdDraw.textLeft(0-decalageX , y-decalageY , "Event en cours :" +
+                traitementReturnCurrentEvent(save.getCurrentEvent(2)) );
+        StdDraw.textLeft(0-decalageX , y-decalageY*2 , "Nom du personnage : "+" wip" );
+
+
+        //third save
+        StdDraw.textLeft(1300-decalageX, y-decalageY , "Event en cours :" +
+                traitementReturnCurrentEvent(save.getCurrentEvent(3)) );
+        StdDraw.textLeft(1300-decalageX , y-decalageY*2 , "Nom du personnage : "  + "wip");
+
+        int nbSave = getIndiceSave();
+
+        file = new File("ressources/saves/save_" + nbSave + ".txt");
+
+        if (file.exists()) {
+            save.loadSave(nbSave);
+        } else {
+            CharacterCreator.creationPerso(nbSave);
+        }
+
+    }
+
+    /**
+     * renvoie le numéro de la save
+     * @return
+     * @throws IOException
+     */
+    public static int getIndiceSave() throws IOException{
+        char inChar;
+
+        do{
+            while (!StdDraw.hasNextKeyTyped()){continue;}
+            inChar = StdDraw.nextKeyTyped();
+            switch (inChar){
+                case '&' , '1' : {
+                    StdDraw.clear();
+                    return 1;
+                }
+                case 'é' , '2' : {
+                    StdDraw.clear();
+                    return 2;
+                }
+                case '"' , '3' : {
+                    StdDraw.clear();
+                    return 3;
+                }
+                default: break;
+            }
+        }while(inChar!='&' && inChar!='1' && inChar!='é' && inChar!='2' && inChar!='"' && inChar!='3');
+        return 0;
+    }
+
+    /**
+     * Traite ce qui doit être affiché dans le rectangle de choix de sauvegarde en fonction de ce qui a été renvoyé
+     * par Sauvegarde.getCurrentEvent()
+     * @param returnCurrentEvent : int de retour de Sauvegarde.getCurrentEvent() [-1 , 1 , 2 , 3]
+     * @return un String qui sera affiché dans le rectangle de choix de sauvegarde
+     */
+    public static String traitementReturnCurrentEvent(int returnCurrentEvent) {
+        if(returnCurrentEvent==-1){
+            return "no save to load";
+        } else {
+            return Integer.toString(returnCurrentEvent);
+        }
     }
 }

@@ -13,17 +13,14 @@ public class Main {
     static Sauvegarde save = new Sauvegarde();
 
     public static void main(String[] args) throws IOException {
-        player = testLoad();
-        System.out.println(player.toString());
+        new Affichage();
+        CharacterCreator.creationPerso(0);
     }
 
     public static Player setUpPlayer() {
         return player = new Player(10,20,4,0,8);
     }
 
-    public void testSave() throws IOException {
-        save.newSave(setUpPlayer());
-    }
 
     public static Player testLoad() throws IOException {
         return save.loadSave(0);
