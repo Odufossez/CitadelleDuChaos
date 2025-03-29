@@ -65,7 +65,11 @@ public class CharacterCreator {
             while(!StdDraw.hasNextKeyTyped()){continue;}
             inChar = StdDraw.nextKeyTyped();
             switch (inChar){
-                case 'a': StdDraw.clear(); creationPerso(nbSave); break; //oui - reroll
+                case 'a': {
+                    StdDraw.clear();
+                    creationPerso(nbSave);
+                    break; //oui - reroll
+                }
                 case 'e': { //non - continuer
                     StdDraw.clear();
                     player = new Player(playerHab, playerEnd, playerMagic, 0, playerLuck);
@@ -74,7 +78,7 @@ public class CharacterCreator {
                 }
                 default: continue;
             }
-        }while(inChar != 'a' && inChar != 'e');
+        }while(true);
 
 
     }
@@ -158,7 +162,6 @@ public class CharacterCreator {
      */
     public static void confirmScreen() throws IOException {
         char inChar;
-        Sauvegarde save = new Sauvegarde();
 
         Affichage.arrowNext();
         Affichage.arrowPrev();
@@ -199,8 +202,8 @@ public class CharacterCreator {
             switch (inChar){
                 case 'x' : {
                     StdDraw.clear();
-                    save.createSave(indiceSave);
-                    save.newSave(indiceSave,player);
+                    Sauvegarde.createSave(indiceSave);
+                    Sauvegarde.newSave(indiceSave,player);
                     new Events(player);
                     Events.intro();
                     break;
@@ -213,7 +216,7 @@ public class CharacterCreator {
                 }
                 default: break;
             }
-        } while (inChar != 'x' && inChar!='w');
+        } while (true);
 
     }
 

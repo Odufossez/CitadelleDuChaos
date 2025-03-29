@@ -11,7 +11,7 @@ import static Tools.PathsTo.savePath;
 
 public class Sauvegarde {
     private String saveName;
-    FileWriter writer;
+    static FileWriter writer;
 
     /**
      * FICHIER DE SAUVEGARDE
@@ -24,7 +24,12 @@ public class Sauvegarde {
 
     public Sauvegarde(){}
 
-    public void createSave(int indiceSave) throws IOException{
+    /**
+     * Création d'un fichier de sauvegarde pour la première fois
+     * @param indiceSave
+     * @throws IOException
+     */
+    public static void createSave(int indiceSave) throws IOException{
         Path path = Paths.get(savePath + indiceSave + ".txt");
         Files.createFile(path);
 
@@ -41,7 +46,7 @@ public class Sauvegarde {
      * @param indiceSave
      * @throws IOException
      */
-    public void newSave(int indiceSave , Player player) throws IOException {
+    public static void newSave(int indiceSave, Player player) throws IOException {
         Path path = Paths.get(savePath + indiceSave + ".txt");
         String dataPlayer = "";
 
@@ -93,7 +98,7 @@ public class Sauvegarde {
      * @return
      * @throws IOException
      */
-    public Player loadSave(int indiceSave) throws IOException {
+    public static Player loadSave(int indiceSave) throws IOException {
         Player ply = new Player();
         ply.setIndiceSave(indiceSave); //réassociation du joueur avec le fichier
         int tabCarac[] = new int[7];
@@ -154,7 +159,7 @@ public class Sauvegarde {
      * @param indiceSave le numéro de la sauvegarde
      * @return numEvent le numéro de l'évent
      */
-    public int getCurrentEvent(int indiceSave) throws FileNotFoundException {
+    public static int getCurrentEvent(int indiceSave) throws FileNotFoundException {
         try{
             File saveFile = new File(savePath + indiceSave + ".txt");
             Scanner rdFile = new Scanner(saveFile);
@@ -169,6 +174,43 @@ public class Sauvegarde {
         }catch (FileNotFoundException e){
             return -1;
         }
+    }
+
+    /**
+     * Est ce que la sauvegarde en paramètre existe
+     * @param slot numéro de la save
+     * @return true si elle existe
+     */
+    public static boolean doesSaveExist(int slot){
+        File file = new File(savePath + slot + ".txt");
+        return file.exists();
+    }
+
+    /**
+     * Permet de savoir s'il existe déjà une sauvegarde
+     * @return true s'il y a au moins une sauvegarde sinon false
+     */
+    public static boolean savesExist(){
+        for (int i = 1; i < 4 ; i++) {
+            File file = new File(savePath + i + ".txt");
+            if (file.exists()) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    /**
+     * renvoie le premier emplacement de sauvegarde libre
+     * @return
+     */
+    public static int firstEmptySlot(){
+        for (int i = 1; i < 4 ; i++) {
+            if (!Sauvegarde.doesSaveExist(i)){
+                return i;
+            }
+        }
+        return -1;
     }
 
 }

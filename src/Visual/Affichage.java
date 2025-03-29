@@ -8,7 +8,6 @@ import static Tools.Fonts.*;
 
 public class Affichage {
 
-    private static Sauvegarde save = new Sauvegarde();
     private static File file;
 
     private static int suiteY;
@@ -305,11 +304,10 @@ public class Affichage {
 
     /**
      * Affichage du menu de choix d'une sauvegarde déjà existante
-     * todo handle un choix sur une save vide (créer une nouvelle save)
-     * todo afficher 
      * @throws FileNotFoundException
      */
     public static void choiceSaveLoad() throws IOException {
+        Affichage.arrowPrev();
         StdDraw.setPenRadius(0.005);
         StdDraw.setFont(bold32);
         int y = 100;
@@ -335,26 +333,28 @@ public class Affichage {
         
         //Premiere save
         StdDraw.textLeft(-1300-decalageX, y-decalageY , "Event en cours :" +
-                traitementReturnCurrentEvent(save.getCurrentEvent(1)));
+                traitementReturnCurrentEvent(Sauvegarde.getCurrentEvent(1)));
         StdDraw.textLeft(-1300-decalageX , y-decalageY*2 , "Nom du personnage : " + " wip" );
 
         //snd save
         StdDraw.textLeft(0-decalageX , y-decalageY , "Event en cours :" +
-                traitementReturnCurrentEvent(save.getCurrentEvent(2)) );
+                traitementReturnCurrentEvent(Sauvegarde.getCurrentEvent(2)) );
         StdDraw.textLeft(0-decalageX , y-decalageY*2 , "Nom du personnage : "+" wip" );
 
 
         //third save
         StdDraw.textLeft(1300-decalageX, y-decalageY , "Event en cours :" +
-                traitementReturnCurrentEvent(save.getCurrentEvent(3)) );
+                traitementReturnCurrentEvent(Sauvegarde.getCurrentEvent(3)) );
         StdDraw.textLeft(1300-decalageX , y-decalageY*2 , "Nom du personnage : "  + "wip");
 
+
+        StdDraw.show();
         int nbSave = getIndiceSave();
 
         file = new File("ressources/saves/save_" + nbSave + ".txt");
 
         if (file.exists()) {
-            save.loadSave(nbSave);
+            Sauvegarde.loadSave(nbSave);
         } else {
             CharacterCreator.creationPerso(nbSave);
         }
@@ -385,10 +385,13 @@ public class Affichage {
                     StdDraw.clear();
                     return 3;
                 }
+                case 'w' : {
+                    StdDraw.clear();
+                    MainMenu.afficherTextes();
+                }
                 default: break;
             }
-        }while(inChar!='&' && inChar!='1' && inChar!='é' && inChar!='2' && inChar!='"' && inChar!='3');
-        return 0;
+        }while(true);
     }
 
     /**

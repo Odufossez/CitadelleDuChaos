@@ -13,12 +13,10 @@ import java.io.IOException;
 //non défintif
 public class Main {
     static Player player;
-    static Sauvegarde save = new Sauvegarde();
 
     public static void main(String[] args) throws IOException {
         new Affichage();
-        MainMenu mainMenu = new MainMenu();
-        mainMenu.afficherTextes();
+        MainMenu.afficherTextes();
     }
 
     public static Player setUpPlayer() {
@@ -27,6 +25,6 @@ public class Main {
 
 
     public static Player testLoad() throws IOException {
-        return save.loadSave(0);
+        return Sauvegarde.loadSave(0);
     }
 }
