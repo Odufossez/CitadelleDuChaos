@@ -1,6 +1,6 @@
 package Visual;
 
-import Methods.Events;
+import EventsCdC.Events;
 import Methods.Player;
 import Methods.Sauvegarde;
 import Tools.Dice;

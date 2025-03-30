@@ -1,9 +1,7 @@
 package Visual;
 
-import Methods.Events;
-import Methods.Sauvegarde;
 import Tools.StdDraw;
-import java.io.File;
+
 import java.io.IOException;
 
 import static Methods.Sauvegarde.*;
@@ -16,6 +14,7 @@ public class MainMenu {
 
         /*Titre principal*/
         StdDraw.setFont(titreMainMenu);
+        StdDraw.setPenColor(StdDraw.BLACK);
         StdDraw.textLeft(x , 900 , "Citadelle du Chaos - The game");
         StdDraw.setFont(bold18);
         StdDraw.textLeft(x,850 , "By LittleBird");
@@ -23,7 +22,7 @@ public class MainMenu {
         /*Sous menu*/
         StdDraw.setFont(plain32);
 
-        if (Sauvegarde.firstEmptySlot() == -1){
+        if (doesSaveExist(1)&&doesSaveExist(2)&&doesSaveExist(3)) { //plus de place
             StdDraw.setPenColor(StdDraw.LIGHT_GRAY);
         }
         StdDraw.textLeft(x , 80 , "1 - Nouvelle partie");

@@ -210,7 +210,7 @@ public class Sauvegarde {
                 return i;
             }
         }
-        return -1;
+        return -1; //si aucune save de dispo
     }
 
 }

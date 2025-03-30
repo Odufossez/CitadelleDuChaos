@@ -22,9 +22,4 @@ public class Main {
     public static Player setUpPlayer() {
         return player = new Player(10,20,4,0,8);
     }
-
-
-    public static Player testLoad() throws IOException {
-        return Sauvegarde.loadSave(0);
-    }
 }

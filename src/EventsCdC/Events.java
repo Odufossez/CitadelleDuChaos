@@ -1,46 +1,58 @@
-package Methods;
+package EventsCdC;
+import Methods.Player;
+import Tools.ReadingInChar;
 import Tools.StdDraw;
 import Visual.Affichage;
+import Visual.CharacterCreator;
+import Visual.MainMenu;
+
 import static Tools.PathsTo.*;
 import java.io.IOException;
 
 public class Events {
     static private int choice;
     static private Player player;
-
-    /**
-     * Instanciation des events avec le joueur qui a été créée.
-     * @param player
-     */
-    public Events(Player player){
-        this.player = player;
-    }
+    static private int nbSave;
+    static private char inChar;
 
 
-    public static void intro() throws IOException {
+    public static void intro(int nbSave) throws IOException {
         player.setCurrentEvent(0);
         Affichage.narration(pathToEvents+"Event_Intro_text.txt");
         Affichage.arrowNext();
-        while(!StdDraw.hasNextKeyTyped()){
-            continue;
-        }
-        StdDraw.nextKeyTyped();
-        event1();
+        Affichage.arrowPrev();
+        do {
+            inChar = ReadingInChar.readChar();
+            switch (inChar){
+                case 'x' : {
+                    StdDraw.clear();
+                    CharacterCreator.creationPerso(nbSave);
+                }
+                case 'w' : {
+                    MainMenu.afficherTextes();
+                }
+                default : {continue;}
+            }
+        }while (true);
+
+
     }
     public static void event1() throws IOException {
         player.setCurrentEvent(1);
         Affichage.narration(pathToEvents+"Event_1_text.txt");
         Affichage.choiceTriple(pathToChoices+"event1_choice1.txt",pathToChoices+"event1_choice2.txt",
                 pathToChoices+"event1_choice3.txt");
-        while(!StdDraw.hasNextKeyTyped()){
-            continue;
-        }
-        switch (StdDraw.nextKeyTyped()){
-            case '&': event261(); break;
-            case 'é': event230(); break;
-            case '"': event20(); break;
-            default: System.exit(1);
-        }
+        do {
+            inChar = ReadingInChar.readChar();
+            switch (inChar){
+                case '&','1': event261(); break;
+                case 'é','2': event230(); break;
+                case '"','3': event20(); break;
+                default: continue;
+            }
+        }while (true);
+
+
     }
     public static void event2() throws IOException {
         player.setCurrentEvent(2);

@@ -1,9 +1,12 @@
 package Visual;
 
+import Methods.AffMethods;
 import Methods.Player;
 import Methods.Sauvegarde;
 import Tools.StdDraw;
 import java.io.*;
+
+import static Methods.AffMethods.getIndiceSave;
 import static Tools.Fonts.*;
 
 public class Affichage {
@@ -349,49 +352,7 @@ public class Affichage {
 
 
         StdDraw.show();
-        int nbSave = getIndiceSave();
-
-        file = new File("ressources/saves/save_" + nbSave + ".txt");
-
-        if (file.exists()) {
-            Sauvegarde.loadSave(nbSave);
-        } else {
-            CharacterCreator.creationPerso(nbSave);
-        }
-
-    }
-
-    /**
-     * renvoie le numéro de la save
-     * @return
-     * @throws IOException
-     */
-    public static int getIndiceSave() throws IOException{
-        char inChar;
-
-        do{
-            while (!StdDraw.hasNextKeyTyped()){continue;}
-            inChar = StdDraw.nextKeyTyped();
-            switch (inChar){
-                case '&' , '1' : {
-                    StdDraw.clear();
-                    return 1;
-                }
-                case 'é' , '2' : {
-                    StdDraw.clear();
-                    return 2;
-                }
-                case '"' , '3' : {
-                    StdDraw.clear();
-                    return 3;
-                }
-                case 'w' : {
-                    StdDraw.clear();
-                    MainMenu.afficherTextes();
-                }
-                default: break;
-            }
-        }while(true);
+        fenetreGestionSave(getIndiceSave());
     }
 
     /**
@@ -407,4 +368,45 @@ public class Affichage {
             return Integer.toString(returnCurrentEvent);
         }
     }
+
+    /**
+     * Affichage de l'écran de décision de ce qu'on fait avec la sauvegarde
+     * @param nbSave num de la sauvegarde
+     * @throws IOException
+     */
+    public static void fenetreGestionSave(int nbSave) throws IOException {
+        StdDraw.setPenColor(StdDraw.LIGHT_GRAY);
+        StdDraw.filledRectangle(0,0,400,200);
+
+        StdDraw.setPenColor(StdDraw.BLACK);
+        StdDraw.setFont(bold25);
+        StdDraw.text(0,170,"Que voulez vous faire ?");
+        StdDraw.setFont(plain15);
+        StdDraw.textLeft(-300,130,"Sauvegarde n° "+nbSave);
+        StdDraw.setFont(plain18);
+        StdDraw.textLeft(-290 , 0 , "Supprimer : x");
+        StdDraw.textLeft(-290 , -40 , "Charger à l'évènement " + Sauvegarde.getCurrentEvent(nbSave) + ": v");
+        StdDraw.textLeft(-290 , -80 , "Retour : w");
+
+        StdDraw.show();
+        AffMethods.fenetreGestionSave(nbSave);
+    }
+
+    /**
+     * Affichage de l'écran de confirmation qu'on veut bien supprimer la sauvegarde
+     */
+    public static void fenetreConfirmDelete() {
+        char inChar;
+        StdDraw.setPenColor(StdDraw.BOOK_RED);
+        StdDraw.filledRectangle(0,0,500,300);
+        StdDraw.setPenColor(StdDraw.LIGHT_GRAY);
+        StdDraw.setFont(bold25);
+        StdDraw.text(0 , 200 , "Etes vous sur de supprimer ?");
+        StdDraw.text(0,160,"Cette action est définitive.");
+        StdDraw.setFont(plain20);
+        StdDraw.textLeft(-490 , -40 , "Supprimer : y");
+        StdDraw.textLeft(-60 , -40 , "Revenir en arrière et annuler : n");
+        StdDraw.show();
+    }
+
 }
