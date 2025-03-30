@@ -2,19 +2,19 @@ package Methods;
 import java.util.ArrayList;
 
 public class Player {
-    private static String pseudo; //TODO V1.1
-    private static int hability;
-    private static int currentHab;
-    private static int vitality;
-    private static int currentVit;
-    private static int magic;
-    private static int gold;
-    private static int luck;
-    private static int[] spellBook;
-    static private int currentEvent;
-    static private int indiceSave;
+    private  String pseudo; //TODO V1.1
+    private  int hability;
+    private  int currentHab;
+    private  int vitality;
+    private  int currentVit;
+    private  int magic;
+    private  int gold;
+    private  int luck;
+    private  int[] spellBook;
+    private  int currentEvent;
+    private  int indiceSave;
 
-    private static ArrayList<Integer> inventory = new ArrayList<Integer>() ;
+    private ArrayList<Integer> inventory = new ArrayList<Integer>() ;
 
     /**
      * Constructor
@@ -34,34 +34,76 @@ public class Player {
 
         setHability(p_hability);
         setVitality(p_vitality);
-        this.magic = p_magic;
+        magic = p_magic;
         setSpellBook();
-        this.gold = p_gold;
-        this.luck = p_luck;
+        gold = p_gold;
+        luck = p_luck;
     }
 
-    public void setIndiceSave(int indiceSave){this.indiceSave = indiceSave;}
+    /**
+     * Méthode qui permet d'attribuer l'indice de save au joueur
+     * @param indiceSave un entier représentant l'indice la sauvegarde du joueur
+     */
+    public void setIndiceSave(int indiceSave){
+        this.indiceSave = indiceSave;}
+
+    /**
+     * Renvoie l'indice de la sauvegarde associée au joueur
+     * @return un entier
+     */
     public int getIndiceSave(){
         return indiceSave;
     }
 
+    /**
+     * Attribue le numéro d'event en cours au joueur
+     * @param p_event un entier représentant l'event en cours
+     */
     public void setCurrentEvent(int p_event){this.currentEvent = p_event;}
+
+    /**
+     * Renvoie le numéro de l'event associé au joueur
+     * @return
+     */
     public int getCurrentEvent(){return this.currentEvent;}
 
+    /**
+     * renvoie la valeur de la vitalité actuelle
+     * @return un entier compris entre 0 et vitality (max)
+     */
     public int getCurrentVitality(){
         return currentVit;
     }
+
+    /**
+     * Renvoie la valeur de la vitalité max
+     * @return un entier
+     */
     public int getVitality(){
         return vitality;
     }
+
+    /**
+     * Mets la valeur de vitalité à jour
+     * @param vit la nouvelle valeur de la vitalité
+     */
     public void setCurrentVitality(int vit){
         currentVit = vit;
     }
+
+    /**
+     * Mets la valeur de vitalité max à jour
+     * @param vitality
+     */
     public void setVitality(int vitality) {
         this.vitality = vitality;
-        this.currentVit = vitality;
+        currentVit = vitality;
     }
 
+    /**
+     * Renvoie si le joueur est mort ou non
+     * @return true si le joueur est mort
+     */
     public boolean isDead(){
         return this.getCurrentVitality() <= 0;
     }
@@ -86,12 +128,12 @@ public class Player {
         return currentHab;
     }
     public void setCurrentHab(int currentHab){
-        Player.currentHab = currentHab;
+        this.currentHab = currentHab;
     }
     public int getHability(){return  hability;}
     public void setHability(int hability) {
         this.hability = hability;
-        this.currentHab = hability;
+        currentHab = hability;
     }
 
     public String getPseudo(){
@@ -112,7 +154,7 @@ public class Player {
      * @param indiceObjet que l'on cherche
      * @return vrai si trouvé sinon faux
      */
-    public boolean isInventory(int indiceObjet){
+    public boolean isInInventory(int indiceObjet){
         return inventory.contains(indiceObjet);
     }
 
@@ -126,9 +168,19 @@ public class Player {
             spellBook[i] = 13;
         }
     }
+
+    /**
+     * Renvoie la totalité du grimoire du joueur
+     * @return un tableau de int représentant les indices de spells mis en grimoire
+     */
     public int[] getSpells(){
         return this.spellBook;
     }
+
+    /**
+     * renvoie si le grimoire est complet ou non
+     * @return true si le grimoire est complet sinon false
+     */
     public boolean grimoireIsFull(){
         for (int i = 0 ; i<this.getMagic() ; i++){
             if (spellBook[i]==13) return false;
@@ -138,7 +190,7 @@ public class Player {
 
     /**
      * Savoir si un sort est dans le grimoire
-     * @param sort : indice du sort que l'on cherche
+     * @param sort  indice du sort que l'on cherche
      * @return true si le sort est trouvé, false sinon
      */
     public boolean isInSpellBook(int sort){
@@ -167,24 +219,24 @@ public class Player {
      * @param index index à lequel le mettre
      */
     public void setSpelltInGrimoire(int sort , int index){
-        this.spellBook[index]=sort;
+        spellBook[index]=sort;
     }
 
+    /**
+     * Fonction qui permet de diminuer les PV du joueur en combat
+     *  !! Ne vérifie pas si le joueur est mort après le coup !!
+     */
     public void isTouchedInCombat(){
         int curVit = this.getCurrentVitality();
         this.setCurrentVitality(curVit-2);
     }
 
-
-
-
-
-
+    /**
+     * Transforme les caractéristiques du joueur en String lisible
+     * @return la liste des informations joueur
+     */
     public String toString(){
         return "Nom: " + pseudo + " -hability : " + hability + " -vitality: " + vitality + " -luck: " + luck +
                 " -magic: " + magic;
     }
-
-
-
 }

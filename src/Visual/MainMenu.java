@@ -1,5 +1,6 @@
 package Visual;
 
+import Methods.AffMethods;
 import Tools.StdDraw;
 
 import java.io.IOException;
@@ -42,41 +43,8 @@ public class MainMenu {
         StdDraw.textLeft(x,-240,"5 - Sortir");
 
         StdDraw.show();
-        char inChar;
+        AffMethods.choiceOnMainMenu();
 
-        do {
-            while (!StdDraw.hasNextKeyTyped()){continue;}
-            inChar = StdDraw.nextKeyTyped();
-            switch (inChar){
-                case '1' , '&' : { //nouvelle partie
-                    if (firstEmptySlot() != -1){
-                        StdDraw.clear();
-                        CharacterCreator.creationPerso(firstEmptySlot());
-                    }
-                    break;
-                }
-                case '2' , 'é' : { //load save
-                    if (savesExist()){
-                        StdDraw.clear();
-                        Affichage.choiceSaveLoad();
-                    }
-                    break;
-                }
-                /*case '3' , '"' : {
-                    System.out.println("Crédits in WIP");
-                    break;
-                }
-                case '4' , '\'' : {
-                    System.out.println("Succès in WIP");
-                    break;
-                }*/
-                case '5' , '(' : {
-                    System.exit(0);
-                    break;
-                }
-                default: break;
-            }
-        }while(true);
     } //fin void
 
 

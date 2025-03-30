@@ -23,8 +23,8 @@ public class PlayerUnitTest {
         new Stuff();
         ply.setInventory(0);
         ply.setInventory(1);
-        Assertions.assertFalse(ply.isInventory(2));
-        Assertions.assertTrue(ply.isInventory(1));
+        Assertions.assertFalse(ply.isInInventory(2));
+        Assertions.assertTrue(ply.isInInventory(1));
     }
 
     @Test

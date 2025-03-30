@@ -1,5 +1,6 @@
 package Methods;
 
+import EventsCdC.Events;
 import Tools.StdDraw;
 import Visual.Affichage;
 import Visual.MainMenu;
@@ -7,6 +8,7 @@ import Visual.MainMenu;
 import java.io.File;
 import java.io.IOException;
 
+import static Methods.Sauvegarde.firstEmptySlot;
 import static Methods.Sauvegarde.savesExist;
 import static Tools.PathsTo.savePath;
 import static Tools.ReadingInChar.readChar;
@@ -14,10 +16,11 @@ import static Visual.Affichage.choiceSaveLoad;
 
 public class AffMethods {
     private static char inChar;
+    private static Player player;
 
     /**
      * renvoie le numéro de la save
-     * @return
+     * @return entier indice de la sauvegarde (1 à 3)
      * @throws IOException
      */
     public static int getIndiceSave() throws IOException{
@@ -60,10 +63,12 @@ public class AffMethods {
                 case 'x' : {
                     File file = new File(savePath + nbSave + ".txt");
                     StdDraw.clear();
-                    Affichage.fenetreConfirmDelete();
+                    Affichage.entryConfirmDelete();
                     if (fenetreConfirm()){
                         StdDraw.clear();
-                        file.delete();
+                        if (!file.delete()){
+                            throw new IOException(file.getAbsolutePath());
+                        }
                         if(savesExist()){
                             choiceSaveLoad(); //retour sur la fenetre générale
                         } else {
@@ -78,7 +83,8 @@ public class AffMethods {
                 }
                 case 'v' : {
                     StdDraw.clear();
-                    Sauvegarde.loadSave(nbSave);
+                    player = Sauvegarde.loadSave(nbSave);
+                    Events.setUpPlayer(player);
                 }
                 case 'w' : {
                     StdDraw.clear();
@@ -99,6 +105,46 @@ public class AffMethods {
             switch (inChar){
                 case 'y' : return true;
                 case 'n' : return false;
+                default: break;
+            }
+        }while(true);
+    }
+
+    /**
+     * Méthode pour le choix sur menu principal
+     */
+    public static void choiceOnMainMenu() throws IOException {
+       do {
+            while (!StdDraw.hasNextKeyTyped()){continue;}
+            inChar = StdDraw.nextKeyTyped();
+            switch (inChar){
+                case '1' , '&' : { //nouvelle partie
+                    int slot = firstEmptySlot();
+                    if (slot != -1){
+                        StdDraw.clear();
+                        Events.intro(slot);
+                    }
+                    break;
+                }
+                case '2' , 'é' : { //load save
+                    if (savesExist()){
+                        StdDraw.clear();
+                        Affichage.choiceSaveLoad();
+                    }
+                    break;
+                }
+                /*case '3' , '"' : {
+                    System.out.println("Crédits in WIP");
+                    break;
+                }
+                case '4' , '\'' : {
+                    System.out.println("Succès in WIP");
+                    break;
+                }*/
+                case '5' , '(' : {
+                    System.exit(0);
+                    break;
+                }
                 default: break;
             }
         }while(true);

@@ -2,9 +2,12 @@ package EventsCdC;
 import Methods.Player;
 import Tools.ReadingInChar;
 import Tools.StdDraw;
-import Visual.Affichage;
 import Visual.CharacterCreator;
+import Visual.DisplayEvents;
 import Visual.MainMenu;
+
+import static Visual.Affichage.displayInventory;
+import static Visual.DisplayEvents.*;
 
 import static Tools.PathsTo.*;
 import java.io.IOException;
@@ -14,13 +17,16 @@ public class Events {
     static private Player player;
     static private int nbSave;
     static private char inChar;
+    static private int counterObjects;
+
+    public static void setUpPlayer(Player player) throws IOException {
+        Events.player = player;
+        RedirectionEvent.returnToEvent(player.getCurrentEvent());
+    }
 
 
     public static void intro(int nbSave) throws IOException {
-        player.setCurrentEvent(0);
-        Affichage.narration(pathToEvents+"Event_Intro_text.txt");
-        Affichage.arrowNext();
-        Affichage.arrowPrev();
+        DisplayEvents.displayIntro();
         do {
             inChar = ReadingInChar.readChar();
             switch (inChar){
@@ -29,6 +35,7 @@ public class Events {
                     CharacterCreator.creationPerso(nbSave);
                 }
                 case 'w' : {
+                    StdDraw.clear();
                     MainMenu.afficherTextes();
                 }
                 default : {continue;}
@@ -38,10 +45,8 @@ public class Events {
 
     }
     public static void event1() throws IOException {
+        DisplayEvents.displayEvent1();
         player.setCurrentEvent(1);
-        Affichage.narration(pathToEvents+"Event_1_text.txt");
-        Affichage.choiceTriple(pathToChoices+"event1_choice1.txt",pathToChoices+"event1_choice2.txt",
-                pathToChoices+"event1_choice3.txt");
         do {
             inChar = ReadingInChar.readChar();
             switch (inChar){
@@ -56,27 +61,60 @@ public class Events {
     }
     public static void event2() throws IOException {
         player.setCurrentEvent(2);
-        Affichage.narration(pathToEvents+"Event_2_text.txt");
-        Affichage.choiceDouble(pathToChoices+"event2_choice1.txt",pathToChoices+"event2_choice2.txt");
-        while(!StdDraw.hasNextKeyTyped()){
-            continue;
+        displayEvent2();
+        do{
+            inChar = ReadingInChar.readChar();
+            switch (inChar){
+                case '&','1': event142(); break;
+                case 'é','2': event343(); break;
+                default: continue;
         }
-        switch (StdDraw.nextKeyTyped()){
-            case '&': event142(); break;
-            case 'é': event343(); break;
-            default: System.exit(1);
-        }
+        }while (true);
+
+
     }
     public static void event3() throws IOException {
         player.setCurrentEvent(3);
-        switch (choice){
-            case 1: event327(); break;
-            case 2: event59();  break;
-            case 3: event236(); break;
-            case 4: event286(); break;
-            case 5: event366(); break;
-            default: System.exit(1);
+        displayEvent3();
+        counterObjects = 0;
+        if (player.isInInventory(9)){ //Myriade
+            counterObjects++;
         }
+        if (player.isInInventory(7)){ //Bocal H-Araignée
+            counterObjects++;
+        }
+        if (player.isInInventory(10)){ //Baies
+            counterObjects++;
+        }
+
+        do {
+            inChar = ReadingInChar.readChar();
+            switch (inChar){
+                case'1','&' : {
+                    StdDraw.clear();
+                    if (counterObjects > 0){
+                        displayInventory(3,player);
+                    } else {
+                        StdDraw.text(0,-1000, "Je n'ai pas d'objet intéressant dans mon sac");
+                        StdDraw.show();
+                        StdDraw.pause(10000);
+                        StdDraw.clear();
+                        displayEvent3();
+                        StdDraw.show();
+                    }
+                    break;
+                }
+                case '2','é':{
+                    StdDraw.clear();
+                    event366();
+                }
+                case '3','"':{
+                    StdDraw.clear();
+                    event286();
+                }
+                default : {continue;}
+            }
+        }while (true);
     }
     public static void event4() throws IOException {
         switch (choice){

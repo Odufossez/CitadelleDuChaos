@@ -1,6 +1,7 @@
 package Visual;
 
 import EventsCdC.Events;
+import Methods.CharacterCreatorMethods;
 import Methods.Player;
 import Methods.Sauvegarde;
 import Tools.Dice;
@@ -10,6 +11,7 @@ import Tools.StdDraw;
 
 import java.io.IOException;
 
+import static Methods.CharacterCreatorMethods.makeGrimoire;
 import static Tools.Fonts.*;
 
 public class CharacterCreator {
@@ -19,7 +21,8 @@ public class CharacterCreator {
     /**
      * Gestion de l'affichage du menu de création de perso
      * @throws IOException
-     */ //TODO potentiellement revoir l'affichage (v1.01)
+     */
+    //TODO potentiellement revoir l'affichage (v1.01)
     public static void creationPerso(int nbSave) throws IOException {
         char inChar;
         indiceSave = nbSave;
@@ -59,34 +62,15 @@ public class CharacterCreator {
         StdDraw.text(x+500,y,"e. Non, continuer");
 
         StdDraw.show();
-
-
-        do {
-            while(!StdDraw.hasNextKeyTyped()){continue;}
-            inChar = StdDraw.nextKeyTyped();
-            switch (inChar){
-                case 'a': {
-                    StdDraw.clear();
-                    creationPerso(nbSave);
-                    break; //oui - reroll
-                }
-                case 'e': { //non - continuer
-                    StdDraw.clear();
-                    player = new Player(playerHab, playerEnd, playerMagic, 0, playerLuck);
-                    afficheMakeGrimoire();
-                    break;
-                }
-                default: continue;
-            }
-        }while(true);
-
+        CharacterCreatorMethods.confirmStats(nbSave,playerHab,playerEnd,playerLuck,playerMagic);
 
     }
 
     /**
      * Affichage de la fenêtre pour ajouter les sorts au grimoire
      */
-    public static void afficheMakeGrimoire() throws IOException {
+    public static void afficheMakeGrimoire(Player player) throws IOException {
+        new Affichage();
         char tabAlphabet[] = { 'a' , 'b' , 'c' , 'd' , 'e' , 'f' , 'g' ,'h','i','j','k','l','m','n','o'};
         new Spells();
         int counterSpells = 0;
@@ -125,33 +109,8 @@ public class CharacterCreator {
             }
 
             StdDraw.show();
+            makeGrimoire(player);
 
-            while(!StdDraw.hasNextKeyTyped()){continue;} //attendre une touche
-            StdDraw.clear();
-            switch (StdDraw.nextKeyTyped()){
-                case 'a' : player.setSpelltInGrimoire(0,counterSpells); counterSpells++; break;
-                case 'b' : player.setSpelltInGrimoire(1,counterSpells); counterSpells++; break;
-                case 'c' : player.setSpelltInGrimoire(2,counterSpells); counterSpells++; break;
-                case 'd' : player.setSpelltInGrimoire(3,counterSpells); counterSpells++; break;
-                case 'e' : player.setSpelltInGrimoire(4,counterSpells); counterSpells++; break;
-                case 'f' : player.setSpelltInGrimoire(5,counterSpells); counterSpells++; break;
-                case 'g' : player.setSpelltInGrimoire(6,counterSpells); counterSpells++; break;
-                case 'h' : player.setSpelltInGrimoire(7,counterSpells); counterSpells++; break;
-                case 'i' : player.setSpelltInGrimoire(8,counterSpells); counterSpells++; break;
-                case 'j' : player.setSpelltInGrimoire(9,counterSpells); counterSpells++; break;
-                case 'k' : player.setSpelltInGrimoire(10,counterSpells); counterSpells++; break;
-                case 'l' : player.setSpelltInGrimoire(11,counterSpells); counterSpells++; break;
-                case 'w' : {
-                    if (counterSpells>0){
-                        counterSpells--;
-                        player.setSpelltInGrimoire(13,counterSpells);
-                    } else {
-                        creationPerso(indiceSave);
-                    }
-                    break;
-                }
-                default: continue;
-            }
         }while(!player.grimoireIsFull());
         StdDraw.clear();
         confirmScreen();
@@ -204,14 +163,12 @@ public class CharacterCreator {
                     StdDraw.clear();
                     Sauvegarde.createSave(indiceSave);
                     Sauvegarde.newSave(indiceSave,player);
-                    new Events(player);
-                    Events.intro();
                     break;
                 }
                 case 'w' : {
                     StdDraw.clear();
                     player.setSpellBook();
-                    afficheMakeGrimoire();
+                    afficheMakeGrimoire(player);
                     break;
                 }
                 default: break;
