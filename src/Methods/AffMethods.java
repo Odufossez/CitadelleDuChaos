@@ -1,6 +1,7 @@
 package Methods;
 
 import EventsCdC.Events;
+import EventsCdC.RedirectionEvent;
 import Tools.StdDraw;
 import Visual.Affichage;
 import Visual.MainMenu;
@@ -83,8 +84,7 @@ public class AffMethods {
                 }
                 case 'v' : {
                     StdDraw.clear();
-                    player = Sauvegarde.loadSave(nbSave);
-                    Events.setUpPlayer(player);
+                    Events.setUpPlayer(Sauvegarde.loadSave(nbSave));
                 }
                 case 'w' : {
                     StdDraw.clear();
@@ -146,6 +146,32 @@ public class AffMethods {
                     break;
                 }
                 default: break;
+            }
+        }while(true);
+    }
+
+    /**
+     * Traitement des objets intéressants dans l'inventaire
+     * @param obj1 objet 1 sélectionnable
+     * @param eventObj1 event associé à obj1
+     * @param obj2 objet 2 sélectionnable
+     * @param eventObj2 event associé à obj2
+     * @param obj3 objet 3 sélectionnable
+     * @param eventObj3 event associé à obj3
+     */
+    public static void tttInventory(int obj1, int eventObj1 , int obj2 , int eventObj2, int obj3 , int eventObj3) throws IOException {
+        do {
+            inChar = readChar();
+            if (inChar == obj1){
+                RedirectionEvent.returnToEvent(eventObj1);
+            }
+            else if (inChar == obj2){
+                RedirectionEvent.returnToEvent(eventObj2);
+            }
+            else if (inChar == obj3){
+                RedirectionEvent.returnToEvent(eventObj3);
+            } else {
+
             }
         }while(true);
     }

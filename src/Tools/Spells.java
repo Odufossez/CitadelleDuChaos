@@ -1,9 +1,18 @@
 package Tools;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.util.ArrayList;
+import java.util.Scanner;
+
+import static Tools.PathsTo.pathToTableurs;
+
 public class Spells {
     private static String[][] spells;
+    private static boolean[][] spellsEvent = new boolean[12][400];
+    private static ArrayList<Integer> interactivSpell = new ArrayList<>();
 
-    public Spells(){
+    public Spells() throws FileNotFoundException {
         spells = new String[12][2];
 
         spells[0][0] = "Chance";
@@ -43,6 +52,22 @@ public class Spells {
         spells[11][0] = "Télépathie";
         spells[11][1] = "Permet de lire dans les ondes psychiques d'une créature mais peut être source de confusion " +
                 "s'il y a plusieurs sources psychiques à proximité";
+
+        File tabSpell = new File(pathToTableurs + "stuff.csv");
+        Scanner scanLine = new Scanner(tabSpell);
+        Scanner scanChar = new Scanner(scanLine.nextLine());
+
+        while (scanLine.hasNextLine()){
+            for (int i = 0; i < 15 ; i++) { //lines
+                for (int j = 0 ; j <400 ; j++){
+                    if(scanChar.nextInt() == 1){
+                        spellsEvent[i][j] = true;
+                    } else {
+                        spellsEvent[i][j] = false;
+                    }
+                }
+            }
+        }
     }
 
     public static String getSpellName(int spell){

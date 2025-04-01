@@ -44,7 +44,6 @@ public class MainMenu {
 
         StdDraw.show();
         AffMethods.choiceOnMainMenu();
-
     } //fin void
 
 

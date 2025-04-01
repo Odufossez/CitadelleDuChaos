@@ -8,6 +8,7 @@ import java.io.IOException;
 import static Tools.Fonts.plain18;
 import static Tools.PathsTo.pathToChoices;
 import static Tools.PathsTo.pathToEvents;
+import static Tools.StdDraw.show;
 
 public class DisplayEvents {
     /**
@@ -18,7 +19,7 @@ public class DisplayEvents {
         Affichage.narration(pathToEvents+"Event_Intro_text.txt");
         Affichage.arrowNext();
         Affichage.arrowPrev();
-        StdDraw.show();
+        show();
     }
 
     /**
@@ -29,6 +30,7 @@ public class DisplayEvents {
         Affichage.narration(pathToEvents+"Event_1_text.txt");
         Affichage.choice(pathToChoices+"choice261.txt",pathToChoices+"choice230.txt",
                 pathToChoices+"choice20.txt");
+        show();
     }
 
     /**
@@ -38,6 +40,7 @@ public class DisplayEvents {
     public static void displayEvent2() throws IOException {
         Affichage.narration(pathToEvents+"Event_2_text.txt");
         Affichage.choice(pathToChoices+"choice142.txt",pathToChoices+"choice343.txt");
+        show();
     }
 
     /**

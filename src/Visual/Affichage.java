@@ -21,6 +21,8 @@ public class Affichage {
 
     private static Player player;
 
+    private static boolean needInventory=false;
+
 
     /**
      * Initialisation des paramètres d'affichage de la fenêtre StdDraw
@@ -417,9 +419,14 @@ public class Affichage {
 
     /**
      * Affichage des objets contenus en inventaire
-     * @param event : pour le retour au bon event à la fermeture de l'inventaire
+     * @param event  pour le retour au bon event à la fermeture de l'inventaire
+     * @param ply  le joueur concerné par l'ouvertur de son inventaire
      */
     public static void displayInventory(int event, Player ply){
+        if (event == 3){
+            needInventory = true;
+        }
+
         int y = 900;
         player = ply;
         ArrayList<Integer> inventory = ply.getInventory();
@@ -438,5 +445,7 @@ public class Affichage {
         StdDraw.text(-1000,-1000,"Or : ");
         StdDraw.textLeft(-980 , -1000, Integer.toString(ply.getGold()));
     }
+
+
 
 }

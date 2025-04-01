@@ -3,12 +3,17 @@ package EventsCdC;
 import java.io.IOException;
 
 import static EventsCdC.Events.*;
+import static Tools.StdDraw.clear;
+
+import Tools.StdDraw.*;
 
 public class RedirectionEvent {
     public static void returnToEvent(int eventNb) throws IOException {
+        System.out.println("REDIRECTION EVENTS");
+        clear();
         switch(eventNb){
-            case 1: event1();
-            case 2: event2();
+            case 1: event1(); break;
+            case 2: event2(); break;
             case 3: event3();
             case 4: event4();
             case 5: event5();

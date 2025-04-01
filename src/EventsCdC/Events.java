@@ -6,6 +6,7 @@ import Visual.CharacterCreator;
 import Visual.DisplayEvents;
 import Visual.MainMenu;
 
+import static Methods.AffMethods.tttInventory;
 import static Visual.Affichage.displayInventory;
 import static Visual.DisplayEvents.*;
 
@@ -21,6 +22,7 @@ public class Events {
 
     public static void setUpPlayer(Player player) throws IOException {
         Events.player = player;
+        System.out.println("EVENTS - SETUP : " + player.toString() + " Event à charger : " + player.getCurrentEvent());
         RedirectionEvent.returnToEvent(player.getCurrentEvent());
     }
 
@@ -94,6 +96,7 @@ public class Events {
                     StdDraw.clear();
                     if (counterObjects > 0){
                         displayInventory(3,player);
+                        tttInventory(7, 59, 9, 327, 10, 236);
                     } else {
                         StdDraw.text(0,-1000, "Je n'ai pas d'objet intéressant dans mon sac");
                         StdDraw.show();

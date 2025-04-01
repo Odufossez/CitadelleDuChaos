@@ -1,5 +1,7 @@
 package Methods;
+import Tools.Spells;
 import Tools.StdDraw;
+import Tools.Stuff;
 import Visual.Affichage;
 import Visual.MainMenu;
 
@@ -18,6 +20,8 @@ public class Main {
 
     public static void main(String[] args) throws IOException {
         new Affichage();
+        new Stuff();
+        new Spells();
         MainMenu.afficherTextes();
 
     }

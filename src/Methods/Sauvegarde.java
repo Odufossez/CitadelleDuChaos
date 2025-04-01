@@ -95,10 +95,11 @@ public class Sauvegarde {
     /**
      * chargement des paramètres d'une partie
      * @param indiceSave
-     * @return
+     * @return un joueur initialisé
      * @throws IOException
      */
     public static Player loadSave(int indiceSave) throws IOException {
+        System.out.println("Load save");
         Player ply = new Player();
         ply.setIndiceSave(indiceSave); //réassociation du joueur avec le fichier
         int tabCarac[] = new int[7];
@@ -151,6 +152,7 @@ public class Sauvegarde {
             throw new FileNotFoundException("File save " + indiceSave + "not found");
         }
 
+        System.out.println("LOAD SAVE  : " + ply.toString());
         return ply;
     }
 
