@@ -1,5 +1,5 @@
 import Tools.Spells;
-import Tools.Stuff;
+import Items.Stuff;
 import org.junit.Test;
 import org.junit.jupiter.api.Assertions;
 

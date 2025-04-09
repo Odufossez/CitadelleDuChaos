@@ -1,11 +1,10 @@
 package Visual;
 
-import Methods.InventoryMethods;
 import Methods.Player;
 import Tools.ReadingInChar;
 import Tools.Spells;
 import Tools.StdDraw;
-import Tools.Stuff;
+import Items.Stuff;
 
 import java.util.ArrayList;
 

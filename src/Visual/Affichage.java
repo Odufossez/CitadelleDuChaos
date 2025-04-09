@@ -4,10 +4,8 @@ import Methods.AffMethods;
 import Methods.Player;
 import Methods.Sauvegarde;
 import Tools.StdDraw;
-import Tools.Stuff;
 
 import java.io.*;
-import java.util.ArrayList;
 
 import static Methods.AffMethods.getIndiceSave;
 import static Tools.Fonts.*;

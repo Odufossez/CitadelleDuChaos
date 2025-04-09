@@ -4,15 +4,13 @@ import Methods.InventoryMethods;
 import Methods.Monster;
 import Methods.Player;
 import Tools.Dice;
-import Tools.ReadingInChar;
-import Tools.StdDraw;
 import Visual.*;
 
 import static Tools.ReadingInChar.ESCAPE;
 import static Tools.ReadingInChar.readChar;
 import static Tools.Spells.eventHasSpell;
 import static Tools.StdDraw.clear;
-import static Tools.Stuff.eventHasStuff;
+import static Items.Stuff.eventHasStuff;
 import static Visual.DisplayChoice.choice;
 import static Visual.Inventory.displayInventory;
 import static Visual.DisplayEvents.*;

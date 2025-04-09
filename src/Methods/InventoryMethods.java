@@ -10,7 +10,7 @@ import static EventsCdC.Events.*;
 import static EventsCdC.RedirectionEvent.returnToEvent;
 import static Tools.ReadingInChar.*;
 import static Tools.StdDraw.clear;
-import static Tools.Stuff.getStuffInEvent;
+import static Items.Stuff.getStuffInEvent;
 
 public class InventoryMethods {
     private Player ply;
@@ -193,37 +193,136 @@ public class InventoryMethods {
                 }
             }
             case 3:{ // faiblesse
-
+                switch (event){
+                    case 11: {
+                        ply.removeFromInvent(indInInventory);
+                        event152();
+                    }
+                    case 26:{
+                        ply.removeFromInvent(indInInventory);
+                        event345();
+                    }
+                    case 51: {
+                        ply.removeFromInvent(indInInventory);
+                        event159();
+                    }
+                    case 70: {
+                        ply.removeFromInvent(indInInventory);
+                        event307();
+                    }
+                    case 128: {
+                        ply.removeFromInvent(indInInventory);
+                        event152();
+                    }
+                    case 188: {
+                        ply.removeFromInvent(indInInventory);
+                        event159();
+                    }
+                    case 189: {
+                        ply.removeFromInvent(indInInventory);
+                        event43();
+                    }
+                    case 246: {
+                        ply.getCombat().getMonster().setHability(5);
+                        ply.removeFromInvent(indInInventory);
+                    }
+                    case 275: {
+                        ply.getCombat().getMonster().setHability(5);
+                        ply.removeFromInvent(indInInventory);
+                    }
+                    case 307: {
+                        ply.removeFromInvent(indInInventory);
+                        ply.getCombat().getMonster().setHability(4);
+                    }
+                    case 320: {
+                        ply.removeFromInvent(indInInventory);
+                        event113();
+                    }
+                    case 374: {
+                        ply.removeFromInvent(indInInventory);
+                        event158();
+                    }
+                    default: //todo rien à faire
+                }
             }
             case 4:{ //feu
                 switch (event){
-                    case 73: event282();
-                    case 77: event46();
-                    case 98: event4();
-                    case 128: event240();
-                    case 139: event28();
-                    case 156,284: event114();
-                    case 182,395: event85();
+                    case 73: {
+                        ply.removeFromInvent(indInInventory);
+                        event282();
+                    }
+                    case 77: {
+                        ply.removeFromInvent(indInInventory);
+                        event46();
+                    }
+                    case 98: {
+                        ply.removeFromInvent(indInInventory);
+                        event4();
+                    }
+                    case 128: {
+                        ply.removeFromInvent(indInInventory);
+                        event240();
+                    }
+                    case 139: {
+                        ply.removeFromInvent(indInInventory);
+                        event28();
+                    }
+                    case 156,284:{
+                        ply.removeFromInvent(indInInventory);
+                        event114();
+                    }
+                    case 182,395: {
+                        ply.removeFromInvent(indInInventory);
+                        event85();
+                    }
                     default : //todo renvoyer message de rien ne se passe
                 }
             }
             case 5:{ //force
                 switch(event){
-                    case 7,174: event116();
-                    case 25: event133();
-                    case 51,188: event301();
-                    case 70: event264();
+                    case 7,174: {
+                        ply.removeFromInvent(indInInventory);
+                        event116();
+                    }
+                    case 25:{
+                        ply.removeFromInvent(indInInventory);
+                        event133();
+                    }
+                    case 51,188: {
+                        ply.removeFromInvent(indInInventory);
+                        event301();
+                    }
+                    case 70: {
+                        ply.removeFromInvent(indInInventory);
+                        event264();
+                    }
                     case 73: {
                         Force.renforcer(ply);
+                        ply.removeFromInvent(indInInventory);
                         if (ply.getCurrentVitality()==0){
                             //todo game over screen
                         }
                     }
-                    case 88: event170();
-                    case 165: event398();
-                    case 218: event94();
-                    case 228: event170();
-                    case 229: event164();
+                    case 88: {
+                        ply.removeFromInvent(indInInventory);
+                        event170();
+                    }
+                    case 165: {
+                        ply.removeFromInvent(indInInventory);
+                        event398();
+                    }
+                    case 218: {
+                        ply.removeFromInvent(indInInventory);
+                        event94();
+                    }
+                    case 228: {
+                        ply.removeFromInvent(indInInventory);
+                        event170();
+                    }
+                    case 229: {
+                        ply.removeFromInvent(indInInventory);
+                        event164();
+                    }
                     case 241:{
                         Combat cmb = ply.getCombat();
                         Monster m = cmb.getMonster();
@@ -233,11 +332,21 @@ public class InventoryMethods {
                         if (ply.getCurrentVitality()==0){
                             //todo gameover
                         }
+                        ply.removeFromInvent(indInInventory);
                     }
 
-                    case 276: event165();
-                    case 288: event162();
-                    case 290: event264();
+                    case 276: {
+                        ply.removeFromInvent(indInInventory);
+                        event165();
+                    }
+                    case 288: {
+                        ply.removeFromInvent(indInInventory);
+                        event162();
+                    }
+                    case 290: {
+                        ply.removeFromInvent(indInInventory);
+                        event264();
+                    }
                     default: //todo message "inutile pour le moment"
                 }
             }
@@ -248,27 +357,228 @@ public class InventoryMethods {
                     } else {
                         ply.setCurrentHab(ply.getCurrentHab()+(ply.getHability()/2));
                     }
+                    ply.removeFromInvent(indInInventory);
                 } else {
                     //todo message pour dire que la santé est au max
                 }
             }
             case 7:{ //illusion
-
+                switch (event){
+                    case 47: {
+                        ply.removeFromInvent(indInInventory);
+                        event173();
+                    }
+                    case 60: {
+                        ply.removeFromInvent(indInInventory);
+                        event295();
+                    }
+                    case 85: {
+                        ply.removeFromInvent(indInInventory);
+                        event395();
+                    }
+                    case 123: {
+                        ply.removeFromInvent(indInInventory);
+                        event35();
+                    }
+                    case 139,300: {
+                        ply.removeFromInvent(indInInventory);
+                        event244();
+                    }
+                    case 182: {
+                        ply.removeFromInvent(indInInventory);
+                        event395();
+                    }
+                    case 187: {
+                        ply.removeFromInvent(indInInventory);
+                        event314();
+                    }
+                    case 189: {
+                        ply.removeFromInvent(indInInventory);
+                        event319();
+                    }
+                    case 193,211: {
+                        ply.removeFromInvent(indInInventory);
+                        event35();
+                    }
+                    case 258: {
+                        ply.removeFromInvent(indInInventory);
+                        event140();
+                    }
+                    case 275: {
+                        ply.removeFromInvent(indInInventory);
+                        event399();
+                    }
+                    case 309: {
+                        ply.removeFromInvent(indInInventory);
+                        event250();
+                    }
+                    case 320,377: {
+                        ply.removeFromInvent(indInInventory);
+                        event332();
+                    }
+                    case 365: {
+                        ply.removeFromInvent(indInInventory);
+                        event9();
+                    }
+                    default : //todo msg "pas utile rn"
+                }
             }
             case 8:{ //lévitation
-
+                switch(event){
+                    case 19: {
+                        ply.removeFromInvent(indInInventory);
+                        event363();
+                    }
+                    case 47: {
+                        ply.removeFromInvent(indInInventory);
+                        event259();
+                    }
+                    case 60: {
+                        ply.removeFromInvent(indInInventory);
+                        event33();
+                    }
+                    case 100:{
+                        ply.removeFromInvent(indInInventory);
+                        event79();
+                    }
+                    case 156: {
+                        ply.removeFromInvent(indInInventory);
+                        event284();
+                    }
+                    case 164: {
+                        ply.removeFromInvent(indInInventory);
+                        //todo recommencer l'aventure
+                    }
+                    case 187: {
+                        ply.removeFromInvent(indInInventory);
+                        event279();
+                    }
+                    case 239: {
+                        ply.removeFromInvent(indInInventory);
+                        event379();
+                    }
+                    case 248: {
+                        ply.removeFromInvent(indInInventory);
+                        event103();
+                    }
+                    case 288:{
+                        ply.removeFromInvent(indInInventory);
+                        event86();
+                    }
+                    case 290: {
+                        ply.removeFromInvent(indInInventory);
+                        event70();
+                    }
+                    case 400: {
+                        //todo fin avec lévitation
+                        ply.removeFromInvent(indInInventory);
+                    }
+                    default : //todo message inutile
+                }
             }
             case 9:{//or du sot
-
+                switch(event){
+                    case 11,128,216: {
+                        ply.removeFromInvent(indInInventory);
+                        event36();
+                    }
+                    case 20,230: {
+                        ply.removeFromInvent(indInInventory);
+                        event96();
+                    }
+                    case 123: {
+                        ply.removeFromInvent(indInInventory);
+                        event211();
+                    }
+                    case 171:{
+                        ply.setGold(ply.getGold()+10);
+                        ply.removeFromInvent(indInInventory);
+                    }
+                    case 186: {
+                        ply.removeFromInvent(indInInventory);
+                        event15();
+                    }
+                    case 193: {
+                        ply.removeFromInvent(indInInventory);
+                        event211();
+                    }
+                    case 225:{
+                        ply.removeFromInvent(indInInventory);
+                        event15();
+                    }
+                    default: //todo inutile rn
+                }
             }
             case 10:{ //protection
-
+                switch (event){
+                    case 24: {
+                        ply.removeFromInvent(indInInventory);
+                        event372();
+                    }
+                    case 138:{
+                        ply.removeFromInvent(indInInventory);
+                        event376();
+                    }
+                    case 179: {
+                        ply.removeFromInvent(indInInventory);
+                        event341();
+                    }
+                    case 189: {
+                        ply.removeFromInvent(indInInventory);
+                        event130();
+                    }
+                    case 210: {
+                        ply.removeFromInvent(indInInventory);
+                        event192();
+                    }
+                    case 217: {
+                        ply.removeFromInvent(indInInventory);
+                        event293();
+                    }
+                    case 292: {
+                        ply.removeFromInvent(indInInventory);
+                        event376();
+                    }
+                    case 316:{
+                        ply.removeFromInvent(indInInventory);
+                        event220();
+                    }
+                    case 374: {
+                        ply.removeFromInvent(indInInventory);
+                        event109();
+                    }
+                }
             }
             case 11:{//télépathie
-
+                switch (event){
+                    case 11: {
+                        ply.removeFromInvent(indInInventory);
+                        event128();
+                    }
+                    case 77: {
+                        ply.removeFromInvent(indInInventory);
+                        event187();
+                    }
+                    case 90,176: {
+                        ply.removeFromInvent(indInInventory);
+                        event329();
+                    }
+                    case 193,211: {
+                        ply.removeFromInvent(indInInventory);
+                        event123();
+                    }
+                    case 310: {
+                        ply.removeFromInvent(indInInventory);
+                        event393();
+                    }
+                    case 377: {
+                        ply.removeFromInvent(indInInventory);
+                        event320();
+                    }
+                    default: //todo il n'y a rien à écouter
+                }
             }
         }
-        ply.removeFromInvent(indInInventory);
     }
 
 }

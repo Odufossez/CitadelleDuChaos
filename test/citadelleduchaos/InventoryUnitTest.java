@@ -1,8 +1,7 @@
 import Methods.Player;
 import Tools.Spells;
-import Tools.Stuff;
+import Items.Stuff;
 import Visual.Affichage;
-import Visual.Inventory;
 import org.junit.Test;
 import org.junit.jupiter.api.Assertions;
 

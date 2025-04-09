@@ -1,14 +1,8 @@
 package Methods;
 import Tools.Spells;
-import Tools.StdDraw;
-import Tools.Stuff;
-import Visual.Affichage;
-import Visual.MainMenu;
+import Items.Stuff;
 
 import java.io.IOException;
-
-import static Tools.Spells.getSpellName;
-import static Visual.Inventory.displayInventory;
 
 /**
  * ERROR STATUS :
