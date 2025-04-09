@@ -17,7 +17,6 @@ public class Affichage {
     private static File file;
 
     private static int suiteY;
-    private static int choiceY;
 
     private static Player player;
 
@@ -63,6 +62,10 @@ public class Affichage {
         }
     }
 
+    public static double getSuiteY(){
+        return suiteY;
+    }
+
     /* --------------------------------- FLECHES DE NAV --------------------------------------------------------- */
 
     /**
@@ -83,229 +86,6 @@ public class Affichage {
         StdDraw.line(-1400 , suiteY-60 , -1600 , suiteY-140); // coté diagonal haut
         StdDraw.line(-1400 , suiteY-200 , -1600 ,  suiteY-140); //coté diagonal bas
         StdDraw.text(-1450 , suiteY-140 , "w");
-    }
-
-    /*---------------------------- AFFICHAGE DES ENCARDS DE CHOIX --------------------------------------- */
-
-    //TODO pour la v1.01 aligner sur le centre du rectangle.
-    /**
-     * Affichage des cases de choix correspondant à l'événement en cours comportant 2 choix
-     * @param choice1 : path vers le txt du choix 1
-     * @param choice2 : path vers le txt du choix 2
-     */
-    public static void choice(String choice1 , String choice2){
-        StdDraw.rectangle(-1000,-1000,1000,500);
-        choiceY=-800;
-        try(FileReader fileReader = new FileReader(choice1);
-            BufferedReader buff = new BufferedReader(fileReader)){
-            String line;
-            while ((line = buff.readLine()) != null) {
-                StdDraw.text(-1020,choiceY,line);
-                choiceY=choiceY-40;
-            }
-        } catch (IOException e) {
-            System.exit(2);
-        }
-
-        StdDraw.rectangle(1000,-1000,1000,500);
-        choiceY=-800;
-        try(FileReader fileReader = new FileReader(choice2);
-            BufferedReader buff = new BufferedReader(fileReader)){
-            String line;
-            while ((line = buff.readLine()) != null) {
-                StdDraw.text(1040,choiceY,line);
-                choiceY=choiceY-40;
-            }
-        } catch (IOException e) {
-            System.exit(2);
-        }
-
-    }
-
-    /**
-     * Affichage des cases de choix correspondant à l'événement en cours comportant 3 choix
-     * @param choice1 : path vers le txt du choix 1
-     * @param choice2 : path vers le txt du choix 2
-     * @param choice3 : path vers le txt du choix 3
-     */
-    public static void choice(String choice1 , String choice2, String choice3){
-        StdDraw.rectangle(-1920,-1000,1280,500);
-        choiceY=-800;
-        try(FileReader fileReader = new FileReader(choice1);
-            BufferedReader buff = new BufferedReader(fileReader)){
-            String line;
-            while ((line = buff.readLine()) != null) {
-                StdDraw.text(-1320,choiceY,line);
-                choiceY=choiceY-40;
-            }
-        } catch (IOException e) {
-            System.exit(2);
-        }
-
-        StdDraw.rectangle(-640,-1000,1280,500);
-        choiceY=-800;
-        try(FileReader fileReader = new FileReader(choice2);
-            BufferedReader buff = new BufferedReader(fileReader)){
-            String line;
-            while ((line = buff.readLine()) != null) {
-                StdDraw.text(-40,choiceY,line);
-                choiceY=choiceY-40;
-            }
-        } catch (IOException e) {
-            System.exit(2);
-        }
-
-        StdDraw.rectangle(640,-1000,1280,500);
-        choiceY=-800;
-        try(FileReader fileReader = new FileReader(choice3);
-            BufferedReader buff = new BufferedReader(fileReader)){
-            String line;
-            while ((line = buff.readLine()) != null) {
-                StdDraw.text(1000,choiceY,line);
-                choiceY=choiceY-40;
-            }
-        } catch (IOException e) {
-            System.exit(2);
-        }
-    }
-
-    /**
-     * Affichage des cases de choix correspondant à l'événement en cours comportant 4 choix
-     * @param choice1 : path vers le txt du choix 1
-     * @param choice2 : path vers le txt du choix 2
-     * @param choice3 : path vers le txt du choix 3
-     * @param choice4 : path vers le txt du choix 4
-     */
-    public static void choice(String choice1 , String choice2, String choice3 , String choice4){
-        StdDraw.rectangle(-1920,-1000,960,500);
-        choiceY=-800;
-        try(FileReader fileReader = new FileReader(choice1);
-            BufferedReader buff = new BufferedReader(fileReader)){
-            String line;
-            while ((line = buff.readLine()) != null) {
-                StdDraw.text(-1500,choiceY,line);
-                choiceY=choiceY-40;
-            }
-        } catch (IOException e) {
-            System.exit(2);
-        }
-
-        StdDraw.rectangle(-960,-1000,960,500);
-        choiceY=-800;
-        try(FileReader fileReader = new FileReader(choice2);
-            BufferedReader buff = new BufferedReader(fileReader)){
-            String line;
-            while ((line = buff.readLine()) != null) {
-                StdDraw.text(-500,choiceY,line);
-                choiceY=choiceY-40;
-            }
-        } catch (IOException e) {
-            System.exit(2);
-        }
-
-        StdDraw.rectangle(0,-1000,960,500);
-        choiceY=-800;
-        try(FileReader fileReader = new FileReader(choice3);
-            BufferedReader buff = new BufferedReader(fileReader)){
-            String line;
-            while ((line = buff.readLine()) != null) {
-                StdDraw.text(500,choiceY,line);
-                choiceY=choiceY-40;
-            }
-        } catch (IOException e) {
-            System.exit(2);
-        }
-
-        StdDraw.rectangle(960,-1000,960,500);
-        choiceY=-800;
-        try(FileReader fileReader = new FileReader(choice4);
-            BufferedReader buff = new BufferedReader(fileReader)){
-            String line;
-            while ((line = buff.readLine()) != null) {
-                StdDraw.text(1300,choiceY,line);
-                choiceY=choiceY-40;
-            }
-        } catch (IOException e) {
-            System.exit(2);
-        }
-
-    }
-
-    /**
-     * Affichage des cases de choix correspondant à l'événement en cours comportant 4 choix
-     * @param choice1 : path vers le txt du choix 1
-     * @param choice2 : path vers le txt du choix 2
-     * @param choice3 : path vers le txt du choix 3
-     * @param choice4 : path vers le txt du choix 4
-     * @param choice5 : path vers le txt du choix 5
-     */
-    public static void choice(String choice1 , String choice2, String choice3 , String choice4 , String choice5){
-        int halfWidht = 768;
-        StdDraw.rectangle(-1920,-1000,halfWidht,500);
-        choiceY=-800;
-        try(FileReader fileReader = new FileReader(choice1);
-            BufferedReader buff = new BufferedReader(fileReader)){
-            String line;
-            while ((line = buff.readLine()) != null) {
-                StdDraw.text(-1500,choiceY,line);
-                choiceY=choiceY-40;
-            }
-        } catch (IOException e) {
-            System.exit(2);
-        }
-
-        StdDraw.rectangle(-1152,-1000,halfWidht,500);
-        choiceY=-800;
-        try(FileReader fileReader = new FileReader(choice2);
-            BufferedReader buff = new BufferedReader(fileReader)){
-            String line;
-            while ((line = buff.readLine()) != null) {
-                StdDraw.text(-900,choiceY,line);
-                choiceY=choiceY-40;
-            }
-        } catch (IOException e) {
-            System.exit(2);
-        }
-
-        StdDraw.rectangle(-384,-1000,halfWidht,500);
-        choiceY=-800;
-        try(FileReader fileReader = new FileReader(choice3);
-            BufferedReader buff = new BufferedReader(fileReader)){
-            String line;
-            while ((line = buff.readLine()) != null) {
-                StdDraw.text(0,choiceY,line);
-                choiceY=choiceY-40;
-            }
-        } catch (IOException e) {
-            System.exit(2);
-        }
-
-        StdDraw.rectangle(384,-1000,halfWidht,500);
-        choiceY=-800;
-        try(FileReader fileReader = new FileReader(choice4);
-            BufferedReader buff = new BufferedReader(fileReader)){
-            String line;
-            while ((line = buff.readLine()) != null) {
-                StdDraw.text(900,choiceY,line);
-                choiceY=choiceY-40;
-            }
-        } catch (IOException e) {
-            System.exit(2);
-        }
-
-        StdDraw.rectangle(1152,-1000,halfWidht,500);
-        choiceY=-800;
-        try(FileReader fileReader = new FileReader(choice5);
-            BufferedReader buff = new BufferedReader(fileReader)){
-            String line;
-            while ((line = buff.readLine()) != null) {
-                StdDraw.text(1500,choiceY,line);
-                choiceY=choiceY-40;
-            }
-        } catch (IOException e) {
-            System.exit(2);
-        }
-
     }
 
 
@@ -415,36 +195,7 @@ public class Affichage {
         StdDraw.show();
     }
 
-    /*--------------------------------------------INVENTORY-------------------------------------*/
 
-    /**
-     * Affichage des objets contenus en inventaire
-     * @param event  pour le retour au bon event à la fermeture de l'inventaire
-     * @param ply  le joueur concerné par l'ouvertur de son inventaire
-     */
-    public static void displayInventory(int event, Player ply){
-        if (event == 3){
-            needInventory = true;
-        }
-
-        int y = 900;
-        player = ply;
-        ArrayList<Integer> inventory = ply.getInventory();
-
-        StdDraw.setFont(bold25);
-        StdDraw.text(0,1000, "Inventaire :");
-
-        StdDraw.setFont(plain15);
-        for (int i = 0; i < inventory.size()-1 ; i++) {
-            StdDraw.point(100,y);
-            StdDraw.textLeft(120 , y, Stuff.getStuffName(inventory.get(i)));
-            y-=40;
-        }
-
-        StdDraw.setFont(bold15);
-        StdDraw.text(-1000,-1000,"Or : ");
-        StdDraw.textLeft(-980 , -1000, Integer.toString(ply.getGold()));
-    }
 
 
 

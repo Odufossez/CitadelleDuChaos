@@ -10,9 +10,12 @@ public class Player {
     private  int magic;
     private  int gold;
     private  int luck;
+    private  int currentLuck;
     private  int[] spellBook;
     private  int currentEvent;
     private  int indiceSave;
+    private boolean isInCombat;
+    private Combat combat;
 
     private ArrayList<Integer> inventory = new ArrayList<Integer>() ;
 
@@ -37,7 +40,8 @@ public class Player {
         magic = p_magic;
         setSpellBook();
         gold = p_gold;
-        luck = p_luck;
+        setLuck(p_luck);
+        setIsInCombat(false);
     }
 
     /**
@@ -109,8 +113,17 @@ public class Player {
     }
 
     public int getLuck(){ return luck; }
-    public void setLuck(int luck) {this.luck = luck;}
-    public void decreaseLuck(){this.luck--;}
+    public void setLuck(int luck) {
+        this.luck = luck;
+        currentLuck = luck;
+    }
+    public void decreaseLuck(){this.currentLuck--;}
+    public void setCurrentLuck(int luck){
+        currentLuck=luck;
+    }
+    public int getCurrentLuck(){
+        return currentLuck;
+    }
 
     public int getMagic(){
         return magic;
@@ -150,6 +163,15 @@ public class Player {
     public void setInventory(int indiceObjet) { inventory.add(indiceObjet);}
 
     /**
+     * retourne le numéro de l'objet présent dans l'inventaire à l'indice indice
+     * @param indice de l'objet dans l'inventaire
+     * @return le numéro de l'objet dans Stuff
+     */
+    public int getWhatIsInventory(int indice){
+        return inventory.get(indice);
+    }
+
+    /**
      * Savoir si l'objet recherché est dans l'inventaire
      * @param indiceObjet que l'on cherche
      * @return vrai si trouvé sinon faux
@@ -157,6 +179,7 @@ public class Player {
     public boolean isInInventory(int indiceObjet){
         return inventory.contains(indiceObjet);
     }
+    public void removeFromInvent(int indiceObjet){ inventory.remove(indiceObjet);}
 
     /**
      * Renvoie les indices des sorts qui ont été choisi. Il faut la combiner avec la méthode Spells.getSpellName(indice)
@@ -230,6 +253,22 @@ public class Player {
         int curVit = this.getCurrentVitality();
         this.setCurrentVitality(curVit-2);
     }
+
+    public boolean getIsInCombat(){
+        return isInCombat;
+    }
+    public void setIsInCombat(boolean state, Combat cmb){
+        this.isInCombat = state;
+        this.combat = cmb;
+    }
+    public void setIsInCombat(boolean state){
+        this.isInCombat = state;
+    }
+    public Combat getCombat(){
+        return combat;
+    }
+
+
 
     /**
      * Transforme les caractéristiques du joueur en String lisible

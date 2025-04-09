@@ -4,6 +4,7 @@ import Tools.StdDraw;
 
 import java.io.IOException;
 
+import static Tools.ReadingInChar.ESCAPE;
 import static Tools.ReadingInChar.readChar;
 import static Visual.CharacterCreator.*;
 
@@ -58,7 +59,7 @@ public class CharacterCreatorMethods {
             case 'j' : player.setSpelltInGrimoire(9,counterSpells); counterSpells++; break;
             case 'k' : player.setSpelltInGrimoire(10,counterSpells); counterSpells++; break;
             case 'l' : player.setSpelltInGrimoire(11,counterSpells); counterSpells++; break;
-            case 'w' : {
+            case ESCAPE : {
                 if (counterSpells>0){
                     counterSpells--;
                     player.setSpelltInGrimoire(13,counterSpells);

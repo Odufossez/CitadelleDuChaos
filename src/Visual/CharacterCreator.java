@@ -5,6 +5,7 @@ import Methods.CharacterCreatorMethods;
 import Methods.Player;
 import Methods.Sauvegarde;
 import Tools.Dice;
+import Tools.ReadingInChar;
 import Tools.Spells;
 import Tools.StdDraw;
 
@@ -71,7 +72,6 @@ public class CharacterCreator {
      */
     public static void afficheMakeGrimoire(Player player) throws IOException {
         new Affichage();
-        char tabAlphabet[] = { 'a' , 'b' , 'c' , 'd' , 'e' , 'f' , 'g' ,'h','i','j','k','l','m','n','o'};
         new Spells();
         int counterSpells = 0;
 
@@ -87,7 +87,7 @@ public class CharacterCreator {
             int x = -1200 , y = 800;
             for (int i=0 ; i<12 ; i++){
                 StdDraw.setFont(bold18);
-                StdDraw.textLeft(x,y , tabAlphabet[i] + " " + Spells.getSpellName(i));
+                StdDraw.textLeft(x,y , ReadingInChar.tabAlphabet[i] + " " + Spells.getSpellName(i));
                 x=1800;
                 StdDraw.setFont(plain18);
                 StdDraw.textRight(x,y, Spells.getSpellDescription(i));

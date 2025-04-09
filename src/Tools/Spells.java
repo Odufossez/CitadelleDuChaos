@@ -9,8 +9,7 @@ import static Tools.PathsTo.pathToTableurs;
 
 public class Spells {
     private static String[][] spells;
-    private static boolean[][] spellsEvent = new boolean[12][400];
-    private static ArrayList<Integer> interactivSpell = new ArrayList<>();
+    private static boolean[][] spellsEvent = new boolean[400][12];
 
     public Spells() throws FileNotFoundException {
         spells = new String[12][2];
@@ -53,17 +52,22 @@ public class Spells {
         spells[11][1] = "Permet de lire dans les ondes psychiques d'une créature mais peut être source de confusion " +
                 "s'il y a plusieurs sources psychiques à proximité";
 
-        File tabSpell = new File(pathToTableurs + "stuff.csv");
+        File tabSpell = new File(pathToTableurs + "sorts.csv");
         Scanner scanLine = new Scanner(tabSpell);
-        Scanner scanChar = new Scanner(scanLine.nextLine());
+        Scanner scanChar;
 
         while (scanLine.hasNextLine()){
-            for (int i = 0; i < 15 ; i++) { //lines
-                for (int j = 0 ; j <400 ; j++){
-                    if(scanChar.nextInt() == 1){
-                        spellsEvent[i][j] = true;
+            for (int i = 0; i < 12 ; i++) { //lines
+                scanChar = new Scanner(scanLine.nextLine());
+                for (int j = 0 ; j <399 ; j++){
+                    if (scanChar.hasNextInt()){
+                        if(scanChar.nextInt() == 1){
+                            spellsEvent[j][i] = true;
+                        } else {
+                            spellsEvent[j][i] = false;
+                        }
                     } else {
-                        spellsEvent[i][j] = false;
+                        scanChar.next();
                     }
                 }
             }
@@ -79,11 +83,25 @@ public class Spells {
     }
 
     public static void tabAffiche(){
-        for (int i = 0; i < spells.length; i++) {
-            for (int j = 0; j < spells[i].length; j++) {
-                System.out.print(spells[i][j]);
+        for (int i = 0; i < spellsEvent.length; i++) {
+            for (int j = 0; j < spellsEvent[i].length; j++) {
+                System.out.print(spellsEvent[i][j]);
             }
             System.out.println();
         }
+    }
+
+
+    public static boolean getSpellInEvent(int event, int spell){
+        return spellsEvent[event-1][spell];
+    }
+
+    public static boolean eventHasSpell(int event){
+        for (int i = 0; i < 12; i++) {
+            if (spellsEvent[event-1][i]){
+                return true;
+            }
+        }
+        return false;
     }
 }

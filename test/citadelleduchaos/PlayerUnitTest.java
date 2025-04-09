@@ -4,6 +4,8 @@ import Tools.Stuff;
 import org.junit.Test;
 import org.junit.jupiter.api.Assertions;
 
+import java.io.FileNotFoundException;
+
 public class PlayerUnitTest {
     Player ply = new Player();
 
@@ -19,7 +21,7 @@ public class PlayerUnitTest {
     }
 
     @Test
-    public void testIsInInventory(){
+    public void testIsInInventory() throws FileNotFoundException {
         new Stuff();
         ply.setInventory(0);
         ply.setInventory(1);
@@ -28,7 +30,7 @@ public class PlayerUnitTest {
     }
 
     @Test
-    public void testIsInSpellBook(){
+    public void testIsInSpellBook() throws FileNotFoundException {
         new Spells();
         ply.setMagic(2);
         ply.setSpellBook();
@@ -39,7 +41,7 @@ public class PlayerUnitTest {
     }
 
     @Test
-    public void testGetCountSpell(){
+    public void testGetCountSpell() throws FileNotFoundException {
         new Spells();
         ply.setMagic(3);
         ply.setSpellBook();
