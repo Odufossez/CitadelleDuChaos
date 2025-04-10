@@ -42,6 +42,18 @@ public class Player {
         setIsInCombat(false);
     }
 
+    public void init(int end, int currentVit , int hab , int currentHab , int magic , int luck ,int gold){
+        setHability(hab);
+        setVitality(end);
+        this.magic = magic;
+        this.gold = gold;
+        this.luck = luck;
+        this.currentHab = currentHab;
+        this.currentVit = currentVit;
+        this.currentLuck = currentLuck;
+
+    }
+
     public SpellBook getGrimoire() {
         return grimoire;
     }

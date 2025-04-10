@@ -1,5 +1,7 @@
 package Methods;
 
+import Items.Item;
+
 import java.io.*;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -72,15 +74,15 @@ public class Sauvegarde {
             writer.write(dataPlayer);
 
             dataPlayer = "";
-            for (int i = 0; i < player.getInventory().size()-1 ; i++) {
-                dataPlayer += Integer.toString(player.getInventory().get(i)+1) + " ";
+            for (int i = 0; i < player.getInventory().getSize()-1 ; i++) {
+                dataPlayer += (player.getInventory().getItem(i)) + " ";
             }
             dataPlayer+="\n";
             writer.write(dataPlayer);
 
             dataPlayer="";
-            for(int i=0 ; i<player.getSpells().length-1 ; i++) {
-                dataPlayer += Integer.toString(player.getSpells()[i]) + " ";
+            for(int i=0 ; i<player.getGrimoire().length-1 ; i++) {
+                dataPlayer += player.getGrimoire().getSpell(i) + " ";
             }
             dataPlayer+="\n";
             writer.write(dataPlayer);
@@ -103,7 +105,7 @@ public class Sauvegarde {
         Player ply = new Player();
         ply.setIndiceSave(indiceSave); //réassociation du joueur avec le fichier
         int tabCarac[] = new int[7];
-        ArrayList<Integer> items = new ArrayList<>();
+        Inventory inventory = ply.getInventory();
         ArrayList<Integer> spells = new ArrayList<>();
 
         try{
@@ -118,15 +120,9 @@ public class Sauvegarde {
                 tabCarac[i] = rdLine.nextInt();
                 i++;
             }
-            ply.setVitality(tabCarac[0]);
-            ply.setCurrentVitality(tabCarac[1]);
-            ply.setHability(tabCarac[2]);
-            ply.setCurrentHab(tabCarac[3]);
-            ply.setMagic(tabCarac[4]);
-            ply.setLuck(tabCarac[5]);
-            ply.setGold(tabCarac[6]);
 
-            ply.setSpellBook();
+            ply.init(tabCarac[0] , tabCarac[1] , tabCarac[2] , tabCarac[3] , tabCarac[4] , tabCarac[5] , tabCarac[6]);
+
 
             //Seconde Ligne - CURRENT EVENT - ATTRIBUTION DIRECTE
             line = rdFile.nextLine();
@@ -136,8 +132,8 @@ public class Sauvegarde {
             //Third Line - ITEMS - REMPLISSAGE DIRECT
             line = rdFile.nextLine();
             rdLine = new Scanner(line);
-            while(rdLine.hasNextInt()){
-                ply.setInventory(rdLine.nextInt());
+            while(rdLine.hasNext()){
+                inventory.putIn((Item)rdLine.next());
             }
 
             //Fourth line - SPELLS - ATTRIBUTION DIRECTE
