@@ -11,13 +11,12 @@ public class Player {
     private  int gold;
     private  int luck;
     private  int currentLuck;
-    private  int[] spellBook;
+    private  SpellBook grimoire;
     private  int currentEvent;
     private  int indiceSave;
     private boolean isInCombat;
     private Combat combat;
-
-    private ArrayList<Integer> inventory = new ArrayList<Integer>() ;
+    private Inventory inventaire;
 
     /**
      * Constructor
@@ -31,17 +30,24 @@ public class Player {
      * @param p_magic : settles the lenght of the magic book
      * @param p_gold
      * @param p_luck
-     * @return a Player
      */
     public Player(int p_hability, int p_vitality, int p_magic, int p_gold, int p_luck){
 
         setHability(p_hability);
         setVitality(p_vitality);
         magic = p_magic;
-        setSpellBook();
+        grimoire = new SpellBook(magic);
         gold = p_gold;
         setLuck(p_luck);
         setIsInCombat(false);
+    }
+
+    public SpellBook getGrimoire() {
+        return grimoire;
+    }
+
+    public Inventory getInventory() {
+        return inventaire;
     }
 
     /**
@@ -151,98 +157,6 @@ public class Player {
 
     public String getPseudo(){
         return pseudo;
-    }
-
-    /**
-     * Renvoie les indices des objets mis en inventaire. Il faut la combiner avec la méthode Stuff.getStuffName(indice)
-     * @return une liste de int représentant les indices des objets dans l'inventaire
-     */
-    public ArrayList<Integer> getInventory(){
-        return inventory;
-    }
-    public void setInventory(int indiceObjet) { inventory.add(indiceObjet);}
-
-    /**
-     * retourne le numéro de l'objet présent dans l'inventaire à l'indice indice
-     * @param indice de l'objet dans l'inventaire
-     * @return le numéro de l'objet dans Stuff
-     */
-    public int getWhatIsInventory(int indice){
-        return inventory.get(indice);
-    }
-
-    /**
-     * Savoir si l'objet recherché est dans l'inventaire
-     * @param indiceObjet que l'on cherche
-     * @return vrai si trouvé sinon faux
-     */
-    public boolean isInInventory(int indiceObjet){
-        return inventory.contains(indiceObjet);
-    }
-    public void removeFromInvent(int indiceObjet){ inventory.remove(indiceObjet);}
-
-    /**
-     * Renvoie les indices des sorts qui ont été choisi. Il faut la combiner avec la méthode Spells.getSpellName(indice)
-     * @return un grimoire d'indice
-     */
-    public void setSpellBook(){
-        this.spellBook = new int[magic];
-        for (int i=0;i<magic;i++){
-            spellBook[i] = 13;
-        }
-    }
-
-    /**
-     * Renvoie la totalité du grimoire du joueur
-     * @return un tableau de int représentant les indices de spells mis en grimoire
-     */
-    public int[] getSpells(){
-        return this.spellBook;
-    }
-
-    /**
-     * renvoie si le grimoire est complet ou non
-     * @return true si le grimoire est complet sinon false
-     */
-    public boolean grimoireIsFull(){
-        for (int i = 0 ; i<this.getMagic() ; i++){
-            if (spellBook[i]==13) return false;
-        }
-        return true;
-    }
-
-    /**
-     * Savoir si un sort est dans le grimoire
-     * @param sort  indice du sort que l'on cherche
-     * @return true si le sort est trouvé, false sinon
-     */
-    public boolean isInSpellBook(int sort){
-        for (int i = 0 ; i<this.getMagic() ; i++){
-            if (spellBook[i]==sort) return true;
-        }
-        return false;
-    }
-
-    /**
-     * Compte le nombre de fois qu'un sort donné est présent dans le grimoire
-     * @param index l'indice du sort à compter
-     * @return le compte du sort index
-     */
-    public int getCountSpell(int index){
-        int count = 0;
-        for(int i=0 ; i<this.getMagic() ; i++){
-            if(spellBook[i]==index) count++;
-        }
-        return count;
-    }
-
-    /**
-     * Put the spell's index into the grimoire's index placed into parameters
-     * @param sort index du sort
-     * @param index index à lequel le mettre
-     */
-    public void setSpelltInGrimoire(int sort , int index){
-        spellBook[index]=sort;
     }
 
     /**

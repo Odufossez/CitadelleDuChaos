@@ -2,16 +2,15 @@ package Tools;
 
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.util.ArrayList;
 import java.util.Scanner;
 
 import static Tools.PathsTo.pathToTableurs;
 
-public class Spells {
+public class OutilsSorts {
     private static String[][] spells;
-    private static boolean[][] spellsEvent = new boolean[400][12];
+    public static boolean[][] spellsEvent = new boolean[400][12];
 
-    public Spells() throws FileNotFoundException {
+    public OutilsSorts() throws FileNotFoundException {
         spells = new String[12][2];
 
         spells[0][0] = "Chance";

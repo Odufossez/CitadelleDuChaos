@@ -1,5 +1,5 @@
 import Methods.Player;
-import Tools.Spells;
+import Tools.OutilsSorts;
 import Items.Stuff;
 import Visual.Affichage;
 import org.junit.Test;
@@ -16,7 +16,7 @@ public class InventoryUnitTest {
         Player ply = new Player();
         new Affichage();
         new Stuff();
-        new Spells();
+        new OutilsSorts();
 
         ply.setMagic(4);
         ply.setSpellBook();

@@ -4,7 +4,7 @@ import Tools.StdDraw;
 
 import java.io.IOException;
 
-import static Tools.ReadingInChar.ESCAPE;
+import static Tools.ReadingInChar.RETURN;
 import static Tools.ReadingInChar.readChar;
 import static Visual.CharacterCreator.*;
 
@@ -22,7 +22,8 @@ public class CharacterCreatorMethods {
      * @param playerMagic magie du joueur (nombre de sorts possible)
      * @throws IOException
      */
-    public static void confirmStats(int nbSave,int playerHab,int playerEnd,int playerLuck,int playerMagic) throws IOException {
+    public static void confirmStats(int nbSave,int playerHab,int playerEnd,
+                                    int playerLuck,int playerMagic) throws IOException {
         indiceSave = nbSave;
         do {
             inChar = readChar();
@@ -47,22 +48,13 @@ public class CharacterCreatorMethods {
         inChar = readChar();
         StdDraw.clear();
         switch (inChar){
-            case 'a' : player.setSpelltInGrimoire(0,counterSpells); counterSpells++; break;
-            case 'b' : player.setSpelltInGrimoire(1,counterSpells); counterSpells++; break;
-            case 'c' : player.setSpelltInGrimoire(2,counterSpells); counterSpells++; break;
-            case 'd' : player.setSpelltInGrimoire(3,counterSpells); counterSpells++; break;
-            case 'e' : player.setSpelltInGrimoire(4,counterSpells); counterSpells++; break;
-            case 'f' : player.setSpelltInGrimoire(5,counterSpells); counterSpells++; break;
-            case 'g' : player.setSpelltInGrimoire(6,counterSpells); counterSpells++; break;
-            case 'h' : player.setSpelltInGrimoire(7,counterSpells); counterSpells++; break;
-            case 'i' : player.setSpelltInGrimoire(8,counterSpells); counterSpells++; break;
-            case 'j' : player.setSpelltInGrimoire(9,counterSpells); counterSpells++; break;
-            case 'k' : player.setSpelltInGrimoire(10,counterSpells); counterSpells++; break;
-            case 'l' : player.setSpelltInGrimoire(11,counterSpells); counterSpells++; break;
-            case ESCAPE : {
+            case 'a' : {
+
+            }
+            case RETURN: {
                 if (counterSpells>0){
                     counterSpells--;
-                    player.setSpelltInGrimoire(13,counterSpells);
+
                 } else {
                     creationPerso(indiceSave);
                 }

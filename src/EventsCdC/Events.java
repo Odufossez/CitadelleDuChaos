@@ -6,9 +6,9 @@ import Methods.Player;
 import Tools.Dice;
 import Visual.*;
 
-import static Tools.ReadingInChar.ESCAPE;
+import static Tools.ReadingInChar.RETURN;
 import static Tools.ReadingInChar.readChar;
-import static Tools.Spells.eventHasSpell;
+import static Tools.OutilsSorts.eventHasSpell;
 import static Tools.StdDraw.clear;
 import static Items.Stuff.eventHasStuff;
 import static Visual.DisplayChoice.choice;
@@ -53,7 +53,7 @@ public class Events {
                     clear();
                     CharacterCreator.creationPerso(nbSave);
                 }
-                case ESCAPE : {
+                case RETURN: {
                     clear();
                     MainMenu.afficherTextes();
                 }

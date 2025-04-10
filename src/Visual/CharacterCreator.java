@@ -1,19 +1,22 @@
 package Visual;
 
-import EventsCdC.Events;
 import Methods.CharacterCreatorMethods;
 import Methods.Player;
 import Methods.Sauvegarde;
+import Methods.SpellBook;
+import Spells.SpellList;
 import Tools.Dice;
 import Tools.ReadingInChar;
-import Tools.Spells;
+import Tools.OutilsSorts;
 import Tools.StdDraw;
 
 
 import java.io.IOException;
+import java.util.Arrays;
 
 import static Methods.CharacterCreatorMethods.makeGrimoire;
 import static Tools.Fonts.*;
+import static Tools.ReadingInChar.RETURN;
 
 public class CharacterCreator {
     public static Player player;
@@ -72,8 +75,9 @@ public class CharacterCreator {
      */
     public static void afficheMakeGrimoire(Player player) throws IOException {
         new Affichage();
-        new Spells();
+        new OutilsSorts();
         int counterSpells = 0;
+        SpellBook grimoire = player.getGrimoire();
 
         do {
             Affichage.arrowPrev();
@@ -87,10 +91,10 @@ public class CharacterCreator {
             int x = -1200 , y = 800;
             for (int i=0 ; i<12 ; i++){
                 StdDraw.setFont(bold18);
-                StdDraw.textLeft(x,y , ReadingInChar.tabAlphabet[i] + " " + Spells.getSpellName(i));
+                StdDraw.textLeft(x,y , ReadingInChar.tabAlphabet[i] + " " + OutilsSorts.getSpellName(i));
                 x=1800;
                 StdDraw.setFont(plain18);
-                StdDraw.textRight(x,y, Spells.getSpellDescription(i));
+                StdDraw.textRight(x,y, OutilsSorts.getSpellDescription(i));
                 y-=100;
                 x = -1200;
             }
@@ -98,12 +102,12 @@ public class CharacterCreator {
             //Construction du tableau de quantité de sorts actuels
             x = -1800;
             y = -500;
-            for (int i=0 ; i<12 ; i++){
+            for (SpellList.Sorts s : SpellList.Sorts.values()){
                 StdDraw.setFont(bold15);
-                StdDraw.textLeft(x,y , Spells.getSpellName(i));
+                StdDraw.textLeft(x,y , s.name());
                 StdDraw.setFont(plain15);
                 y-=40;
-                StdDraw.textRight(x,y, Integer.toString(player.getCountSpell(i)));
+                StdDraw.textRight(x,y, Integer.toString(grimoire.getCountSpell(s)));
                 y+=40;
                 x+=300;
             }
@@ -111,7 +115,7 @@ public class CharacterCreator {
             StdDraw.show();
             makeGrimoire(player);
 
-        }while(!player.grimoireIsFull());
+        }while(!grimoire.grimoireIsFull());
         StdDraw.clear();
         confirmScreen();
     }
@@ -121,6 +125,7 @@ public class CharacterCreator {
      */
     public static void confirmScreen() throws IOException {
         char inChar;
+        SpellBook grimoire = player.getGrimoire();
 
         Affichage.arrowNext();
         Affichage.arrowPrev();
@@ -135,9 +140,9 @@ public class CharacterCreator {
         StdDraw.textLeft(-1200 , 600 , "Sorts");
         StdDraw.setFont(plain15);
         int x = -1200 , y = 400;
-        for (int i=0 ; i<12 ; i++){
-            if(player.getCountSpell(i)>0){
-                StdDraw.textLeft(x,y , Spells.getSpellName(i) + " " + player.getCountSpell(i));
+        for (SpellList.Sorts s : SpellList.Sorts.values()){
+            if(grimoire.getCountSpell(s)>0){
+                StdDraw.textLeft(x,y , s.name() + " " + grimoire.getCountSpell(s));
                 y-=40;
             }
         }
@@ -165,9 +170,9 @@ public class CharacterCreator {
                     Sauvegarde.newSave(indiceSave,player);
                     break;
                 }
-                case 'w' : {
+                case RETURN : {
                     StdDraw.clear();
-                    player.setSpellBook();
+                    new SpellBook(player.getMagic());
                     afficheMakeGrimoire(player);
                     break;
                 }

@@ -1,5 +1,5 @@
 import Methods.Player;
-import Tools.Spells;
+import Tools.OutilsSorts;
 import Items.Stuff;
 import org.junit.Test;
 import org.junit.jupiter.api.Assertions;
@@ -31,7 +31,7 @@ public class PlayerUnitTest {
 
     @Test
     public void testIsInSpellBook() throws FileNotFoundException {
-        new Spells();
+        new OutilsSorts();
         ply.setMagic(2);
         ply.setSpellBook();
         ply.setSpelltInGrimoire(0,0);
@@ -42,7 +42,7 @@ public class PlayerUnitTest {
 
     @Test
     public void testGetCountSpell() throws FileNotFoundException {
-        new Spells();
+        new OutilsSorts();
         ply.setMagic(3);
         ply.setSpellBook();
         ply.setSpelltInGrimoire(0,0);

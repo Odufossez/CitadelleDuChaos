@@ -4,7 +4,7 @@ public class ReadingInChar {
     public static final char[] tabAlphabet = { 'a' , 'b' , 'c' , 'd' , 'e' , 'f' , 'g' ,'h','i','j','k','l','m','n','o'
             ,'p','q','r','s','p','q','v','w','x','y','z'};
 
-    public static final char ESCAPE = 0x1B;
+    public static final char RETURN = 0x1B;
 
 
     public static char readChar(){

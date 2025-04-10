@@ -1,14 +1,16 @@
 package Items;
 
 public class Item {
-    private String name;
-    private String description;
-    private int numero;
+    protected String name;
+    protected String description;
+    protected int numero;
+    protected boolean isDansInventaire;
     
     Item(String name, String description, int numero) {
         this.name = name;
         this.description = description;
         this.numero = numero;
+        this.isDansInventaire = false;
     }
     
     public String getName() {
@@ -19,5 +21,17 @@ public class Item {
     }
     public int getNumero() {
         return numero;
+    }
+
+    public void setEtat(boolean etat) {
+        isDansInventaire = etat;
+    }
+
+    public boolean isDansInventaire() {
+        return isDansInventaire;
+    }
+
+    public String toString() {
+        return name;
     }
 }

@@ -36,7 +36,7 @@ public class InventoryMethods {
             } else if (!getUsableObject() && !getUsableSpell()) {
                 System.out.println("Rien d'utilisable");
             } else {
-                if (inChar == ESCAPE){
+                if (inChar == RETURN){
                     returnToEvent(ply.getCurrentEvent());
                 }
             }

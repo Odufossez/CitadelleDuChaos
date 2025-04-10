@@ -1,24 +1,24 @@
-import Tools.Spells;
+import Tools.OutilsSorts;
 import Items.Stuff;
 import org.junit.Test;
 import org.junit.jupiter.api.Assertions;
 
 import java.io.FileNotFoundException;
 
-import static Tools.Spells.eventHasSpell;
+import static Tools.OutilsSorts.eventHasSpell;
 
 public class SpellsAndStuff {
 
     @Test
     public void testGetSpellName() throws FileNotFoundException {
-        new Spells();
-        Assertions.assertEquals("Chance" , Spells.getSpellName(0));
+        new OutilsSorts();
+        Assertions.assertEquals("Chance" , OutilsSorts.getSpellName(0));
     }
 
      @Test
     public void testGetSpellDescription() throws FileNotFoundException {
-        new Spells();
-        Assertions.assertEquals("Augmente les points de chance de la moitié des points de départ sans le dépasser.", Spells.getSpellDescription(0));
+        new OutilsSorts();
+        Assertions.assertEquals("Augmente les points de chance de la moitié des points de départ sans le dépasser.", OutilsSorts.getSpellDescription(0));
     }
 
     @Test
@@ -35,11 +35,11 @@ public class SpellsAndStuff {
 
     @Test
     public void getSpellInEvent() throws FileNotFoundException {
-        new Spells();
+        new OutilsSorts();
         Assertions.assertTrue(eventHasSpell(11));
         Assertions.assertFalse(eventHasSpell(12));
 
-        Assertions.assertTrue(Spells.getSpellInEvent(11,9));
-        Assertions.assertFalse(Spells.getSpellInEvent(11,4));
+        Assertions.assertTrue(OutilsSorts.getSpellInEvent(11,9));
+        Assertions.assertFalse(OutilsSorts.getSpellInEvent(11,4));
     }
 }

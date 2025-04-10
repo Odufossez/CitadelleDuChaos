@@ -1,6 +1,9 @@
 package Methods;
-import Tools.Spells;
+import Spells.SpellList;
+import Tools.OutilsSorts;
 import Items.Stuff;
+import Visual.Affichage;
+import Visual.MainMenu;
 
 import java.io.IOException;
 
@@ -16,9 +19,11 @@ public class Main {
     static Player player;
 
     public static void main(String[] args) throws IOException {
-        new Spells();
+        new OutilsSorts();
         new Stuff();
-
+        new SpellList();
+        new Affichage();
+        MainMenu.afficherTextes();
 
 
     }
