@@ -26,7 +26,7 @@ public class Inventory {
 
         inventory = ply.getInventory();
         for (int i = 0; i < inventory.getSize() ; i++) {
-            if ( ply.getCurrentEvent()!=0 && Stuff.getStuffInEvent(ply.getCurrentEvent(), inventory.get(i))) {
+            if ( ply.getCurrentEvent()!=0 && Stuff.getStuffInEvent(ply.getCurrentEvent(), inventory.getItem(i))) {
                 StdDraw.setPenColor(StdDraw.RED);
             }
             StdDraw.textLeft(-1050,y, Character.toString(ReadingInChar.tabAlphabet[i]));

@@ -3,8 +3,7 @@ package Items;
 public class DagueEnchantee extends Item{
 
     DagueEnchantee(String name, String description,int numero) {
-        super(name, description,numero);
+        super(name, description,numero , LabelItem.DAGUE_ENCHANTEE);
+        tabEvent = new int[]{};
     }
-
-    //todo ajouter les utilisations de la dague ici
 }
