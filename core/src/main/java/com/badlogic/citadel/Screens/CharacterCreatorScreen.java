@@ -44,7 +44,7 @@ public class CharacterCreatorScreen implements Screen {
 
 
         table.add(title);
-        table.row().pad(10,0,0,10);
+        table.row();
         table.row();
         table.add(habLabel);
         table.add(Integer.toString(habInt));

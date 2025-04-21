@@ -24,10 +24,13 @@ public class SpellScreen implements Screen {
     private Stage stage;
     private Player ply;
 
-    private TextButton addCopy, addFeable, addFire, addStrenght, addIllusion , addLevitation , addGoldDumb , addProtection , addTelepathy , addEndu,addLuck,addHab;
+    private TextButton addCopy, addFeable, addFire, addStrenght, addIllusion , addLevitation , addGoldDumb ,
+        addProtection , addTelepathy , addEndu,addLuck,addHab;
     private TextButton backButton,nextButton;
-    private TextButton rmCopy,rmFeable,rmFire,rmStrenght,rmIllusion,rmLevitation,rmGoldDumb,rmProtection,rmTelepathy,rmEndu,rmLuck,rmHab;
-    private Label title , copyLabel , feableLabel,fireLabel,strenghtlabel,illusionLabel,levitationLabel,goldDumbLabel,protectionLabel,telepathyLabel,enduLabel,luckLabel,habLabel;
+    private TextButton rmCopy,rmFeable,rmFire,rmStrenght,rmIllusion,rmLevitation,rmGoldDumb,rmProtection,rmTelepathy,
+        rmEndu,rmLuck,rmHab;
+    private Label title , copyLabel , feableLabel,fireLabel,strenghtlabel,illusionLabel,levitationLabel,goldDumbLabel,
+        protectionLabel,telepathyLabel,enduLabel,luckLabel,habLabel;
 
     public SpellScreen(Citadel game) {
         this.game = game;
@@ -49,7 +52,50 @@ public class SpellScreen implements Screen {
         table.setSkin(DEFAULT_SKIN);
         stage.addActor(table);
 
-        table.setDebug(true);
+        createButtons();
+        createLabels();
+
+        table.add(title);
+        table.row().pad(100, 0, 0, 0);
+        table.add(copyLabel); table.add(addCopy); table.add(rmCopy);
+        table.add(Integer.toString(ply.getGrimoire().getCountSpell(SpellList.Sorts.COPIE_CONFORME)));
+        table.row();
+        table.add(feableLabel); table.add(addFeable); table.add(rmFeable);
+        table.add(Integer.toString(ply.getGrimoire().getCountSpell(SpellList.Sorts.FAIBLESSE)));
+        table.row();
+        table.add(fireLabel); table.add(addFire); table.add(rmFire);
+        table.add(Integer.toString(ply.getGrimoire().getCountSpell(SpellList.Sorts.FEU)));
+        table.row();
+        table.add(strenghtlabel); table.add(addStrenght); table.add(rmStrenght);
+        table.add(Integer.toString(ply.getGrimoire().getCountSpell(SpellList.Sorts.FORCE)));
+        table.row();
+        table.add(illusionLabel); table.add(addIllusion); table.add(rmIllusion);
+        table.add(Integer.toString(ply.getGrimoire().getCountSpell(SpellList.Sorts.ILLUSION)));
+        table.row();
+        table.add(levitationLabel); table.add(addLevitation); table.add(rmLevitation);
+        table.add(Integer.toString(ply.getGrimoire().getCountSpell(SpellList.Sorts.LEVITATION)));
+        table.row();
+        table.add(goldDumbLabel); table.add(addGoldDumb); table.add(rmGoldDumb);
+        table.add(Integer.toString(ply.getGrimoire().getCountSpell(SpellList.Sorts.OR_DU_SOT)));
+        table.row();
+        table.add(protectionLabel); table.add(addProtection); table.add(rmProtection);
+        table.add(Integer.toString(ply.getGrimoire().getCountSpell(SpellList.Sorts.PROTECTION)));
+        table.row();
+        table.add(telepathyLabel); table.add(addTelepathy); table.add(rmTelepathy);
+        table.add(Integer.toString(ply.getGrimoire().getCountSpell(SpellList.Sorts.TELEPATHIE)));
+        table.row();
+        table.add(enduLabel); table.add(addEndu); table.add(rmEndu);
+        table.add(Integer.toString(ply.getGrimoire().getCountSpell(SpellList.Sorts.ENDURANCE)));
+        table.row();
+        table.add(luckLabel); table.add(addLuck); table.add(rmLuck);
+        table.add(Integer.toString(ply.getGrimoire().getCountSpell(SpellList.Sorts.CHANCE)));
+        table.row();
+        table.add(habLabel); table.add(addHab); table.add(rmHab);
+        table.add(Integer.toString(ply.getGrimoire().getCountSpell(SpellList.Sorts.HABILITE)));
+        table.row().pad(50,0,10,50);
+        table.add(backButton); table.add(nextButton);
+        table.add(Integer.toString(ply.getGrimoire().countSpells())+'/'+ply.getMagic());
+        table.row().pad(10,0,0,100);
     }
 
     private void createButtons(){
@@ -80,9 +126,22 @@ public class SpellScreen implements Screen {
         rmHab = new TextButton("Remove" , PLAIN_JAMES_SKIN);
 
         backButton = new TextButton("Back" , PLAIN_JAMES_SKIN);
+        nextButton = new TextButton("Next step" , PLAIN_JAMES_SKIN);
     }
     private void createLabels(){
         title = new Label("Compose your spell's book" , DEFAULT_SKIN);
+        copyLabel = new Label("Copie Conforme", DEFAULT_SKIN);
+        feableLabel = new Label("Faiblesse",DEFAULT_SKIN);
+        fireLabel = new Label("Fire", DEFAULT_SKIN);
+        strenghtlabel = new Label("Force",DEFAULT_SKIN);
+        illusionLabel = new Label("Illusion",DEFAULT_SKIN);
+        levitationLabel = new Label("Levitation",DEFAULT_SKIN);
+        goldDumbLabel = new Label("L'or du sot",DEFAULT_SKIN);
+        protectionLabel = new Label("Protection",DEFAULT_SKIN);
+        telepathyLabel = new Label("Telepathie",DEFAULT_SKIN);
+        enduLabel = new Label("Endurance",DEFAULT_SKIN);
+        luckLabel = new Label("Chance",DEFAULT_SKIN);
+        habLabel = new Label("Habilite",DEFAULT_SKIN);
     }
 
     private void input(){
@@ -90,18 +149,18 @@ public class SpellScreen implements Screen {
             @Override
             public void changed(ChangeEvent event, Actor actor){
                 stage.clear();
+                ply.getGrimoire().emptyGrimoire();
                 game.changeScreen(Citadel.CHARACTERCREATOR);
             }
         });
 
-        //todo
-        /*nextButton.addListener(new ChangeListener(){
+        nextButton.addListener(new ChangeListener(){
             @Override
             public void changed(ChangeEvent event, Actor actor){
                 stage.clear();
-                game.changeScreen(Citadel.CHARACTERCREATOR);
+                game.changeScreen(Citadel.SUMMARYSCREEN);
             }
-        });*/
+        });
 
         addCopy.addListener(new ChangeListener(){
             @Override
@@ -173,7 +232,7 @@ public class SpellScreen implements Screen {
         rmIllusion.addListener(new ChangeListener(){
             @Override
             public void changed(ChangeEvent changeEvent, Actor actor){
-                ply.getGrimoire().putIn(SpellList.Sorts.ILLUSION);
+                ply.getGrimoire().removeFrom(SpellList.Sorts.ILLUSION);
                 game.changeScreen(Citadel.SPELLSMENU);
             }
         });
@@ -238,6 +297,50 @@ public class SpellScreen implements Screen {
             }
         });
 
+        addEndu.addListener(new ChangeListener(){
+            @Override
+            public void changed(ChangeEvent changeEvent, Actor actor){
+                ply.getGrimoire().putIn(SpellList.Sorts.ENDURANCE);
+                game.changeScreen(Citadel.SPELLSMENU);
+            }
+        });
+        rmEndu.addListener(new ChangeListener(){
+            @Override
+            public void changed(ChangeEvent changeEvent, Actor actor){
+                ply.getGrimoire().removeFrom(SpellList.Sorts.ENDURANCE);
+                game.changeScreen(Citadel.SPELLSMENU);
+            }
+        });
+
+        addHab.addListener(new ChangeListener() {
+            @Override
+            public void changed(ChangeEvent changeEvent, Actor actor) {
+                ply.getGrimoire().putIn(SpellList.Sorts.HABILITE);
+                game.changeScreen(Citadel.SPELLSMENU);
+            }
+        });
+        rmHab.addListener(new ChangeListener(){
+            @Override
+            public void changed(ChangeEvent changeEvent, Actor actor){
+                ply.getGrimoire().removeFrom(SpellList.Sorts.HABILITE);
+                game.changeScreen(Citadel.SPELLSMENU);
+            }
+        });
+
+        addLuck.addListener(new ChangeListener(){
+            @Override
+            public void changed(ChangeEvent changeEvent, Actor actor){
+                ply.getGrimoire().putIn(SpellList.Sorts.CHANCE);
+                game.changeScreen(Citadel.SPELLSMENU);
+            }
+        });
+        rmLuck.addListener(new ChangeListener(){
+            @Override
+            public void changed(ChangeEvent changeEvent, Actor actor){
+                ply.getGrimoire().removeFrom(SpellList.Sorts.CHANCE);
+                game.changeScreen(Citadel.SPELLSMENU);
+            }
+        });
 
     }
 

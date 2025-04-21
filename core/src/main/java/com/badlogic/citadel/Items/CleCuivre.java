@@ -1,4 +1,4 @@
-package io.github.odufossez.update.Items;
+package com.badlogic.citadel.Items;
 
 public class CleCuivre extends Item{
 

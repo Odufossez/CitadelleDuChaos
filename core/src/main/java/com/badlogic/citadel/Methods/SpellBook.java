@@ -1,6 +1,8 @@
 package com.badlogic.citadel.Methods;
 
 
+import java.util.Arrays;
+
 public class SpellBook {
     public int length;
     private SpellList.Sorts[] grimoire;
@@ -18,6 +20,7 @@ public class SpellBook {
         for (int i = 0; i < grimoire.length; i++) {
             if (grimoire[i] == null) {
                 grimoire[i] = s;
+                return;
             }
         }
     }
@@ -81,6 +84,20 @@ public class SpellBook {
 
     public SpellList.Sorts getSpell(int i){
         return grimoire[i];
+    }
+
+    public void emptyGrimoire(){
+        Arrays.fill(grimoire, null);
+    }
+
+    public int countSpells(){
+        int count = 0;
+        for (int i = 0; i < grimoire.length; i++) {
+            if (grimoire[i] != null) {
+                count++;
+            }
+        }
+        return count;
     }
 
 

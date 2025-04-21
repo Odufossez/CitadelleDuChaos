@@ -14,6 +14,7 @@ public class Citadel extends Game {
     public final static int GAMESCREEN = 5;
     public final static int GAMEOVER = 6;
     public final static int PARAMETERS = 7;
+    public final static int SUMMARYSCREEN = 8;
 
     private MainMenuScreen menuScreen;
     private SpellScreen spellScreen;
@@ -23,6 +24,7 @@ public class Citadel extends Game {
     private InventoryScreen inventoryScreen;
     private LoadSaveScreen loadScreen;
     private ParameterScreen parameterScreen;
+    private SummaryScreen summaryScreen;
 
     private AppPreferences appPrefs;
     public Player player;
@@ -79,6 +81,11 @@ public class Citadel extends Game {
             case PARAMETERS:{
                 if (parameterScreen == null) parameterScreen = new ParameterScreen(this);
                 this.setScreen(parameterScreen);
+                break;
+            }
+            case SUMMARYSCREEN:{
+                if (summaryScreen == null) summaryScreen = new SummaryScreen(this);
+                this.setScreen(summaryScreen);
                 break;
             }
         }
