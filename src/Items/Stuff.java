@@ -1,4 +1,4 @@
-package Items;
+package io.github.odufossez.update.Items;
 
 import java.io.FileNotFoundException;
 import java.util.ArrayList;

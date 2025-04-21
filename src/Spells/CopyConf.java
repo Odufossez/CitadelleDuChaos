@@ -1,4 +1,4 @@
-package Spells;
+package io.github.odufossez.update.Spells;
 
 import Methods.Combat;
 import Methods.Monster;

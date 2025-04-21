@@ -1,4 +1,4 @@
-package Visual;
+package com.badlogic.citadel.Visual;
 
 import Methods.CharacterCreatorMethods;
 import Methods.Player;
@@ -12,7 +12,6 @@ import Tools.StdDraw;
 
 
 import java.io.IOException;
-import java.util.Arrays;
 
 import static Methods.CharacterCreatorMethods.makeGrimoire;
 import static Tools.Fonts.*;

@@ -1,4 +1,4 @@
-package Visual;
+package com.badlogic.citadel.Visual;
 
 import EventsCdC.Events;
 import Tools.StdDraw;

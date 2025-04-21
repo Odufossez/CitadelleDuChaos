@@ -1,4 +1,4 @@
-package Methods;
+package com.badlogic.citadel.Methods;
 
 public class Monster {
     private String name;

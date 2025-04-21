@@ -1,18 +1,18 @@
-package Items;
+package io.github.odufossez.update.Items;
 
 public class Item {
     protected String name;
     protected String description;
     protected int numero;
     protected boolean isDansInventaire;
-    
+
     Item(String name, String description, int numero) {
         this.name = name;
         this.description = description;
         this.numero = numero;
         this.isDansInventaire = false;
     }
-    
+
     public String getName() {
         return name;
     }

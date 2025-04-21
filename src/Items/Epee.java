@@ -1,4 +1,4 @@
-package Items;
+package io.github.odufossez.update.Items;
 
 public class Epee extends Item{
 

@@ -1,4 +1,4 @@
-package Methods;
+package com.badlogic.citadel.Methods;
 
 import EventsCdC.Events;
 import EventsCdC.RedirectionEvent;
@@ -9,8 +9,8 @@ import Visual.MainMenu;
 import java.io.File;
 import java.io.IOException;
 
-import static Methods.Sauvegarde.firstEmptySlot;
-import static Methods.Sauvegarde.savesExist;
+import static com.badlogic.citadel.Methods.Sauvegarde.firstEmptySlot;
+import static com.badlogic.citadel.Methods.Sauvegarde.savesExist;
 import static Tools.PathsTo.savePath;
 import static Tools.ReadingInChar.readChar;
 import static Visual.Affichage.choiceSaveLoad;

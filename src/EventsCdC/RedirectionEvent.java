@@ -1,4 +1,4 @@
-package EventsCdC;
+package io.github.odufossez.update.EventsCdC;
 
 import java.io.IOException;
 

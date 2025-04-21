@@ -1,4 +1,4 @@
-package Visual;
+package com.badlogic.citadel.Visual;
 
 import Methods.Player;
 import Methods.SpellBook;
@@ -7,8 +7,6 @@ import Tools.ReadingInChar;
 import Tools.OutilsSorts;
 import Tools.StdDraw;
 import Items.Stuff;
-
-import java.util.ArrayList;
 
 public class Inventory {
     private static Methods.Inventory inventory;

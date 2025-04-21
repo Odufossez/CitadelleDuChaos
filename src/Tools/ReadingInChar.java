@@ -1,4 +1,4 @@
-package Tools;
+package io.github.odufossez.update.Tools;
 
 public class ReadingInChar {
     public static final char[] tabAlphabet = { 'a' , 'b' , 'c' , 'd' , 'e' , 'f' , 'g' ,'h','i','j','k','l','m','n','o'

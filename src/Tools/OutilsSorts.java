@@ -1,4 +1,4 @@
-package Tools;
+package io.github.odufossez.update.Tools;
 
 import java.io.File;
 import java.io.FileNotFoundException;

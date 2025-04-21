@@ -2,7 +2,13 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/Citadelle Du Chaos.iml" filepath="$PROJECT_DIR$/Citadelle Du Chaos.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/Citadelle_Du_Chaos.iml" filepath="$PROJECT_DIR$/.idea/modules/Citadelle_Du_Chaos.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/core/Citadelle_Du_Chaos.core.iml" filepath="$PROJECT_DIR$/.idea/modules/core/Citadelle_Du_Chaos.core.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/core/Citadelle_Du_Chaos.core.main.iml" filepath="$PROJECT_DIR$/.idea/modules/core/Citadelle_Du_Chaos.core.main.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/core/Citadelle_Du_Chaos.core.test.iml" filepath="$PROJECT_DIR$/.idea/modules/core/Citadelle_Du_Chaos.core.test.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/lwjgl3/Citadelle_Du_Chaos.lwjgl3.iml" filepath="$PROJECT_DIR$/.idea/modules/lwjgl3/Citadelle_Du_Chaos.lwjgl3.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/lwjgl3/Citadelle_Du_Chaos.lwjgl3.main.iml" filepath="$PROJECT_DIR$/.idea/modules/lwjgl3/Citadelle_Du_Chaos.lwjgl3.main.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/lwjgl3/Citadelle_Du_Chaos.lwjgl3.test.iml" filepath="$PROJECT_DIR$/.idea/modules/lwjgl3/Citadelle_Du_Chaos.lwjgl3.test.iml" />
     </modules>
   </component>
 </project>

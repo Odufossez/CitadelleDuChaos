@@ -1,4 +1,4 @@
-package Tools;
+package io.github.odufossez.update.Tools;
 
 public class PathsTo {
     public static final String savePath = "ressources/saves/save_";

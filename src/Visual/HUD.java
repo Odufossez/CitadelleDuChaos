@@ -1,4 +1,4 @@
-package Visual;
+package com.badlogic.citadel.Visual;
 
 import Methods.Player;
 import Tools.StdDraw;

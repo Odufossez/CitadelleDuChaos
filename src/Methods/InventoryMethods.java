@@ -1,4 +1,4 @@
-package Methods;
+package com.badlogic.citadel.Methods;
 
 import Spells.CopyConf;
 import Spells.Force;

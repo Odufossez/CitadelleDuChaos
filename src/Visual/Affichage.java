@@ -1,4 +1,4 @@
-package Visual;
+package com.badlogic.citadel.Visual;
 
 import Methods.AffMethods;
 import Methods.Player;
@@ -117,7 +117,7 @@ public class Affichage {
         //--------------------- AFFICHAGE TEXTE -----------------//
         StdDraw.setPenRadius();
         StdDraw.setFont(plain18);
-        
+
         //Premiere save
         StdDraw.textLeft(-1300-decalageX, y-decalageY , "Event en cours :" +
                 traitementReturnCurrentEvent(Sauvegarde.getCurrentEvent(1)));
