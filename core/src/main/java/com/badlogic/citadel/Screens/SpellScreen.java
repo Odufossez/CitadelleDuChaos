@@ -14,8 +14,6 @@ import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 
-import javax.security.auth.callback.CallbackHandler;
-
 import static com.badlogic.citadel.Screens.Skins.DEFAULT_SKIN;
 import static com.badlogic.citadel.Screens.Skins.PLAIN_JAMES_SKIN;
 
@@ -26,7 +24,7 @@ public class SpellScreen implements Screen {
 
     private TextButton addCopy, addFeable, addFire, addStrenght, addIllusion , addLevitation , addGoldDumb ,
         addProtection , addTelepathy , addEndu,addLuck,addHab;
-    private TextButton backButton,nextButton;
+    private TextButton backButton,nextButton,emptyBook ;
     private TextButton rmCopy,rmFeable,rmFire,rmStrenght,rmIllusion,rmLevitation,rmGoldDumb,rmProtection,rmTelepathy,
         rmEndu,rmLuck,rmHab;
     private Label title , copyLabel , feableLabel,fireLabel,strenghtlabel,illusionLabel,levitationLabel,goldDumbLabel,
@@ -93,8 +91,9 @@ public class SpellScreen implements Screen {
         table.add(habLabel); table.add(addHab); table.add(rmHab);
         table.add(Integer.toString(ply.getGrimoire().getCountSpell(SpellList.Sorts.HABILITE)));
         table.row().pad(50,0,10,50);
-        table.add(backButton); table.add(nextButton);
-        table.add(Integer.toString(ply.getGrimoire().countSpells())+'/'+ply.getMagic());
+        table.add(backButton);
+        if (ply.getGrimoire().countSpells() >= 1) { table.add(nextButton);}
+        table.add(Integer.toString(ply.getGrimoire().countSpells())+'/'+ply.getMagic()); table.add(emptyBook);
         table.row().pad(10,0,0,100);
     }
 
@@ -127,9 +126,10 @@ public class SpellScreen implements Screen {
 
         backButton = new TextButton("Back" , PLAIN_JAMES_SKIN);
         nextButton = new TextButton("Next step" , PLAIN_JAMES_SKIN);
+        emptyBook = new TextButton("Empty book" , PLAIN_JAMES_SKIN);
     }
     private void createLabels(){
-        title = new Label("Compose your spell's book" , DEFAULT_SKIN);
+        title = new Label("Compose your spell's book", DEFAULT_SKIN);
         copyLabel = new Label("Copie Conforme", DEFAULT_SKIN);
         feableLabel = new Label("Faiblesse",DEFAULT_SKIN);
         fireLabel = new Label("Fire", DEFAULT_SKIN);
@@ -159,6 +159,14 @@ public class SpellScreen implements Screen {
             public void changed(ChangeEvent event, Actor actor){
                 stage.clear();
                 game.changeScreen(Citadel.SUMMARYSCREEN);
+            }
+        });
+
+        emptyBook.addListener(new ChangeListener(){
+            @Override
+            public void changed(ChangeEvent event, Actor actor){
+                ply.getGrimoire().emptyGrimoire();
+                game.changeScreen(Citadel.SPELLSMENU);
             }
         });
 

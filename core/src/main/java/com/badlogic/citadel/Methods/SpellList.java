@@ -12,6 +12,8 @@ public class SpellList {
     private static final int[] EVENT_PROTECTION = {};
     private static final int[] EVENT_TELEPATHIE = {};
 
+    private String name;
+
     public enum Sorts {
         CHANCE,
         COPIE_CONFORME,
@@ -25,6 +27,24 @@ public class SpellList {
         OR_DU_SOT,
         PROTECTION,
         TELEPATHIE
+    }
+
+    private String getName(SpellList.Sorts s){
+        return switch (s) {
+            case CHANCE -> "Luck";
+            case COPIE_CONFORME -> "Copy";
+            case ENDURANCE -> "Endurance";
+            case FAIBLESSE -> "Feabble";
+            case FEU -> "Fire";
+            case FORCE -> "Strenght";
+            case HABILITE -> "Hability";
+            case ILLUSION -> "Illusion";
+            case LEVITATION -> "Levitation";
+            case OR_DU_SOT -> "Gold for dummy";
+            case PROTECTION -> "Protection";
+            case TELEPATHIE -> "Telepathie";
+            default -> null;
+        };
     }
 
     public static boolean sortInEvent(int sort, int event){

@@ -100,6 +100,4 @@ public class SpellBook {
         return count;
     }
 
-
-
 }
