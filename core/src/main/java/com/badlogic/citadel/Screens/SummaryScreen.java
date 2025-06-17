@@ -83,8 +83,7 @@ public class SummaryScreen implements Screen {
         spellsTable.row();
         for (SpellList.Sorts sort : SpellList.Sorts.values()) {
             if (ply.getGrimoire().isInGrimoire(sort)) {
-                spellsTable.add(sort.name() + " - " + ply.getGrimoire().getCountSpell(sort));
-
+                spellsTable.add(SpellList.getName(sort) + " - " + ply.getGrimoire().getCountSpell(sort));
             }
             spellsTable.row();
         }

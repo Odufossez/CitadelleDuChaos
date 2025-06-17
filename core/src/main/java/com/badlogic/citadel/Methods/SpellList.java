@@ -29,7 +29,7 @@ public class SpellList {
         TELEPATHIE
     }
 
-    private String getName(SpellList.Sorts s){
+    public static String getName(SpellList.Sorts s){
         return switch (s) {
             case CHANCE -> "Luck";
             case COPIE_CONFORME -> "Copy";

@@ -41,7 +41,6 @@ public class SpellScreen implements Screen {
         Gdx.input.setInputProcessor(stage);
         create();
         input();
-
     }
 
     private void create(){

@@ -1,5 +1,6 @@
 package com.badlogic.citadel;
 
+import com.badlogic.citadel.Items.*;
 import com.badlogic.citadel.Methods.AppPreferences;
 import com.badlogic.citadel.Methods.Player;
 import com.badlogic.citadel.Screens.*;
@@ -29,11 +30,31 @@ public class Citadel extends Game {
     private AppPreferences appPrefs;
     public Player player;
 
+    private AmuletteEnsorcelee  amuletteEnsorcelee;
+    private BocalHA bocalHA;
+    private BrosseACheveux brosse;
+    private CleCuivre cleCuivre;
+    private DagueEnchantee dagueEnchantee;
+    private Epee sword;
+    private EssenceBerce essenceBerce;
+    private MiroirArgent miroirArgent;
+    private Myriade myriade;
+    private OnguentNoir onguentNoir;
+    private PoigneeBaies poigneeBaies;
+    private ToisonOr toisonOr;
+
     @Override
     public void create() {
         appPrefs = new AppPreferences();
         menuScreen = new MainMenuScreen(this);
         setScreen(menuScreen);
+        initializeItems();
+    }
+
+    private void initializeItems(){
+        amuletteEnsorcelee = new AmuletteEnsorcelee();
+        bocalHA = new BocalHA();
+
     }
 
     public AppPreferences getAppPrefs() {
