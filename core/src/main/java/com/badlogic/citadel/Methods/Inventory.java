@@ -1,6 +1,6 @@
 package com.badlogic.citadel.Methods;
 
-import com.badlogic.citadel.Items.Item;
+import com.badlogic.citadel.Item;
 import java.util.ArrayList;
 
 public class Inventory {

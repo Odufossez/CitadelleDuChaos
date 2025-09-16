@@ -1,34 +1,13 @@
-package io.github.odufossez.update.EventsCdC;
-import Methods.Combat;
-import Methods.InventoryMethods;
-import Methods.Monster;
-import Methods.Player;
-import Tools.Dice;
-import Visual.*;
+package com.badlogic.citadel.Methods ;
+import com.badlogic.citadel.Dice;
+import com.badlogic.citadel.Screens.HUD;
 
-import static Tools.ReadingInChar.RETURN;
-import static Tools.ReadingInChar.readChar;
-import static Tools.OutilsSorts.eventHasSpell;
-import static Tools.StdDraw.clear;
-import static Items.Stuff.eventHasStuff;
-import static Visual.DisplayChoice.choice;
-import static Visual.Inventory.displayInventory;
-import static Visual.DisplayEvents.*;
-
-import static Tools.PathsTo.*;
 import java.io.IOException;
 
 public class Events {
     static private int choice;
     static private Player player;
-    static private char inChar;
-    static private boolean usableObject;
-    static private boolean usableSpell;
 
-    public static boolean getUsableObject(){
-        return usableObject;
-    }
-    public static boolean getUsableSpell() {return usableSpell;}
 
 
     public static void setUpPlayer(Player player) throws IOException {
@@ -36,298 +15,84 @@ public class Events {
         RedirectionEvent.returnToEvent(player.getCurrentEvent());
     }
 
-    private static void initStuffSpell(int indice){
-        usableObject = eventHasStuff(indice);
-        usableSpell = eventHasSpell(indice);
-    }
+
 
 
     public static void intro(int nbSave) throws IOException {
-        DisplayEvents.displayIntro();
-        usableObject = false;
-        usableSpell = false;
-        do {
-            inChar = readChar();
-            switch (inChar){
-                case 'x' : {
-                    clear();
-                    CharacterCreator.creationPerso(nbSave);
-                }
-                case RETURN: {
-                    clear();
-                    MainMenu.afficherTextes();
-                }
-                default : {continue;}
-            }
-        }while (true);
+        //todo displaying
 
 
     }
     public static void event1() throws IOException {
-        DisplayEvents.displayEvent1();
+        //todo displaying
         player.setCurrentEvent(1);
         new HUD(player);
-        initStuffSpell(1);
-        do {
-            inChar = readChar();
-            switch (inChar){
-                case 'i' : {
-                    clear();
-                    new InventoryMethods(player,displayInventory(player));
-                }
-                case '&','1': {
-                    clear();
-                    event261();
-                    break;
-                }
-                case 'é','2': {
-                    clear();
-                    event230();
-                    break;
-                }
-                case '"','3': {
-                    clear();
-                    event20();
-                    break;
-                }
-                default: continue;
-            }
-        }while (true);
+
     }
     public static void event2() throws IOException {
         player.setCurrentEvent(2);
-        displayEvent2();
+        //todo displaying
         new HUD(player);
-        initStuffSpell(2);
-        choice(pathToChoices+"choice142.txt" , pathToChoices+"choice343.txt");
-        do{
-            inChar = readChar();
-            switch (inChar){
-                case 'i' : {
-                    clear();
-                    new InventoryMethods(player,displayInventory(player));
-                }
-                case '&','1': {
-                    clear();
-                    event142();
-                    break;
-                }
-                case 'é','2': {
-                    clear();
-                    event343();
-                    break;
-                }
-                default: continue;
-        }
-        }while (true);
+
 
 
     }
     public static void event3() throws IOException {
         player.setCurrentEvent(3);
-        displayEvent3();
-        initStuffSpell(3);
+        //todo displaying
         new HUD(player);
-        do {
-            inChar = readChar();
-            switch (inChar){
-                case 'i':{
-                    clear();
-                    new InventoryMethods(player,displayInventory(player));
-                }
-                case'1','&' : {
-                    clear();
-                    event366();
-                }
-                case '2','é':{
-                    clear();
-                    event286();
-                }
-
-                default : {continue;}
-            }
-        }while (true);
     }
     public static void event4() throws IOException {
         player.setCurrentEvent(4);
-        displayEvent4();
-        initStuffSpell(4);
+        //todo displaying
         new HUD(player);
-        do {
-            inChar = readChar();
-            switch (inChar){
-                case 'i':{
-                    clear();
-                    new InventoryMethods(player,displayInventory(player));
-                }
-                case '1','&' : {
-                    clear();
-                    event303();
-                }
-                case '2' , 'é':{
-                    clear();
-                    event190();
-                }
-                default : {continue;}
-            }
-        }while(true);
 
     }
 
     public static void event5() throws IOException {
         player.setCurrentEvent(5);
-        displayEvent5();
-        initStuffSpell(5);
+        //todo displaying
         new HUD(player);
-        do{
-            inChar = readChar();
-            switch (inChar){
-                case 'i' : {
-                    clear();
-                    new InventoryMethods(player,displayInventory(player));
-                }
-                case '1','&': {
-                    clear();
-                    event40();
-                }
-                case '2','é': {
-                    event361();
-                    clear();
-                }
-                default: System.exit(1);
-            }
-        }while(true);
 
 
     }
     public static void event6() throws IOException {
         player.setCurrentEvent(6);
-        displayEvent6();
-        initStuffSpell(6);
+        //todo displaying
         new HUD(player);
-        do{
-            inChar = readChar();
-            switch (inChar){
-                case 'i':{
-                    clear();
-                    new InventoryMethods(player,displayInventory(player));
-                }
-                case 'x':{
-                    clear();
-                    event367();
-                }
-            }
-        }while(true);
+
 
     }
     public static void event7() throws IOException {
         player.setCurrentEvent(7);
-        displayEvent7();
-        initStuffSpell(7);
+        //todo displaying
         new HUD(player);
-        do{
-            inChar = readChar();
-            switch (inChar){
-                case 'i' : {
-                    clear();
-                    new InventoryMethods(player,displayInventory(player));
-                }
-                case '1' ,'&': {
-                    clear();
-                    event268();
-                }
-                case '2' ,'é':{
-                    clear();
-                    event116();
-                }
-                default: continue;
-            }
-        }while(true);
+
 
     }
     public static void event8() throws IOException {
         player.setCurrentEvent(8);
-        displayEvent8();
-        initStuffSpell(8);
+        //todo displaying
         new HUD(player);
-        do{
-            inChar = readChar();
-            switch (inChar){
-                case 'i' : {
-                    clear();
-                    new InventoryMethods(player,displayInventory(player));
-                }
-                case 'x' : {
-                    clear();
-                    event218();
-                }
-            }
-        }while (true);
 
     }
     public static void event9() throws IOException {
         player.setCurrentEvent(9);
-        displayEvent9();
-        initStuffSpell(9);
+        //todo displaying
         new HUD(player);
-        do {
-            inChar = readChar();
-            switch (inChar){
-                case 'i' : {
-                    clear();
-                    new InventoryMethods(player,displayInventory(player));
-                }
-                case 'x' : {
-                    clear();
-                    event31();
-                }
-                default:continue;
-            }
-        }while(true);
 
     }
     public static void event10() throws IOException {
         player.setCurrentEvent(10);
-        initStuffSpell(10);
+        //todo displaying
         new HUD(player);
-        do {
-            inChar = readChar();
-            switch (inChar){
-                case 'i' : {
-                    clear();
-                    new InventoryMethods(player,displayInventory(player));
-                }
-                case 'x' : {
-                    clear();
-                    event249();
-                }
-                default: continue;
-            }
-
-        }while(true);
 
     }
 
     public static void event11() throws IOException {
         player.setCurrentEvent(11);
-        initStuffSpell(11);
-        displayEvent10();
-        do {
-            inChar = readChar();
-            switch (inChar){
-                case 'i' : {
-                    clear();
-                    new InventoryMethods(player,displayInventory(player));
-                }
-
-                case 'x' : {
-                    clear();
-                    event16(); break;
-                }
-
-                default: continue;
-            }
-        }while (true);
+        //todo displaying
+        new HUD(player);
     }
     public static void event12() throws IOException {
         switch (choice){
@@ -1740,7 +1505,7 @@ public class Events {
             cmb.fight(Dice.doubleDice(),Dice.tripleDice());
         }
         if (player.getCurrentVitality()==0){
-            //todo gameover
+            //todo game over
         }
         event177();
     }

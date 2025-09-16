@@ -30,18 +30,7 @@ public class Citadel extends Game {
     private AppPreferences appPrefs;
     public Player player;
 
-    private AmuletteEnsorcelee  amuletteEnsorcelee;
-    private BocalHA bocalHA;
-    private BrosseACheveux brosse;
-    private CleCuivre cleCuivre;
-    private DagueEnchantee dagueEnchantee;
-    private Epee sword;
-    private EssenceBerce essenceBerce;
-    private MiroirArgent miroirArgent;
-    private Myriade myriade;
-    private OnguentNoir onguentNoir;
-    private PoigneeBaies poigneeBaies;
-    private ToisonOr toisonOr;
+
 
     @Override
     public void create() {
@@ -51,11 +40,6 @@ public class Citadel extends Game {
         initializeItems();
     }
 
-    private void initializeItems(){
-        amuletteEnsorcelee = new AmuletteEnsorcelee();
-        bocalHA = new BocalHA();
-
-    }
 
     public AppPreferences getAppPrefs() {
         return appPrefs;

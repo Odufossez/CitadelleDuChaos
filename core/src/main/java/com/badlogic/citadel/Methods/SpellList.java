@@ -2,6 +2,7 @@ package com.badlogic.citadel.Methods;
 
 public class SpellList {
 
+    //TODO COMPLETER
     private static final int[] EVENT_COPIE_CONFORME = {};
     private static final int[] EVENT_FAIBLESSE= {};
     private static final int[] EVENT_FEU = {};

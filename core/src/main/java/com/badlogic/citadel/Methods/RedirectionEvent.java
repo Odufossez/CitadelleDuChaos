@@ -1,16 +1,14 @@
-package io.github.odufossez.update.EventsCdC;
+package com.badlogic.citadel.Methods;
 
 import java.io.IOException;
 
-import static EventsCdC.Events.*;
-import static Tools.StdDraw.clear;
+import static com.badlogic.citadel.Methods.Events.*;
 
-import Tools.StdDraw.*;
 
 public class RedirectionEvent {
     public static void returnToEvent(int eventNb) throws IOException {
         System.out.println("REDIRECTION EVENTS");
-        clear();
+        //todo changement de screen
         switch(eventNb){
             case 1: event1(); break;
             case 2: event2(); break;

@@ -1,13 +1,14 @@
-package com.badlogic.citadel.Items;
+package com.badlogic.citadel;
 
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 
+import java.util.ArrayList;
 public class Item {
     protected String name;
     protected String description;
     protected int numero;
     protected boolean isDansInventaire;
-    protected int[] usages;
+    protected ArrayList<Integer> usages;
     protected TextButton buttonUse;
 
     Item(String name, String description, int numero) {
@@ -15,6 +16,7 @@ public class Item {
         this.description = description;
         this.numero = numero;
         this.isDansInventaire = false;
+        this.usages = new ArrayList<>();
     }
 
     public String getName() {
@@ -25,8 +27,7 @@ public class Item {
     }
     public int getNumero() {
         return numero;
-    }
-
+    } //utile ?
 
     public void setEtat(boolean etat) {
         isDansInventaire = etat;
@@ -34,6 +35,10 @@ public class Item {
 
     public boolean isDansInventaire() {
         return isDansInventaire;
+    }
+
+    public void setUsages(ArrayList<Integer> uses) {
+        usages = uses;
     }
 
     /**
