@@ -26,13 +26,13 @@ public class Events {
     public static void event1() throws IOException {
         //todo displaying
         player.setCurrentEvent(1);
-        new HUD(player);
+        //new HUD(player);
 
     }
     public static void event2() throws IOException {
         player.setCurrentEvent(2);
         //todo displaying
-        new HUD(player);
+        //new HUD(player);
 
 
 
@@ -40,59 +40,59 @@ public class Events {
     public static void event3() throws IOException {
         player.setCurrentEvent(3);
         //todo displaying
-        new HUD(player);
+        //new HUD(player);
     }
     public static void event4() throws IOException {
         player.setCurrentEvent(4);
         //todo displaying
-        new HUD(player);
+        //new HUD(player);
 
     }
 
     public static void event5() throws IOException {
         player.setCurrentEvent(5);
         //todo displaying
-        new HUD(player);
+        //new HUD(player);
 
 
     }
     public static void event6() throws IOException {
         player.setCurrentEvent(6);
         //todo displaying
-        new HUD(player);
+        //new HUD(player);
 
 
     }
     public static void event7() throws IOException {
         player.setCurrentEvent(7);
         //todo displaying
-        new HUD(player);
+        //new HUD(player);
 
 
     }
     public static void event8() throws IOException {
         player.setCurrentEvent(8);
         //todo displaying
-        new HUD(player);
+        //new HUD(player);
 
     }
     public static void event9() throws IOException {
         player.setCurrentEvent(9);
         //todo displaying
-        new HUD(player);
+        //new HUD(player);
 
     }
     public static void event10() throws IOException {
         player.setCurrentEvent(10);
         //todo displaying
-        new HUD(player);
+        //new HUD(player);
 
     }
 
     public static void event11() throws IOException {
         player.setCurrentEvent(11);
         //todo displaying
-        new HUD(player);
+        //new HUD(player);
     }
     public static void event12() throws IOException {
         switch (choice){

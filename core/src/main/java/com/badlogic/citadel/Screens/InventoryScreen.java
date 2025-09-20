@@ -6,11 +6,16 @@ import com.badlogic.citadel.Methods.Player;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
+import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.scenes.scene2d.ui.Button;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
+import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
+import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 
+import javax.swing.plaf.basic.BasicButtonUI;
 import java.util.ArrayList;
 
 public class InventoryScreen implements Screen {
@@ -22,6 +27,8 @@ public class InventoryScreen implements Screen {
     private Label title;
     private Table table;
 
+    private TextButton backButton;
+
     public InventoryScreen(Citadel game) {
         this.game = game;
         ply = game.getPlayer();
@@ -31,8 +38,10 @@ public class InventoryScreen implements Screen {
 
     private void create() {
         stage.setDebugAll(true);
+        backButton = new TextButton("Back", Skins.PLAIN_JAMES_SKIN);
 
         title = new Label("Inventory" , Skins.DEFAULT_SKIN);
+        stage.addActor(backButton);
         stage.addActor(title);
         table = new Table(Skins.DEFAULT_SKIN);
         table.row();
@@ -50,7 +59,13 @@ public class InventoryScreen implements Screen {
 
 
     private void input(){
-
+        backButton.addListener(new ChangeListener(){
+            @Override
+            public void changed(ChangeEvent event, Actor actor){
+                stage.clear();
+                //game.changeScreen(Citadel.); //TODO configure required
+            }
+        });
     }
 
     @Override

@@ -117,7 +117,7 @@ public class SummaryScreen implements Screen {
             @Override
             public void changed(ChangeEvent event, Actor actor){
                 stage.clear();
-                game.changeScreen(Citadel.GAMESCREEN);
+                game.changeScreen(Citadel.INTROSCREEN);
             }
         });
 

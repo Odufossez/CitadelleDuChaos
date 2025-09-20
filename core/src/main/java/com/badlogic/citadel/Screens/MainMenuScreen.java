@@ -43,12 +43,10 @@ public class MainMenuScreen implements Screen {
         Table table = new Table();
         table.setFillParent(true);
 
-        stage.addActor(table);
-
         //Les boutons
         TextButton newGame = new TextButton("New Game", PLAIN_JAMES_SKIN);
         TextButton quit = new TextButton("Quit", PLAIN_JAMES_SKIN);
-        TextButton loadSave = new TextButton("Load Save", PLAIN_JAMES_SKIN);
+        TextButton loadSave = new TextButton("Load Save", PLAIN_JAMES_SKIN); //todo conditionné apparition
         TextButton parameters = new TextButton("Parameters", PLAIN_JAMES_SKIN);
 
         table.add(newGame).fillX().uniformX();
@@ -58,6 +56,8 @@ public class MainMenuScreen implements Screen {
         table.add(parameters).fillX().uniformX();
         table.row();
         table.add(quit).fillX().uniformX();
+
+        stage.addActor(table);
 
         //Les listeners des boutons
         quit.addListener(new ChangeListener() {
@@ -95,6 +95,10 @@ public class MainMenuScreen implements Screen {
         Gdx.gl.glClearColor(0, 0, 0, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
         stage.act(Math.min(Gdx.graphics.getDeltaTime(), 1 / 30f));
+        game.batch.begin();
+        //Titre
+        game.font.draw(game.batch, "Citadel of Chaos" , Gdx.graphics.getWidth()*0.25f, Gdx.graphics.getHeight()*0.3f);
+        game.batch.end();
         stage.draw();
     }
 
