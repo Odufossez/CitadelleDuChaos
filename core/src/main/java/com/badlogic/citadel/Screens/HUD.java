@@ -1,18 +1,23 @@
 package com.badlogic.citadel.Screens;
+import com.badlogic.citadel.Citadel;
 import com.badlogic.citadel.Methods.Player;
+import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
+import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.badlogic.gdx.utils.Disposable;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 
 import javax.swing.*;
 
-public class HUD implements Disposable {
+public class HUD implements Disposable , Screen {
+    private final Citadel game;
     private Player ply;
     private int currentHealth;
     private int maxHealth;
@@ -21,17 +26,20 @@ public class HUD implements Disposable {
 
     private TextButton inventoryButton;
     private TextButton menuButton;
+    private Table table;
 
     private Label healthLabel, luckLabel;
 
     public Stage stage;
 
-    public HUD(Player player , SpriteBatch batch) {
+    public HUD(Player player , SpriteBatch batch, Citadel game) {
         ply = player;
         currentHealth = ply.getCurrentVitality();
         maxHealth = ply.getVitality();
         luck = ply.getCurrentLuck();
         maxLuck = ply.getLuck();
+
+        this.game = game;
 
         Viewport viewport = new FitViewport(400, 400, new OrthographicCamera());
         stage = new Stage(viewport, batch);
@@ -43,10 +51,14 @@ public class HUD implements Disposable {
         healthLabel = new Label("Health: " + currentHealth + "/" + maxHealth, Skins.PLAIN_JAMES_SKIN);
 
         //a table to organize the hud's labels and button
-        Table table = new Table();
+        table = new Table();
         table.top();
         table.setFillParent(true);
 
+    }
+
+    @Override
+    public void show() {
         //add labels and button to the table, padding the top and giving them all equal width with expandX
         table.add(menuButton).expandX().padTop(10);
         table.add(inventoryButton).expandX().padTop(10);
@@ -56,6 +68,38 @@ public class HUD implements Disposable {
 
         //add the table to the stage
         stage.addActor(table);
+
+        inventoryButton.addListener(new ChangeListener() {
+            @Override
+            public void changed(ChangeEvent event, Actor actor) {
+                game.changeScreen(Citadel.INVENTORY);
+            }
+        });
+    }
+
+    @Override
+    public void render(float delta) {
+
+    }
+
+    @Override
+    public void resize(int width, int height) {
+
+    }
+
+    @Override
+    public void pause() {
+
+    }
+
+    @Override
+    public void resume() {
+
+    }
+
+    @Override
+    public void hide() {
+
     }
 
     @Override

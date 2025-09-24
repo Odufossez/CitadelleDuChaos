@@ -1,12 +1,15 @@
 package com.badlogic.citadel.Screens;
 
 import com.badlogic.citadel.Citadel;
+import com.badlogic.citadel.Methods.DialogAlert;
 import com.badlogic.citadel.Methods.Player;
 import com.badlogic.citadel.Methods.SpellList;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.scenes.scene2d.Actor;
+import com.badlogic.gdx.scenes.scene2d.InputEvent;
+import com.badlogic.gdx.scenes.scene2d.InputListener;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Container;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
@@ -16,10 +19,13 @@ import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 
+import static com.badlogic.citadel.Screens.Skins.PLAIN_JAMES_SKIN;
+
 public class SummaryScreen implements Screen {
     Citadel game;
     private Stage stage;
     private Player ply;
+    private Stage dialogAlertStage;
 
     private TextButton rerollButton, startButton , newSpellBook;
     private Label title , playerLabel , spellBookLabel;
@@ -27,10 +33,13 @@ public class SummaryScreen implements Screen {
     private Table spellsTable;
     private Table titleTable;
 
+    private DialogAlert dialogAlert = new DialogAlert("" , PLAIN_JAMES_SKIN);
+
     public SummaryScreen(Citadel game){
         this.game = game;
         ply = game.getPlayer();
         stage = new Stage(new ScreenViewport());
+        dialogAlertStage = new Stage(new ScreenViewport());
     }
 
     private void create(){
@@ -98,9 +107,9 @@ public class SummaryScreen implements Screen {
     }
 
     private void createButtons(){
-        rerollButton = new TextButton("Reroll all characteristics", Skins.PLAIN_JAMES_SKIN);
-        startButton = new TextButton("Start the adventure", Skins.PLAIN_JAMES_SKIN);
-        newSpellBook = new TextButton("Redo the spell book", Skins.PLAIN_JAMES_SKIN);
+        rerollButton = new TextButton("Reroll all characteristics", PLAIN_JAMES_SKIN);
+        startButton = new TextButton("Start the adventure", PLAIN_JAMES_SKIN);
+        newSpellBook = new TextButton("Redo the spell book", PLAIN_JAMES_SKIN);
     }
 
     private void input(){
@@ -116,8 +125,24 @@ public class SummaryScreen implements Screen {
         startButton.addListener(new ChangeListener(){
             @Override
             public void changed(ChangeEvent event, Actor actor){
-                stage.clear();
-                game.changeScreen(Citadel.INTROSCREEN);
+                stage.addActor(dialogAlert);
+                dialogAlert.text("Are you sure you want to go into the adventure ? You will not be able to change those " +
+                        "values later on.")
+                    .buttonNo("No I am not ready yet ! " , new InputListener(){
+                        public boolean touchDown(InputEvent event, float x, float y){
+                            dialogAlert.hide();
+                            return true;
+                        }
+                    })
+                    .buttonYes("Yes, hit me with the adventure ! ", new InputListener(){
+                        @Override
+                        public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
+                            stage.clear();
+                            game.changeScreen(Citadel.INTROSCREEN);
+                            return true;
+                        }
+                    });
+                dialogAlert.show(stage);
             }
         });
 

@@ -4,6 +4,7 @@ import com.badlogic.citadel.Methods.AppPreferences;
 import com.badlogic.citadel.Methods.Player;
 import com.badlogic.citadel.Screens.*;
 import com.badlogic.gdx.Game;
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.scenes.scene2d.Stage;
@@ -23,7 +24,7 @@ public class Citadel extends Game {
     public final static int EVENT2 = 10;
     public final static int EVENT3 = 11;
 
-    public BitmapFont font; //todo revoir les fonts
+    public static BitmapFont font; //todo revoir les fonts
     public SpriteBatch batch;
 
     private MainMenuScreen menuScreen;
@@ -40,6 +41,7 @@ public class Citadel extends Game {
     private Event1GameScreen event1GameScreen;
 
     private AppPreferences appPrefs;
+    public static float density;
     public Player player;
 
 
@@ -48,10 +50,11 @@ public class Citadel extends Game {
     public void create() {
         appPrefs = new AppPreferences();
         menuScreen = new MainMenuScreen(this);
-        introScreen = new IntroGameScreen(this); //todo remove after testing
         batch = new SpriteBatch();
         font = new BitmapFont();
-        setScreen(introScreen); //todo correct after testing
+        density = Gdx.graphics.getDensity();
+        setScreen(menuScreen);
+
     }
 
 
