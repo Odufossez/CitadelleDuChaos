@@ -6,7 +6,7 @@ import java.util.ArrayList;
 public class Item {
     protected String name;
     protected String description;
-    protected int numero;
+    protected int numero; //must be unique for each item
     protected boolean isDansInventaire;
     protected ArrayList<Integer> usages;
     protected TextButton buttonUse;
@@ -27,7 +27,7 @@ public class Item {
     }
     public int getNumero() {
         return numero;
-    } //utile ?
+    }
 
     public void setEtat(boolean etat) {
         isDansInventaire = etat;

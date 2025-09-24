@@ -11,8 +11,21 @@ public class Inventory {
         inventory = new ArrayList<>();
     }
 
-    public void putIn(Item i) {
+    /**
+     * Check if the item is already in the inventory, if yes does not add the item to the inventory to avoid
+     * duplications.
+     * IT IS NOT REQUIRED TO ADD MANUALLY THE ITEM AFTER HAND, THE METHOD DOES IT IF THE ITEM IS NOT IN THE INVENTORY
+     * @param i the item that you want to add to the inventory
+     * @return 1 if the item is already in the inventory, else return 0
+     */
+    public int putIn(Item i) {
+        for(Item item : inventory){
+            if(item.getName().equals(i.getName())){
+                return 1;
+            }
+        }
         inventory.add(i);
+        return 0;
     }
 
     public ArrayList<Item> getInventory(){
