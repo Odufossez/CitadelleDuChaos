@@ -39,8 +39,6 @@ public class SummaryScreen implements Screen {
     }
 
     private void create() {
-        stage.setDebugAll(true);
-
         createLabels();
         createButtons();
 
@@ -110,20 +108,39 @@ public class SummaryScreen implements Screen {
 
     private void input() {
         rerollButton.addListener(new ChangeListener() {
+            final DialogAlert dialogAlertPlayer = new DialogAlert(" Reroll all characteristics",
+                    PLAIN_JAMES_SKIN);
             @Override
             public void changed(ChangeEvent event, Actor actor) {
-                stage.clear();
-                ply.getGrimoire().emptyGrimoire();
-                game.changeScreen(Citadel.CHARACTERCREATOR);
+                dialogAlertPlayer.text("    You are about to reroll all characteristics and will need to redo the spell " +
+                    "book as well. Are you sure you want to continue?").align(Align.center).padRight(-20);
+                dialogAlertPlayer.button("Yes, redo the character", Color.RED, new InputListener(){
+                    @Override
+                    public boolean touchDown(InputEvent event, float x , float y, int pointer, int button){
+                        stage.clear();
+                        game.getPlayer().getGrimoire().emptyGrimoire();
+                        game.changeScreen(Citadel.CHARACTERCREATOR);
+                        return true;
+                    }
+                });
+                dialogAlertPlayer.button("No, keep as it is",Color.BLACK, new InputListener(){
+                    @Override
+                    public boolean touchDown(InputEvent event, float x , float y , int pointer, int button){
+                        dialogAlertPlayer.hide();
+                        return true;
+                    }
+                });
+                stage.addActor(dialogAlertPlayer);
+                dialogAlertPlayer.show(stage);
             }
         });
 
         startButton.addListener(new ChangeListener() {
-            DialogAlert dialogAlert = new DialogAlert("Start the adventure ?", PLAIN_JAMES_SKIN);
+            final DialogAlert dialogAlert = new DialogAlert("   Start the adventure ?", PLAIN_JAMES_SKIN);
             @Override
             public void changed(ChangeEvent event, Actor actor) {
                 dialogAlert.text("Are you sure you want to go into the adventure ? You will not be able to change those " +
-                    "values later on.");
+                    "values later on.").align(Align.center).padRight(-20);
 
                 dialogAlert.button("No I am not ready yet ! ", Color.BLACK,  new InputListener() {
                     @Override
@@ -146,10 +163,28 @@ public class SummaryScreen implements Screen {
         });
 
         newSpellBook.addListener(new ChangeListener() {
+            final DialogAlert dialogAlertSpells = new DialogAlert(" New Spell Book", PLAIN_JAMES_SKIN);
             @Override
             public void changed(ChangeEvent event, Actor actor) {
-                stage.clear();
-                game.changeScreen(Citadel.SPELLSMENU);
+                dialogAlertSpells.text("You are about to redo the whole spellbook. Are you sure you want to proceed ?")
+                    .padRight(-20);
+                dialogAlertSpells.button("Yes, redo the whole book ", Color.BLACK,new InputListener() {
+                    @Override
+                    public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
+                        stage.clear();
+                        game.changeScreen(Citadel.SPELLSMENU);
+                        return true;
+                    }
+                });
+                dialogAlertSpells.button("No, keep the book ", Color.RED,new InputListener() {
+                    @Override
+                    public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
+                        dialogAlertSpells.hide();
+                        return true;
+                    }
+                });
+                stage.addActor(dialogAlertSpells);
+                dialogAlertSpells.show(stage);
             }
         });
     }

@@ -2,14 +2,11 @@ package com.badlogic.citadel.Methods;
 
 import com.badlogic.citadel.Citadel;
 import com.badlogic.gdx.graphics.Color;
-import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.scenes.scene2d.InputListener;
 import com.badlogic.gdx.scenes.scene2d.ui.Dialog;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
-
-import java.awt.*;
 
 import static com.badlogic.citadel.Screens.Skins.PLAIN_JAMES_SKIN;
 
@@ -17,12 +14,12 @@ public class DialogAlert extends Dialog {
 
     //https://www.catalinmunteanu.com/design-custom-dialog-libgdx.html
 
-    private float dialog_width = (float)(430* Citadel.density);
-    private float dialog_height = (float)(200*Citadel.density);
-    private float dialog_padding = (float)(5*Citadel.density);
-    private float button_height = (float)(40*Citadel.density);
-    private float button_width = (float)(100*Citadel.density);
-    private float button_pad_h = (float)(10*Citadel.density);
+    private final float dialog_width = (float)(450);
+    private final float dialog_height = (float)(200);
+    private final float dialog_padding = (float)(0);
+    private final float button_height = (float)(40);
+    private final float button_width = (float)(100);
+    private final float button_pad_h = (float)(10);
 
     public DialogAlert(String title, Skin skin) {
         super(title, skin);
@@ -59,12 +56,14 @@ public class DialogAlert extends Dialog {
      * the action might be either :
      * - usage of a spell
      * - usage of an item
+     * - confirmation of proceeding
      * Either during a dialog, an event or in combat
-     * @param btnText the text displayed on the button
+     *
+     * @param btnText  the text displayed on the button
+     * @param color    the color of the text on the button
      * @param listener the listener of the button
-     * @return a button all done for the dialogAlert box
      */
-    public DialogAlert button(String btnText , Color color , InputListener listener){
+    public void button(String btnText , Color color , InputListener listener){
         TextButton.TextButtonStyle style = new TextButton.TextButtonStyle();
         style.font = Citadel.font;
         style.fontColor = color;
@@ -76,8 +75,6 @@ public class DialogAlert extends Dialog {
         button.padRight(button_pad_h);
 
         button(button);
-
-        return this;
     }
 
 
