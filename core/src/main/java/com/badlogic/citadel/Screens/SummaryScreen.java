@@ -6,15 +6,13 @@ import com.badlogic.citadel.Methods.Player;
 import com.badlogic.citadel.Methods.SpellList;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.InputListener;
 import com.badlogic.gdx.scenes.scene2d.Stage;
-import com.badlogic.gdx.scenes.scene2d.ui.Container;
-import com.badlogic.gdx.scenes.scene2d.ui.Label;
-import com.badlogic.gdx.scenes.scene2d.ui.Table;
-import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
+import com.badlogic.gdx.scenes.scene2d.ui.*;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
@@ -27,22 +25,20 @@ public class SummaryScreen implements Screen {
     private Player ply;
     private Stage dialogAlertStage;
 
-    private TextButton rerollButton, startButton , newSpellBook;
-    private Label title , playerLabel , spellBookLabel;
+    private TextButton rerollButton, startButton, newSpellBook;
+    private Label title, playerLabel, spellBookLabel;
     private Table playerTable;
     private Table spellsTable;
     private Table titleTable;
 
-    private DialogAlert dialogAlert = new DialogAlert("" , PLAIN_JAMES_SKIN);
-
-    public SummaryScreen(Citadel game){
+    public SummaryScreen(Citadel game) {
         this.game = game;
         ply = game.getPlayer();
         stage = new Stage(new ScreenViewport());
         dialogAlertStage = new Stage(new ScreenViewport());
     }
 
-    private void create(){
+    private void create() {
         stage.setDebugAll(true);
 
         createLabels();
@@ -68,13 +64,13 @@ public class SummaryScreen implements Screen {
         stage.addActor(startButton);
     }
 
-    private Table setUpPlayerTable(){
+    private Table setUpPlayerTable() {
         playerTable = new Table();
         playerTable.setSkin(Skins.DEFAULT_SKIN);
         playerTable.setFillParent(true);
         playerTable.add(playerLabel);
         playerTable.row();
-        playerTable.add("Hability - Strenght in combat : " + ply.getHability());
+        playerTable.add("Ability - Strength in combat : " + ply.getAbility());
         playerTable.row();
         playerTable.add("Endurance - Damage you can take : " + ply.getVitality());
         playerTable.row();
@@ -84,7 +80,7 @@ public class SummaryScreen implements Screen {
         return playerTable;
     }
 
-    private Table setUpSpellBookTable(){
+    private Table setUpSpellBookTable() {
         spellsTable = new Table();
         spellsTable.setSkin(Skins.DEFAULT_SKIN);
         spellsTable.setFillParent(true);
@@ -100,55 +96,58 @@ public class SummaryScreen implements Screen {
         return spellsTable;
     }
 
-    private void createLabels(){
-        title = new Label("Summary" , Skins.DEFAULT_SKIN);
-        playerLabel = new Label("Player characteristics" , Skins.DEFAULT_SKIN);
-        spellBookLabel = new Label("Spell Book" , Skins.DEFAULT_SKIN);
+    private void createLabels() {
+        title = new Label("Summary", Skins.DEFAULT_SKIN);
+        playerLabel = new Label("Player characteristics", Skins.DEFAULT_SKIN);
+        spellBookLabel = new Label("Spell Book", Skins.DEFAULT_SKIN);
     }
 
-    private void createButtons(){
+    private void createButtons() {
         rerollButton = new TextButton("Reroll all characteristics", PLAIN_JAMES_SKIN);
         startButton = new TextButton("Start the adventure", PLAIN_JAMES_SKIN);
         newSpellBook = new TextButton("Redo the spell book", PLAIN_JAMES_SKIN);
     }
 
-    private void input(){
-        rerollButton.addListener(new ChangeListener(){
+    private void input() {
+        rerollButton.addListener(new ChangeListener() {
             @Override
-            public void changed(ChangeEvent event, Actor actor){
+            public void changed(ChangeEvent event, Actor actor) {
                 stage.clear();
                 ply.getGrimoire().emptyGrimoire();
                 game.changeScreen(Citadel.CHARACTERCREATOR);
             }
         });
 
-        startButton.addListener(new ChangeListener(){
+        startButton.addListener(new ChangeListener() {
+            DialogAlert dialogAlert = new DialogAlert("Start the adventure ?", PLAIN_JAMES_SKIN);
             @Override
-            public void changed(ChangeEvent event, Actor actor){
-                stage.addActor(dialogAlert);
+            public void changed(ChangeEvent event, Actor actor) {
                 dialogAlert.text("Are you sure you want to go into the adventure ? You will not be able to change those " +
-                        "values later on.")
-                    .buttonNo("No I am not ready yet ! " , new InputListener(){
-                        public boolean touchDown(InputEvent event, float x, float y){
-                            dialogAlert.hide();
-                            return true;
-                        }
-                    })
-                    .buttonYes("Yes, hit me with the adventure ! ", new InputListener(){
-                        @Override
-                        public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
-                            stage.clear();
-                            game.changeScreen(Citadel.INTROSCREEN);
-                            return true;
-                        }
-                    });
+                    "values later on.");
+
+                dialogAlert.button("No I am not ready yet ! ", Color.BLACK,  new InputListener() {
+                    @Override
+                    public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
+                        dialogAlert.hide();
+                        return true;
+                    }
+                });
+                dialogAlert.button("Yes, hit me with the adventure ! ", Color.RED,new InputListener() {
+                    @Override
+                    public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
+                        stage.clear();
+                        game.changeScreen(Citadel.INTROSCREEN);
+                        return true;
+                    }
+                });
+                stage.addActor(dialogAlert);
                 dialogAlert.show(stage);
             }
         });
 
-        newSpellBook.addListener(new ChangeListener(){
+        newSpellBook.addListener(new ChangeListener() {
             @Override
-            public void changed(ChangeEvent event, Actor actor){
+            public void changed(ChangeEvent event, Actor actor) {
                 stage.clear();
                 game.changeScreen(Citadel.SPELLSMENU);
             }

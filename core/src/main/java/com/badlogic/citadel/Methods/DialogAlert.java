@@ -17,12 +17,12 @@ public class DialogAlert extends Dialog {
 
     //https://www.catalinmunteanu.com/design-custom-dialog-libgdx.html
 
-    private float dialog_width = (float)(260* Citadel.density);
-    private float dialog_height = (float)(180*Citadel.density);
-    private float dialog_padding = (float)(20*Citadel.density);
+    private float dialog_width = (float)(430* Citadel.density);
+    private float dialog_height = (float)(200*Citadel.density);
+    private float dialog_padding = (float)(5*Citadel.density);
     private float button_height = (float)(40*Citadel.density);
-    private float button_width = (float)(200*Citadel.density);
-    private float button_pad_h = (float)(15*Citadel.density);
+    private float button_width = (float)(100*Citadel.density);
+    private float button_pad_h = (float)(10*Citadel.density);
 
     public DialogAlert(String title, Skin skin) {
         super(title, skin);
@@ -55,45 +55,31 @@ public class DialogAlert extends Dialog {
     }
 
     /**
-     * The button to accept the intented action and proceed
+     * The button to accept the intended action and proceed
      * the action might be either :
      * - usage of a spell
      * - usage of an item
      * Either during a dialog, an event or in combat
-     * @param btnText
-     * @param listener
-     * @return
+     * @param btnText the text displayed on the button
+     * @param listener the listener of the button
+     * @return a button all done for the dialogAlert box
      */
-    public DialogAlert buttonYes(String btnText , InputListener listener){
+    public DialogAlert button(String btnText , Color color , InputListener listener){
         TextButton.TextButtonStyle style = new TextButton.TextButtonStyle();
         style.font = Citadel.font;
-        style.fontColor = Color.RED;
+        style.fontColor = color;
 
         TextButton button = new TextButton(btnText, style);
-        button.setSize(button_width, (float)(44*Citadel.density));
+        button.setSize(button_width, (44*Citadel.density));
         button.addListener(listener);
         button.padLeft(button_pad_h);
         button.padRight(button_pad_h);
-
 
         button(button);
 
         return this;
     }
 
-    public DialogAlert buttonNo(String btnTxt , InputListener listener){
-        TextButton.TextButtonStyle style = new TextButton.TextButtonStyle();
-        style.font = Citadel.font;
-        style.fontColor = Color.GREEN;
-
-        TextButton button = new TextButton(btnTxt, style);
-        button.setSize(button_width, (float)(44*Citadel.density));
-        button.addListener(listener);
-        button.padLeft(button_pad_h);
-        button.padRight(button_pad_h);
-
-        return this;
-    }
 
     @Override
     public float getPrefWidth() {

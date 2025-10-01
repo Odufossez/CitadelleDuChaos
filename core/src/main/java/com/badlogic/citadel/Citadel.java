@@ -2,12 +2,15 @@ package com.badlogic.citadel;
 
 import com.badlogic.citadel.Methods.AppPreferences;
 import com.badlogic.citadel.Methods.Player;
+import com.badlogic.citadel.Methods.SpellBook;
+import com.badlogic.citadel.Methods.SpellList;
 import com.badlogic.citadel.Screens.*;
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.utils.Sort;
 
 public class Citadel extends Game {
     public final static int MAINMENU = 0;
@@ -53,7 +56,13 @@ public class Citadel extends Game {
         batch = new SpriteBatch();
         font = new BitmapFont();
         density = Gdx.graphics.getDensity();
-        setScreen(menuScreen);
+
+        //TODO à changer pour la version finale -- player et grimoire virtuel pour les tests
+        player = new Player(1,1,1,1,1);
+        SpellBook grim = new SpellBook(1);
+        grim.putIn(SpellList.Sorts.HABILITE);
+        summaryScreen = new SummaryScreen(this);
+        setScreen(summaryScreen);
 
     }
 

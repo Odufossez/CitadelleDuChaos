@@ -26,7 +26,7 @@ public class Combat {
     }
 
     public int playerTurn(int attack){
-        return player.getCurrentHab()+attack;
+        return player.getCurrentAbility()+attack;
     }
 
     public int monsterTurn(int attack){

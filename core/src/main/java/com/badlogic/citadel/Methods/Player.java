@@ -2,8 +2,8 @@ package com.badlogic.citadel.Methods;
 
 public class Player {
     private  String pseudo; //TODO V1.1
-    private  int hability;
-    private  int currentHab;
+    private  int ability;
+    private  int currentAbility;
     private  int vitality;
     private  int currentVit;
     private  int magic;
@@ -32,7 +32,7 @@ public class Player {
      */
     public Player(int p_hability, int p_vitality, int p_magic, int p_gold, int p_luck){
 
-        setHability(p_hability);
+        setAbility(p_hability);
         setVitality(p_vitality);
         magic = p_magic;
         grimoire = new SpellBook(magic);
@@ -42,12 +42,12 @@ public class Player {
     }
 
     public void init(int end, int currentVit , int hab , int currentHab , int magic , int luck ,int gold){
-        setHability(hab);
+        setAbility(hab);
         setVitality(end);
         this.magic = magic;
         this.gold = gold;
         this.luck = luck;
-        this.currentHab = currentHab;
+        this.currentAbility = currentHab;
         this.currentVit = currentVit;
         this.currentLuck = currentLuck;
 
@@ -154,16 +154,16 @@ public class Player {
      * Les méthodes liées à l'habilité
      * @return l'habilité actuelle
      */
-    public int  getCurrentHab(){
-        return currentHab;
+    public int getCurrentAbility(){
+        return currentAbility;
     }
-    public void setCurrentHab(int currentHab){
-        this.currentHab = currentHab;
+    public void setCurrentAbility(int currentAbility){
+        this.currentAbility = currentAbility;
     }
-    public int getHability(){return  hability;}
-    public void setHability(int hability) {
-        this.hability = hability;
-        currentHab = hability;
+    public int getAbility(){return ability;}
+    public void setAbility(int ability) {
+        this.ability = ability;
+        currentAbility = ability;
     }
 
     public String getPseudo(){
@@ -200,7 +200,7 @@ public class Player {
      * @return la liste des informations joueur
      */
     public String toString(){
-        return "Nom: " + pseudo + " -hability : " + hability + " -vitality: " + vitality + " -luck: " + luck +
+        return "Nom: " + pseudo + " -hability : " + ability + " -vitality: " + vitality + " -luck: " + luck +
                 " -magic: " + magic;
     }
 
