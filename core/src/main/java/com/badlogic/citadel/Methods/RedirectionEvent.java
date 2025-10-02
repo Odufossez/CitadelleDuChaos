@@ -1,17 +1,20 @@
 package com.badlogic.citadel.Methods;
 
-import java.io.IOException;
+import com.badlogic.citadel.Citadel;
+import com.badlogic.citadel.Screens.Event1GameScreen;
 
-import static com.badlogic.citadel.Methods.Events.*;
+import java.io.IOException;
 
 
 public class RedirectionEvent {
-    public static void returnToEvent(int eventNb) throws IOException {
+    public static void returnToEvent(int eventNb, Citadel game) throws IOException {
         System.out.println("REDIRECTION EVENTS");
         //todo changement de screen
         switch(eventNb){
-            case 1: event1(); break;
-            case 2: event2(); break;
+            case 1: {
+
+            }
+            /*case 2:
             case 3: event3();
             case 4: event4();
             case 5: event5();
@@ -409,7 +412,7 @@ public class RedirectionEvent {
             case 397: event397();
             case 398: event398();
             case 399: event399();
-            case 400: event400();
+            case 400: event400();*/
             default: System.exit(3);
         }
     }

@@ -3,13 +3,32 @@ package com.badlogic.citadel;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 
 import java.util.ArrayList;
-public class Item {
+public class Item implements Comparable{
     protected String name;
     protected String description;
     protected int numero; //must be unique for each item
     protected boolean isDansInventaire;
     protected ArrayList<Integer> usages;
     protected TextButton buttonUse;
+
+    public enum Items{
+        ALCHEMIST_HEALING_BALM,
+        BERRIES,
+        CHARMED_AMULET,
+        ENCHANTED_BRUSH,
+        ENCHANTED_THROWING_DAGGER,
+        EXOTIC_FRUITS,
+        FRUIT_OF_SILENCE,
+        HALLUCINATING_POTION,
+        HOGWEED,
+        HOGWEED_ESSENCE,
+        JEWEL_OF_LIGHT,
+        NEEDLE_KNIFE,
+        POCKET_MYRIADE,
+        RING_OF_SWORDSMANSHIP,
+        SLUMBERBERRY,
+        SWORD
+    }
 
     Item(String name, String description, int numero) {
         this.name = name;
@@ -67,5 +86,14 @@ public class Item {
 
     public String toString() {
         return name;
+    }
+
+    @Override
+    public int compareTo(Object o) {
+        if(o instanceof Item){
+            Item item = (Item) o;
+            return this.numero - item.numero;
+        }
+        return 0;
     }
 }

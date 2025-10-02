@@ -9,8 +9,6 @@ import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.scenes.scene2d.Stage;
-import com.badlogic.gdx.utils.Sort;
 
 public class Citadel extends Game {
     public final static int MAINMENU = 0;
@@ -21,13 +19,15 @@ public class Citadel extends Game {
     public final static int GAMEOVER = 5;
     public final static int PARAMETERS = 6;
     public final static int SUMMARYSCREEN = 7;
+    public final static int RULESSCREEN = 8; //TODO
 
-    public final static int INTROSCREEN = 8;
-    public final static int EVENT1 = 9;
-    public final static int EVENT2 = 10;
-    public final static int EVENT3 = 11;
+    public final static int INTROSCREEN = 10;
+    public final static int EVENT1 = 11;
+    public final static int EVENT2 = 12;
 
-    public static BitmapFont font; //todo revoir les fonts
+    public static BitmapFont titleFont = new BitmapFont(); //todo revoir les fonts
+    public static BitmapFont versionFont;
+
     public SpriteBatch batch;
 
     private MainMenuScreen menuScreen;
@@ -42,6 +42,7 @@ public class Citadel extends Game {
     //Events screen
     private IntroGameScreen introScreen;
     private Event1GameScreen event1GameScreen;
+    //private Event2GameScreen event2GameScreen;
 
     private AppPreferences appPrefs;
     public static float density;
@@ -54,7 +55,7 @@ public class Citadel extends Game {
         appPrefs = new AppPreferences();
         menuScreen = new MainMenuScreen(this);
         batch = new SpriteBatch();
-        font = new BitmapFont();
+        titleFont = new BitmapFont();
         density = Gdx.graphics.getDensity();
 
         //TODO à changer pour la version finale -- player et grimoire virtuel pour les tests
@@ -63,6 +64,7 @@ public class Citadel extends Game {
         grim.putIn(SpellList.Sorts.HABILITE);
         summaryScreen = new SummaryScreen(this);
         setScreen(summaryScreen);
+        //setScreen(menuScreen);
 
     }
 
@@ -120,12 +122,10 @@ public class Citadel extends Game {
                 this.setScreen(introScreen);
                 break;
             }
+
             case EVENT1:{
-                if (event1GameScreen==null) event1GameScreen = new Event1GameScreen(this);
+                if (event1GameScreen == null) event1GameScreen = new Event1GameScreen(this);
                 this.setScreen(event1GameScreen);
-                break;
-            }
-            case EVENT2:{
             }
         }
     }

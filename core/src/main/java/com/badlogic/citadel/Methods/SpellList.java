@@ -34,7 +34,7 @@ public class SpellList {
         return switch (s) {
             case CHANCE -> "Luck";
             case COPIE_CONFORME -> "Copy";
-            case ENDURANCE -> "Endurance";
+            case ENDURANCE -> "Stamina";
             case FAIBLESSE -> "Feabble";
             case FEU -> "Fire";
             case FORCE -> "Strength";

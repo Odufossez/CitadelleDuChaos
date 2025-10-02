@@ -14,8 +14,8 @@ public class DialogAlert extends Dialog {
 
     //https://www.catalinmunteanu.com/design-custom-dialog-libgdx.html
 
-    private final float dialog_width = (float)(450);
-    private final float dialog_height = (float)(200);
+    private float dialog_width = (float)(450);
+    private float dialog_height = (float)(200);
     private final float dialog_padding = (float)(0);
     private final float button_height = (float)(40);
     private final float button_width = (float)(100);
@@ -65,7 +65,7 @@ public class DialogAlert extends Dialog {
      */
     public void button(String btnText , Color color , InputListener listener){
         TextButton.TextButtonStyle style = new TextButton.TextButtonStyle();
-        style.font = Citadel.font;
+        style.font = Citadel.titleFont;
         style.fontColor = color;
 
         TextButton button = new TextButton(btnText, style);

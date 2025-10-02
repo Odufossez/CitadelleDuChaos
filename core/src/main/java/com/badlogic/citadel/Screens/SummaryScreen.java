@@ -23,7 +23,6 @@ public class SummaryScreen implements Screen {
     Citadel game;
     private Stage stage;
     private Player ply;
-    private Stage dialogAlertStage;
 
     private TextButton rerollButton, startButton, newSpellBook;
     private Label title, playerLabel, spellBookLabel;
@@ -35,7 +34,6 @@ public class SummaryScreen implements Screen {
         this.game = game;
         ply = game.getPlayer();
         stage = new Stage(new ScreenViewport());
-        dialogAlertStage = new Stage(new ScreenViewport());
     }
 
     private void create() {
@@ -70,9 +68,9 @@ public class SummaryScreen implements Screen {
         playerTable.row();
         playerTable.add("Ability - Strength in combat : " + ply.getAbility());
         playerTable.row();
-        playerTable.add("Endurance - Damage you can take : " + ply.getVitality());
+        playerTable.add("Endurance - Damage you can take before dying : " + ply.getVitality());
         playerTable.row();
-        playerTable.add("Luck : " + ply.getLuck());
+        playerTable.add("Luck - used to reroll a result: " + ply.getLuck());
         playerTable.row();
         playerTable.add(rerollButton);
         return playerTable;

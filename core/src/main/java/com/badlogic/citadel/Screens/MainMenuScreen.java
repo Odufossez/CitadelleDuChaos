@@ -1,13 +1,16 @@
 package com.badlogic.citadel.Screens;
 
+import com.badlogic.citadel.Methods.DialogAlert;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.citadel.Citadel;
 import com.badlogic.gdx.scenes.scene2d.Actor;
+import com.badlogic.gdx.scenes.scene2d.InputEvent;
+import com.badlogic.gdx.scenes.scene2d.InputListener;
 import com.badlogic.gdx.scenes.scene2d.Stage;
-import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
@@ -61,9 +64,26 @@ public class MainMenuScreen implements Screen {
 
         //Les listeners des boutons
         quit.addListener(new ChangeListener() {
+            DialogAlert alertQuit = new DialogAlert(" Are you sure you want to quit ?", PLAIN_JAMES_SKIN);
             @Override
             public void changed(ChangeEvent changeEvent, Actor actor) {
-                Gdx.app.exit();
+                alertQuit.button("Yes" , Color.BLACK , new InputListener(){
+                   @Override
+                   public boolean touchDown(InputEvent event, float x, float y, int pointer , int button){
+                       Gdx.app.exit();
+                       return true;
+                   }
+                });
+
+                alertQuit.button("No", Color.BLACK, new InputListener(){
+                    @Override
+                    public boolean touchDown(InputEvent event, float x, float y, int pointer , int button){
+                        alertQuit.hide();
+                        return true;
+                    }
+                });
+                stage.addActor(alertQuit);
+                alertQuit.show(stage);
             }
         });
 
@@ -75,9 +95,20 @@ public class MainMenuScreen implements Screen {
         });
 
         loadSave.addListener(new ChangeListener() {
+            final DialogAlert alertLoadSave = new DialogAlert(" This functionnality is not done yet ! "
+                , PLAIN_JAMES_SKIN);
             @Override
             public void changed(ChangeEvent changeEvent, Actor actor) {
-                game.changeScreen(Citadel.LOADMENU);
+                //game.changeScreen(Citadel.LOADMENU); //WIP
+                alertLoadSave.button("Back" , Color.RED , new InputListener(){
+                    @Override
+                    public boolean touchDown(InputEvent event, float x , float y, int pointer, int button){
+                        alertLoadSave.hide();
+                        return true;
+                    }
+                });
+                stage.addActor(alertLoadSave);
+                alertLoadSave.show(stage);
             }
         });
 
@@ -97,7 +128,10 @@ public class MainMenuScreen implements Screen {
         stage.act(Math.min(Gdx.graphics.getDeltaTime(), 1 / 30f));
         game.batch.begin();
         //Titre
-        game.font.draw(game.batch, "Citadel of Chaos" , Gdx.graphics.getWidth()*0.25f, Gdx.graphics.getHeight()*0.3f);
+        Citadel.titleFont.draw(game.batch, "Citadel of Chaos" ,
+            Gdx.graphics.getWidth()*0.25f,
+            Gdx.graphics.getHeight()*(0.3f)); //actuellement en bas à gauche TODO refaire proprement
+
         game.batch.end();
         stage.draw();
     }
