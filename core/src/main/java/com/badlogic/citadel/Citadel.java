@@ -25,7 +25,7 @@ public class Citadel extends Game {
     public final static int EVENT1 = 11;
     public final static int EVENT2 = 12;
 
-    public static BitmapFont titleFont = new BitmapFont(); //todo revoir les fonts
+    public static BitmapFont titleFont ; //todo revoir les fonts
     public static BitmapFont versionFont;
 
     public SpriteBatch batch;
