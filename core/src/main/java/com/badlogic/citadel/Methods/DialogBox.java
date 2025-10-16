@@ -1,7 +1,9 @@
 package com.badlogic.citadel.Methods;
+import com.badlogic.gdx.scenes.scene2d.InputListener;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.Dialog;
+import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 
 import static com.badlogic.citadel.Screens.Skins.PLAIN_JAMES_SKIN;
 
@@ -35,5 +37,11 @@ public class DialogBox extends Dialog {
         label.setWidth(dialog_width-dialog_padding*2);
         text(label);
         return this;
+    }
+
+    public void buttonNext(InputListener listener){
+        TextButton button = new TextButton("Next", PLAIN_JAMES_SKIN);
+        button.addListener(listener);
+        button(button);
     }
 }

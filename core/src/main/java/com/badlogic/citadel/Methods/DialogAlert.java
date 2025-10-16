@@ -2,6 +2,7 @@ package com.badlogic.citadel.Methods;
 
 import com.badlogic.citadel.Citadel;
 import com.badlogic.gdx.graphics.Color;
+import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.scenes.scene2d.InputListener;
 import com.badlogic.gdx.scenes.scene2d.ui.Dialog;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
@@ -66,6 +67,7 @@ public class DialogAlert extends Dialog {
     public void button(String btnText , Color color , InputListener listener){
         TextButton.TextButtonStyle style = new TextButton.TextButtonStyle();
         //style.font = Citadel.titleFont;
+        style.font = new BitmapFont();
         style.fontColor = color;
 
         TextButton button = new TextButton(btnText, style);
