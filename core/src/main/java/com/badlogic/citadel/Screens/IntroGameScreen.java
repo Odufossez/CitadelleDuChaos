@@ -1,6 +1,7 @@
 package com.badlogic.citadel.Screens;
 
 import com.badlogic.citadel.Citadel;
+import com.badlogic.citadel.Methods.DialogBox;
 import com.badlogic.citadel.Methods.RedirectionEvent;
 import com.badlogic.gdx.ApplicationAdapter;
 import com.badlogic.gdx.Gdx;
@@ -63,6 +64,8 @@ public class IntroGameScreen extends ApplicationAdapter implements Screen {
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
         stage.act(Math.min(Gdx.graphics.getDeltaTime(), 1 / 30f));
         game.batch.begin();
+        DialogBox intro = new DialogBox("Test" , PLAIN_JAMES_SKIN);
+        intro.text("ceci est un test");
         /*game.font.draw(game.batch , " Le bon peuple de la Vallée des Saules vit depuis environ huit ans dans " +
                 "la crainte, voire la terreur. Cette crainte, c'est un certain Balthus le\n" +
                 "Terrible qui l'inspire, Balthus le Sorcier dont les pouvoirs magiques " +

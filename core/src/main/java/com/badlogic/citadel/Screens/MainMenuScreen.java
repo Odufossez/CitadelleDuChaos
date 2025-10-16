@@ -7,6 +7,7 @@ import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.citadel.Citadel;
+import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.InputListener;
@@ -128,7 +129,8 @@ public class MainMenuScreen implements Screen {
         stage.act(Math.min(Gdx.graphics.getDeltaTime(), 1 / 30f));
         game.batch.begin();
         //Titre
-        Citadel.titleFont.draw(game.batch, "Citadel of Chaos" ,
+        BitmapFont font = new BitmapFont();
+        font.draw(game.batch, "Citadel of Chaos" ,
             Gdx.graphics.getWidth()*0.25f,
             Gdx.graphics.getHeight()*(0.3f)); //actuellement en bas à gauche TODO refaire proprement
 

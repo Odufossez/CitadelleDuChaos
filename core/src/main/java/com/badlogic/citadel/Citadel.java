@@ -25,7 +25,7 @@ public class Citadel extends Game {
     public final static int EVENT1 = 11;
     public final static int EVENT2 = 12;
 
-    public static BitmapFont titleFont = new BitmapFont(); //todo revoir les fonts
+    //public BitmapFont titleFont = new BitmapFont(); //todo revoir les fonts
     public static BitmapFont versionFont;
 
     public SpriteBatch batch;
@@ -55,7 +55,7 @@ public class Citadel extends Game {
         appPrefs = new AppPreferences();
         menuScreen = new MainMenuScreen(this);
         batch = new SpriteBatch();
-        titleFont = new BitmapFont();
+        //titleFont = new BitmapFont();
         density = Gdx.graphics.getDensity();
 
         //TODO à changer pour la version finale -- player et grimoire virtuel pour les tests
@@ -64,7 +64,7 @@ public class Citadel extends Game {
         grim.putIn(SpellList.Sorts.HABILITE);
         summaryScreen = new SummaryScreen(this);
         setScreen(summaryScreen);
-        //setScreen(menuScreen);
+        setScreen(menuScreen);
 
     }
 

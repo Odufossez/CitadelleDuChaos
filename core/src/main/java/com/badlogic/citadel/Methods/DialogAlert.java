@@ -65,7 +65,7 @@ public class DialogAlert extends Dialog {
      */
     public void button(String btnText , Color color , InputListener listener){
         TextButton.TextButtonStyle style = new TextButton.TextButtonStyle();
-        style.font = Citadel.titleFont;
+        //style.font = Citadel.titleFont;
         style.fontColor = color;
 
         TextButton button = new TextButton(btnText, style);
