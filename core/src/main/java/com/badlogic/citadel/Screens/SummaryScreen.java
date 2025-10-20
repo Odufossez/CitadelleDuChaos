@@ -106,10 +106,10 @@ public class SummaryScreen implements Screen {
 
     private void input() {
         rerollButton.addListener(new ChangeListener() {
-            final DialogAlert dialogAlertPlayer = new DialogAlert(" Reroll all characteristics",
-                    PLAIN_JAMES_SKIN);
             @Override
             public void changed(ChangeEvent event, Actor actor) {
+                final DialogAlert dialogAlertPlayer = new DialogAlert(" Reroll all characteristics",
+                    PLAIN_JAMES_SKIN);
                 dialogAlertPlayer.text("    You are about to reroll all characteristics and will need to redo the spell " +
                     "book as well. Are you sure you want to continue?").align(Align.center).padRight(-20);
                 dialogAlertPlayer.button("Yes, redo the character", Color.RED, new InputListener(){
@@ -134,9 +134,9 @@ public class SummaryScreen implements Screen {
         });
 
         startButton.addListener(new ChangeListener() {
-            final DialogAlert dialogAlert = new DialogAlert("   Start the adventure ?", PLAIN_JAMES_SKIN);
             @Override
             public void changed(ChangeEvent event, Actor actor) {
+                final DialogAlert dialogAlert = new DialogAlert("   Start the adventure ?", PLAIN_JAMES_SKIN);
                 dialogAlert.text("Are you sure you want to go into the adventure ? You will not be able to change those " +
                     "values later on.").align(Align.center).padRight(-20);
 
@@ -161,9 +161,9 @@ public class SummaryScreen implements Screen {
         });
 
         newSpellBook.addListener(new ChangeListener() {
-            final DialogAlert dialogAlertSpells = new DialogAlert(" New Spell Book", PLAIN_JAMES_SKIN);
             @Override
             public void changed(ChangeEvent event, Actor actor) {
+                final DialogAlert dialogAlertSpells = new DialogAlert(" New Spell Book", PLAIN_JAMES_SKIN);
                 dialogAlertSpells.text("You are about to redo the whole spellbook. Are you sure you want to proceed ?")
                     .padRight(-20);
                 dialogAlertSpells.button("Yes, redo the whole book ", Color.BLACK,new InputListener() {
