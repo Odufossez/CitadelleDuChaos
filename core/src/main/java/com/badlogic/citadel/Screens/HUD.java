@@ -116,7 +116,7 @@ public class HUD implements Disposable {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
                 DialogAlert menuAlert = new DialogAlert("Menu" , Skins.PLAIN_JAMES_SKIN);
-                menuAlert.button("Main menu", new InputListener(){ //TODO AN "ARE YOU SURE"
+                menuAlert.button("Main menu", Color.BLACK, new InputListener(){ //TODO AN "ARE YOU SURE"
                     @Override
                     public boolean touchDown(InputEvent event, float x , float y, int pointer, int button){
                         stage.clear();
@@ -124,15 +124,25 @@ public class HUD implements Disposable {
                         return true;
                     }
                 });
+                menuAlert.getButtonTable().row();
 
-                menuAlert.button("Quit", new InputListener(){ //TODO AN "ARE YOU SURE"
+                menuAlert.button("Quit", Color.BLACK ,new InputListener(){ //TODO AN "ARE YOU SURE"
                     @Override
                     public boolean touchDown(InputEvent event, float x , float y, int pointer, int button){
-                        menuAlert.hide();
                         Gdx.app.exit();
                         return true;
                     }
                 });
+                menuAlert.getButtonTable().row();
+
+                menuAlert.button("Back", Color.BLACK ,new InputListener(){
+                    @Override
+                    public boolean touchDown(InputEvent event, float x , float y, int pointer, int button){
+                        menuAlert.hide();
+                        return true;
+                    }
+                });
+                menuAlert.getButtonTable().row();
 
                 stage.addActor(menuAlert);
                 menuAlert.show(stage);

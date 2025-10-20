@@ -18,8 +18,8 @@ public class DialogAlert extends Dialog {
     private float dialog_width = (float) (450);
     private float dialog_height = (float) (200);
     private final float dialog_padding = (float) (0);
-    private final float button_height = (float) (40);
-    private final float button_width = (float) (100);
+    private final float button_height = (float) (60);
+    private final float button_width = (float) (150);
     private final float button_pad_h = (float) (10);
 
     public DialogAlert(String title, Skin skin) {
@@ -70,8 +70,9 @@ public class DialogAlert extends Dialog {
      */
     public void button(String btnText, Color color, InputListener listener) {
         TextButton.TextButtonStyle style = new TextButton.TextButtonStyle();
-        //style.font = Citadel.titleFont;
-        style.font = new BitmapFont();
+        BitmapFont font = new BitmapFont();
+        font.getData().setScale(1.5f);
+        style.font = font;
         style.fontColor = color;
 
         TextButton button = new TextButton(btnText, style);
@@ -80,7 +81,7 @@ public class DialogAlert extends Dialog {
         button.padLeft(button_pad_h);
         button.padRight(button_pad_h);
 
-        button(button);
+        getButtonTable().add(button).height(button_height);
     }
 
 
