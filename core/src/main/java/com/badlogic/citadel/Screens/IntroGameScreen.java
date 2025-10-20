@@ -70,7 +70,6 @@ public class IntroGameScreen extends ApplicationAdapter implements Screen {
         Gdx.input.setInputProcessor(stage);
         create();
         input();
-
     }
 
     @Override

@@ -1,7 +1,6 @@
 package com.badlogic.citadel.Methods;
 
 import com.badlogic.citadel.Citadel;
-import com.badlogic.citadel.Screens.Event1GameScreen;
 
 import java.io.IOException;
 

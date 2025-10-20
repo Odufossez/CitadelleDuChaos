@@ -41,7 +41,7 @@ public class Citadel extends Game {
 
     //Events screen
     private IntroGameScreen introScreen;
-    private Event1GameScreen event1GameScreen;
+    private AtTheGateGameScreen atTheGateGameScreen;
     //private Event2GameScreen event2GameScreen;
 
     private AppPreferences appPrefs;
@@ -65,8 +65,8 @@ public class Citadel extends Game {
         player.setCurrentVitality(1);
         SpellBook grim = new SpellBook(1);
         grim.putIn(SpellList.Sorts.HABILITE);
-        event1GameScreen = new Event1GameScreen(this);
-        setScreen(event1GameScreen);
+        atTheGateGameScreen = new AtTheGateGameScreen(this);
+        setScreen(atTheGateGameScreen);
         //setScreen(menuScreen);
 
     }
@@ -127,8 +127,8 @@ public class Citadel extends Game {
             }
 
             case EVENT1:{
-                if (event1GameScreen == null) event1GameScreen = new Event1GameScreen(this);
-                this.setScreen(event1GameScreen);
+                if (atTheGateGameScreen == null) atTheGateGameScreen = new AtTheGateGameScreen(this);
+                this.setScreen(atTheGateGameScreen);
             }
         }
     }
