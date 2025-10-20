@@ -15,12 +15,12 @@ public class DialogAlert extends Dialog {
 
     //https://www.catalinmunteanu.com/design-custom-dialog-libgdx.html
 
-    private float dialog_width = (float)(450);
-    private float dialog_height = (float)(200);
-    private final float dialog_padding = (float)(0);
-    private final float button_height = (float)(40);
-    private final float button_width = (float)(100);
-    private final float button_pad_h = (float)(10);
+    private float dialog_width = (float) (450);
+    private float dialog_height = (float) (200);
+    private final float dialog_padding = (float) (0);
+    private final float button_height = (float) (40);
+    private final float button_width = (float) (100);
+    private final float button_pad_h = (float) (10);
 
     public DialogAlert(String title, Skin skin) {
         super(title, skin);
@@ -40,12 +40,16 @@ public class DialogAlert extends Dialog {
         setResizable(false);
     }
 
-    //set the properties of the description Label
+    /**
+     *
+     * @param text
+     * @return
+     */
     @Override
-    public DialogAlert text(String text){
-        Label label = new Label(text , PLAIN_JAMES_SKIN);
+    public DialogAlert text(String text) {
+        Label label = new Label(text, PLAIN_JAMES_SKIN);
         label.setWrap(true);
-        label.setWidth(dialog_width-dialog_padding*2);
+        label.setWidth(dialog_width - dialog_padding * 2);
 
         text(label);
 
@@ -64,14 +68,14 @@ public class DialogAlert extends Dialog {
      * @param color    the color of the text on the button
      * @param listener the listener of the button
      */
-    public void button(String btnText , Color color , InputListener listener){
+    public void button(String btnText, Color color, InputListener listener) {
         TextButton.TextButtonStyle style = new TextButton.TextButtonStyle();
         //style.font = Citadel.titleFont;
         style.font = new BitmapFont();
         style.fontColor = color;
 
         TextButton button = new TextButton(btnText, style);
-        button.setSize(button_width, (44*Citadel.density));
+        button.setSize(button_width, (44 * Citadel.density));
         button.addListener(listener);
         button.padLeft(button_pad_h);
         button.padRight(button_pad_h);
@@ -84,6 +88,7 @@ public class DialogAlert extends Dialog {
     public float getPrefWidth() {
         return dialog_width;
     }
+
     @Override
     public float getPrefHeight() {
         return dialog_height;

@@ -64,7 +64,7 @@ public class Citadel extends Game {
         grim.putIn(SpellList.Sorts.HABILITE);
         summaryScreen = new SummaryScreen(this);
         setScreen(summaryScreen);
-        setScreen(menuScreen);
+        //setScreen(menuScreen);
 
     }
 
