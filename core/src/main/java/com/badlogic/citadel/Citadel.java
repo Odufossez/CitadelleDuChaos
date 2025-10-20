@@ -60,10 +60,13 @@ public class Citadel extends Game {
 
         //TODO à changer pour la version finale -- player et grimoire virtuel pour les tests
         player = new Player(1,1,1,1,1);
+        player.setCurrentMagic(1);
+        player.setCurrentLuck(1);
+        player.setCurrentVitality(1);
         SpellBook grim = new SpellBook(1);
         grim.putIn(SpellList.Sorts.HABILITE);
-        summaryScreen = new SummaryScreen(this);
-        setScreen(summaryScreen);
+        event1GameScreen = new Event1GameScreen(this);
+        setScreen(event1GameScreen);
         //setScreen(menuScreen);
 
     }

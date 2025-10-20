@@ -21,35 +21,24 @@ public class Event1GameScreen extends ApplicationAdapter implements Screen {
     private Stage stage;
     private Dialog sceneDialog;
     private Skin skin;
+    private HUD hud;
 
     public Event1GameScreen(Citadel game){
         this.game = game;
         stage = new Stage(new ScreenViewport());
+        hud = new HUD(game);
     }
 
     @Override
     public void show() {
         /*
-        * The screen must show first the back ground then the texts
-        * and add lastly the HUD
+        * The screen must show first the background then the texts
+        * and lastly add the HUD
         * */
         Gdx.input.setInputProcessor(stage);
+        /*----------backgrounds------------*/
 
-        //Temporary
-        TextButton nextEvent = new TextButton("Test retourne Main menu" , PLAIN_JAMES_SKIN); //todo texte ne s'affiche pas ?
-
-        stage.addActor(nextEvent);
-        nextEvent.align(Align.bottom);
-        nextEvent.padLeft(1000);
-
-        nextEvent.addListener(new ChangeListener() {
-            @Override
-            public void changed(ChangeEvent event, Actor actor) {
-                game.changeScreen(Citadel.MAINMENU);
-            }
-        });
-
-        new HUD(game.getPlayer(), game.batch , game);
+        /*------------------------------*/
 
     }
 
@@ -63,6 +52,7 @@ public class Event1GameScreen extends ApplicationAdapter implements Screen {
         font.draw(game.batch, "Event 1" , Gdx.graphics.getWidth()*0.25f, Gdx.graphics.getHeight()*0.3f);
         game.batch.end();
         stage.draw();
+        hud.render(v);
     }
 
     @Override
@@ -87,6 +77,6 @@ public class Event1GameScreen extends ApplicationAdapter implements Screen {
 
     @Override
     public void dispose() {
-
+        hud.dispose();
     }
 }

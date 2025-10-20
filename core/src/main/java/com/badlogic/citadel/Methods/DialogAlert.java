@@ -41,9 +41,9 @@ public class DialogAlert extends Dialog {
     }
 
     /**
-     *
-     * @param text
-     * @return
+     * A dialog alert with a text to confirm a pending choice
+     * @param text the text to display
+     * @return the dialog alert with the text
      */
     @Override
     public DialogAlert text(String text) {

@@ -7,6 +7,7 @@ public class Player {
     private  int vitality;
     private  int currentVit;
     private  int magic;
+    private int currentMagic;
     private  int gold;
     private  int luck;
     private  int currentLuck;
@@ -41,10 +42,11 @@ public class Player {
         setIsInCombat(false);
     }
 
-    public void init(int end, int currentVit , int hab , int currentHab , int magic , int luck ,int gold){
+    public void init(int end, int currentVit , int hab , int currentHab , int magic , int currentMagic, int luck ,int gold){
         setAbility(hab);
         setVitality(end);
         this.magic = magic;
+        this.currentMagic = currentMagic;
         this.gold = gold;
         this.luck = luck;
         this.currentAbility = currentHab;
@@ -146,6 +148,12 @@ public class Player {
         return magic;
     }
     public void setMagic(int magic) {this.magic = magic;}
+    public int getCurrentMagic(){
+        return currentMagic;
+    }
+    public void setCurrentMagic(int magic){
+        currentMagic = magic;
+    }
 
     public void setGold(int gold) {this.gold = gold;}
     public  int getGold(){return  gold;}
