@@ -30,7 +30,11 @@ public class DialogBox extends Dialog {
         getButtonTable().defaults().minWidth(button_width);
         getButtonTable().defaults().minHeight(button_height);
         getButtonTable().defaults().pad(5);
-        //super.setPosition(0,0);
+
+        this.getTitleTable().padLeft(20);
+        getContentTable().defaults().width(dialog_width - dialog_padding * 2);
+        getContentTable().defaults().pad(10,30,10,10); //padding sur le contenu du dialog
+        this.setWidth(this.getPrefWidth());
 
         setModal(true);
         setMovable(false);
@@ -38,15 +42,24 @@ public class DialogBox extends Dialog {
 
     }
 
+    /**
+     * Generate a box dialog located in 0,0 with a text
+     * @param text the text to display
+     * @return a dialog box with the text
+     */
     @Override
     public DialogBox text(String text){
         Label label = new Label(text , PLAIN_JAMES_SKIN);
         label.setWrap(true);
-        getContentTable().defaults().width(dialog_width - dialog_padding * 2);
         text(label);
         return this;
     }
 
+    /**
+     * Generate a button with a text and an action listener
+     * @param text the text to display on the button
+     * @param listener the actions the button will perform
+     */
     public void button(String text, InputListener listener){
         TextButton button = new TextButton(text, PLAIN_JAMES_SKIN);
         button.padLeft(button_pad_h);
@@ -60,6 +73,7 @@ public class DialogBox extends Dialog {
     public float getPrefWidth() {
         return dialog_width;
     }
+
     @Override
     public float getPrefHeight() {
         return dialog_height;

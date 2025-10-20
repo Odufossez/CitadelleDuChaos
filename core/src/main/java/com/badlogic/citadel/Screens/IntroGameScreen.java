@@ -26,6 +26,8 @@ public class IntroGameScreen extends ApplicationAdapter implements Screen {
 
     private final Citadel game;
     private final Stage stage;
+    private final DialogBox dialogIntro = new DialogBox("Narrator" , PLAIN_JAMES_SKIN);
+    private final DialogBox dialogIntro2 = new DialogBox("Narrator" , PLAIN_JAMES_SKIN);
 
     public IntroGameScreen(Citadel game) {
         this.game = game;
@@ -34,36 +36,33 @@ public class IntroGameScreen extends ApplicationAdapter implements Screen {
 
     @Override
     public void create() {
-        final DialogBox dialogIntro = new DialogBox("Test" , PLAIN_JAMES_SKIN);
-        dialogIntro.getTitleTable().padLeft(20);
-        dialogIntro.setWidth(dialogIntro.getPrefWidth());
-        dialogIntro.text("Ceci est un test de dialog box");
-        dialogIntro.button("Next (test)" , new InputListener(){
+
+        dialogIntro.text("You've been commissioned to go and defeat Baltus who's been terrifying the valley for " +
+            "8 years. He's planning to invade the Valley before the end of the week and must be stopped.");
+
+        dialogIntro2.text("You have been walking for quite some time now and finally, the Citadel of Chaos" +
+            " is in sight");
+
+        stage.addActor(dialogIntro);
+
+    }
+
+    private void input(){
+        dialogIntro.button("Next" , new InputListener(){
+            public boolean touchDown(InputEvent event, float x, float y, int pointer, int button){
+                dialogIntro.hide();
+                stage.addActor(dialogIntro2);
+                return true;
+            }
+        });
+
+        dialogIntro2.button("Start the adventure" , new InputListener(){
             public boolean touchDown(InputEvent event, float x, float y, int pointer, int button){
                 stage.clear();
                 game.changeScreen(Citadel.EVENT1);
                 return true;
             }
         });
-        dialogIntro.button("Quit" ,new InputListener(){
-            public boolean touchDown(InputEvent event, float x, float y, int pointer, int button){
-                stage.clear();
-                game.changeScreen(Citadel.MAINMENU);
-                return true;
-            }
-        });
-        dialogIntro.button("Un dernier test" , new InputListener(){
-            public boolean touchDown(InputEvent event, float x, float y, int pointer, int button){
-                stage.clear();
-                game.changeScreen(Citadel.MAINMENU);
-                return true;
-            }
-        });
-        stage.addActor(dialogIntro);
-    }
-
-    private void input(){
-
     }
 
     @Override
