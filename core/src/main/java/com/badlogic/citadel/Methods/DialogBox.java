@@ -5,6 +5,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.Dialog;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
+import com.badlogic.gdx.utils.Align;
 
 import static com.badlogic.citadel.Screens.Skins.PLAIN_JAMES_SKIN;
 
@@ -26,8 +27,9 @@ public class DialogBox extends Dialog {
         padLeft(dialog_padding);
         padRight(dialog_padding);
         padBottom(dialog_padding);
-        getButtonTable().defaults().height(button_height);
-        getButtonTable().defaults().width(dialog_width);
+        getButtonTable().defaults().minWidth(button_width);
+        getButtonTable().defaults().minHeight(button_height);
+        getButtonTable().defaults().pad(5);
         //super.setPosition(0,0);
 
         setModal(true);
@@ -40,17 +42,16 @@ public class DialogBox extends Dialog {
     public DialogBox text(String text){
         Label label = new Label(text , PLAIN_JAMES_SKIN);
         label.setWrap(true);
-        label.setWidth(dialog_width-dialog_padding*2);
+        getContentTable().defaults().width(dialog_width - dialog_padding * 2);
         text(label);
         return this;
     }
 
     public void button(String text, InputListener listener){
         TextButton button = new TextButton(text, PLAIN_JAMES_SKIN);
-        button.setSize(button_width, (44* Citadel.density));
-        button.addListener(listener);
         button.padLeft(button_pad_h);
         button.padRight(button_pad_h);
+        button.getLabel().setAlignment(Align.center);
         button.addListener(listener);
         button(button);
     }

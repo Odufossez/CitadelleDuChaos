@@ -45,6 +45,20 @@ public class IntroGameScreen extends ApplicationAdapter implements Screen {
                 return true;
             }
         });
+        dialogIntro.button("Quit" ,new InputListener(){
+            public boolean touchDown(InputEvent event, float x, float y, int pointer, int button){
+                stage.clear();
+                game.changeScreen(Citadel.MAINMENU);
+                return true;
+            }
+        });
+        dialogIntro.button("Un dernier test" , new InputListener(){
+            public boolean touchDown(InputEvent event, float x, float y, int pointer, int button){
+                stage.clear();
+                game.changeScreen(Citadel.MAINMENU);
+                return true;
+            }
+        });
         stage.addActor(dialogIntro);
     }
 
