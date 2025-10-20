@@ -3,6 +3,7 @@ package com.badlogic.citadel.Screens;
 import com.badlogic.citadel.Citadel;
 import com.badlogic.citadel.Methods.DialogBox;
 import com.badlogic.citadel.Methods.RedirectionEvent;
+import com.badlogic.citadel.Methods.ScreenTransitionFade;
 import com.badlogic.gdx.ApplicationAdapter;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
@@ -29,6 +30,8 @@ public class IntroGameScreen extends ApplicationAdapter implements Screen {
     private final DialogBox dialogIntro = new DialogBox("Narrator" , PLAIN_JAMES_SKIN);
     private final DialogBox dialogIntro2 = new DialogBox("Narrator" , PLAIN_JAMES_SKIN);
 
+    private final Screen from = this;
+
     public IntroGameScreen(Citadel game) {
         this.game = game;
         stage = new Stage(new ScreenViewport());
@@ -37,7 +40,7 @@ public class IntroGameScreen extends ApplicationAdapter implements Screen {
     @Override
     public void create() {
 
-        dialogIntro.text("You've been commissioned to go and defeat Baltus who's been terrifying the valley for " +
+        dialogIntro.text("You've been commissioned to go and defeat Baltus The Terrible who's been terrifying the valley for " +
             "8 years. He's planning to invade the Valley before the end of the week and must be stopped.");
 
         dialogIntro2.text("You have been walking for quite some time now and finally, the Citadel of Chaos" +
@@ -52,14 +55,16 @@ public class IntroGameScreen extends ApplicationAdapter implements Screen {
             public boolean touchDown(InputEvent event, float x, float y, int pointer, int button){
                 dialogIntro.hide();
                 stage.addActor(dialogIntro2);
+                dialogIntro2.show(stage);
                 return true;
             }
         });
 
         dialogIntro2.button("Start the adventure" , new InputListener(){
             public boolean touchDown(InputEvent event, float x, float y, int pointer, int button){
+                Screen next = new AtTheGateGameScreen(game);
                 stage.clear();
-                game.changeScreen(Citadel.EVENT1);
+                game.setScreen(new ScreenTransitionFade(game,from,next,1));
                 return true;
             }
         });

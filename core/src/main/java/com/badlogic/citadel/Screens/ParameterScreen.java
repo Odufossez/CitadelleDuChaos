@@ -1,6 +1,7 @@
 package com.badlogic.citadel.Screens;
 
 import com.badlogic.citadel.Citadel;
+import com.badlogic.citadel.Methods.ScreenTransitionFade;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
@@ -22,6 +23,8 @@ public class ParameterScreen implements Screen {
     private Label musicOnOffLabel;
     private Label soundOnOffLabel;
 
+    private final Screen from = this;
+
 
     public ParameterScreen(Citadel game) {
         this.game = game;
@@ -41,7 +44,8 @@ public class ParameterScreen implements Screen {
            @Override
            public void changed(ChangeEvent event, Actor actor){
                stage.clear();
-               game.changeScreen(Citadel.MAINMENU);
+               Screen next = new MainMenuScreen(game);
+               game.setScreen(new ScreenTransitionFade(game,from,next,1f));
            }
         });
 

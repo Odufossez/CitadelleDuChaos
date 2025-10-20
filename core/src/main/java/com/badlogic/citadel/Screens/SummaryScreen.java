@@ -3,6 +3,7 @@ package com.badlogic.citadel.Screens;
 import com.badlogic.citadel.Citadel;
 import com.badlogic.citadel.Methods.DialogAlert;
 import com.badlogic.citadel.Methods.Player;
+import com.badlogic.citadel.Methods.ScreenTransitionFade;
 import com.badlogic.citadel.Methods.SpellList;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
@@ -29,6 +30,8 @@ public class SummaryScreen implements Screen {
     private Table playerTable;
     private Table spellsTable;
     private Table titleTable;
+
+    private final Screen from = this;
 
     public SummaryScreen(Citadel game) {
         this.game = game;
@@ -117,7 +120,8 @@ public class SummaryScreen implements Screen {
                     public boolean touchDown(InputEvent event, float x , float y, int pointer, int button){
                         stage.clear();
                         game.getPlayer().getGrimoire().emptyGrimoire();
-                        game.changeScreen(Citadel.CHARACTERCREATOR);
+                        Screen next = new CharacterCreatorScreen(game);
+                        game.setScreen(new ScreenTransitionFade(game,from,next,1f));
                         return true;
                     }
                 });
@@ -151,7 +155,7 @@ public class SummaryScreen implements Screen {
                     @Override
                     public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
                         stage.clear();
-                        game.changeScreen(Citadel.INTROSCREEN);
+                        game.setScreen(new ScreenTransitionFade(game,from,new AtTheGateGameScreen(game),1f));
                         return true;
                     }
                 });
@@ -170,7 +174,8 @@ public class SummaryScreen implements Screen {
                     @Override
                     public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
                         stage.clear();
-                        game.changeScreen(Citadel.SPELLSMENU);
+                        game.getPlayer().getGrimoire().emptyGrimoire();
+                        game.setScreen(new ScreenTransitionFade(game, from , new SpellScreen(game),1f));
                         return true;
                     }
                 });

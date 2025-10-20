@@ -1,6 +1,7 @@
 package com.badlogic.citadel.Screens;
 
 import com.badlogic.citadel.Methods.DialogAlert;
+import com.badlogic.citadel.Methods.ScreenTransitionFade;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.Color;
@@ -62,10 +63,11 @@ public class MainMenuScreen implements Screen {
         table.add(quit).fillX().uniformX();
 
         stage.addActor(table);
+        Screen from = this;
 
         //Les listeners des boutons
         quit.addListener(new ChangeListener() {
-            DialogAlert alertQuit = new DialogAlert(" Are you sure you want to quit ?", PLAIN_JAMES_SKIN);
+            final DialogAlert alertQuit = new DialogAlert(" Are you sure you want to quit ?", PLAIN_JAMES_SKIN);
             @Override
             public void changed(ChangeEvent changeEvent, Actor actor) {
                 alertQuit.button("Yes" , Color.BLACK , new InputListener(){
@@ -91,8 +93,10 @@ public class MainMenuScreen implements Screen {
         newGame.addListener(new ChangeListener() {
             @Override
             public void changed(ChangeEvent changeEvent, Actor actor) {
-                game.changeScreen(Citadel.CHARACTERCREATOR);
+                Screen next = new CharacterCreatorScreen(game);
+                game.setScreen(new ScreenTransitionFade(game,from,next,1f));
             }
+
         });
 
         loadSave.addListener(new ChangeListener() {
@@ -100,7 +104,7 @@ public class MainMenuScreen implements Screen {
                 , PLAIN_JAMES_SKIN);
             @Override
             public void changed(ChangeEvent changeEvent, Actor actor) {
-                //game.changeScreen(Citadel.LOADMENU); //WIP
+                //todo the load save functionnality
                 alertLoadSave.button("Back" , Color.RED , new InputListener(){
                     @Override
                     public boolean touchDown(InputEvent event, float x , float y, int pointer, int button){
@@ -116,7 +120,8 @@ public class MainMenuScreen implements Screen {
         parameters.addListener(new ChangeListener() {
             @Override
             public void changed(ChangeEvent changeEvent , Actor actor) {
-                game.changeScreen(Citadel.PARAMETERS);
+                Screen next = new ParameterScreen(game);
+                game.setScreen(new ScreenTransitionFade(game,from,next,1f));
             }
         });
 

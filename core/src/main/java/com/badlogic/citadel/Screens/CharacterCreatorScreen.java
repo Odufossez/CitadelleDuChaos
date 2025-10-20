@@ -2,6 +2,7 @@ package com.badlogic.citadel.Screens;
 
 import com.badlogic.citadel.Dice;
 import com.badlogic.citadel.Methods.Player;
+import com.badlogic.citadel.Methods.ScreenTransitionFade;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.Color;
@@ -19,6 +20,7 @@ import com.badlogic.gdx.utils.viewport.ScreenViewport;
 public class CharacterCreatorScreen implements Screen {
     Citadel game;
     private Stage stage;
+    private final Screen from = this;
 
     TextButton backButton , rerollButton , goSpellButton;
     Label title , habLabel , endLabel , luckLabel , magicLabel;
@@ -98,7 +100,8 @@ public class CharacterCreatorScreen implements Screen {
             @Override
             public void changed(ChangeEvent event, Actor actor){
                 stage.clear();
-                game.changeScreen(Citadel.MAINMENU);
+                Screen next = new MainMenuScreen(game);
+                game.setScreen(new ScreenTransitionFade(game,from,next,1f));
             }
         });
 
@@ -106,16 +109,19 @@ public class CharacterCreatorScreen implements Screen {
             @Override
             public void changed(ChangeEvent event, Actor actor){
                 stage.clear();
-                game.changeScreen(Citadel.CHARACTERCREATOR);
+                // Régénérer les statistiques
+                game.setScreen(new CharacterCreatorScreen(game));
             }
         });
 
         goSpellButton.addListener(new ChangeListener(){
             @Override
             public void changed(ChangeEvent event, Actor actor){
-                stage.clear();
                 game.player = new Player(habInt,endInt,magicInt,0,luckInt);
-                game.changeScreen(Citadel.SPELLSMENU);
+                System.out.println(game.player);
+                stage.clear();
+                Screen next = new SpellScreen(game);
+                game.setScreen(new ScreenTransitionFade(game,from,next,1f));
             }
         });
 

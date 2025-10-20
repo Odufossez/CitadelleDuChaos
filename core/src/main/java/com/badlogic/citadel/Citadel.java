@@ -22,8 +22,6 @@ public class Citadel extends Game {
     public final static int RULESSCREEN = 8; //TODO
 
     public final static int INTROSCREEN = 10;
-    public final static int EVENT1 = 11;
-    public final static int EVENT2 = 12;
 
     //public BitmapFont titleFont = new BitmapFont(); //todo revoir les fonts
     public static BitmapFont versionFont;
@@ -42,7 +40,6 @@ public class Citadel extends Game {
     //Events screen
     private IntroGameScreen introScreen;
     private AtTheGateGameScreen atTheGateGameScreen;
-    //private Event2GameScreen event2GameScreen;
 
     private AppPreferences appPrefs;
     public static float density;
@@ -59,15 +56,16 @@ public class Citadel extends Game {
         density = Gdx.graphics.getDensity();
 
         //TODO à changer pour la version finale -- player et grimoire virtuel pour les tests
-        player = new Player(1,1,1,1,1);
+        /*player = new Player(1,1,1,1,1);
         player.setCurrentMagic(1);
         player.setCurrentLuck(1);
         player.setCurrentVitality(1);
         SpellBook grim = new SpellBook(1);
         grim.putIn(SpellList.Sorts.HABILITE);
-        atTheGateGameScreen = new AtTheGateGameScreen(this);
-        setScreen(atTheGateGameScreen);
-        //setScreen(menuScreen);
+        introScreen = new IntroGameScreen(this);
+        setScreen(introScreen);*/
+        /*------ fin du temporaire ---*/
+        setScreen(menuScreen);
 
     }
 
@@ -77,61 +75,6 @@ public class Citadel extends Game {
     }
     public Player getPlayer(){ return player ;}
 
-    public void changeScreen(int screen){
-        switch(screen){
-            case MAINMENU:{
-                if (menuScreen == null) menuScreen = new MainMenuScreen(this);
-                this.setScreen(menuScreen);
-                break;
-            }
-            case LOADMENU:{
-                if (loadScreen == null) loadScreen = new LoadSaveScreen(this);
-                this.setScreen(loadScreen);
-                break;
-            }
-            case CHARACTERCREATOR:{
-                cCScreen = new CharacterCreatorScreen(this);
-                this.setScreen(cCScreen);
-                break;
-            }
-            case SPELLSMENU:{
-                spellScreen = new SpellScreen(this);
-                this.setScreen(spellScreen);
-                break;
-            }
-            case INVENTORY:{
-                if (inventoryScreen == null) inventoryScreen = new InventoryScreen(this);
-                this.setScreen(inventoryScreen);
-                break;
-            }
-            case GAMEOVER:{
-                if (gameOverScreen == null) gameOverScreen = new GameOverScreen(this);
-                this.setScreen(gameOverScreen);
-                break;
-            }
-            case PARAMETERS:{
-                if (parameterScreen == null) parameterScreen = new ParameterScreen(this);
-                this.setScreen(parameterScreen);
-                break;
-            }
-            case SUMMARYSCREEN:{
-                if (summaryScreen == null) summaryScreen = new SummaryScreen(this);
-                this.setScreen(summaryScreen);
-                break;
-            }
-
-            case INTROSCREEN:{
-                if (introScreen == null) introScreen = new IntroGameScreen(this);
-                this.setScreen(introScreen);
-                break;
-            }
-
-            case EVENT1:{
-                if (atTheGateGameScreen == null) atTheGateGameScreen = new AtTheGateGameScreen(this);
-                this.setScreen(atTheGateGameScreen);
-            }
-        }
-    }
 
     public void render(){
         super.render();

@@ -1,6 +1,8 @@
 package com.badlogic.citadel.Methods;
 import com.badlogic.citadel.Citadel;
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.scenes.scene2d.InputListener;
+import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.Dialog;
@@ -23,6 +25,17 @@ public class DialogBox extends Dialog {
         setup();
     }
 
+    @Override
+    public Dialog show(Stage stage){
+        super.show(stage);
+        //positionnement bas-centre
+        setPosition(
+            (Gdx.graphics.getWidth() - dialog_width) / 2 ,
+            0
+        );
+        return this;
+    }
+
     void setup(){
         padLeft(dialog_padding);
         padRight(dialog_padding);
@@ -39,7 +52,6 @@ public class DialogBox extends Dialog {
         setModal(true);
         setMovable(false);
         setResizable(false);
-
     }
 
     /**

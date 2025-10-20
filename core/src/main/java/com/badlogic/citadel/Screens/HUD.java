@@ -2,6 +2,7 @@ package com.badlogic.citadel.Screens;
 import com.badlogic.citadel.Citadel;
 import com.badlogic.citadel.Methods.DialogAlert;
 import com.badlogic.citadel.Methods.Player;
+import com.badlogic.citadel.Methods.ScreenTransitionFade;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.Color;
@@ -35,6 +36,7 @@ public class HUD implements Disposable {
     private Table table, tableButtons, hudLayer;
 
     private Label healthLabel, luckLabel, manaLabel;
+
 
     public HUD(Citadel game , Stage stage) {
         this.game = game;
@@ -107,8 +109,7 @@ public class HUD implements Disposable {
         inventoryButton.addListener(new ChangeListener() {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
-                stage.clear();
-                game.changeScreen(Citadel.INVENTORY);
+                //todo faire de l'inventaire comme un dialog alert
             }
         });
 
@@ -120,7 +121,8 @@ public class HUD implements Disposable {
                     @Override
                     public boolean touchDown(InputEvent event, float x , float y, int pointer, int button){
                         stage.clear();
-                        game.changeScreen(Citadel.MAINMENU);
+                        Screen next = new MainMenuScreen(game);
+                        game.setScreen(new ScreenTransitionFade(game,game.getScreen(), next , 1));
                         return true;
                     }
                 });
