@@ -1,25 +1,16 @@
-package com.badlogic.citadel.Screens;
+package com.badlogic.citadel.Screens.OnGameScreens;
 
 import com.badlogic.citadel.Citadel;
-import com.badlogic.citadel.Methods.DialogBox;
-import com.badlogic.citadel.Methods.RedirectionEvent;
+import com.badlogic.citadel.DialogWindows.DialogBox;
 import com.badlogic.citadel.Methods.ScreenTransitionFade;
 import com.badlogic.gdx.ApplicationAdapter;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
-import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.InputListener;
 import com.badlogic.gdx.scenes.scene2d.Stage;
-import com.badlogic.gdx.scenes.scene2d.ui.Dialog;
-import com.badlogic.gdx.scenes.scene2d.ui.Table;
-import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
-import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
-import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
-
-import java.io.IOException;
 
 import static com.badlogic.citadel.Screens.Skins.PLAIN_JAMES_SKIN;
 
@@ -47,6 +38,7 @@ public class IntroGameScreen extends ApplicationAdapter implements Screen {
             " is in sight");
 
         stage.addActor(dialogIntro);
+        dialogIntro.show(stage);
 
     }
 

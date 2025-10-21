@@ -1,4 +1,4 @@
-package com.badlogic.citadel.Methods;
+package com.badlogic.citadel.DialogWindows;
 
 import com.badlogic.citadel.Citadel;
 import com.badlogic.gdx.graphics.Color;

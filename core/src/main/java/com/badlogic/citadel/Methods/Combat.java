@@ -1,5 +1,7 @@
 package com.badlogic.citadel.Methods;
 
+import com.badlogic.citadel.PlayerRelatedMethods.Player;
+
 public class Combat {
     private Player player;
     private Monster monster;

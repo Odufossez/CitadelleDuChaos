@@ -1,4 +1,4 @@
-package com.badlogic.citadel.Methods;
+package com.badlogic.citadel.PlayerRelatedMethods;
 
 public class SpellList {
 

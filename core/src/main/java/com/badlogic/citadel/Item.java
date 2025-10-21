@@ -11,6 +11,11 @@ public class Item implements Comparable{
     protected ArrayList<Integer> usages;
     protected TextButton buttonUse;
 
+    public Item(Items items) {
+        name = items.toString().toLowerCase();
+        numero = items.ordinal();
+    }
+
     public enum Items{
         ALCHEMIST_HEALING_BALM,
         BERRIES,
@@ -19,6 +24,7 @@ public class Item implements Comparable{
         ENCHANTED_THROWING_DAGGER,
         EXOTIC_FRUITS,
         FRUIT_OF_SILENCE,
+        GRASS,
         HALLUCINATING_POTION,
         HOGWEED,
         HOGWEED_ESSENCE,
@@ -27,15 +33,7 @@ public class Item implements Comparable{
         POCKET_MYRIADE,
         RING_OF_SWORDSMANSHIP,
         SLUMBERBERRY,
-        SWORD
-    }
-
-    Item(String name, String description, int numero) {
-        this.name = name;
-        this.description = description;
-        this.numero = numero;
-        this.isDansInventaire = false;
-        this.usages = new ArrayList<>();
+        SWORD;
     }
 
     public String getName() {

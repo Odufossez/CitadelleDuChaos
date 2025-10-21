@@ -1,14 +1,13 @@
 package com.badlogic.citadel.Screens;
 import com.badlogic.citadel.Citadel;
-import com.badlogic.citadel.Methods.DialogAlert;
-import com.badlogic.citadel.Methods.Player;
+import com.badlogic.citadel.DialogWindows.DialogAlert;
+import com.badlogic.citadel.DialogWindows.InventoryDialog;
+import com.badlogic.citadel.PlayerRelatedMethods.Player;
 import com.badlogic.citadel.Methods.ScreenTransitionFade;
+import com.badlogic.citadel.Screens.PregameScreens.MainMenuScreen;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.Color;
-import com.badlogic.gdx.graphics.GL20;
-import com.badlogic.gdx.graphics.OrthographicCamera;
-import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.scenes.scene2d.*;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
@@ -16,11 +15,6 @@ import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.badlogic.gdx.utils.Disposable;
-import com.badlogic.gdx.utils.viewport.FitViewport;
-import com.badlogic.gdx.utils.viewport.ScreenViewport;
-import com.badlogic.gdx.utils.viewport.Viewport;
-
-import javax.swing.*;
 
 public class HUD implements Disposable {
     private final Citadel game;

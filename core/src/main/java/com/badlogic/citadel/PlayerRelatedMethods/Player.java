@@ -1,4 +1,7 @@
-package com.badlogic.citadel.Methods;
+package com.badlogic.citadel.PlayerRelatedMethods;
+
+import com.badlogic.citadel.Item;
+import com.badlogic.citadel.Methods.Combat;
 
 public class Player {
     private  String pseudo; //TODO V1.1
@@ -24,35 +27,49 @@ public class Player {
     public Player(){}
 
     /**
-     * Method that returns a Player with the caracteristics that were passed on parameters
-     * @param p_hability
-     * @param p_vitality
-     * @param p_magic : settles the lenght of the magic book
-     * @param p_gold
-     * @param p_luck
+     * Method that constructs a Player with the characteristics that were passed on parameters
+     * @param p_hability  the ability of the player
+     * @param p_vitality the vitality of the player
+     * @param p_magic  settles the length of the magic book
+     * @param p_gold  the gold of the player
+     * @param p_luck  the luck of the player
      */
     public Player(int p_hability, int p_vitality, int p_magic, int p_gold, int p_luck){
-
-        setAbility(p_hability);
-        setVitality(p_vitality);
+        //Init caractéristiques
         magic = p_magic;
+        currentMagic = magic;
+        ability = p_hability;
+        currentAbility = ability;
+        vitality = p_vitality;
+        currentVit = vitality;
+        luck = p_luck;
+        currentLuck = luck;
+
+        //Init grimoire et inventaire
         grimoire = new SpellBook(magic);
         gold = p_gold;
-        setLuck(p_luck);
+        inventaire = new Inventory();
+        inventaire.putIn(new Item(Item.Items.GRASS)); //item par défaut dans l'inventaire
+
+        //In combat
         setIsInCombat(false);
+
     }
 
-    public void init(int end, int currentVit , int hab , int currentHab , int magic , int currentMagic, int luck ,int gold){
-        setAbility(hab);
-        setVitality(end);
-        this.magic = magic;
+    /**
+     * Init the player with the current stats passed on parameters
+     * @param currentVit
+     * @param currentHab
+     * @param currentMagic
+     * @param currentLuck
+     * @param gold
+     */
+    public void initCurrent(int currentVit, int currentHab , int currentMagic, int currentLuck ,int gold){
         this.currentMagic = currentMagic;
         this.gold = gold;
-        this.luck = luck;
+        this.currentLuck = currentLuck;
         this.currentAbility = currentHab;
         this.currentVit = currentVit;
-        this.currentLuck = currentLuck;
-
     }
 
     public SpellBook getGrimoire() {

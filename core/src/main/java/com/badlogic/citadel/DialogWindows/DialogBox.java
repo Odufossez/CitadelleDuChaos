@@ -1,5 +1,4 @@
-package com.badlogic.citadel.Methods;
-import com.badlogic.citadel.Citadel;
+package com.badlogic.citadel.DialogWindows;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.scenes.scene2d.InputListener;
 import com.badlogic.gdx.scenes.scene2d.Stage;

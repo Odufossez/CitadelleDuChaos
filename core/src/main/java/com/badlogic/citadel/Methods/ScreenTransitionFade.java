@@ -14,7 +14,7 @@ public class ScreenTransitionFade implements Screen {
     private final ShapeRenderer shapeRenderer;
 
     private float alpha = 0f;
-    private float duration = 1f; //durée du fondu en secondes
+    private final float duration; //durée du fondu en secondes
     private boolean fadingOut = true;
     private boolean switched = false;
 

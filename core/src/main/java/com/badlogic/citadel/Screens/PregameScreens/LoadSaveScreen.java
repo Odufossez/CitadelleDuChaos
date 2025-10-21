@@ -1,4 +1,4 @@
-package com.badlogic.citadel.Screens;
+package com.badlogic.citadel.Screens.PregameScreens;
 
 import com.badlogic.gdx.Screen;
 import com.badlogic.citadel.Citadel;

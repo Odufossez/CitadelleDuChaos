@@ -1,7 +1,8 @@
-package com.badlogic.citadel.Screens;
+package com.badlogic.citadel.Screens.PregameScreens;
 
 import com.badlogic.citadel.Citadel;
 import com.badlogic.citadel.Methods.ScreenTransitionFade;
+import com.badlogic.citadel.Screens.Skins;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;

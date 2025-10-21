@@ -1,13 +1,12 @@
-package com.badlogic.citadel.Screens;
+package com.badlogic.citadel.Screens.PregameScreens;
 
 import com.badlogic.citadel.Dice;
-import com.badlogic.citadel.Methods.Player;
+import com.badlogic.citadel.PlayerRelatedMethods.Player;
 import com.badlogic.citadel.Methods.ScreenTransitionFade;
+import com.badlogic.citadel.Screens.Skins;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
-import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
-import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;

@@ -1,13 +1,13 @@
 package com.badlogic.citadel;
 
 import com.badlogic.citadel.Methods.AppPreferences;
-import com.badlogic.citadel.Methods.Player;
-import com.badlogic.citadel.Methods.SpellBook;
-import com.badlogic.citadel.Methods.SpellList;
-import com.badlogic.citadel.Screens.*;
+import com.badlogic.citadel.PlayerRelatedMethods.Player;
+import com.badlogic.citadel.PlayerRelatedMethods.SpellBook;
+import com.badlogic.citadel.PlayerRelatedMethods.SpellList;
+import com.badlogic.citadel.Screens.OnGameScreens.IntroGameScreen;
+import com.badlogic.citadel.Screens.PregameScreens.MainMenuScreen;
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
 public class Citadel extends Game {

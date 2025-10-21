@@ -1,6 +1,6 @@
-package com.badlogic.citadel.Screens;
+package com.badlogic.citadel.Screens.PregameScreens;
 
-import com.badlogic.citadel.Methods.DialogAlert;
+import com.badlogic.citadel.DialogWindows.DialogAlert;
 import com.badlogic.citadel.Methods.ScreenTransitionFade;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;

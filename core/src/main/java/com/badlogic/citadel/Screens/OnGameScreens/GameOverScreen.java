@@ -1,15 +1,12 @@
-package com.badlogic.citadel.Screens;
+package com.badlogic.citadel.Screens.OnGameScreens;
 
 import com.badlogic.citadel.Citadel;
 import com.badlogic.gdx.Screen;
-import com.badlogic.gdx.scenes.scene2d.Stage;
-import com.badlogic.gdx.utils.viewport.ScreenViewport;
 
-public class OnGameScreen implements Screen {
+public class GameOverScreen implements Screen {
+    private Citadel game;
 
-    Citadel game;
-
-    public OnGameScreen(Citadel game) {
+    public GameOverScreen(Citadel game) {
         this.game = game;
     }
 
@@ -19,12 +16,12 @@ public class OnGameScreen implements Screen {
     }
 
     @Override
-    public void render(float delta) {
+    public void render(float v) {
 
     }
 
     @Override
-    public void resize(int width, int height) {
+    public void resize(int i, int i1) {
 
     }
 

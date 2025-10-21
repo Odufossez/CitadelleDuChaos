@@ -1,13 +1,11 @@
-package com.badlogic.citadel.Screens;
+package com.badlogic.citadel.DialogWindows;
 
 import com.badlogic.citadel.Citadel;
 import com.badlogic.citadel.Item;
-import com.badlogic.citadel.Methods.Player;
-import com.badlogic.gdx.scenes.scene2d.Actor;
+import com.badlogic.citadel.PlayerRelatedMethods.Player;
+import com.badlogic.citadel.Screens.Skins;
 import com.badlogic.gdx.scenes.scene2d.InputListener;
-import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.*;
-import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 
 import java.util.ArrayList;
 
@@ -35,7 +33,7 @@ public class InventoryDialog extends Dialog {
             this.text("Inventory is empty.");
         } else {
             for (Item item : ply.getInventory().getInventory()) {
-                add(item.toString()).pad(dialog_padding);
+                add(item.getName()).pad(dialog_padding);
                 row();
             }
         }
@@ -49,6 +47,7 @@ public class InventoryDialog extends Dialog {
         button.padRight(button_pad_h);
 
         getButtonTable().add(button).height(button_height);
+        getButtonTable().row();
     }
 
 

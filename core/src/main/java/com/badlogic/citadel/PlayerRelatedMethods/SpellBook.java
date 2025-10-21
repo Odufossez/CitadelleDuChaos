@@ -1,4 +1,4 @@
-package com.badlogic.citadel.Methods;
+package com.badlogic.citadel.PlayerRelatedMethods;
 
 
 import java.util.Arrays;

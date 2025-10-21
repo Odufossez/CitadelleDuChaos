@@ -1,10 +1,12 @@
-package com.badlogic.citadel.Screens;
+package com.badlogic.citadel.Screens.PregameScreens;
 
 import com.badlogic.citadel.Citadel;
-import com.badlogic.citadel.Methods.DialogAlert;
-import com.badlogic.citadel.Methods.Player;
+import com.badlogic.citadel.DialogWindows.DialogAlert;
+import com.badlogic.citadel.PlayerRelatedMethods.Player;
 import com.badlogic.citadel.Methods.ScreenTransitionFade;
-import com.badlogic.citadel.Methods.SpellList;
+import com.badlogic.citadel.PlayerRelatedMethods.SpellList;
+import com.badlogic.citadel.Screens.OnGameScreens.AtTheGateGameScreen;
+import com.badlogic.citadel.Screens.Skins;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.Color;
