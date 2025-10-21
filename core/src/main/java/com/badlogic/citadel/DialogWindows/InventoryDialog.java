@@ -29,11 +29,11 @@ public class InventoryDialog extends Dialog {
     }
 
     private void create() {
-        if (ply.getInventory() == null){
+        if (ply.getInventory() == null || ply.getInventory().getInventory().isEmpty()){
             this.text("Inventory is empty.");
         } else {
-            for (Item item : ply.getInventory().getInventory()) {
-                add(item.getName()).pad(dialog_padding);
+            for (Item.Items item : ply.getInventory().getInventory()) {
+                add(item.toString().toLowerCase());
                 row();
             }
         }

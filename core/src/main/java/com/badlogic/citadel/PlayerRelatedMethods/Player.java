@@ -49,7 +49,7 @@ public class Player {
         grimoire = new SpellBook(magic);
         gold = p_gold;
         inventaire = new Inventory();
-        inventaire.putIn(new Item(Item.Items.GRASS)); //item par défaut dans l'inventaire
+        inventaire.putIn(Item.Items.GRASS); //item par défaut dans l'inventaire
 
         //In combat
         setIsInCombat(false);
