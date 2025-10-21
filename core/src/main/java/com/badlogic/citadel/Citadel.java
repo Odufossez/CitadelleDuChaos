@@ -36,7 +36,7 @@ public class Citadel extends Game {
         player.setCurrentMagic(9);
         player.setCurrentLuck(10);
         player.setCurrentVitality(15);
-        SpellBook grim = new SpellBook(9);
+        SpellBook grim = player.getGrimoire();
         grim.putIn(SpellList.Sorts.HABILITE);
         grim.putIn(SpellList.Sorts.CHANCE);
         grim.putIn(SpellList.Sorts.ENDURANCE);

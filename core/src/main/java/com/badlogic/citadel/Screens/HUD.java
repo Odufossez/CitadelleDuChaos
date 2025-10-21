@@ -2,6 +2,7 @@ package com.badlogic.citadel.Screens;
 import com.badlogic.citadel.Citadel;
 import com.badlogic.citadel.DialogWindows.DialogAlert;
 import com.badlogic.citadel.DialogWindows.InventoryDialog;
+import com.badlogic.citadel.DialogWindows.SpellBookDialog;
 import com.badlogic.citadel.PlayerRelatedMethods.Player;
 import com.badlogic.citadel.Methods.ScreenTransitionFade;
 import com.badlogic.citadel.Screens.PregameScreens.MainMenuScreen;
@@ -26,7 +27,7 @@ public class HUD implements Disposable {
     private int maxLuck;
     private int mana , maxMana;
 
-    private TextButton inventoryButton, menuButton;
+    private TextButton inventoryButton, menuButton, spellbookButton;
     private Table table, tableButtons, hudLayer;
 
     private Label healthLabel, luckLabel, manaLabel;
@@ -57,6 +58,7 @@ public class HUD implements Disposable {
 
         inventoryButton = new TextButton("Inventory" , skin);
         menuButton = new TextButton("Menu" , skin);
+        spellbookButton = new TextButton("Spellbook" , skin);
 
         table.add(healthLabel).padTop(10);
         table.row();
@@ -65,6 +67,8 @@ public class HUD implements Disposable {
         table.add(manaLabel).padTop(10);
 
         tableButtons.add(inventoryButton).padTop(10);
+        tableButtons.row();
+        tableButtons.add(spellbookButton).padTop(10);
         tableButtons.row();
         tableButtons.add(menuButton).padTop(10);
 
@@ -115,6 +119,23 @@ public class HUD implements Disposable {
                 inventoryDialog.show(stage);
                 bringToFront();
             }
+        });
+
+        spellbookButton.addListener(new ChangeListener() {
+           @Override
+           public void changed(ChangeEvent event, Actor actor) {
+               SpellBookDialog spellBookDialog = new SpellBookDialog(game);
+               spellBookDialog.button("Back", new InputListener(){
+                   @Override
+                   public boolean touchDown(InputEvent event, float x , float y, int pointer, int button){
+                       spellBookDialog.hide();
+                       return true;
+                   }
+               });
+               spellBookDialog.getButtonTable().row();
+               spellBookDialog.show(stage);
+               bringToFront();
+           }
         });
 
         menuButton.addListener(new ChangeListener() {

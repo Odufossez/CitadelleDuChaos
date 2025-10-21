@@ -2,10 +2,12 @@ package com.badlogic.citadel.Methods;
 
 public class Monster {
     private String name;
-    private int habiliy;
+    private int ability;
     private int vitality;
 
-    public Monster() {}
+    public Monster(String name, int a, int v) {
+
+    }
 
     public void setName(String n_name) {
         name = n_name;
@@ -14,15 +16,15 @@ public class Monster {
         return name;
     }
 
-    public void setHability(int n_h) {
-        habiliy = n_h;
+    public void setHability(int n_a) {
+        ability = n_a;
     }
     public void setVitality(int n_v) {
         vitality = n_v;
     }
 
-    public int getHability() {
-        return habiliy;
+    public int getAbility() {
+        return ability;
     }
     public int getVitality() {
         return vitality;
@@ -42,7 +44,7 @@ public class Monster {
     }
 
     public String toString(){
-        return "Monster : " + name + " hab= " + habiliy + " vital=" + vitality;
+        return "Monster : " + name + " hab= " + ability + " vital=" + vitality;
     }
 
 }

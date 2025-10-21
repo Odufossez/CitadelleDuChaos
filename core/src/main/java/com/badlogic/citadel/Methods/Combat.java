@@ -32,10 +32,10 @@ public class Combat {
     }
 
     public int monsterTurn(int attack){
-        return monster.getHability()+attack;
+        return monster.getAbility()+attack;
     }
 
-    public int copyTurn(int attack) { return copyMonster.getHability()+attack; }
+    public int copyTurn(int attack) { return copyMonster.getAbility()+attack; }
 
     public String fight(int monsterAtk , int playerAtk){
         if (monsterTurn(monsterAtk) > playerTurn(playerAtk)){

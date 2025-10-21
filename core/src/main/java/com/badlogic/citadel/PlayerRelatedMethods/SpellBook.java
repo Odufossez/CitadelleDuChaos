@@ -34,7 +34,7 @@ public class SpellBook {
     }
 
     /**
-     * Retire du grimoire le sort passer en paramètre
+     * Retire du grimoire le sort passé en paramètre
      * @param s
      */
     public void removeFrom(SpellList.Sorts s){
@@ -63,8 +63,8 @@ public class SpellBook {
      * @return true si le sort est trouvé, false sinon
      */
     public boolean isInGrimoire(SpellList.Sorts s){
-        for (int i = 0 ; i< grimoire.length ; i++){
-            if (grimoire[i]==s) return true;
+        for (SpellList.Sorts sorts : grimoire) {
+            if (sorts == s) return true;
         }
         return false;
     }
