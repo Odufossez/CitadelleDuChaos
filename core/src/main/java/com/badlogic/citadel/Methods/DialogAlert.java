@@ -15,7 +15,7 @@ public class DialogAlert extends Dialog {
 
     //https://www.catalinmunteanu.com/design-custom-dialog-libgdx.html
 
-    private float dialog_width = (float) (450);
+    private float dialog_width = (float) (600);
     private float dialog_height = (float) (200);
     private final float dialog_padding = (float) (0);
     private final float button_height = (float) (60);

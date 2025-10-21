@@ -109,7 +109,17 @@ public class HUD implements Disposable {
         inventoryButton.addListener(new ChangeListener() {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
-                //todo faire de l'inventaire comme un dialog alert
+                InventoryDialog inventoryDialog = new InventoryDialog(game);
+                inventoryDialog.button("Back", new InputListener(){
+                    @Override
+                    public boolean touchDown(InputEvent event, float x , float y, int pointer, int button){
+                        inventoryDialog.hide();
+                        return true;
+                    }
+                });
+                inventoryDialog.getButtonTable().row();
+                inventoryDialog.show(stage);
+                bringToFront();
             }
         });
 

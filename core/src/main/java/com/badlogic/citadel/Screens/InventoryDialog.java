@@ -1,0 +1,56 @@
+package com.badlogic.citadel.Screens;
+
+import com.badlogic.citadel.Citadel;
+import com.badlogic.citadel.Item;
+import com.badlogic.citadel.Methods.Player;
+import com.badlogic.gdx.scenes.scene2d.Actor;
+import com.badlogic.gdx.scenes.scene2d.InputListener;
+import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.scenes.scene2d.ui.*;
+import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
+
+import java.util.ArrayList;
+
+public class InventoryDialog extends Dialog {
+    Citadel game;
+    private Player ply;
+    private ArrayList<Item> inventory;
+
+    private float dialog_width = (float) (600);
+    private float dialog_height = (float) (1000);
+    private final float dialog_padding = (float) (0);
+    private final float button_height = (float) (60);
+    private final float button_width = (float) (150);
+    private final float button_pad_h = (float) (10);
+
+    public InventoryDialog(Citadel game) {
+        super("Inventory" , Skins.PLAIN_JAMES_SKIN);
+        this.game = game;
+        ply = game.getPlayer();
+        create();
+    }
+
+    private void create() {
+        if (ply.getInventory() == null){
+            this.text("Inventory is empty.");
+        } else {
+            for (Item item : ply.getInventory().getInventory()) {
+                add(item.toString()).pad(dialog_padding);
+                row();
+            }
+        }
+    }
+
+    public void button(String text, InputListener listener){
+        TextButton button = new TextButton(text, Skins.PLAIN_JAMES_SKIN);
+        button.setSize(button_width, (44 * Citadel.density));
+        button.addListener(listener);
+        button.padLeft(button_pad_h);
+        button.padRight(button_pad_h);
+
+        getButtonTable().add(button).height(button_height);
+    }
+
+
+
+}
