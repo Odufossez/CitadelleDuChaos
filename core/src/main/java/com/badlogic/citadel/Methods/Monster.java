@@ -6,7 +6,9 @@ public class Monster {
     private int vitality;
 
     public Monster(String name, int a, int v) {
-
+        this.name = name;
+        this.ability = a;
+        this.vitality = v;
     }
 
     public void setName(String n_name) {
@@ -29,6 +31,7 @@ public class Monster {
     public int getVitality() {
         return vitality;
     }
+
 
     public void isTouchedInCombat() {
         int curVit = this.getVitality();

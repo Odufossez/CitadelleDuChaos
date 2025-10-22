@@ -2,7 +2,7 @@ package com.badlogic.citadel.PlayerRelatedMethods;
 
 public class SpellList {
 
-    //TODO COMPLETER
+    //TODO COMPLETER?
     private static final int[] EVENT_COPIE_CONFORME = {};
     private static final int[] EVENT_FAIBLESSE= {};
     private static final int[] EVENT_FEU = {};
@@ -33,15 +33,15 @@ public class SpellList {
     public static String getName(SpellList.Sorts s){
         return switch (s) {
             case CHANCE -> "Luck";
-            case COPIE_CONFORME -> "Copy";
+            case COPIE_CONFORME -> "Creature Copy";
             case ENDURANCE -> "Stamina";
-            case FAIBLESSE -> "Feabble";
+            case FAIBLESSE -> "Weakness";
             case FEU -> "Fire";
             case FORCE -> "Strength";
             case HABILITE -> "Ability";
             case ILLUSION -> "Illusion";
             case LEVITATION -> "Levitation";
-            case OR_DU_SOT -> "Gold for dummy";
+            case OR_DU_SOT -> "Fool's Gold";
             case PROTECTION -> "Protection";
             case TELEPATHIE -> "Telepathy";
             default -> null;

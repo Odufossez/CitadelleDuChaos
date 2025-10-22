@@ -31,7 +31,7 @@ public class IntroGameScreen extends ApplicationAdapter implements Screen {
     @Override
     public void create() {
 
-        dialogIntro.text("You've been commissioned to go and defeat Baltus The Terrible who's been terrifying the valley for " +
+        dialogIntro.text("You've been commissioned to go and defeat Baltus Dire who's been terrifying the valley for " +
             "8 years. He's planning to invade the Valley before the end of the week and must be stopped.");
 
         dialogIntro2.text("You have been walking for quite some time now and finally, the Citadel of Chaos" +

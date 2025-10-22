@@ -31,7 +31,7 @@ public class SpellBookDialog extends Dialog {
         } else {
             for (SpellList.Sorts sort : ply.getGrimoire().getGrimoire()) {
                 if (sort == null) continue;
-                add(sort.toString().toLowerCase());
+                add(SpellList.getName(sort));
                 row();
             }
         }
