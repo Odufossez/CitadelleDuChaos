@@ -51,9 +51,10 @@ public class AtTheGateGameScreen extends ApplicationAdapter implements Screen {
 
     private final DialogBox dialogBox230 = new DialogBox("Monster Monkey-Head-Hound-Body", PLAIN_JAMES_SKIN); //event 230
     private final DialogBox dialogBox230_1 = new DialogBox("Narrator", PLAIN_JAMES_SKIN);
-    private final DialogBox dialogBox230_OrDuSot = new DialogBox("Narrator", PLAIN_JAMES_SKIN);
+    private final DialogBox dialogBoxOrDuSot = new DialogBox("Narrator", PLAIN_JAMES_SKIN);
 
-    private final DialogBox dialogBox20 = new DialogBox("", PLAIN_JAMES_SKIN); //event 20
+    private final DialogBox dialogBox20 = new DialogBox("Monster Monkey-Head-Hound-Body", PLAIN_JAMES_SKIN); //event 20
+    private final DialogBox dialogBox20_1 = new DialogBox("Narrator", PLAIN_JAMES_SKIN);
 
     public AtTheGateGameScreen(Citadel game){
         this.game = game;
@@ -243,17 +244,17 @@ public class AtTheGateGameScreen extends ApplicationAdapter implements Screen {
             }
         );
         if (game.getPlayer().getGrimoire().isInGrimoire(SpellList.Sorts.OR_DU_SOT)){
-            dialogBox230_1.button("Cast Or Du Sot" , new InputListener() {
+            dialogBox230_1.button("Cast Dummy's Gold" , new InputListener() {
                 public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
-                    DialogAlert alert = new DialogAlert("Do you want to cast Or Du Sot ?" , PLAIN_JAMES_SKIN);
-                    alert.text("    An usage of Or Du Sot will be remove from your spellbook.");
+                    DialogAlert alert = new DialogAlert("Do you want to cast Dummy's Gold ?" , PLAIN_JAMES_SKIN);
+                    alert.text("    An usage of Dummy's Gold will be remove from your spellbook.");
                     alert.button("Yes" , Color.BLACK , new InputListener() {
                         public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
                             game.getPlayer().getGrimoire().removeFrom(SpellList.Sorts.OR_DU_SOT);
                             alert.hide();
                             dialogBox230_1.hide();
-                            stage.addActor(dialogBox230_OrDuSot);
-                            dialogBox230_OrDuSot.show(stage);
+                            stage.addActor(dialogBoxOrDuSot);
+                            dialogBoxOrDuSot.show(stage);
                             hud.bringToFront();
                             return true;
                         }
@@ -273,7 +274,55 @@ public class AtTheGateGameScreen extends ApplicationAdapter implements Screen {
         }
     }
 
-    private void inputPathWanderer(){}
+    private void inputPathWanderer(){
+        dialogBox20.button("Think fast ! " , new InputListener() {
+            public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
+                dialogBox20.hide();
+                stage.addActor(dialogBox20_1);
+                dialogBox20_1.show(stage);
+                hud.bringToFront();
+                return true;
+            }
+        });
+
+        dialogBox20_1.button("Draw my sword and fight" , new InputListener() {
+            public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
+                dialogBox20_1.hide();
+                combat288();
+                return true;
+            }
+        });
+
+        if (game.getPlayer().getGrimoire().isInGrimoire(SpellList.Sorts.OR_DU_SOT)){
+            dialogBox20_1.button("Cast Dummy's Gold" , new InputListener() {
+                public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
+                    DialogAlert alert = new DialogAlert("Do you want to cast Dummy's Gold ?" , PLAIN_JAMES_SKIN);
+                    alert.text("    An usage of Dummy's Gold will be remove from your spellbook.");
+                    alert.button("Yes" , Color.BLACK , new InputListener() {
+                        public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
+                            game.getPlayer().getGrimoire().removeFrom(SpellList.Sorts.OR_DU_SOT);
+                            alert.hide();
+                            dialogBox20_1.hide();
+                            stage.addActor(dialogBoxOrDuSot);
+                            dialogBoxOrDuSot.show(stage);
+                            hud.bringToFront();
+                            return true;
+                        }
+                    });
+                    alert.button("No" , Color.BLACK , new InputListener() {
+                        public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
+                            alert.hide();
+                            hud.bringToFront();
+                            return true;
+                        }
+                    });
+                    alert.show(stage);
+                    hud.bringToFront();
+                    return true;
+                }
+            });
+        }
+    }
 
     private void input() {
         dialogBox1.button("Think about a lie" , new InputListener() {
@@ -342,7 +391,7 @@ public class AtTheGateGameScreen extends ApplicationAdapter implements Screen {
                 dialogBox230.text("You came to earn money uh ? Maybe you can share a bit of your profit !");
                 dialogBox230_1.text("You don't have any money to share... maybe you can trick them ? " +
                     "Or draw your sword and fight.");
-                dialogBox230_OrDuSot.text("You grab a small stone you collected earlier and cast the spell on it.\n" +
+                dialogBoxOrDuSot.text("You grab a small stone you collected earlier and cast the spell on it.\n" +
                     "It turns into a golden nugget you toss to the guards.");
                 dialogBoxEnter.text("The guards yell to open the gate. As it opens, you step through and hear in the" +
                     " distance the two of them tick each other off about who's going to get the golden nugget.");
@@ -359,8 +408,19 @@ public class AtTheGateGameScreen extends ApplicationAdapter implements Screen {
         dialogBox4.button("I am a wanderer,\n looking for hospitality for the night !" , new InputListener() {
             public boolean touchDown(InputEvent event, float x, float y, int pointer, int button){
                 dialogBox4.hide();
+
+                //Les dialogues de cette branche
+                dialogBox20.text("Nobody enters the Black Tower after the night's fall. Go find somewhere else ! ");
+                dialogBox20_1.text("You'll have to think about a new strategy right now. What do you think ?");
+                dialogBoxOrDuSot.text("You grab a small stone you collected earlier and cast the spell on it.\n" +
+                    "It turns into a golden nugget you toss to the guards.");
+                dialogBoxEnter.text("The guards yell to open the gate. As it opens, you step through and hear in the" +
+                    " distance the two of them tick each other off about who's going to get the golden nugget.");
+                /*------------------------------------------------*/
+
                 stage.addActor(dialogBox20);
                 dialogBox20.show(stage);
+                inputPathWanderer();
                 hud.bringToFront();
                 return true;
             }
@@ -371,6 +431,17 @@ public class AtTheGateGameScreen extends ApplicationAdapter implements Screen {
                 dialogBoxEnter.hide();
                 stage.clear();
                 game.setScreen(new IntroGameScreen(game)); //todo change to the next screen
+                return true;
+            }
+        });
+
+        dialogBoxOrDuSot.button("Move on" , new InputListener(){
+            @Override
+            public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
+                dialogBoxOrDuSot.hide();
+                stage.addActor(dialogBoxEnter);
+                dialogBoxEnter.show(stage);
+                hud.bringToFront();
                 return true;
             }
         });
