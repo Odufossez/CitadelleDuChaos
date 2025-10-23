@@ -5,6 +5,7 @@ import com.badlogic.citadel.PlayerRelatedMethods.Player;
 import com.badlogic.citadel.PlayerRelatedMethods.SpellBook;
 import com.badlogic.citadel.PlayerRelatedMethods.SpellList;
 import com.badlogic.citadel.Screens.OnGameScreens.IntroGameScreen;
+import com.badlogic.citadel.Screens.OnGameScreens.TheCourtyardGameScreen;
 import com.badlogic.citadel.Screens.PregameScreens.MainMenuScreen;
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
@@ -46,8 +47,7 @@ public class Citadel extends Game {
         grim.putIn(SpellList.Sorts.TELEPATHIE);
         grim.putIn(SpellList.Sorts.ILLUSION);
         grim.putIn(SpellList.Sorts.FORCE);
-        IntroGameScreen introScreen = new IntroGameScreen(this);
-        setScreen(introScreen);
+        setScreen(new TheCourtyardGameScreen(this));
         /*------ fin du temporaire ---*/
         //setScreen(menuScreen);
 

@@ -1,10 +1,15 @@
 package com.badlogic.citadel.Screens.OnGameScreens;
 
+import com.badlogic.citadel.Citadel;
 import com.badlogic.gdx.ApplicationAdapter;
 import com.badlogic.gdx.Screen;
 
 //218
 public class RhinoDoorGameScreen extends ApplicationAdapter implements Screen {
+    public RhinoDoorGameScreen(Citadel game) {
+
+    }
+
     @Override
     public void show() {
 

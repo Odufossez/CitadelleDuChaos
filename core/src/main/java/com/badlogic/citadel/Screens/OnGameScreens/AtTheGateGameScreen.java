@@ -140,15 +140,13 @@ public class AtTheGateGameScreen extends ApplicationAdapter implements Screen {
         dialogBox261_SecondChance.button("Get lucky" , new InputListener() {
             public boolean touchDown(InputEvent event, float x, float y, int pointer, int button){
                 if (Dice.doubleDice() <= game.getPlayer().getCurrentLuck()){ //chanceux
-                    game.getPlayer().setCurrentLuck(game.getPlayer().getCurrentLuck() - 1); //réduc du point de chance
                     stage.addActor(dialogBox261_Lucky);
                     dialogBox261_Lucky.show(stage);
                 } else { //malchanceux
-                    game.getPlayer().setCurrentLuck(game.getPlayer().getCurrentLuck() - 1); //réduc du point de chance
                     stage.addActor(dialogBox261_Unlucky);
                     dialogBox261_Unlucky.show(stage);
                 }
-
+                game.getPlayer().decreaseLuck();
                 hud.bringToFront();
                 return true;
             }
@@ -716,7 +714,7 @@ public class AtTheGateGameScreen extends ApplicationAdapter implements Screen {
             @Override
             public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
                 getLucky.hide();
-                game.getPlayer().setCurrentLuck(game.getPlayer().getCurrentLuck() - 1); //enlever 1 PL
+                game.getPlayer().decreaseLuck(); //enlever 1 PL
                 DialogAlert getLuckyResult= new DialogAlert("Result");
                 getLuckyResult.text(msgFinal);
                 getLuckyResult.button("Ok" , new InputListener(){
