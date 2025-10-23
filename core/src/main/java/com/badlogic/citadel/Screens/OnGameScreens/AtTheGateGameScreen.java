@@ -430,7 +430,7 @@ public class AtTheGateGameScreen extends ApplicationAdapter implements Screen {
             public boolean touchDown(InputEvent event, float x, float y, int pointer, int button){
                 dialogBoxEnter.hide();
                 stage.clear();
-                game.setScreen(new IntroGameScreen(game)); //todo change to the next screen
+                game.setScreen(new TheCourtyardGameScreen(game));
                 return true;
             }
         });
@@ -466,7 +466,7 @@ public class AtTheGateGameScreen extends ApplicationAdapter implements Screen {
                 public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
                     victoryBox.hide();
                     stage.clear();
-                    game.setScreen(new IntroGameScreen(game)); //todo change to the next screen
+                    game.setScreen(new TheCourtyardGameScreen(game));
                     return true;
                 }
             });
@@ -633,7 +633,7 @@ public class AtTheGateGameScreen extends ApplicationAdapter implements Screen {
                                     @Override
                                     public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
                                         stage.clear();
-                                        game.setScreen(new AtTheGateGameScreen(game)); //todo change to the next screen
+                                        game.setScreen(new TheCourtyardGameScreen(game));
                                         return true;
                                     }
                                 }
