@@ -141,7 +141,7 @@ public class HUD implements Disposable {
         menuButton.addListener(new ChangeListener() {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
-                DialogAlert menuAlert = new DialogAlert("Menu" , Skins.PLAIN_JAMES_SKIN); //TODO pass possible d'ouvrir en double
+                DialogAlert menuAlert = new DialogAlert("Menu"); //TODO pass possible d'ouvrir en double
                 menuAlert.button("Main menu", Color.BLACK, new InputListener(){ //TODO AN "ARE YOU SURE"
                     @Override
                     public boolean touchDown(InputEvent event, float x , float y, int pointer, int button){

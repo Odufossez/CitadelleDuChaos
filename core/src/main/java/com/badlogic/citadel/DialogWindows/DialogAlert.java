@@ -1,12 +1,12 @@
 package com.badlogic.citadel.DialogWindows;
 
 import com.badlogic.citadel.Citadel;
+import com.badlogic.citadel.Screens.Skins;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.scenes.scene2d.InputListener;
 import com.badlogic.gdx.scenes.scene2d.ui.Dialog;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
-import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 
 import static com.badlogic.citadel.Screens.Skins.PLAIN_JAMES_SKIN;
@@ -22,8 +22,8 @@ public class DialogAlert extends Dialog {
     private final float button_width = (float) (150);
     private final float button_pad_h = (float) (10);
 
-    public DialogAlert(String title, Skin skin) {
-        super(title, skin);
+    public DialogAlert(String title) {
+        super(title, Skins.PLAIN_JAMES_SKIN);
         setup();
     }
 

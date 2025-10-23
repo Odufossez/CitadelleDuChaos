@@ -20,7 +20,6 @@ import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Dialog;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
-import static com.badlogic.citadel.Screens.Skins.PLAIN_JAMES_SKIN;
 
 public class AtTheGateGameScreen extends ApplicationAdapter implements Screen {
     Citadel game;
@@ -246,7 +245,7 @@ public class AtTheGateGameScreen extends ApplicationAdapter implements Screen {
         if (game.getPlayer().getGrimoire().isInGrimoire(SpellList.Sorts.OR_DU_SOT)){
             dialogBox230_1.button("Cast Dummy's Gold" , new InputListener() {
                 public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
-                    DialogAlert alert = new DialogAlert("Do you want to cast Dummy's Gold ?" , PLAIN_JAMES_SKIN);
+                    DialogAlert alert = new DialogAlert("Do you want to cast Dummy's Gold ?");
                     alert.text("    An usage of Dummy's Gold will be remove from your spellbook.");
                     alert.button("Yes" , Color.BLACK , new InputListener() {
                         public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
@@ -296,7 +295,7 @@ public class AtTheGateGameScreen extends ApplicationAdapter implements Screen {
         if (game.getPlayer().getGrimoire().isInGrimoire(SpellList.Sorts.OR_DU_SOT)){
             dialogBox20_1.button("Cast Dummy's Gold" , new InputListener() {
                 public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
-                    DialogAlert alert = new DialogAlert("Do you want to cast Dummy's Gold ?" , PLAIN_JAMES_SKIN);
+                    DialogAlert alert = new DialogAlert("Do you want to cast Dummy's Gold ?");
                     alert.text("    An usage of Dummy's Gold will be remove from your spellbook.");
                     alert.button("Yes" , Color.BLACK , new InputListener() {
                         public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
@@ -500,7 +499,7 @@ public class AtTheGateGameScreen extends ApplicationAdapter implements Screen {
 
                     String msg = resolutionTour(scorePlayer , scoreGuard_HM , guard_Hound_Monkey);
                     playerTouched = isPlayerTouched(scorePlayer , scoreGuard_HM);
-                    DialogAlert alert = new DialogAlert(msg , PLAIN_JAMES_SKIN);
+                    DialogAlert alert = new DialogAlert(msg);
 
                     alert.button("Ok" , Color.BLACK, new InputListener(){
                         public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
@@ -534,7 +533,7 @@ public class AtTheGateGameScreen extends ApplicationAdapter implements Screen {
 
                     String msg = resolutionTour(scorePlayer , scoreGuard_MH, guard_Monkey_Hound);
                     playerTouched = isPlayerTouched(scorePlayer , scoreGuard_MH);
-                    DialogAlert alert = new DialogAlert(msg , PLAIN_JAMES_SKIN);
+                    DialogAlert alert = new DialogAlert(msg);
 
                     alert.button("Ok" , Color.BLACK , new InputListener(){
                         public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
@@ -558,7 +557,7 @@ public class AtTheGateGameScreen extends ApplicationAdapter implements Screen {
             fightBox.button("Cast Force" , new InputListener(){
                 @Override
                 public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
-                    DialogAlert alert = new DialogAlert("Do you want to cast Force ?" , PLAIN_JAMES_SKIN);
+                    DialogAlert alert = new DialogAlert("Do you want to cast Force ?");
                     alert.text("    An usage of Force will be remove from your spellbook.");
                     alert.button("Yes" , Color.BLACK , new InputListener() {
                         @Override
@@ -618,7 +617,7 @@ public class AtTheGateGameScreen extends ApplicationAdapter implements Screen {
             fightBox.button("Cast Levitation" , new InputListener(){
                 @Override
                 public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
-                    DialogAlert alert = new DialogAlert("Do you want to cast Levitation ?" , PLAIN_JAMES_SKIN);
+                    DialogAlert alert = new DialogAlert("Do you want to cast Levitation ?");
                     alert.text("    An usage of Levitation will be remove from your spellbook.");
                     alert.button("Yes" , Color.BLACK , new InputListener() {
                         @Override
@@ -711,14 +710,14 @@ public class AtTheGateGameScreen extends ApplicationAdapter implements Screen {
 
         String msgFinal = resultP1 + resultP2;
 
-        DialogAlert getLucky = new DialogAlert(msg , PLAIN_JAMES_SKIN);
+        DialogAlert getLucky = new DialogAlert(msg);
         getLucky.text("You will lose a point of luck by doing this action");
         getLucky.button("Yes" , Color.BLACK, new InputListener(){
             @Override
             public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
                 getLucky.hide();
                 game.getPlayer().setCurrentLuck(game.getPlayer().getCurrentLuck() - 1); //enlever 1 PL
-                DialogAlert getLuckyResult= new DialogAlert("Result" , PLAIN_JAMES_SKIN);
+                DialogAlert getLuckyResult= new DialogAlert("Result");
                 getLuckyResult.text(msgFinal);
                 getLuckyResult.button("Ok" , new InputListener(){
                     @Override

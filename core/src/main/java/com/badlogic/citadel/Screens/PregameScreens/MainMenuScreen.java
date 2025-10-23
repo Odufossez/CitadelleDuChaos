@@ -67,7 +67,7 @@ public class MainMenuScreen implements Screen {
 
         //Les listeners des boutons
         quit.addListener(new ChangeListener() {
-            final DialogAlert alertQuit = new DialogAlert(" Are you sure you want to quit ?", PLAIN_JAMES_SKIN);
+            final DialogAlert alertQuit = new DialogAlert(" Are you sure you want to quit ?");
             @Override
             public void changed(ChangeEvent changeEvent, Actor actor) {
                 alertQuit.button("Yes" , Color.BLACK , new InputListener(){
@@ -101,7 +101,7 @@ public class MainMenuScreen implements Screen {
 
         loadSave.addListener(new ChangeListener() {
             final DialogAlert alertLoadSave = new DialogAlert(" This functionnality is not done yet ! "
-                , PLAIN_JAMES_SKIN);
+            );
             @Override
             public void changed(ChangeEvent changeEvent, Actor actor) {
                 //todo the load save functionnality
