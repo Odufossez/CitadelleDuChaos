@@ -30,31 +30,31 @@ public class AtTheGateGameScreen extends ApplicationAdapter implements Screen {
     private HUD hud;
 
     /*----Dialogues for the current scene (event 1)----*/
-    private final DialogBox dialogBox1 = new DialogBox("Narrator" , PLAIN_JAMES_SKIN);
-    private final DialogBox dialogBox2 = new DialogBox("Narrator" , PLAIN_JAMES_SKIN);
-    private final DialogBox dialogBox3 = new DialogBox("Narrator" , PLAIN_JAMES_SKIN);
-    private final DialogBox dialogBox4 = new DialogBox("Monster Monkey-Head-Hound-Body" , PLAIN_JAMES_SKIN);
+    private final DialogBox dialogBox1 = new DialogBox("Narrator");
+    private final DialogBox dialogBox2 = new DialogBox("Narrator");
+    private final DialogBox dialogBox3 = new DialogBox("Narrator");
+    private final DialogBox dialogBox4 = new DialogBox("Monster Monkey-Head-Hound-Body");
 
     /*----Dialogues for events----*/
-    private final DialogBox dialogBox261 = new DialogBox("Monster Monkey-Head-Hound-Body" , PLAIN_JAMES_SKIN); //évènement 261
-    private final DialogBox dialogBox261_1 = new DialogBox("Narrator", PLAIN_JAMES_SKIN);
-    private final DialogBox dialogBox261_2 = new DialogBox("Monster Monkey-Head-Hound-Body", PLAIN_JAMES_SKIN); //choix multiple de nom
-    private final DialogBox dialogBox261_Wrong = new DialogBox("Monster Monkey-Head-Hound-Body", PLAIN_JAMES_SKIN);
-    private final DialogBox dialogBox261_SecondChance = new DialogBox("Monster Monkey-Head-Hound-Body", PLAIN_JAMES_SKIN);
-    private final DialogBox dialogBox261_Lucky = new DialogBox("Narrator", PLAIN_JAMES_SKIN);
-    private final DialogBox dialogBox261_Unlucky = new DialogBox("Narrator", PLAIN_JAMES_SKIN);
-    private final DialogBox dialogBox261_Kylltrog = new DialogBox("Monster Monkey-Head-Hound-Body", PLAIN_JAMES_SKIN);
-    private final DialogBox dialogBox261_Blag = new DialogBox("Monster Monkey-Head-Hound-Body", PLAIN_JAMES_SKIN);
-    private final DialogBox dialogBox261_Blag2 = new DialogBox("Monster Monkey-Head-Hound-Body", PLAIN_JAMES_SKIN);
+    private final DialogBox dialogBox261 = new DialogBox("Monster Monkey-Head-Hound-Body"); //évènement 261
+    private final DialogBox dialogBox261_1 = new DialogBox("Narrator");
+    private final DialogBox dialogBox261_2 = new DialogBox("Monster Monkey-Head-Hound-Body"); //choix multiple de nom
+    private final DialogBox dialogBox261_Wrong = new DialogBox("Monster Monkey-Head-Hound-Body");
+    private final DialogBox dialogBox261_SecondChance = new DialogBox("Monster Monkey-Head-Hound-Body");
+    private final DialogBox dialogBox261_Lucky = new DialogBox("Narrator");
+    private final DialogBox dialogBox261_Unlucky = new DialogBox("Narrator");
+    private final DialogBox dialogBox261_Kylltrog = new DialogBox("Monster Monkey-Head-Hound-Body");
+    private final DialogBox dialogBox261_Blag = new DialogBox("Monster Monkey-Head-Hound-Body");
+    private final DialogBox dialogBox261_Blag2 = new DialogBox("Monster Monkey-Head-Hound-Body");
 
-    private final DialogBox dialogBoxEnter = new DialogBox("Narrator", PLAIN_JAMES_SKIN);
+    private final DialogBox dialogBoxEnter = new DialogBox("Narrator");
 
-    private final DialogBox dialogBox230 = new DialogBox("Monster Monkey-Head-Hound-Body", PLAIN_JAMES_SKIN); //event 230
-    private final DialogBox dialogBox230_1 = new DialogBox("Narrator", PLAIN_JAMES_SKIN);
-    private final DialogBox dialogBoxOrDuSot = new DialogBox("Narrator", PLAIN_JAMES_SKIN);
+    private final DialogBox dialogBox230 = new DialogBox("Monster Monkey-Head-Hound-Body"); //event 230
+    private final DialogBox dialogBox230_1 = new DialogBox("Narrator");
+    private final DialogBox dialogBoxOrDuSot = new DialogBox("Narrator");
 
-    private final DialogBox dialogBox20 = new DialogBox("Monster Monkey-Head-Hound-Body", PLAIN_JAMES_SKIN); //event 20
-    private final DialogBox dialogBox20_1 = new DialogBox("Narrator", PLAIN_JAMES_SKIN);
+    private final DialogBox dialogBox20 = new DialogBox("Monster Monkey-Head-Hound-Body"); //event 20
+    private final DialogBox dialogBox20_1 = new DialogBox("Narrator");
 
     public AtTheGateGameScreen(Citadel game){
         this.game = game;
@@ -458,7 +458,7 @@ public class AtTheGateGameScreen extends ApplicationAdapter implements Screen {
 
         //si les DEUX monstres sont morts
         if (guard_Hound_Monkey.isDead() && guard_Monkey_Hound.isDead()){
-            DialogBox victoryBox = new DialogBox("Narrator" , PLAIN_JAMES_SKIN);
+            DialogBox victoryBox = new DialogBox("Narrator");
             victoryBox.text("You defeated both monsters ! You lure the third guard by calling him from below and " +
                 "manage your way in the citadel.");
             victoryBox.button("Continue" , new InputListener(){
@@ -483,7 +483,7 @@ public class AtTheGateGameScreen extends ApplicationAdapter implements Screen {
         }
 
         //Le combat se fait normalement
-        DialogBox fightBox = new DialogBox("Choose an action" , PLAIN_JAMES_SKIN);
+        DialogBox fightBox = new DialogBox("Choose an action");
 
         //Chien-Singe
         if (!guard_Hound_Monkey.isDead()){
@@ -566,7 +566,7 @@ public class AtTheGateGameScreen extends ApplicationAdapter implements Screen {
                             game.getPlayer().getGrimoire().removeFrom(SpellList.Sorts.FORCE);
                             alert.hide();
                             fightBox.hide();
-                            DialogBox eventForce = new DialogBox("Narrator" , PLAIN_JAMES_SKIN);
+                            DialogBox eventForce = new DialogBox("Narrator");
                             eventForce.text("You cast Force on yourself and ready yourself for the next fight.\n" +
                                     "But you got so strong, you fail to control yourself and send your sword away. You'll" +
                                     " have to fight bare hands or flee.");
@@ -626,7 +626,7 @@ public class AtTheGateGameScreen extends ApplicationAdapter implements Screen {
                             game.getPlayer().getGrimoire().removeFrom(SpellList.Sorts.LEVITATION);
                             fightBox.hide();
                             alert.hide();
-                            DialogBox eventLevitation = new DialogBox("Narrator" , PLAIN_JAMES_SKIN);
+                            DialogBox eventLevitation = new DialogBox("Narrator");
                             eventLevitation.text("The monsters are stunned as you elevate yourself over the rampart.\n" +
                                 "You just have to hope they will not alert anyone...");
                             eventLevitation.button("Fly away" , new InputListener() {

@@ -1,9 +1,15 @@
 package com.badlogic.citadel.Screens.OnGameScreens;
 
+import com.badlogic.citadel.Citadel;
 import com.badlogic.gdx.ApplicationAdapter;
 import com.badlogic.gdx.Screen;
 
+//362
 public class TempleOfTheCourtyardGameScreen extends ApplicationAdapter implements Screen {
+    public TempleOfTheCourtyardGameScreen(Citadel game) {
+
+    }
+
     @Override
     public void show() {
 

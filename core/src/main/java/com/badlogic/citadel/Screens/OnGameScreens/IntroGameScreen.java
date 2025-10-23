@@ -12,14 +12,12 @@ import com.badlogic.gdx.scenes.scene2d.InputListener;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 
-import static com.badlogic.citadel.Screens.Skins.PLAIN_JAMES_SKIN;
-
 public class IntroGameScreen extends ApplicationAdapter implements Screen {
 
     private final Citadel game;
     private final Stage stage;
-    private final DialogBox dialogIntro = new DialogBox("Narrator" , PLAIN_JAMES_SKIN);
-    private final DialogBox dialogIntro2 = new DialogBox("Narrator" , PLAIN_JAMES_SKIN);
+    private final DialogBox dialogIntro = new DialogBox("Narrator");
+    private final DialogBox dialogIntro2 = new DialogBox("Narrator");
 
     private final Screen from = this;
 

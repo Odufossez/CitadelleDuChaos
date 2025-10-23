@@ -1,9 +1,9 @@
 package com.badlogic.citadel.DialogWindows;
+import com.badlogic.citadel.Screens.Skins;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.scenes.scene2d.InputListener;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
-import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.Dialog;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.utils.Align;
@@ -19,8 +19,8 @@ public class DialogBox extends Dialog {
     private final float button_pad_h = (float)(10);
 
 
-    public DialogBox(String title, Skin skin){
-        super(title, skin);
+    public DialogBox(String title){
+        super(title, PLAIN_JAMES_SKIN);
         setup();
     }
 
