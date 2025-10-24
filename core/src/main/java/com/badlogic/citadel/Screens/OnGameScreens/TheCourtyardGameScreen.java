@@ -7,10 +7,7 @@ import com.badlogic.citadel.Dice;
 import com.badlogic.citadel.Methods.Monster;
 import com.badlogic.citadel.PlayerRelatedMethods.SpellList;
 import com.badlogic.citadel.Screens.HUD;
-import com.badlogic.gdx.ApplicationAdapter;
-import com.badlogic.gdx.Game;
-import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.Screen;
+import com.badlogic.gdx.*;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
@@ -35,7 +32,6 @@ public class TheCourtyardGameScreen extends ApplicationAdapter implements Screen
     DialogBox dialogBox222_Help2 = new DialogBox("Narrator");
     DialogBox dialogBox222_Help3 = new DialogBox("The old man");
     DialogBox dialogBox222_Help4 = new DialogBox("Narrator");
-    DialogBox dialogBox222_Help5 = new DialogBox("Narrator");
     DialogBox dialogBox222_Sword = new DialogBox("Narrator");
     DialogBox dialogBox222_Illusion = new DialogBox("Narrator");
     DialogBox dialogBox222_Protection = new DialogBox("Narrator");
@@ -61,6 +57,31 @@ public class TheCourtyardGameScreen extends ApplicationAdapter implements Screen
     DialogBox dialogBoxFire = new DialogBox("Narrator");
 
     DialogBox dialogBox321 = new DialogBox("Narrator");
+    DialogBox dialogBoxDuo = new DialogBox("Narrator");
+    DialogBox dialogBoxDuo_1 = new DialogBox("Tall man");
+    DialogBox dialogBoxDuo_2 = new DialogBox("Small man");
+    DialogBox dialogBoxDuo_3 = new DialogBox("Narrator");
+    DialogBox dialogBoxDuo_4 = new DialogBox("Tall man");
+    DialogBox dialogBox186 = new DialogBox("Narrator");
+    DialogBox dialogBoxDagger = new DialogBox("Narrator");
+    DialogBox dialogBoxAlive = new DialogBox("Small man");
+    DialogBox dialogBoxDead = new DialogBox("Narrator");
+    DialogBox dialogBox161 = new DialogBox("Narrator");
+    DialogBox dialogBoxWindWomen = new DialogBox("Narrator");
+    DialogBox dialogBoxWindWomen_1 = new DialogBox("Narrator");
+    DialogBox dialogBoxTricked = new DialogBox("Narrator");
+    DialogBox dialogBoxNotTricked = new DialogBox("Narrator");
+    DialogBox dialogBoxChatting = new DialogBox("Narrator");
+    DialogBox dialogBoxWind = new DialogBox("Narrator");
+    DialogBox dialogBoxWind_1 = new DialogBox("Wind Women");
+    DialogBox dialogBoxWind_2 = new DialogBox("Narrator");
+    DialogBox dialogBoxDouble = new DialogBox("Narrator");
+    DialogBox dialogBoxGaz = new DialogBox("Narrator");
+    DialogBox dialogBoxFly = new DialogBox("Narrator");
+    DialogBox dialogBoxLucky390 = new DialogBox("Narrator");
+    DialogBox dialogBoxFireCamp = new DialogBox("Narrator");
+    DialogBox dialogBoxFireCamp_1 = new DialogBox("Narrator");
+    DialogBox dialogBoxFireCamp_2 = new DialogBox("Narrator");
 
     public TheCourtyardGameScreen(Citadel game) {
         this.game = game;
@@ -78,7 +99,7 @@ public class TheCourtyardGameScreen extends ApplicationAdapter implements Screen
     @Override
     public void create() {
         dialogBox1.text("You are standing in the shadow of the rampart surrounding the courtyard." +
-            "How do you want to proceed? You could sneak your way to the next door or rush it.\n" +
+            "How do you want to proceed? You could sneak your way to the next door or cross the courtyard.\n" +
             "Maybe go talk to the bystanders on your left ?");
         dialogBox1.show(stage);
         hud.bringToFront();
@@ -99,12 +120,12 @@ public class TheCourtyardGameScreen extends ApplicationAdapter implements Screen
                 dialogBox222_Help3.text("Thank you. I taught I would die here ! Beware of the Ganjees ! They are really" +
                     " dangerous !");
                 dialogBox222_Help4.text("Suddenly his eyes change and long piercing teeth bite down on your arm.");
-                dialogBox222_Sword.text("You draw your sword but quickly realise the old man is not controlling his actions.\n" +
+                dialogBox222_Sword.text("You draw out your sword but quickly realise the old man is not controlling his actions.\n" +
                     "With mercy, you hit his head with the pommel of you sword. He screams and release you.");
                 dialogBox222_Illusion.text("You concentrate on your arm, he starts to harden and the color change to a \n" +
                     "silver-like tint. The old man seems surprised but no way to get away from him. You'll have to draw\n" +
-                    "your sword and fight.");
-                dialogBox222_Protection.text("The spell has no effect. You have to draw your sword and fight.");
+                    "out your sword and fight.");
+                dialogBox222_Protection.text("The spell has no effect. You have to draw out your sword and fight.");
                 dialogBox222_Weakness.text("The spell works ! His grasp goes slack and he fall to the ground.\n" +
                     "You take some time to recover and patch up your arm before continuing.");
                 dialogBoxTumbling.text("You can't see well in the shadow of the rampart. Suddenly, a tumbling stone makes\n" +
@@ -119,7 +140,7 @@ public class TheCourtyardGameScreen extends ApplicationAdapter implements Screen
             }
         });
 
-        dialogBox1.button("Rush" , new InputListener(){
+        dialogBox1.button("Cross the courtyard\ntowards the monument" , new InputListener(){
             public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
                 dialogBox1.hide();
 
@@ -157,7 +178,44 @@ public class TheCourtyardGameScreen extends ApplicationAdapter implements Screen
             }
         });
 
-        dialogBox1.button("Talk" , new InputListener());
+        dialogBox1.button("Approach the group\naround the fire camp" , new InputListener(){
+            public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
+                dialogBox1.hide();
+
+                //Dialogues de cette branche
+                dialogBoxDuo.text("You come near two individuals that seem to be arguing about the price of a dagger.");
+                dialogBoxDuo_1.text("You can't be serious, it's worth way more. It is magical !");
+                dialogBoxDuo_2.text("Craps ! I am not paying more for that !");
+                dialogBoxDuo_3.text("The tall man grabs your arm, calling you as a witness.");
+                dialogBoxDuo_4.text("You ! Tell us how much that dagger costs !");
+                dialogBoxAlive.text("Well, that old thief is dead now at least. Wanna toss a coin to see who keeps the\n" +
+                    "dagger ?");
+                dialogBoxDead.text("Both of the men are dead. You loot them the dagger and 28 gold pieces");
+                dialogBoxDagger.text("The dagger is a proper work of art. The blade is shining and the handle is in green leather.\n" +
+                    "You put it in your belt and continue your way towards the tower.");
+                dialogBoxWind.text("As you walk, the night's air is fresh. But a little wind rise up and quickly becomes a gust\n" +
+                    "so violent you can't manage to walk forward. You close your eyes waiting for the wind to cease and when\n" +
+                    "you open them back, a women draped in wind is standing in front of you. When she talks, you hear her words\n" +
+                    "a few moments after.");
+                dialogBoxWind_1.text("Are you not a bit aggressive ?");
+                dialogBoxWind_2.text("The women defies you, throwing insults at you. She laughs at you when you draw out\n" +
+                    "your sword.");
+                dialogBoxFireCamp.text("A few creatures sit there around a fire camp. An Orc with green skin hands out\n" +
+                    "paltry portions of meat to everyone. A grumpy Dwarf says he has been left out while a couple of\n" +
+                    "Gobelins hold each other lovingly");
+                dialogBoxFireCamp_1.text("When you approach, they look at you with hostility. As clean as you are, you\n" +
+                    "stand out. The female Goblin murmurs something to her companion and they laugh.");
+                dialogBoxFireCamp_2.text("In front of the dwarf, there is an open small coffer. Inside of it, there is a\n" +
+                    "flask of an unknown liquid. What will you do, sit with them or maybe ask for permission ?");
+
+                /*-----------------------------------------------------*/
+                inputCampFire();
+                stage.addActor(dialogBox321);
+                dialogBox321.show(stage);
+                hud.bringToFront();
+                return true;
+            }
+        });
     }
 
     //222
@@ -255,7 +313,7 @@ public class TheCourtyardGameScreen extends ApplicationAdapter implements Screen
             }
         });
 
-        dialogBox222_Help4.button("Draw your sword" , new InputListener() {
+        dialogBox222_Help4.button("Draw out your sword" , new InputListener() {
             public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
                 dialogBox222_Help4.hide();
                 game.getPlayer().isTouchedInCombat();
@@ -459,6 +517,381 @@ public class TheCourtyardGameScreen extends ApplicationAdapter implements Screen
 
     //321
     public void inputCampFire(){
+        dialogBoxDuo_4.button("5 golden coins" , new InputListener() {
+            public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
+                DialogBox dialogBox = new DialogBox("Tall man");
+                dialogBox.text("What !? It is way too low !");
+                dialogBox.button("Draw out your sword" , new InputListener() {
+                    public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
+                        dialogBox.hide();
+                        combat205();
+                        hud.bringToFront();
+                        return true;
+                    }
+                });
+                dialogBox.show(stage);
+                hud.bringToFront();
+                return true;
+            }
+        });
+        dialogBoxDuo_4.button("8 golden coins" , new InputListener() {
+            public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
+                dialogBoxDuo_4.hide();
+                stage.addActor(dialogBox186);
+                dialogBox186.show(stage);
+                hud.bringToFront();
+                return true;
+            }
+        });
+        dialogBoxDuo_4.button("10 golden coins" , new InputListener() {
+            public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
+                dialogBoxDuo_4.hide();
+                DialogBox dialogBox = new DialogBox("Small man");
+                DialogBox dialogBox2 = new DialogBox("Tall man");
+                dialogBox.text("TEN ? That's way too much. I pass.");
+                dialogBox2.text("Well. That's unfortunate. I can make it 9 pieces for you.");
+                dialogBox.button("Next" , new InputListener() {
+                    public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
+                        dialogBox.hide();
+                        stage.addActor(dialogBox2);
+                        dialogBox2.show(stage);
+                        hud.bringToFront();
+                        return true;
+                    }
+                });
+                if (game.getPlayer().getGrimoire().isInGrimoire(SpellList.Sorts.OR_DU_SOT)) {
+                    dialogBox2.button("Cast Fool's Gold", new InputListener() {
+                        public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
+                            DialogAlert alert = new DialogAlert("Do you want to cast Fool's Gold ?");
+                            alert.text("    An usage of Fool's Gold will be remove from your spellbook.");
+                            alert.button("Yes" , Color.BLACK , new InputListener() {
+                                public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
+                                    alert.hide();
+                                    dialogBox2.hide();
+                                    stage.addActor(dialogBoxDagger);
+                                    dialogBoxDagger.show(stage);
+                                    hud.bringToFront();
+                                    return true;
+                                }
+                            });
+                            alert.button("No" , Color.BLACK , new InputListener(){
+                                public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
+                                    alert.hide();
+                                    hud.bringToFront();
+                                    return true;
+                                }
+                            });
+                            alert.show(stage);
+                            hud.bringToFront();
+                            return true;
+                        }
+                    });
+                }
+                dialogBox2.button("Continue your way" , new InputListener() {
+                    public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
+                        dialogBox2.hide();
+                        stage.addActor(dialogBoxWind);
+                        dialogBoxDuo_4.show(stage);
+                        hud.bringToFront();
+                        return true;
+                    }
+                });
+
+                dialogBox186.show(stage);
+                hud.bringToFront();
+                return true;
+            }
+        });
+        dialogBox186.button("Have a chat with the tall man" , new InputListener() {});
+        dialogBox186.button("Continue your way\nto the tower" , new InputListener() {});
+        if (game.getPlayer().getGrimoire().isInGrimoire(SpellList.Sorts.OR_DU_SOT)){
+            dialogBox186.button("Cast Or Du Sot" , new InputListener() {
+                public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
+                    DialogAlert alert = new DialogAlert("Do you want to cast Or Du Sot ?");
+                    alert.text("    An usage of Or Du Sot will be remove from your spellbook.");
+                    alert.button("Yes" , Color.BLACK , new InputListener() {
+                        public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
+                            game.getPlayer().getGrimoire().removeFrom(SpellList.Sorts.OR_DU_SOT);
+                            dialogBox186.hide();
+                            stage.addActor(dialogBoxDagger);
+                            dialogBoxDagger.show(stage);
+                            return true;
+                        }
+                    });
+                    alert.button("No" , Color.BLACK , new InputListener() {
+                        public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
+                            alert.hide();
+                            hud.bringToFront();
+                            return true;
+                        }
+                    });
+                    alert.show(stage);
+                    hud.bringToFront();
+                    return true;
+                }
+            });
+        }//186
+        dialogBoxDagger.button("Continue" , new InputListener() {
+            public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
+                dialogBoxDagger.hide();
+                stage.addActor(dialogBoxWind);
+                dialogBoxWind.show(stage);
+                hud.bringToFront();
+                return true;
+            }
+        });
+        dialogBoxWind.button("Next", new InputListener() {} );
+        dialogBoxWind_1.button("Draw out your sword" , new InputListener() {
+
+        });
+        dialogBoxWind_2.button("Ignore her" , new InputListener() {});
+        dialogBoxWind_2.button("Talk to her" , new InputListener() {
+            public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
+                DialogBox dialogBox = new DialogBox("Narrator");
+                dialogBox.text("She's playing with you. Every time you get up, she makes you fall.");
+                dialogBox.button("Make her believe you see someone far away on the courtyard that looks like her" , new InputListener() {
+                   public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
+                       dialogBox.hide();
+                       if (game.getPlayer().getCurrentLuck() <= Dice.doubleDice()){ //350
+                           dialogBoxLucky390.text("She says you must be mistaking. But you ended up convincing her and she\n" +
+                               "decides to go see that by herself");
+                           dialogBoxLucky390.button("Take this opportunity to go the tower's door" , new InputListener() {
+                               public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
+                                   dialogBoxLucky390.hide();
+                                   stage.clear();
+                                   game.setScreen(new RhinoDoorGameScreen(game));
+                                   hud.bringToFront();
+                                   return true;
+                               }
+                           });
+                       } else {
+                           dialogBoxLucky390.text("The trick does not work. She laughs it of. You have no choice but to use\n" +
+                               "a spell. Or back away and hide behind the monument.");
+                           if(game.getPlayer().getGrimoire().isInGrimoire(SpellList.Sorts.COPIE_CONFORME)){
+                               dialogBoxLucky390.button("Cast Copy" , new InputListener() {
+                                   DialogAlert alert = new DialogAlert("Do you want to cast Copy ?");
+                                   public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
+                                       alert.text("    An usage of Copy will be remove from your spellbook.");
+                                       alert.button("Yes" , Color.BLACK , new InputListener() {
+                                           public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
+                                               game.getPlayer().getGrimoire().removeFrom(SpellList.Sorts.COPIE_CONFORME);
+                                               alert.hide();
+                                               dialogBoxLucky390.hide();
+                                               stage.addActor(dialogBoxDouble);
+                                               dialogBoxDouble.show(stage);
+                                               hud.bringToFront();
+                                               return true;
+                                           }
+                                       });
+                                       alert.button("No" , Color.BLACK , new InputListener() {
+                                           @Override
+                                           public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
+                                               alert.hide();
+                                               hud.bringToFront();
+                                               return true;
+                                           }
+                                       });
+                                       alert.show(stage);
+                                       hud.bringToFront();
+                                       return true;
+                                   }
+                               });
+                           }
+                           if (game.getPlayer().getGrimoire().isInGrimoire(SpellList.Sorts.ILLUSION)){
+                               dialogBoxLucky390.button("Cast Illusion" , new InputListener() {
+                                   DialogAlert alert = new DialogAlert("Do you want to cast Illusion ?");
+                                   public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
+                                       alert.text("    An usage of Illusion will be remove from your spellbook.");
+                                       alert.button("Yes" , Color.BLACK , new InputListener() {
+                                           public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
+                                               game.getPlayer().getGrimoire().removeFrom(SpellList.Sorts.ILLUSION);
+                                               alert.hide();
+                                               dialogBoxLucky390.hide();
+                                               stage.addActor(dialogBoxGaz);
+                                               dialogBoxGaz.show(stage);
+                                               hud.bringToFront();
+                                               return true;
+                                           }
+                                       });
+                                       alert.button("No", Color.BLACK, new InputListener() {
+                                           public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
+                                               alert.hide();
+                                               hud.bringToFront();
+                                               return true;
+                                           }
+                                       });
+                                       alert.show(stage);
+                                       hud.bringToFront();
+                                       return true;
+                                   }
+                               });
+                           }
+                           if (game.getPlayer().getGrimoire().isInGrimoire(SpellList.Sorts.LEVITATION)){
+                               dialogBoxLucky390.button("Cast Levitation" , new InputListener() {
+                                   DialogAlert alert = new DialogAlert("Do you want to cast Levitation ?");
+                                   public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
+                                       alert.text("    An usage of Levitation will be remove from your spellbook.");
+                                       alert.button("Yes" , Color.BLACK , new InputListener() {
+                                           public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
+                                               game.getPlayer().getGrimoire().removeFrom(SpellList.Sorts.LEVITATION);
+                                               alert.hide();
+                                               dialogBoxLucky390.hide();
+                                               stage.addActor(dialogBoxFly);
+                                               dialogBoxFly.show(stage);
+                                               hud.bringToFront();
+                                               return true;
+                                           }
+                                       });
+                                       alert.button("No" , Color.BLACK , new InputListener() {
+                                           public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
+                                               alert.hide();
+                                               hud.bringToFront();
+                                               return true;
+                                           }
+                                       });
+                                       alert.show(stage);
+                                       hud.bringToFront();
+                                       return true;
+                                   }
+                               });
+                           }
+                           dialogBoxLucky390.button("Go hide\nbehind the monument" , new InputListener() {
+                               public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
+                                   dialogBoxLucky390.hide();
+                                   stage.addActor(dialogBox209);
+                                   dialogBox209.show(stage);
+                                   hud.bringToFront();
+                                   return true;
+                               }
+                           });
+                       }
+                       game.getPlayer().decreaseLuck();
+                       dialogBoxLucky390.show(stage);
+                       hud.bringToFront();
+                       return true;
+                   }
+                });
+                dialogBox.show(stage);
+                hud.bringToFront();
+                return true;
+            }
+        });
+        if (game.getPlayer().getGrimoire().isInGrimoire(SpellList.Sorts.COPIE_CONFORME)){
+            dialogBoxWind_2.button("Cast Copy" , new InputListener() {
+                public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
+                    DialogAlert alert = new DialogAlert("Do you want to cast Copy ?");
+                    alert.text("    An usage of Copy will be remove from your spellbook.");
+                    alert.button("Yes" , Color.BLACK , new InputListener() {
+                        public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
+                            game.getPlayer().getGrimoire().removeFrom(SpellList.Sorts.COPIE_CONFORME);
+                            dialogBoxWind_2.hide();
+                            stage.addActor(dialogBoxDouble);
+                            dialogBoxDouble.show(stage);
+                            return true;
+                        }
+                    });
+                    alert.button("No" , Color.BLACK , new InputListener() {
+                        public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
+                            alert.hide();
+                            hud.bringToFront();
+                            return true;
+                        }
+                    });
+                    alert.show(stage);
+                    hud.bringToFront();
+                    return true;
+                }
+            });
+            dialogBoxDouble.button("Continue" , new InputListener() {
+                public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
+                    dialogBoxDouble.hide();
+                    stage.clear();
+                    game.setScreen(new RhinoDoorGameScreen(game));
+                    hud.bringToFront();
+                    return true;
+                }
+            });
+        }
+        if (game.getPlayer().getGrimoire().isInGrimoire(SpellList.Sorts.ILLUSION)){
+            dialogBoxWind_2.button("Cast Illusion" , new InputListener() {
+                public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
+                    DialogAlert alert = new DialogAlert("Do you want to cast Illusion ?");
+                    alert.text("    An usage of Illusion will be remove from your spellbook.");
+                    alert.button("Yes" , Color.BLACK , new InputListener() {
+                        public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
+                            game.getPlayer().getGrimoire().removeFrom(SpellList.Sorts.ILLUSION);
+                            dialogBoxWind_2.hide();
+                            stage.addActor(dialogBoxGaz);
+                            dialogBoxGaz.show(stage);
+                            hud.bringToFront();
+                            return true;
+                        }
+                    });
+                    alert.button("No" , Color.BLACK , new InputListener() {
+                        public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
+                            alert.hide();
+                            hud.bringToFront();
+                            return true;
+                        }
+                    });
+                    alert.show(stage);
+                    hud.bringToFront();
+                    return true;
+                }
+            });
+            dialogBoxGaz.button("Continue" , new InputListener() {
+                public boolean touchDown(Event event, float x, float y, int pointer, int button) {
+                    dialogBoxGaz.hide();
+                    stage.clear();
+                    game.setScreen(new RhinoDoorGameScreen(game));
+                    hud.bringToFront();
+                    return true;
+                }
+            });
+        }
+        if (game.getPlayer().getGrimoire().isInGrimoire(SpellList.Sorts.LEVITATION)){
+            dialogBoxWind_2.button("Cast Levitate" , new InputListener() {
+                public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
+                    DialogAlert alert = new DialogAlert("Cast Levitate ?");
+                    alert.text("    An usage of Levitate will be remove from your spellbook.");
+                    alert.button("Yes" , Color.BLACK , new InputListener() {
+                        @Override
+                        public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
+                            game.getPlayer().getGrimoire().removeFrom(SpellList.Sorts.LEVITATION);
+                            alert.hide();
+                            dialogBoxWind_2.hide();
+                            stage.addActor(dialogBoxFly);
+                            dialogBoxFly.show(stage);
+                            hud.bringToFront();
+                            return true;
+                        }
+                    });
+                    alert.button("No" , Color.BLACK , new InputListener() {
+                        public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
+                            alert.hide();
+                            hud.bringToFront();
+                            return true;
+                        }
+                    });
+                    alert.show(stage);
+                    hud.bringToFront();
+                    return true;
+                }
+            });
+            dialogBoxFly.button("Continue" , new InputListener() {
+                public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
+                    dialogBoxFly.hide();
+                    stage.clear();
+                    game.setScreen(new RhinoDoorGameScreen(game));
+                    return true;
+                }
+            });
+        }
+
+        dialogBoxFireCamp.button("Approach" , new InputListener() {});
+        dialogBoxFireCamp_1.button("Look at them" , new InputListener() {});
+        dialogBoxFireCamp_2.button("Sit down" , new InputListener() {});
+        dialogBoxFireCamp_2.button("Ask for permission to sit down" , new InputListener() {});
 
     }
 
@@ -529,9 +962,24 @@ public class TheCourtyardGameScreen extends ApplicationAdapter implements Screen
         });
         dialogBox378_2.button("Jump behind the monument to take cover" , new InputListener() {
             public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
-               dialogBox378_2.hide();
-               stage.addActor(dialogBox209);
-               dialogBox209.show(stage);
+               DialogAlert alert = new DialogAlert("You have lost 4 HP !");
+               alert.button("Ok" , Color.BLACK ,new InputListener() {
+                   public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
+                       alert.hide();
+                       dialogBox378_2.hide();
+                       System.out.println("Touch dialogBox378_2");
+                       game.getPlayer().setCurrentVitality(game.getPlayer().getCurrentVitality() - 4);
+                       if (game.getPlayer().isDead()) {
+                           stage.clear();
+                           game.setScreen(new GameOverScreen(game));
+                       }
+                       stage.addActor(dialogBox209);
+                       dialogBox209.show(stage);
+                       hud.bringToFront();
+                       return true;
+                   }
+               });
+               alert.show(stage);
                hud.bringToFront();
                return true;
             }
@@ -670,7 +1118,7 @@ public class TheCourtyardGameScreen extends ApplicationAdapter implements Screen
                 return true;
             }
         });
-        dialogBoxLevitation_1.button("Draw my sword" , new InputListener() {
+        dialogBoxLevitation_1.button("Draw out my sword" , new InputListener() {
             public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
                 dialogBoxLevitation_1.hide();
                 combat71();
@@ -699,9 +1147,7 @@ public class TheCourtyardGameScreen extends ApplicationAdapter implements Screen
                     return true;
                 }
             });
-        }
-
-        dialogBoxFire.button("Go to the tower's door" , new InputListener() {
+            dialogBoxFire.button("Go to the tower's door" , new InputListener() {
             public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
                 dialogBoxFire.hide();
                 stage.clear();
@@ -710,6 +1156,7 @@ public class TheCourtyardGameScreen extends ApplicationAdapter implements Screen
                 return true;
             }
         });
+        }
     }
 
     private void combat71(){
@@ -759,7 +1206,7 @@ public class TheCourtyardGameScreen extends ApplicationAdapter implements Screen
 
         //exécution du combat
         DialogBox fightBox = new DialogBox("Choose an action");
-        DialogBox tentacleCrawl = setupTentacleCrawl(monster, cptTour);
+        DialogBox tentacleCrawl = setupTentacleCrawl(monster,cptTour);
 
         fightBox.button("Attack", new InputListener() {
             public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
@@ -769,7 +1216,7 @@ public class TheCourtyardGameScreen extends ApplicationAdapter implements Screen
 
                 if (scorePlayer<monster.getAbility()){
                     alert.text("You did not harm the tentacle.");
-                    alert.button("Continue" , new InputListener() {
+                    alert.button("Continue" , Color.BLACK, new InputListener() {
                        public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
                            alert.hide();
                            tentacleCrawl.show(stage);
@@ -780,7 +1227,7 @@ public class TheCourtyardGameScreen extends ApplicationAdapter implements Screen
                 } else {
                     monster.isTouchedInCombat();
                     alert.text("You harm the tentacle.");
-                    alert.button("Continue" , new InputListener() {
+                    alert.button("Continue", Color.BLACK , new InputListener() {
                         public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
                             alert.hide();
                             showCombatDialogBox(monster,cptTour);
@@ -801,9 +1248,11 @@ public class TheCourtyardGameScreen extends ApplicationAdapter implements Screen
                 escapeBox.text("You try to escape the Grey Tentacle.\n" +
                     "But it does not work.");
                 escapeBox.button("Continue" , new InputListener() {
-                    public boolean touchDown(Event event, float x, float y, int pointer, int button) {
+                    public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
                         escapeBox.hide();
+                        stage.addActor(tentacleCrawl);
                         tentacleCrawl.show(stage);
+                        hud.bringToFront();
                         return true;
                     }
                 });
@@ -821,10 +1270,12 @@ public class TheCourtyardGameScreen extends ApplicationAdapter implements Screen
     public DialogBox setupTentacleCrawl(Monster monster, int cptTour){
         DialogBox tentacleCrawl = new DialogBox("Grey Tentacle");
         DialogAlert alert = new DialogAlert("Do you want to crawl ?");
+
         alert.text("You have " + (4-cptTour+1) + " round left to get away" );
         alert.button("Ok" , Color.BLACK , new InputListener() {
             public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
                 alert.hide();
+                showCombatDialogBox(monster, cptTour + 1);
                 return true;
             }
         });
@@ -834,12 +1285,19 @@ public class TheCourtyardGameScreen extends ApplicationAdapter implements Screen
             public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
                 alert.show(stage);
                 tentacleCrawl.hide();
-                showCombatDialogBox(monster, cptTour + 1);
                 hud.bringToFront();
                 return true;
             }
         });
         return tentacleCrawl;
+    }
+
+    private void combat205(){
+
+    }
+
+    private void showDialogBox205(){
+
     }
 
     /*--------- MÉTHODES DE SCREEN ----------*/
@@ -853,7 +1311,7 @@ public class TheCourtyardGameScreen extends ApplicationAdapter implements Screen
         stage.act(Math.min(Gdx.graphics.getDeltaTime(), 1 / 30f));
         game.batch.begin();
         BitmapFont font = new BitmapFont();
-        font.draw(game.batch, "In front of the gate" , Gdx.graphics.getWidth()*0.25f, Gdx.graphics.getHeight()*0.3f);
+        font.draw(game.batch, "In the courtyard" , Gdx.graphics.getWidth()*0.25f, Gdx.graphics.getHeight()*0.3f);
         game.batch.end();
         stage.draw();
     }
