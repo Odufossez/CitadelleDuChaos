@@ -5,6 +5,7 @@ import com.badlogic.citadel.DialogWindows.DialogAlert;
 import com.badlogic.citadel.DialogWindows.DialogBox;
 import com.badlogic.citadel.Dice;
 import com.badlogic.citadel.Item;
+import com.badlogic.citadel.Methods.Combat;
 import com.badlogic.citadel.Methods.Monster;
 import com.badlogic.citadel.PlayerRelatedMethods.SpellList;
 import com.badlogic.citadel.Screens.HUD;
@@ -484,7 +485,7 @@ public class AtTheGateGameScreen extends ApplicationAdapter implements Screen {
 
         //Chien-Singe
         if (!guard_Hound_Monkey.isDead()){
-            fightBox.button("Attack"+guard_Hound_Monkey.getName() , new InputListener(){
+            fightBox.button("Attack "+guard_Hound_Monkey.getName() , new InputListener(){
                 int scorePlayer;
                 int scoreGuard_HM;
                 int playerTouched = 0;
@@ -495,8 +496,8 @@ public class AtTheGateGameScreen extends ApplicationAdapter implements Screen {
 
                     fightBox.hide();
 
-                    String msg = resolutionTour(scorePlayer , scoreGuard_HM , guard_Hound_Monkey);
-                    playerTouched = isPlayerTouched(scorePlayer , scoreGuard_HM);
+                    String msg = Combat.resolutionTour(scorePlayer,scoreGuard_HM,guard_Hound_Monkey,game);
+                    playerTouched = Combat.isPlayerTouched(scorePlayer , scoreGuard_HM);
                     DialogAlert alert = new DialogAlert(msg);
 
                     alert.button("Ok" , Color.BLACK, new InputListener(){
@@ -507,7 +508,7 @@ public class AtTheGateGameScreen extends ApplicationAdapter implements Screen {
                         }
                     });
                     if (playerTouched !=0){
-                        displayAlertTouch(playerTouched,alert,guard_Hound_Monkey);
+                        Combat.displayAlertTouch(playerTouched, stage , game, hud);
                         playerTouched = 0;
                     }
                     alert.show(stage);
@@ -518,7 +519,7 @@ public class AtTheGateGameScreen extends ApplicationAdapter implements Screen {
         }
         //Singe-Chien
         if (!guard_Monkey_Hound.isDead()){
-            fightBox.button("Attack" + guard_Monkey_Hound.getName() , new InputListener(){
+            fightBox.button("Attack " + guard_Monkey_Hound.getName() , new InputListener(){
                 int scorePlayer;
                 int scoreGuard_MH;
                 int playerTouched = 0;
@@ -529,8 +530,8 @@ public class AtTheGateGameScreen extends ApplicationAdapter implements Screen {
 
                     fightBox.hide();
 
-                    String msg = resolutionTour(scorePlayer , scoreGuard_MH, guard_Monkey_Hound);
-                    playerTouched = isPlayerTouched(scorePlayer , scoreGuard_MH);
+                    String msg = Combat.resolutionTour(scorePlayer,scoreGuard_MH,guard_Monkey_Hound,game);
+                    playerTouched = Combat.isPlayerTouched(scorePlayer , scoreGuard_MH);
                     DialogAlert alert = new DialogAlert(msg);
 
                     alert.button("Ok" , Color.BLACK , new InputListener(){
@@ -541,7 +542,7 @@ public class AtTheGateGameScreen extends ApplicationAdapter implements Screen {
                         }
                     });
                     if (playerTouched !=0){
-                        displayAlertTouch(playerTouched,alert,guard_Monkey_Hound);
+                        Combat.displayAlertTouch(playerTouched, stage , game, hud);
                         playerTouched = 0;
                     }
                     alert.show(stage);
@@ -661,84 +662,6 @@ public class AtTheGateGameScreen extends ApplicationAdapter implements Screen {
         hud.bringToFront();
     }
 
-    private int isPlayerTouched(int playerScore, int monsterScore){
-        if (playerScore == monsterScore){
-            return 0;
-        }
-        if (playerScore > monsterScore){
-            return 2;
-        }
-        return 1;
-    }
-
-    private String resolutionTour(int playerScore , int monsterScore , Monster monster){
-        String msg = "The " + monster.getName();
-        if(playerScore == monsterScore){
-            msg +=  " and you pared your hits !\nNobody was hurt.";
-        } else if (playerScore > monsterScore) {
-            msg += " took 2 damage from your hit !";
-            monster.isTouchedInCombat();
-        } else {
-            msg += " hits you for 2 damage !";
-            game.getPlayer().isTouchedInCombat();
-        }
-        return msg;
-    }
-
-    private void displayAlertTouch(int playerTouched, DialogAlert alert, Monster monster){
-        String msg ="";
-        String resultP1 = ""; //lucky or not
-        String resultP2 = ""; //who is hit
-
-        if (playerTouched==1){
-            msg = "Will you taunt the devil to take less damage ? ";
-            resultP2 = " were hit for 1 less damage.";
-
-        } else {
-            msg = "Will you taunt the devil to make more damage ? ";
-            resultP2 = " hit the monster for 1 more damage";
-        }
-
-        boolean lucky = Dice.doubleDice() <= game.getPlayer().getCurrentLuck(); //true = lucky
-        if (lucky){
-            resultP1 = " You got lucky and ";
-        } else {
-            resultP1 = " You lost your bet and ";
-        }
-
-        String msgFinal = resultP1 + resultP2;
-
-        DialogAlert getLucky = new DialogAlert(msg);
-        getLucky.text("You will lose a point of luck by doing this action");
-        getLucky.button("Yes" , Color.BLACK, new InputListener(){
-            @Override
-            public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
-                getLucky.hide();
-                game.getPlayer().decreaseLuck(); //enlever 1 PL
-                DialogAlert getLuckyResult= new DialogAlert("Result");
-                getLuckyResult.text(msgFinal);
-                getLuckyResult.button("Ok" , new InputListener(){
-                    @Override
-                    public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
-                        getLuckyResult.hide();
-                        return true;
-                    }
-                });
-                stage.addActor(getLuckyResult);
-                getLuckyResult.show(stage);
-                hud.bringToFront();
-                return true;
-            }
-        });
-        getLucky.button("No" , Color.BLACK, new InputListener(){
-            @Override
-            public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
-                getLucky.hide();
-                return true;
-            }
-        });
-
-    }
 
 
     //Méthodes de screens

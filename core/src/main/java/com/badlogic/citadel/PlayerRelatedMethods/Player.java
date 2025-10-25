@@ -1,7 +1,6 @@
 package com.badlogic.citadel.PlayerRelatedMethods;
 
 import com.badlogic.citadel.Item;
-import com.badlogic.citadel.Methods.Combat;
 
 public class Player {
     private  String pseudo; //TODO V1.1
@@ -18,7 +17,6 @@ public class Player {
     private  int currentEvent;
     private  int indiceSave;
     private boolean isInCombat;
-    private Combat combat;
     private Inventory inventaire;
 
     /**
@@ -207,16 +205,11 @@ public class Player {
     public boolean getIsInCombat(){
         return isInCombat;
     }
-    public void setIsInCombat(boolean state, Combat cmb){
-        this.isInCombat = state;
-        this.combat = cmb;
-    }
+
     public void setIsInCombat(boolean state){
         this.isInCombat = state;
     }
-    public Combat getCombat(){
-        return combat;
-    }
+
 
 
 

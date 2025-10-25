@@ -4,6 +4,8 @@ import com.badlogic.citadel.Citadel;
 import com.badlogic.citadel.DialogWindows.DialogAlert;
 import com.badlogic.citadel.DialogWindows.DialogBox;
 import com.badlogic.citadel.Dice;
+import com.badlogic.citadel.Item;
+import com.badlogic.citadel.Methods.Combat;
 import com.badlogic.citadel.Methods.Monster;
 import com.badlogic.citadel.PlayerRelatedMethods.SpellList;
 import com.badlogic.citadel.Screens.HUD;
@@ -16,8 +18,6 @@ import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.InputListener;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
-
-import java.awt.*;
 
 //251
 public class TheCourtyardGameScreen extends ApplicationAdapter implements Screen {
@@ -66,7 +66,8 @@ public class TheCourtyardGameScreen extends ApplicationAdapter implements Screen
     DialogBox dialogBoxDagger = new DialogBox("Narrator");
     DialogBox dialogBoxAlive = new DialogBox("Small man");
     DialogBox dialogBoxDead = new DialogBox("Narrator");
-    DialogBox dialogBox161 = new DialogBox("Narrator");
+    DialogBox dialogBox161 = new DialogBox("Narrrator");
+    DialogBox dialogBox161_1 = new DialogBox("Narrator");
     DialogBox dialogBoxWindWomen = new DialogBox("Narrator");
     DialogBox dialogBoxWindWomen_1 = new DialogBox("Narrator");
     DialogBox dialogBoxTricked = new DialogBox("Narrator");
@@ -82,6 +83,10 @@ public class TheCourtyardGameScreen extends ApplicationAdapter implements Screen
     DialogBox dialogBoxFireCamp = new DialogBox("Narrator");
     DialogBox dialogBoxFireCamp_1 = new DialogBox("Narrator");
     DialogBox dialogBoxFireCamp_2 = new DialogBox("Narrator");
+    DialogBox dialogBoxSitDown = new DialogBox("Narrator");
+    DialogBox dialogBoxSitDown_1 = new DialogBox("Orc");
+    DialogBox dialogBoxSitDown_2 = new DialogBox("Narrator");
+    DialogBox dialogBoxSitDown_3 = new DialogBox("Narrator");
 
     public TheCourtyardGameScreen(Citadel game) {
         this.game = game;
@@ -99,7 +104,7 @@ public class TheCourtyardGameScreen extends ApplicationAdapter implements Screen
     @Override
     public void create() {
         dialogBox1.text("You are standing in the shadow of the rampart surrounding the courtyard." +
-            "How do you want to proceed? You could sneak your way to the next door or cross the courtyard.\n" +
+            "How do you want to proceed? You could sneak your way to the next door or cross the courtyard." +
             "Maybe go talk to the bystanders on your left ?");
         dialogBox1.show(stage);
         hud.bringToFront();
@@ -112,7 +117,7 @@ public class TheCourtyardGameScreen extends ApplicationAdapter implements Screen
                 dialogBox1.hide();
 
                 //Les dialogues de cette branche
-                dialogBox222.text("As you scoot your way to the door along the rampart, you see a man lying down.\n" +
+                dialogBox222.text("As you scoot your way to the door along the rampart, you see a man lying down." +
                     "His voice low, but he is asking for help. He seems to be suffering. What to do ?");
                 dialogBox222_Help.text("It is an old man. Seems a mass has hit him on the head. You don't have any healing" +
                     " potion or remedy but you could try an other way. Or move on.");
@@ -120,15 +125,15 @@ public class TheCourtyardGameScreen extends ApplicationAdapter implements Screen
                 dialogBox222_Help3.text("Thank you. I taught I would die here ! Beware of the Ganjees ! They are really" +
                     " dangerous !");
                 dialogBox222_Help4.text("Suddenly his eyes change and long piercing teeth bite down on your arm.");
-                dialogBox222_Sword.text("You draw out your sword but quickly realise the old man is not controlling his actions.\n" +
-                    "With mercy, you hit his head with the pommel of you sword. He screams and release you.");
-                dialogBox222_Illusion.text("You concentrate on your arm, he starts to harden and the color change to a \n" +
-                    "silver-like tint. The old man seems surprised but no way to get away from him. You'll have to draw\n" +
+                dialogBox222_Sword.text("You draw out your sword but quickly realise the old man is not controlling his actions." +
+                    " With mercy, you hit his head with the pommel of you sword. He screams and release you.");
+                dialogBox222_Illusion.text("You concentrate on your arm, he starts to harden and the color change to a " +
+                    "silver-like tint. The old man seems surprised but no way to get away from him. You'll have to draw " +
                     "out your sword and fight.");
                 dialogBox222_Protection.text("The spell has no effect. You have to draw out your sword and fight.");
-                dialogBox222_Weakness.text("The spell works ! His grasp goes slack and he fall to the ground.\n" +
+                dialogBox222_Weakness.text("The spell works ! His grasp goes slack and he fall to the ground." +
                     "You take some time to recover and patch up your arm before continuing.");
-                dialogBoxTumbling.text("You can't see well in the shadow of the rampart. Suddenly, a tumbling stone makes\n" +
+                dialogBoxTumbling.text("You can't see well in the shadow of the rampart. Suddenly, a tumbling stone makes" +
                     " you lose your balance and you are dangerously staggering close to a well.");
                 /*--------------------------------------------------------*/
 
@@ -145,29 +150,29 @@ public class TheCourtyardGameScreen extends ApplicationAdapter implements Screen
                 dialogBox1.hide();
 
                 //Les dialogues de cette branche
-                dialogBox179.text("You step out of the shadow towards the center of the courtyard when you hear someone shout\n" +
+                dialogBox179.text("You step out of the shadow towards the center of the courtyard when you hear someone shout " +
                     "'Halt! Stop moving !'");
                 dialogBox179_1.text("You try and fail to see who shout.");
-                dialogBox179_2.text("Once again, you hear someone shouting but this time an arrow hiss through the air and\n" +
+                dialogBox179_2.text("Once again, you hear someone shouting but this time an arrow hiss through the air and " +
                     "sticks into the ground right next to your left feet.");
                 dialogBox179_3.text("You still fail to see anything. Your enemy is invisible. You have to do something.");
                 dialogBox378.text("You take a couple steps and an arrow stucks into the ground next to your foot.");
                 dialogBox378_1.text("Another steps and an arrow rips your coat and catch your arm.");
                 dialogBox378_2.text("Another steps and an arrow stucks right into your calf. You shout in pain.");
-                dialogBoxGetLucky125.text("Fingers crossed, you rush at full speed towards the monument. Maybe they will\n" +
+                dialogBoxGetLucky125.text("Fingers crossed, you rush at full speed towards the monument. Maybe they will " +
                     "not touch you if you run fast enough.");
-                dialogBox341.text("You cast Protection on yourself and move forward. Four or five arrows hiss and crash\n" +
+                dialogBox341.text("You cast Protection on yourself and move forward. Four or five arrows hiss and crash " +
                     "on the shield and you manage to reach the monument unharmed.");
-                dialogBox209.text("You take a look at the rather odd structure. It is not a fountain but a sort of temple.\n" +
+                dialogBox209.text("You take a look at the rather odd structure. It is not a fountain but a sort of temple. " +
                     "There is a door on the side. Might be worth a look, or maybe you prefer to continue on your way to the tower.");
-                dialogBoxGreyTentacle.text("Walking the courtyard, you walk along a lump that seems to connect the temple\n" +
+                dialogBoxGreyTentacle.text("Walking the courtyard, you walk along a lump that seems to connect the temple " +
                     "to the tower; like a canalisation right under the dirt.");
-                dialogBoxGreyTentacle_1.text("You examine it closer, maybe it is just a mole gallery ? But when you touch it\n" +
+                dialogBoxGreyTentacle_1.text("You examine it closer, maybe it is just a mole gallery ? But when you touch it, " +
                     "it retracts and a grey tentacle appears from the ground and grab you by the leg.");
-                dialogBoxLevitation.text("You cast Levitation and start to float. The tentacle goes up in the air with you\n" +
+                dialogBoxLevitation.text("You cast Levitation and start to float. The tentacle goes up in the air with you " +
                     "and your leg starts to hurt tremendously.");
                 dialogBoxLevitation_1.text("No other choices now but to fight or cast another spell.");
-                dialogBoxFire.text("You cast Fire and the tentacle starts to tremble and release your leg before retreat\n" +
+                dialogBoxFire.text("You cast Fire and the tentacle starts to tremble and release your leg before retreat " +
                     "below the dirt. You rub your numb leg and resume your way towards the tower.");
                 /*------------------------------------------------------*/
                 inputArrows();
@@ -183,30 +188,46 @@ public class TheCourtyardGameScreen extends ApplicationAdapter implements Screen
                 dialogBox1.hide();
 
                 //Dialogues de cette branche
+                dialogBox321.text("You sneak along the rampart, cautiously to avoid being seen. There is two groups of creatures. " +
+                    "On the right two humans chatting below a torch fixed on the wall. On the left, four creatures of different " +
+                    "species are eating around a wood fire camp. Which one would you like to talk to ?");
                 dialogBoxDuo.text("You come near two individuals that seem to be arguing about the price of a dagger.");
                 dialogBoxDuo_1.text("You can't be serious, it's worth way more. It is magical !");
                 dialogBoxDuo_2.text("Craps ! I am not paying more for that !");
                 dialogBoxDuo_3.text("The tall man grabs your arm, calling you as a witness.");
                 dialogBoxDuo_4.text("You ! Tell us how much that dagger costs !");
-                dialogBoxAlive.text("Well, that old thief is dead now at least. Wanna toss a coin to see who keeps the\n" +
+                dialogBoxAlive.text("Well, that old thief is dead now at least. Wanna toss a coin to see who keeps the " +
                     "dagger ?");
                 dialogBoxDead.text("Both of the men are dead. You loot them the dagger and 28 gold pieces");
-                dialogBoxDagger.text("The dagger is a proper work of art. The blade is shining and the handle is in green leather.\n" +
+                dialogBoxDagger.text("The dagger is a proper work of art. The blade is shining and the handle is in green leather. " +
                     "You put it in your belt and continue your way towards the tower.");
-                dialogBoxWind.text("As you walk, the night's air is fresh. But a little wind rise up and quickly becomes a gust\n" +
-                    "so violent you can't manage to walk forward. You close your eyes waiting for the wind to cease and when\n" +
-                    "you open them back, a women draped in wind is standing in front of you. When she talks, you hear her words\n" +
+                dialogBoxChatting.text("The man is a merchant, you talk with him about prices and trade. He informs you " +
+                    "he has never been on the stories of the Black Tower ever because they despise merchants.");
+                dialogBox186.text("The tall man agrees, the small one tries to bargain 6 then 7 golds." +
+                    "You can offer him 8 golds for it yourself before the small man takes it for himself. In that case, " +
+                    "you can have a chat with the tall man or just continue on your way.");
+                dialogBox161.text("She's upset by your indifference. She makes you fall and even you try to crawl, she's" +
+                    " always standing in front of you.");
+                dialogBoxWind.text("As you walk, the night's air is fresh. But a little wind rise up and quickly becomes a gust " +
+                    "so violent you can't manage to walk forward. You close your eyes waiting for the wind to cease and when " +
+                    "you open them back, a women draped in wind is standing in front of you. When she talks, you hear her words " +
                     "a few moments after.");
                 dialogBoxWind_1.text("Are you not a bit aggressive ?");
-                dialogBoxWind_2.text("The women defies you, throwing insults at you. She laughs at you when you draw out\n" +
+                dialogBoxWind_2.text("The women defies you, throwing insults at you. She laughs at you when you draw out " +
                     "your sword.");
-                dialogBoxFireCamp.text("A few creatures sit there around a fire camp. An Orc with green skin hands out\n" +
-                    "paltry portions of meat to everyone. A grumpy Dwarf says he has been left out while a couple of\n" +
+                dialogBoxFireCamp.text("A few creatures sit there around a fire camp. An Orc with green skin hands out " +
+                    "paltry portions of meat to everyone. A grumpy Dwarf says he has been left out while a couple of " +
                     "Gobelins hold each other lovingly");
-                dialogBoxFireCamp_1.text("When you approach, they look at you with hostility. As clean as you are, you\n" +
+                dialogBoxFireCamp_1.text("When you approach, they look at you with hostility. As clean as you are, you " +
                     "stand out. The female Goblin murmurs something to her companion and they laugh.");
-                dialogBoxFireCamp_2.text("In front of the dwarf, there is an open small coffer. Inside of it, there is a\n" +
+                dialogBoxFireCamp_2.text("In front of the dwarf, there is an open small coffer. Inside of it, there is a " +
                     "flask of an unknown liquid. What will you do, sit with them or maybe ask for permission ?");
+                dialogBoxSitDown.text("They are disconcerted by your boldness. Maybe do not wait for them to react."); //todo 134
+                dialogBoxSitDown_1.text("By ... the door ? But you'll need the password. Scmitar.");
+                dialogBoxSitDown_2.text("They begin to be agitaded with that question.");
+                dialogBoxSitDown_3.text("The more you ask, the more they start to be wary. The dwarf is jumping with his " +
+                    "club as the Gobelin and the Orc are grabbing their swords. The female gobelin takes a few steps back " +
+                    "as the three of them are coming upon you.");
 
                 /*-----------------------------------------------------*/
                 inputCampFire();
@@ -221,13 +242,13 @@ public class TheCourtyardGameScreen extends ApplicationAdapter implements Screen
     //222
     public void inputManOnTheFloor(){
         dialogBox222.button("Help the person" , new InputListener(){
-           public boolean touchDown(InputEvent event, float x, float y, int pointer, int button){
-               dialogBox222.hide();
-               stage.addActor(dialogBox222_Help);
-               dialogBox222_Help.show(stage);
-               hud.bringToFront();
-               return true;
-           }
+            public boolean touchDown(InputEvent event, float x, float y, int pointer, int button){
+                dialogBox222.hide();
+                stage.addActor(dialogBox222_Help);
+                dialogBox222_Help.show(stage);
+                hud.bringToFront();
+                return true;
+            }
         });
         dialogBox222.button("Ignore the person" , new InputListener() {
             public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
@@ -486,24 +507,7 @@ public class TheCourtyardGameScreen extends ApplicationAdapter implements Screen
             }
         });
 
-        dialogBox222_Illusion.button("Continue" , new InputListener() {
-            public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
-                dialogBox222_Illusion.hide();
-                stage.addActor(dialogBox222_Sword);
-                dialogBox222_Sword.show(stage);
-                hud.bringToFront();
-                return true;
-            }
-        });
-        dialogBox222_Protection.button("Continue" , new InputListener() {
-            public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
-                dialogBox222_Protection.hide();
-                stage.addActor(dialogBox222_Sword);
-                dialogBox222_Sword.show(stage);
-                hud.bringToFront();
-                return true;
-            }
-        });
+        nextDialogBox(dialogBox222_Illusion, dialogBox222_Sword);
         dialogBox222_Weakness.button("Continue" , new InputListener() {
             public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
                 dialogBox222_Weakness.hide();
@@ -517,8 +521,39 @@ public class TheCourtyardGameScreen extends ApplicationAdapter implements Screen
 
     //321
     public void inputCampFire(){
+        dialogBox321.button("Talk to the men on the right" , new InputListener() {
+            public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
+                dialogBox321.hide();
+                stage.addActor(dialogBoxDuo);
+                dialogBoxDuo.show(stage);
+                hud.bringToFront();
+                return true;
+            }
+        });
+        dialogBox321.button("Talk to the group on the left" , new InputListener() {
+            public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
+                dialogBox321.hide();
+                stage.addActor(dialogBoxFireCamp);
+                dialogBoxFireCamp.show(stage);
+                hud.bringToFront();
+                return true;
+            }
+        });
+        dialogBoxDuo.button("Listen to them" , new InputListener() {
+            public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
+                dialogBoxDuo.hide();
+                stage.addActor(dialogBoxDuo_1);
+                dialogBoxDuo_1.show(stage);
+                hud.bringToFront();
+                return true;
+            }
+        });
+        nextDialogBox(dialogBoxDuo_1, dialogBoxDuo_2);
+        nextDialogBox(dialogBoxDuo_2, dialogBoxDuo_3);
+        nextDialogBox(dialogBoxDuo_3, dialogBoxDuo_4);
         dialogBoxDuo_4.button("5 golden coins" , new InputListener() {
             public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
+                dialogBoxDuo_4.hide();
                 DialogBox dialogBox = new DialogBox("Tall man");
                 dialogBox.text("What !? It is way too low !");
                 dialogBox.button("Draw out your sword" , new InputListener() {
@@ -550,15 +585,7 @@ public class TheCourtyardGameScreen extends ApplicationAdapter implements Screen
                 DialogBox dialogBox2 = new DialogBox("Tall man");
                 dialogBox.text("TEN ? That's way too much. I pass.");
                 dialogBox2.text("Well. That's unfortunate. I can make it 9 pieces for you.");
-                dialogBox.button("Next" , new InputListener() {
-                    public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
-                        dialogBox.hide();
-                        stage.addActor(dialogBox2);
-                        dialogBox2.show(stage);
-                        hud.bringToFront();
-                        return true;
-                    }
-                });
+                nextDialogBox(dialogBox, dialogBox2);
                 if (game.getPlayer().getGrimoire().isInGrimoire(SpellList.Sorts.OR_DU_SOT)) {
                     dialogBox2.button("Cast Fool's Gold", new InputListener() {
                         public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
@@ -602,8 +629,25 @@ public class TheCourtyardGameScreen extends ApplicationAdapter implements Screen
                 return true;
             }
         });
-        dialogBox186.button("Have a chat with the tall man" , new InputListener() {});
-        dialogBox186.button("Continue your way\nto the tower" , new InputListener() {});
+        dialogBox186.button("Have a chat with the tall man" , new InputListener() {
+            public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
+                dialogBox186.hide();
+                stage.addActor(dialogBoxChatting);
+                dialogBoxChatting.show(stage);
+                hud.bringToFront();
+                return true;
+            }
+        });
+        nextDialogBox(dialogBoxChatting,dialogBoxWind);
+        dialogBox186.button("Continue your way\nto the tower" , new InputListener() {
+            public boolean touchDown(Event event, float x, float y, int pointer, int button) {
+                dialogBox186.hide();
+                stage.addActor(dialogBoxWind);
+                dialogBoxWind.show(stage);
+                hud.bringToFront();
+                return true;
+            }
+        });
         if (game.getPlayer().getGrimoire().isInGrimoire(SpellList.Sorts.OR_DU_SOT)){
             dialogBox186.button("Cast Or Du Sot" , new InputListener() {
                 public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
@@ -631,148 +675,20 @@ public class TheCourtyardGameScreen extends ApplicationAdapter implements Screen
                 }
             });
         }//186
-        dialogBoxDagger.button("Continue" , new InputListener() {
+
+        nextDialogBox(dialogBoxWind,dialogBoxWind_1);
+        nextDialogBox(dialogBoxWind_1,dialogBoxWind_2);
+        dialogBoxWind_2.button("Ignore her" , new InputListener() {
             public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
-                dialogBoxDagger.hide();
-                stage.addActor(dialogBoxWind);
-                dialogBoxWind.show(stage);
+                dialogBoxWind_2.hide();
+                dialogBox161.show(stage);
                 hud.bringToFront();
                 return true;
             }
         });
-        dialogBoxWind.button("Next", new InputListener() {} );
-        dialogBoxWind_1.button("Draw out your sword" , new InputListener() {
-
-        });
-        dialogBoxWind_2.button("Ignore her" , new InputListener() {});
         dialogBoxWind_2.button("Talk to her" , new InputListener() {
             public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
-                DialogBox dialogBox = new DialogBox("Narrator");
-                dialogBox.text("She's playing with you. Every time you get up, she makes you fall.");
-                dialogBox.button("Make her believe you see someone far away on the courtyard that looks like her" , new InputListener() {
-                   public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
-                       dialogBox.hide();
-                       if (game.getPlayer().getCurrentLuck() <= Dice.doubleDice()){ //350
-                           dialogBoxLucky390.text("She says you must be mistaking. But you ended up convincing her and she\n" +
-                               "decides to go see that by herself");
-                           dialogBoxLucky390.button("Take this opportunity to go the tower's door" , new InputListener() {
-                               public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
-                                   dialogBoxLucky390.hide();
-                                   stage.clear();
-                                   game.setScreen(new RhinoDoorGameScreen(game));
-                                   hud.bringToFront();
-                                   return true;
-                               }
-                           });
-                       } else {
-                           dialogBoxLucky390.text("The trick does not work. She laughs it of. You have no choice but to use\n" +
-                               "a spell. Or back away and hide behind the monument.");
-                           if(game.getPlayer().getGrimoire().isInGrimoire(SpellList.Sorts.COPIE_CONFORME)){
-                               dialogBoxLucky390.button("Cast Copy" , new InputListener() {
-                                   DialogAlert alert = new DialogAlert("Do you want to cast Copy ?");
-                                   public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
-                                       alert.text("    An usage of Copy will be remove from your spellbook.");
-                                       alert.button("Yes" , Color.BLACK , new InputListener() {
-                                           public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
-                                               game.getPlayer().getGrimoire().removeFrom(SpellList.Sorts.COPIE_CONFORME);
-                                               alert.hide();
-                                               dialogBoxLucky390.hide();
-                                               stage.addActor(dialogBoxDouble);
-                                               dialogBoxDouble.show(stage);
-                                               hud.bringToFront();
-                                               return true;
-                                           }
-                                       });
-                                       alert.button("No" , Color.BLACK , new InputListener() {
-                                           @Override
-                                           public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
-                                               alert.hide();
-                                               hud.bringToFront();
-                                               return true;
-                                           }
-                                       });
-                                       alert.show(stage);
-                                       hud.bringToFront();
-                                       return true;
-                                   }
-                               });
-                           }
-                           if (game.getPlayer().getGrimoire().isInGrimoire(SpellList.Sorts.ILLUSION)){
-                               dialogBoxLucky390.button("Cast Illusion" , new InputListener() {
-                                   DialogAlert alert = new DialogAlert("Do you want to cast Illusion ?");
-                                   public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
-                                       alert.text("    An usage of Illusion will be remove from your spellbook.");
-                                       alert.button("Yes" , Color.BLACK , new InputListener() {
-                                           public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
-                                               game.getPlayer().getGrimoire().removeFrom(SpellList.Sorts.ILLUSION);
-                                               alert.hide();
-                                               dialogBoxLucky390.hide();
-                                               stage.addActor(dialogBoxGaz);
-                                               dialogBoxGaz.show(stage);
-                                               hud.bringToFront();
-                                               return true;
-                                           }
-                                       });
-                                       alert.button("No", Color.BLACK, new InputListener() {
-                                           public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
-                                               alert.hide();
-                                               hud.bringToFront();
-                                               return true;
-                                           }
-                                       });
-                                       alert.show(stage);
-                                       hud.bringToFront();
-                                       return true;
-                                   }
-                               });
-                           }
-                           if (game.getPlayer().getGrimoire().isInGrimoire(SpellList.Sorts.LEVITATION)){
-                               dialogBoxLucky390.button("Cast Levitation" , new InputListener() {
-                                   DialogAlert alert = new DialogAlert("Do you want to cast Levitation ?");
-                                   public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
-                                       alert.text("    An usage of Levitation will be remove from your spellbook.");
-                                       alert.button("Yes" , Color.BLACK , new InputListener() {
-                                           public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
-                                               game.getPlayer().getGrimoire().removeFrom(SpellList.Sorts.LEVITATION);
-                                               alert.hide();
-                                               dialogBoxLucky390.hide();
-                                               stage.addActor(dialogBoxFly);
-                                               dialogBoxFly.show(stage);
-                                               hud.bringToFront();
-                                               return true;
-                                           }
-                                       });
-                                       alert.button("No" , Color.BLACK , new InputListener() {
-                                           public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
-                                               alert.hide();
-                                               hud.bringToFront();
-                                               return true;
-                                           }
-                                       });
-                                       alert.show(stage);
-                                       hud.bringToFront();
-                                       return true;
-                                   }
-                               });
-                           }
-                           dialogBoxLucky390.button("Go hide\nbehind the monument" , new InputListener() {
-                               public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
-                                   dialogBoxLucky390.hide();
-                                   stage.addActor(dialogBox209);
-                                   dialogBox209.show(stage);
-                                   hud.bringToFront();
-                                   return true;
-                               }
-                           });
-                       }
-                       game.getPlayer().decreaseLuck();
-                       dialogBoxLucky390.show(stage);
-                       hud.bringToFront();
-                       return true;
-                   }
-                });
-                dialogBox.show(stage);
-                hud.bringToFront();
+                dialogLucky();
                 return true;
             }
         });
@@ -888,10 +804,256 @@ public class TheCourtyardGameScreen extends ApplicationAdapter implements Screen
             });
         }
 
-        dialogBoxFireCamp.button("Approach" , new InputListener() {});
-        dialogBoxFireCamp_1.button("Look at them" , new InputListener() {});
-        dialogBoxFireCamp_2.button("Sit down" , new InputListener() {});
-        dialogBoxFireCamp_2.button("Ask for permission to sit down" , new InputListener() {});
+        dialogBox161.button("Show her your anger" , new InputListener() {
+            public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
+                DialogBox dialogBox = new DialogBox("Wind women");
+                dialogBox161.hide();
+                dialogBox.text("Oh I like that way more ! Let's walk together !");
+                nextDialogBox(dialogBox, dialogBox161_1);
+                hud.bringToFront();
+                return true;
+            }
+        });
+        dialogBox161.button("Try to coax her" , new InputListener() {
+            public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
+                dialogBox161.hide();
+                dialogLucky();
+                return true;
+            }
+        });
+
+        dialogBox161_1.button("Continue" , new InputListener() {
+            public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
+                stage.clear();
+                game.setScreen(new RhinoDoorGameScreen(game));
+                hud.bringToFront();
+                return true;
+            }
+        });
+
+        dialogBoxAlive.button("Flip a coin" , new InputListener() {
+            DialogAlert alert = new DialogAlert("Result");
+            boolean win ;
+            public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
+                if (Dice.pileFaceDice() == "face"){
+                    alert.text("You flipped a coin and it's heads. You win");
+                    win = true;
+                    game.getPlayer().getInventory().putIn(Item.Items.ENCHANTED_THROWING_DAGGER);
+                } else {
+                    alert.text("You flipped a coin and it's tails. You lose");
+                    win = false;
+                }
+
+                alert.button("Ok" , Color.BLACK , new InputListener() {
+                    public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
+                        alert.hide();
+                        if (win) dialogBoxDagger.show(stage);
+                        else dialogBoxWind.show(stage);
+                        return true;
+                    }
+                });
+
+                alert.show(stage);
+                hud.bringToFront();
+                return true;
+            }
+        });
+        dialogBoxAlive.button("No, leave the dagger to the man" , new InputListener() {
+            public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
+                dialogBoxAlive.hide();
+                stage.addActor(dialogBoxWind);
+                dialogBoxWind.show(stage);
+                hud.bringToFront();
+                return true;
+            }
+        });
+        nextDialogBox(dialogBoxDagger,dialogBoxWind);
+
+        dialogBoxFireCamp.button("Approach" , new InputListener() {
+            public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
+                dialogBoxFireCamp.hide();
+                dialogBoxFireCamp_1.show(stage);
+                hud.bringToFront();
+                return true;
+            }
+        });
+        dialogBoxFireCamp_1.button("Look at them" , new InputListener() {
+            public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
+                dialogBoxFireCamp_1.hide();
+                dialogBoxFireCamp_2.show(stage);
+                hud.bringToFront();
+                return true;
+            }
+        });
+        dialogBoxFireCamp_2.button("Sit down" , new InputListener() {
+            public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
+                dialogBoxFireCamp_2.hide();
+                dialogBoxSitDown.show(stage);
+                hud.bringToFront();
+                return true;
+            }
+        });
+        dialogBoxFireCamp_2.button("Ask for permission to sit down" , new InputListener() {
+            public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
+                dialogBoxFireCamp_2.hide();
+                //149
+                hud.bringToFront();
+                return true;
+            }
+        }); //todo
+
+        dialogBoxSitDown.button("Do not wait their reactions. Ask how to enter the Black Tower." , new InputListener() {}); //todo
+        dialogBoxSitDown_1.button("Ask what is in the flask" , new InputListener() {}); //todo
+        dialogBoxSitDown_2.button("Insist" , new InputListener(){}); //todo
+        dialogBoxSitDown_2.button("Give up and\ngo see the men" , new InputListener(){}); //todo
+        dialogBoxSitDown_2.button("Hasten to the tower", new InputListener(){}); //todo
+        
+    }
+
+    private void dialogLucky(){
+        DialogBox dialogBox = new DialogBox("Narrator");
+        dialogBox.text("She's playing with you. Every time you get up, she makes you fall.");
+        dialogBox.button("Make her believe you see someone far away on the courtyard that looks like her" , new InputListener() {
+            public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
+                dialogBox.hide();
+                if (game.getPlayer().getCurrentLuck() <= Dice.doubleDice()){ //350
+                    dialogBoxLucky390.text("She says you must be mistaking. But you're insisting and you ended up convincing her and she" +
+                        " decides to go see that by herself");
+                    dialogBoxLucky390.button("Take this opportunity to go the tower's door" , new InputListener() {
+                        public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
+                            dialogBoxLucky390.hide();
+                            stage.clear();
+                            game.setScreen(new RhinoDoorGameScreen(game));
+                            hud.bringToFront();
+                            return true;
+                        }
+                    });
+                } else {
+                    dialogBoxLucky390.text("The trick does not work. She laughs it of. You have no choice but to use" +
+                        " a spell. Or back away and hide behind the monument.");
+                    if(game.getPlayer().getGrimoire().isInGrimoire(SpellList.Sorts.COPIE_CONFORME)){
+                        dialogBoxLucky390.button("Cast Copy" , new InputListener() {
+                            DialogAlert alert = new DialogAlert("Do you want to cast Copy ?");
+                            public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
+                                alert.text("    An usage of Copy will be remove from your spellbook.");
+                                alert.button("Yes" , Color.BLACK , new InputListener() {
+                                    public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
+                                        game.getPlayer().getGrimoire().removeFrom(SpellList.Sorts.COPIE_CONFORME);
+                                        alert.hide();
+                                        dialogBoxLucky390.hide();
+                                        stage.addActor(dialogBoxDouble);
+                                        dialogBoxDouble.show(stage);
+                                        hud.bringToFront();
+                                        return true;
+                                    }
+                                });
+                                alert.button("No" , Color.BLACK , new InputListener() {
+                                    @Override
+                                    public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
+                                        alert.hide();
+                                        hud.bringToFront();
+                                        return true;
+                                    }
+                                });
+                                alert.show(stage);
+                                hud.bringToFront();
+                                return true;
+                            }
+                        });
+                    }
+                    if (game.getPlayer().getGrimoire().isInGrimoire(SpellList.Sorts.ILLUSION)){
+                        dialogBoxLucky390.button("Cast Illusion" , new InputListener() {
+                            DialogAlert alert = new DialogAlert("Do you want to cast Illusion ?");
+                            public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
+                                alert.text("    An usage of Illusion will be remove from your spellbook.");
+                                alert.button("Yes" , Color.BLACK , new InputListener() {
+                                    public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
+                                        game.getPlayer().getGrimoire().removeFrom(SpellList.Sorts.ILLUSION);
+                                        alert.hide();
+                                        dialogBoxLucky390.hide();
+                                        stage.addActor(dialogBoxGaz);
+                                        dialogBoxGaz.show(stage);
+                                        hud.bringToFront();
+                                        return true;
+                                    }
+                                });
+                                alert.button("No", Color.BLACK, new InputListener() {
+                                    public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
+                                        alert.hide();
+                                        hud.bringToFront();
+                                        return true;
+                                    }
+                                });
+                                alert.show(stage);
+                                hud.bringToFront();
+                                return true;
+                            }
+                        });
+                    }
+                    if (game.getPlayer().getGrimoire().isInGrimoire(SpellList.Sorts.LEVITATION)){
+                        dialogBoxLucky390.button("Cast Levitation" , new InputListener() {
+                            DialogAlert alert = new DialogAlert("Do you want to cast Levitation ?");
+                            public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
+                                alert.text("    An usage of Levitation will be remove from your spellbook.");
+                                alert.button("Yes" , Color.BLACK , new InputListener() {
+                                    public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
+                                        game.getPlayer().getGrimoire().removeFrom(SpellList.Sorts.LEVITATION);
+                                        alert.hide();
+                                        dialogBoxLucky390.hide();
+                                        stage.addActor(dialogBoxFly);
+                                        dialogBoxFly.show(stage);
+                                        hud.bringToFront();
+                                        return true;
+                                    }
+                                });
+                                alert.button("No" , Color.BLACK , new InputListener() {
+                                    public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
+                                        alert.hide();
+                                        hud.bringToFront();
+                                        return true;
+                                    }
+                                });
+                                alert.show(stage);
+                                hud.bringToFront();
+                                return true;
+                            }
+                        });
+                    }
+                    dialogBoxLucky390.button("Go hide\nbehind the monument" , new InputListener() {
+                        public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
+                            dialogBoxLucky390.hide();
+                            stage.addActor(dialogBox209);
+                            dialogBox209.show(stage);
+                            hud.bringToFront();
+                            return true;
+                        }
+                    });
+                }
+                game.getPlayer().decreaseLuck();
+                dialogBoxLucky390.show(stage);
+                hud.bringToFront();
+                return true;
+            }
+        });
+        dialogBox.show(stage);
+        hud.bringToFront();
+    }
+
+    /**
+     * Method to generate a dialogbox when the only possibility is continue
+     * @param dialogBoxFrom the dialogBox in which the button is integrated
+     * @param dialogBoxTo the dialogBox the button is linked to
+     */
+    private void nextDialogBox(DialogBox dialogBoxFrom, DialogBox dialogBoxTo) {
+        dialogBoxFrom.button("Continue" , new InputListener() {
+            public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
+                dialogBoxFrom.hide();
+                stage.addActor(dialogBoxTo);
+                dialogBoxTo.show(stage);
+                hud.bringToFront();
+                return true;
+            }
+        });
 
     }
 
@@ -899,89 +1061,89 @@ public class TheCourtyardGameScreen extends ApplicationAdapter implements Screen
     public void inputArrows(){
         dialogBox179.button("Turn around looking for the person" , new InputListener() {
             public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
-               dialogBox179.hide();
-               stage.addActor(dialogBox179_1);
-               dialogBox179_1.show(stage);
-               hud.bringToFront();
-               return true;
+                dialogBox179.hide();
+                stage.addActor(dialogBox179_1);
+                dialogBox179_1.show(stage);
+                hud.bringToFront();
+                return true;
             }
         });
         dialogBox179_1.button("Take another couple of steps" , new InputListener() {
             public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
-               dialogBox179_1.hide();
-               stage.addActor(dialogBox179_2);
-               dialogBox179_2.show(stage);
-               hud.bringToFront();
-               return true;
+                dialogBox179_1.hide();
+                stage.addActor(dialogBox179_2);
+                dialogBox179_2.show(stage);
+                hud.bringToFront();
+                return true;
             }
         });
         dialogBox179_2.button("Jump back and look for the person" , new InputListener() {
             public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
-               dialogBox179_2.hide();
-               stage.addActor(dialogBox179_3);
-               dialogBox179_3.show(stage);
-               hud.bringToFront();
-               return true;
+                dialogBox179_2.hide();
+                stage.addActor(dialogBox179_3);
+                dialogBox179_3.show(stage);
+                hud.bringToFront();
+                return true;
             }
         });
         dialogBox179_3.button("Continue to move on despite the enemy" , new InputListener() {
             public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
-               dialogBox179_3.hide();
-               stage.addActor(dialogBox378);
-               dialogBox378.show(stage);
-               hud.bringToFront();
-               return true;
+                dialogBox179_3.hide();
+                stage.addActor(dialogBox378);
+                dialogBox378.show(stage);
+                hud.bringToFront();
+                return true;
             }
         });
         dialogBox179_3.button("Rush towards the monument" , new InputListener() {
             public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
-               dialogBox179_3.hide();
-               stage.addActor(dialogBoxGetLucky125);
-               dialogBoxGetLucky125.show(stage);
-               hud.bringToFront();
-               return true;
+                dialogBox179_3.hide();
+                stage.addActor(dialogBoxGetLucky125);
+                dialogBoxGetLucky125.show(stage);
+                hud.bringToFront();
+                return true;
             }
         });
         dialogBox378.button("Take a couple of steps" , new InputListener() {
             public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
-               dialogBox378.hide();
-               stage.addActor(dialogBox378_1);
-               dialogBox378_1.show(stage);
-               hud.bringToFront();
-               return true;
+                dialogBox378.hide();
+                stage.addActor(dialogBox378_1);
+                dialogBox378_1.show(stage);
+                hud.bringToFront();
+                return true;
             }
         });
         dialogBox378_1.button("Another couple of steps" , new InputListener() {
             public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
-               dialogBox378_1.hide();
-               stage.addActor(dialogBox378_2);
-               dialogBox378_2.show(stage);
-               hud.bringToFront();
-               return true;
+                dialogBox378_1.hide();
+                stage.addActor(dialogBox378_2);
+                dialogBox378_2.show(stage);
+                hud.bringToFront();
+                return true;
             }
         });
         dialogBox378_2.button("Jump behind the monument to take cover" , new InputListener() {
             public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
-               DialogAlert alert = new DialogAlert("You have lost 4 HP !");
-               alert.button("Ok" , Color.BLACK ,new InputListener() {
-                   public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
-                       alert.hide();
-                       dialogBox378_2.hide();
-                       System.out.println("Touch dialogBox378_2");
-                       game.getPlayer().setCurrentVitality(game.getPlayer().getCurrentVitality() - 4);
-                       if (game.getPlayer().isDead()) {
-                           stage.clear();
-                           game.setScreen(new GameOverScreen(game));
-                       }
-                       stage.addActor(dialogBox209);
-                       dialogBox209.show(stage);
-                       hud.bringToFront();
-                       return true;
-                   }
-               });
-               alert.show(stage);
-               hud.bringToFront();
-               return true;
+                DialogAlert alert = new DialogAlert("You have lost 4 HP !");
+                alert.button("Ok" , Color.BLACK ,new InputListener() {
+                    public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
+                        alert.hide();
+                        dialogBox378_2.hide();
+                        System.out.println("Touch dialogBox378_2");
+                        game.getPlayer().setCurrentVitality(game.getPlayer().getCurrentVitality() - 4);
+                        if (game.getPlayer().isDead()) {
+                            stage.clear();
+                            game.setScreen(new GameOverScreen(game));
+                        }
+                        stage.addActor(dialogBox209);
+                        dialogBox209.show(stage);
+                        hud.bringToFront();
+                        return true;
+                    }
+                });
+                alert.show(stage);
+                hud.bringToFront();
+                return true;
             }
         });
         if (game.getPlayer().getGrimoire().isInGrimoire(SpellList.Sorts.PROTECTION)){
@@ -1015,50 +1177,50 @@ public class TheCourtyardGameScreen extends ApplicationAdapter implements Screen
         }
         dialogBoxGetLucky125.button("Run full speed" , new InputListener() {
             public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
-               DialogAlert alertGetLucky125 = new DialogAlert("Result get lucky");
-               if (Dice.doubleDice() <= game.getPlayer().getCurrentLuck()){
-                   alertGetLucky125.text("You ran fast enough to avoid the arrows\n" +
-                       "(You lost a point of luck.)");
-               } else {
+                DialogAlert alertGetLucky125 = new DialogAlert("Result get lucky");
+                if (Dice.doubleDice() <= game.getPlayer().getCurrentLuck()){
+                    alertGetLucky125.text("You ran fast enough to avoid the arrows\n" +
+                        "(You lost a point of luck.)");
+                } else {
                     alertGetLucky125.text("You did not manage to avoid the incoming arrows and lost 5 HP.\n" +
                         "(You lost a point of luck.)");
                     game.getPlayer().setCurrentVitality(game.getPlayer().getCurrentVitality() - 5);
-               }
-               alertGetLucky125.button("Continue" , new InputListener() {
-                   public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
-                       alertGetLucky125.hide();
-                       if (game.getPlayer().isDead()) {
-                           stage.clear();
-                           game.setScreen(new GameOverScreen(game));
-                       }
-                       dialogBoxGetLucky125.hide();
-                       stage.addActor(dialogBox209);
-                       dialogBox209.show(stage);
-                       hud.bringToFront();
-                       return true;
-                   }
-               });
-               alertGetLucky125.show(stage);
-               hud.bringToFront();
-               return true;
+                }
+                alertGetLucky125.button("Continue" , new InputListener() {
+                    public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
+                        alertGetLucky125.hide();
+                        if (game.getPlayer().isDead()) {
+                            stage.clear();
+                            game.setScreen(new GameOverScreen(game));
+                        }
+                        dialogBoxGetLucky125.hide();
+                        stage.addActor(dialogBox209);
+                        dialogBox209.show(stage);
+                        hud.bringToFront();
+                        return true;
+                    }
+                });
+                alertGetLucky125.show(stage);
+                hud.bringToFront();
+                return true;
             }
         });
         dialogBox341.button("Hide behind the monument" , new InputListener() {
             public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
-               dialogBox341.hide();
-               stage.addActor(dialogBox209);
-               dialogBox209.show(stage);
-               hud.bringToFront();
-               return true;
+                dialogBox341.hide();
+                stage.addActor(dialogBox209);
+                dialogBox209.show(stage);
+                hud.bringToFront();
+                return true;
             }
         });
         dialogBox209.button("Open the door" , new InputListener() {
             public boolean touchDown(Event event, float x, float y, int pointer, int button) {
-               dialogBox209.hide();
-               stage.clear();
-               game.setScreen(new TempleOfTheCourtyardGameScreen(game));
-               hud.bringToFront();
-               return true;
+                dialogBox209.hide();
+                stage.clear();
+                game.setScreen(new TempleOfTheCourtyardGameScreen(game));
+                hud.bringToFront();
+                return true;
             }
         });
         dialogBox209.button("Continue my way to the tower" , new InputListener() {
@@ -1110,22 +1272,22 @@ public class TheCourtyardGameScreen extends ApplicationAdapter implements Screen
                 }
             });
             dialogBoxLevitation.button("Get back down" , new InputListener() {
-            public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
-                dialogBoxLevitation.hide();
-                stage.addActor(dialogBoxLevitation_1);
-                dialogBoxLevitation_1.show(stage);
-                hud.bringToFront();
-                return true;
-            }
-        });
-        dialogBoxLevitation_1.button("Draw out my sword" , new InputListener() {
-            public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
-                dialogBoxLevitation_1.hide();
-                combat71();
-                hud.bringToFront();
-                return true;
-            }
-        });
+                public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
+                    dialogBoxLevitation.hide();
+                    stage.addActor(dialogBoxLevitation_1);
+                    dialogBoxLevitation_1.show(stage);
+                    hud.bringToFront();
+                    return true;
+                }
+            });
+            dialogBoxLevitation_1.button("Draw out my sword" , new InputListener() {
+                public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
+                    dialogBoxLevitation_1.hide();
+                    combat71();
+                    hud.bringToFront();
+                    return true;
+                }
+            });
         }
 
         if (game.getPlayer().getGrimoire().isInGrimoire(SpellList.Sorts.FEU)){
@@ -1148,24 +1310,24 @@ public class TheCourtyardGameScreen extends ApplicationAdapter implements Screen
                 }
             });
             dialogBoxFire.button("Go to the tower's door" , new InputListener() {
-            public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
-                dialogBoxFire.hide();
-                stage.clear();
-                game.setScreen(new RhinoDoorGameScreen(game));
-                hud.bringToFront();
-                return true;
-            }
-        });
+                public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
+                    dialogBoxFire.hide();
+                    stage.clear();
+                    game.setScreen(new RhinoDoorGameScreen(game));
+                    hud.bringToFront();
+                    return true;
+                }
+            });
         }
     }
 
     private void combat71(){
         Monster greyTentacle = new Monster("Grey tentacle" , 15 , 2);
         int compteurTour = 1;
-        showCombatDialogBox(greyTentacle, compteurTour);
+        showCombatDialogBox71(greyTentacle, compteurTour);
     }
 
-    private void showCombatDialogBox(Monster monster, int cptTour){
+    private void showCombatDialogBox71(Monster monster, int cptTour){
         //le monstre est mort
         if (monster.isDead() && cptTour != 4){
             DialogBox victory = new DialogBox("Narrator");
@@ -1217,12 +1379,12 @@ public class TheCourtyardGameScreen extends ApplicationAdapter implements Screen
                 if (scorePlayer<monster.getAbility()){
                     alert.text("You did not harm the tentacle.");
                     alert.button("Continue" , Color.BLACK, new InputListener() {
-                       public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
-                           alert.hide();
-                           tentacleCrawl.show(stage);
-                           hud.bringToFront();
-                           return true;
-                       }
+                        public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
+                            alert.hide();
+                            tentacleCrawl.show(stage);
+                            hud.bringToFront();
+                            return true;
+                        }
                     });
                 } else {
                     monster.isTouchedInCombat();
@@ -1230,7 +1392,7 @@ public class TheCourtyardGameScreen extends ApplicationAdapter implements Screen
                     alert.button("Continue", Color.BLACK , new InputListener() {
                         public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
                             alert.hide();
-                            showCombatDialogBox(monster,cptTour);
+                            showCombatDialogBox71(monster,cptTour);
                             return true;
                         }
                     });
@@ -1247,15 +1409,7 @@ public class TheCourtyardGameScreen extends ApplicationAdapter implements Screen
                 DialogBox escapeBox = new DialogBox("Narrator");
                 escapeBox.text("You try to escape the Grey Tentacle.\n" +
                     "But it does not work.");
-                escapeBox.button("Continue" , new InputListener() {
-                    public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
-                        escapeBox.hide();
-                        stage.addActor(tentacleCrawl);
-                        tentacleCrawl.show(stage);
-                        hud.bringToFront();
-                        return true;
-                    }
-                });
+                nextDialogBox(escapeBox, tentacleCrawl);
                 stage.addActor(escapeBox);
                 escapeBox.show(stage);
                 hud.bringToFront();
@@ -1275,7 +1429,7 @@ public class TheCourtyardGameScreen extends ApplicationAdapter implements Screen
         alert.button("Ok" , Color.BLACK , new InputListener() {
             public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
                 alert.hide();
-                showCombatDialogBox(monster, cptTour + 1);
+                showCombatDialogBox71(monster, cptTour + 1);
                 return true;
             }
         });
@@ -1293,10 +1447,119 @@ public class TheCourtyardGameScreen extends ApplicationAdapter implements Screen
     }
 
     private void combat205(){
+        Monster tallMan = new Monster("Tall man", 8,8);
+        Monster ally = new Monster("Small man", 7,6);
+
+        showDialogBox205(tallMan,ally);
+    }
+
+    private void showDialogBox205(Monster monster, Monster ally){
+        //Check la victoire
+        if (monster.isDead()){
+            DialogBox victory = new DialogBox("Narrator");
+            victory.text("You have defeated the Tall Man!");
+            victory.button("Continue" , new InputListener() {
+                public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
+                    victory.hide();
+                    if (!ally.isDead()){
+                        dialogBoxAlive.show(stage);
+                    } else {
+                        dialogBoxDead.show(stage);
+                    }
+                    hud.bringToFront();
+                    return true;
+                }
+            });
+            stage.addActor(victory);
+            victory.show(stage);
+            hud.bringToFront();
+            return;
+        }
+
+        //check si le joueur est mort
+        if (game.getPlayer().isDead()){
+            stage.clear();
+            game.setScreen(new GameOverScreen(game));
+            return;
+        }
+
+        //déroulement du combat
+        DialogBox fightBox = new DialogBox("Choose an action");
+        DialogBox fightBox2 = new DialogBox("Narrator");
+        boolean attackSmallMan = false;
+
+        if (!ally.isDead()){
+            attackSmallMan = Dice.pileFaceDice() == "face";
+        }
+
+        if (attackSmallMan) {
+            int scoreAlly = Dice.doubleDice() + ally.getAbility();
+            int scoreMonster = Dice.doubleDice() + monster.getAbility();
+
+            DialogAlert alert = new DialogAlert("Info !");
+            alert.text("The men fight each other !");
+            alert.button("Ok" , Color.BLACK , new InputListener() {
+                public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
+                    alert.hide();
+                    fightBox2.text(Combat.resolutionTour(scoreAlly,scoreMonster,ally,monster,game));
+                    fightBox2.button("Continue" , new InputListener() {
+                        public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
+                            fightBox2.hide();
+                            showDialogBox205(monster,ally);
+                            return true;
+                        }
+                    });
+                    fightBox2.show(stage);
+                    hud.bringToFront();
+                    return true;
+                }
+            });
+            alert.show(stage);
+            hud.bringToFront();
+        } else {
+            DialogAlert alert = new DialogAlert("Info !");
+            alert.text("The tall man attacks you !");
+            alert.button("Ok",Color.BLACK, new InputListener() {
+                public boolean touchDown(InputEvent event, float x, float y, int pointer, int button){
+                    alert.hide();
+                    fightBox.button("Attack" , new InputListener() {
+                        public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
+                            int scorePlayer = Dice.doubleDice()+game.getPlayer().getCurrentAbility();
+                            int scoreMonster = Dice.doubleDice()+monster.getAbility();
+
+                            Combat.displayAlertTouch(Combat.isPlayerTouched(scorePlayer,scoreMonster) , stage, game, hud);
+
+                            DialogAlert alert = new DialogAlert("Info !");
+                            alert.text(Combat.resolutionTour(scorePlayer,scoreMonster,monster,game));
+                            alert.button("Ok" , Color.BLACK , new InputListener() {
+                                public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
+                                    fightBox.hide();
+                                    alert.hide();
+                                    showDialogBox205(monster,ally);
+                                    hud.bringToFront();
+                                    return true;
+                                }
+                            });
+                            alert.show(stage);
+                            hud.bringToFront();
+                            return true;
+                        }
+                    });
+                    fightBox.show(stage);
+                    hud.bringToFront();
+                    return true;
+                }
+            });
+            alert.show(stage);
+            hud.bringToFront();
+        }
+    }
+
+    private void combat213(){
 
     }
 
-    private void showDialogBox205(){
+    private void showCombat213(){
 
     }
 

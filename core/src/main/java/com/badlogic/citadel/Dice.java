@@ -21,7 +21,8 @@ public abstract class Dice {
      * Return 0 or 1
      * @return 0 for face and 1 for tails
      */
-    public static int pileFaceDice(){
-        return rand.nextInt(0,1);
+    public static String pileFaceDice(){
+        if (rand.nextInt(2)==0) return "face";
+        else return "tails";
     }
 }
