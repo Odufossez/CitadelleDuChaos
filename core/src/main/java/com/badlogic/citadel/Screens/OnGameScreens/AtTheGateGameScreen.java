@@ -3,6 +3,7 @@ package com.badlogic.citadel.Screens.OnGameScreens;
 import com.badlogic.citadel.Citadel;
 import com.badlogic.citadel.DialogWindows.DialogAlert;
 import com.badlogic.citadel.DialogWindows.DialogBox;
+import com.badlogic.citadel.DialogWindows.DialogBoxMethods;
 import com.badlogic.citadel.Dice;
 import com.badlogic.citadel.Item;
 import com.badlogic.citadel.Methods.Combat;
@@ -88,36 +89,11 @@ public class AtTheGateGameScreen extends ApplicationAdapter implements Screen {
     }
 
     private void inputPathHerbalist(){
-        dialogBox261.button("Continue" , new InputListener() {
-            public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
-                dialogBox261.hide();
-                stage.addActor(dialogBox261_1);
-                dialogBox261_1.show(stage);
-                hud.bringToFront();
-                return true;
-            }
-        });
-
-        dialogBox261_1.button("Continue" , new InputListener() {
-            public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
-                dialogBox261_1.hide();
-                game.getPlayer().getInventory().removeFrom(Item.Items.GRASS);
-                stage.addActor(dialogBox261_2);
-                dialogBox261_2.show(stage);
-                hud.bringToFront();
-                return true;
-            }
-        });
-
-        dialogBox261_2.button("Pincus" , new InputListener() { //175
-            public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
-                dialogBox261_2.hide();
-                stage.addActor(dialogBox261_Wrong);
-                dialogBox261_Wrong.show(stage);
-                hud.bringToFront();
-                return true;
-            }
-        });
+        DialogBoxMethods.continueDialogBox(dialogBox261,dialogBox261_1,hud,stage);
+        DialogBoxMethods.continueDialogBox(dialogBox261_1,dialogBox261_2,hud,stage,game,Item.Items.GRASS);
+        DialogBoxMethods.continueDialogBox(dialogBox261_2,dialogBox261_Wrong,"Pincus" , stage, hud);
+        DialogBoxMethods.continueDialogBox(dialogBox261_2,dialogBox261_Kylltrog,"Kylltrog",stage,hud);
+        DialogBoxMethods.continueDialogBox(dialogBox261_2,dialogBox261_Blag,"Blag",stage,hud);
 
         dialogBox261_Wrong.button("Fight for your life !" , new InputListener() {
             public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
@@ -127,16 +103,8 @@ public class AtTheGateGameScreen extends ApplicationAdapter implements Screen {
             }
         });
 
-        dialogBox261_Wrong.button("Well no ! I meant someone else !" , new InputListener() {
-            public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
-                dialogBox261_Wrong.hide();
-                dialogBox261_SecondChance.text("Well WHO in that case ? ");
-                stage.addActor(dialogBox261_SecondChance);
-                dialogBox261_SecondChance.show(stage);
-                hud.bringToFront();
-                return true;
-            }
-        });
+        DialogBoxMethods.continueDialogBox(dialogBox261_Wrong,dialogBox261_SecondChance,
+                    "Well no ! I meant someone else !" , stage, hud);
 
         dialogBox261_SecondChance.button("Get lucky" , new InputListener() {
             public boolean touchDown(InputEvent event, float x, float y, int pointer, int button){
@@ -153,15 +121,7 @@ public class AtTheGateGameScreen extends ApplicationAdapter implements Screen {
             }
         });
 
-        dialogBox261_Lucky.button("Continue" , new InputListener(){
-            public boolean touchDown(InputEvent event, float x, float y, int pointer, int button){
-                dialogBox261_Lucky.hide();
-                stage.addActor(dialogBoxEnter);
-                dialogBoxEnter.show(stage);
-                hud.bringToFront();
-                return true;
-            }
-        });
+        DialogBoxMethods.continueDialogBox(dialogBox261_Lucky,dialogBoxEnter,hud,stage);
 
         dialogBox261_Unlucky.button("Continue" , new InputListener(){
             public boolean touchDown(InputEvent event, float x, float y, int pointer, int button){
@@ -172,67 +132,16 @@ public class AtTheGateGameScreen extends ApplicationAdapter implements Screen {
             }
         });
 
-        dialogBox261_2.button("Kylltrog" , new InputListener(){
-            public boolean touchDown(InputEvent event, float x, float y, int pointer, int button){
-                dialogBox261_2.hide();
-                stage.addActor(dialogBox261_Kylltrog);
-                dialogBox261_Kylltrog.show(stage);
-                hud.bringToFront();
-                return true;
-            }
-        });
+        DialogBoxMethods.continueDialogBox(dialogBox261_Kylltrog,dialogBoxEnter,"Laugh with them",stage,hud);
+        DialogBoxMethods.continueDialogBox(dialogBox261_Blag,dialogBox261_Blag2,"He's guard on the first floor !",
+            stage, hud);
 
-        dialogBox261_Kylltrog.button("Laugh with them" , new InputListener(){
-            public boolean touchDown(InputEvent event, float x, float y, int pointer, int button){
-                dialogBox261_Kylltrog.hide();
-                stage.addActor(dialogBoxEnter);
-                dialogBoxEnter.show(stage);
-                hud.bringToFront();
-                return true;
-            }
-        });
-
-        dialogBox261_2.button("Blag" , new InputListener(){
-            public boolean touchDown(InputEvent event, float x, float y, int pointer, int button){
-                dialogBox261_2.hide();
-                stage.addActor(dialogBox261_Blag);
-                dialogBox261_Blag.show(stage);
-                hud.bringToFront();
-                return true;
-            }
-        });
-
-        dialogBox261_Blag.button("He's guard on the first floor !" , new InputListener(){
-            public boolean touchDown(InputEvent event, float x, float y, int pointer, int button){
-                dialogBox261_Blag.hide();
-                stage.addActor(dialogBox261_Blag2);
-                dialogBox261_Blag2.show(stage);
-                hud.bringToFront();
-                return true;
-            }
-        });
-
-        dialogBox261_Blag2.button("Continue" , new InputListener(){
-            public boolean touchDown(InputEvent event, float x, float y, int pointer, int button){
-                dialogBox261_Blag2.hide();
-                stage.addActor(dialogBoxEnter);
-                dialogBoxEnter.show(stage);
-                hud.bringToFront();
-                return true;
-            }
-        });
+        DialogBoxMethods.continueDialogBox(dialogBox261_Blag2,dialogBoxEnter,hud,stage);
     }
 
     private void inputPathMerchant(){
-        dialogBox230.button("Continue" , new InputListener() {
-            public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
-                dialogBox230.hide();
-                stage.addActor(dialogBox230_1);
-                dialogBox230_1.show(stage);
-                hud.bringToFront();
-                return true;
-            }
-        });
+        DialogBoxMethods.continueDialogBox(dialogBox230,dialogBox230_1,hud,stage);
+
         dialogBox230_1.button("Draw my sword" , new InputListener() {
                 public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
                     dialogBox230_1.hide();
@@ -242,46 +151,12 @@ public class AtTheGateGameScreen extends ApplicationAdapter implements Screen {
             }
         );
         if (game.getPlayer().getGrimoire().isInGrimoire(SpellList.Sorts.OR_DU_SOT)){
-            dialogBox230_1.button("Cast Dummy's Gold" , new InputListener() {
-                public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
-                    DialogAlert alert = new DialogAlert("Do you want to cast Dummy's Gold ?");
-                    alert.text("    An usage of Dummy's Gold will be remove from your spellbook.");
-                    alert.button("Yes" , Color.BLACK , new InputListener() {
-                        public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
-                            game.getPlayer().getGrimoire().removeFrom(SpellList.Sorts.OR_DU_SOT);
-                            alert.hide();
-                            dialogBox230_1.hide();
-                            stage.addActor(dialogBoxOrDuSot);
-                            dialogBoxOrDuSot.show(stage);
-                            hud.bringToFront();
-                            return true;
-                        }
-                    });
-                    alert.button("No" , Color.BLACK , new InputListener() {
-                        public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
-                            alert.hide();
-                            hud.bringToFront();
-                            return true;
-                        }
-                    });
-                    alert.show(stage);
-                    hud.bringToFront();
-                    return true;
-                }
-            });
+            DialogBoxMethods.alertSpellDialog(dialogBox230_1,dialogBoxOrDuSot,SpellList.Sorts.OR_DU_SOT,hud,stage,game);
         }
     }
 
     private void inputPathWanderer(){
-        dialogBox20.button("Think fast ! " , new InputListener() {
-            public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
-                dialogBox20.hide();
-                stage.addActor(dialogBox20_1);
-                dialogBox20_1.show(stage);
-                hud.bringToFront();
-                return true;
-            }
-        });
+        DialogBoxMethods.continueDialogBox(dialogBox20,dialogBox20_1,"Think fast", stage,hud);
 
         dialogBox20_1.button("Draw my sword and fight" , new InputListener() {
             public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
@@ -292,66 +167,14 @@ public class AtTheGateGameScreen extends ApplicationAdapter implements Screen {
         });
 
         if (game.getPlayer().getGrimoire().isInGrimoire(SpellList.Sorts.OR_DU_SOT)){
-            dialogBox20_1.button("Cast Dummy's Gold" , new InputListener() {
-                public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
-                    DialogAlert alert = new DialogAlert("Do you want to cast Dummy's Gold ?");
-                    alert.text("    An usage of Dummy's Gold will be remove from your spellbook.");
-                    alert.button("Yes" , Color.BLACK , new InputListener() {
-                        public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
-                            game.getPlayer().getGrimoire().removeFrom(SpellList.Sorts.OR_DU_SOT);
-                            alert.hide();
-                            dialogBox20_1.hide();
-                            stage.addActor(dialogBoxOrDuSot);
-                            dialogBoxOrDuSot.show(stage);
-                            hud.bringToFront();
-                            return true;
-                        }
-                    });
-                    alert.button("No" , Color.BLACK , new InputListener() {
-                        public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
-                            alert.hide();
-                            hud.bringToFront();
-                            return true;
-                        }
-                    });
-                    alert.show(stage);
-                    hud.bringToFront();
-                    return true;
-                }
-            });
+            DialogBoxMethods.alertSpellDialog(dialogBox20_1,dialogBoxOrDuSot, SpellList.Sorts.OR_DU_SOT, hud,stage,game);
         }
     }
 
     private void input() {
-        dialogBox1.button("Think about a lie" , new InputListener() {
-            public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
-                dialogBox1.hide();
-                stage.addActor(dialogBox2);
-                dialogBox2.show(stage);
-                hud.bringToFront();
-                return true;
-            }
-        });
-
-        dialogBox2.button("Continue" , new InputListener() {
-            public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
-                dialogBox2.hide();
-                stage.addActor(dialogBox3);
-                dialogBox3.show(stage);
-                hud.bringToFront();
-                return true;
-            }
-        });
-
-        dialogBox3.button("Approach the gate" , new InputListener() {
-            public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
-                dialogBox3.hide();
-                stage.addActor(dialogBox4);
-                dialogBox4.show(stage);
-                hud.bringToFront();
-                return true;
-            }
-        });
+        DialogBoxMethods.continueDialogBox(dialogBox1,dialogBox2,"Think about a lie", stage,hud);
+        DialogBoxMethods.continueDialogBox(dialogBox2,dialogBox3,hud,stage);
+        DialogBoxMethods.continueDialogBox(dialogBox3,dialogBox4,"Approach the gate", stage,hud);
 
         dialogBox4.button("I am a herbalist ! " , new InputListener() {
             public boolean touchDown(InputEvent event, float x, float y, int pointer, int button){
@@ -371,6 +194,7 @@ public class AtTheGateGameScreen extends ApplicationAdapter implements Screen {
                     " that name.");
                 dialogBox261_Unlucky.text("You scream a random name. The guards do not know anyone with that name. You " +
                     "will have to fight for your life !");
+                dialogBox261_SecondChance.text("Well WHO in that case ? ");
                 /*------------------------------------------------------------*/
 
                 stage.addActor(dialogBox261);
@@ -424,25 +248,10 @@ public class AtTheGateGameScreen extends ApplicationAdapter implements Screen {
             }
         });
 
-        dialogBoxEnter.button("Go through the gate" , new InputListener(){
-            public boolean touchDown(InputEvent event, float x, float y, int pointer, int button){
-                dialogBoxEnter.hide();
-                stage.clear();
-                game.setScreen(new TheCourtyardGameScreen(game));
-                return true;
-            }
-        });
+        DialogBoxMethods.continueDialogBox(dialogBoxEnter,"Go through the gate", stage,
+            new TheCourtyardGameScreen(game), game);
 
-        dialogBoxOrDuSot.button("Move on" , new InputListener(){
-            @Override
-            public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
-                dialogBoxOrDuSot.hide();
-                stage.addActor(dialogBoxEnter);
-                dialogBoxEnter.show(stage);
-                hud.bringToFront();
-                return true;
-            }
-        });
+        DialogBoxMethods.continueDialogBox(dialogBoxOrDuSot,dialogBoxEnter,"Move on", stage,hud);
     }
 
     private void combat288(){
