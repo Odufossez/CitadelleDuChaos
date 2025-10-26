@@ -23,6 +23,8 @@ import com.badlogic.gdx.scenes.scene2d.ui.Dialog;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 
+import static com.badlogic.citadel.Methods.Combat.displayAlertTouch;
+
 public class AtTheGateGameScreen extends ApplicationAdapter implements Screen {
     Citadel game;
     private Stage stage;
@@ -312,14 +314,18 @@ public class AtTheGateGameScreen extends ApplicationAdapter implements Screen {
                     alert.button("Ok" , Color.BLACK, new InputListener(){
                         public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
                             alert.hide();
-                            showCombatDialog(guard_Hound_Monkey, guard_Monkey_Hound);
+                            if (playerTouched !=0){
+                                displayAlertTouch(playerTouched, guard_Hound_Monkey ,stage , game, hud, () -> {
+                                    showCombatDialog(guard_Hound_Monkey, guard_Monkey_Hound);
+                                });
+                                playerTouched = 0;
+                            } else {
+                                showCombatDialog(guard_Hound_Monkey, guard_Monkey_Hound);
+                            }
                             return true;
                         }
                     });
-                    if (playerTouched !=0){
-                        Combat.displayAlertTouch(playerTouched, stage , game, hud);
-                        playerTouched = 0;
-                    }
+
                     alert.show(stage);
                     hud.bringToFront();
                     return true;
@@ -330,30 +336,34 @@ public class AtTheGateGameScreen extends ApplicationAdapter implements Screen {
         if (!guard_Monkey_Hound.isDead()){
             fightBox.button("Attack " + guard_Monkey_Hound.getName() , new InputListener(){
                 int scorePlayer;
-                int scoreGuard_MH;
+                int scoreGuard_HM;
                 int playerTouched = 0;
                 @Override
                 public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
                     scorePlayer = Dice.doubleDice() + game.getPlayer().getCurrentAbility();
-                    scoreGuard_MH = Dice.doubleDice() + guard_Monkey_Hound.getAbility();
+                    scoreGuard_HM = Dice.doubleDice() + guard_Monkey_Hound.getAbility();
 
                     fightBox.hide();
 
-                    String msg = Combat.resolutionTour(scorePlayer,scoreGuard_MH,guard_Monkey_Hound,game);
-                    playerTouched = Combat.isPlayerTouched(scorePlayer , scoreGuard_MH);
+                    String msg = Combat.resolutionTour(scorePlayer,scoreGuard_HM,guard_Monkey_Hound,game);
+                    playerTouched = Combat.isPlayerTouched(scorePlayer , scoreGuard_HM);
                     DialogAlert alert = new DialogAlert(msg);
 
-                    alert.button("Ok" , Color.BLACK , new InputListener(){
+                    alert.button("Ok" , Color.BLACK, new InputListener(){
                         public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
                             alert.hide();
-                            showCombatDialog(guard_Hound_Monkey, guard_Monkey_Hound);
+                            if (playerTouched !=0){
+                                displayAlertTouch(playerTouched, guard_Hound_Monkey ,stage , game, hud, () -> {
+                                    showCombatDialog(guard_Hound_Monkey, guard_Monkey_Hound);
+                                });
+                                playerTouched = 0;
+                            } else {
+                                showCombatDialog(guard_Hound_Monkey, guard_Monkey_Hound);
+                            }
                             return true;
                         }
                     });
-                    if (playerTouched !=0){
-                        Combat.displayAlertTouch(playerTouched, stage , game, hud);
-                        playerTouched = 0;
-                    }
+
                     alert.show(stage);
                     hud.bringToFront();
                     return true;
@@ -436,15 +446,9 @@ public class AtTheGateGameScreen extends ApplicationAdapter implements Screen {
                             DialogBox eventLevitation = new DialogBox("Narrator");
                             eventLevitation.text("The monsters are stunned as you elevate yourself over the rampart.\n" +
                                 "You just have to hope they will not alert anyone...");
-                            eventLevitation.button("Fly away" , new InputListener() {
-                                    @Override
-                                    public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
-                                        stage.clear();
-                                        game.setScreen(new TheCourtyardGameScreen(game));
-                                        return true;
-                                    }
-                                }
-                            );
+                            DialogBoxMethods.continueDialogBox(eventLevitation,"Fly away",stage,
+                                new TheCourtyardGameScreen(game),game);
+
                             stage.addActor(eventLevitation);
                             eventLevitation.show(stage);
                             hud.bringToFront();
@@ -470,7 +474,6 @@ public class AtTheGateGameScreen extends ApplicationAdapter implements Screen {
         fightBox.show(stage);
         hud.bringToFront();
     }
-
 
 
     //Méthodes de screens
