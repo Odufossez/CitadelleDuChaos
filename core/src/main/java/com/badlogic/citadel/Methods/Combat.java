@@ -76,6 +76,20 @@ public abstract class  Combat {
         hud.bringToFront();
     }
 
+    public static void displayAlertResolutionTour(String msg, Stage stage, Citadel game, HUD hud, Runnable onComplete){
+        DialogAlert alert = new DialogAlert("   Info !");
+        alert.text(msg);
+        alert.button("Ok" ,Color.BLACK, new InputListener(){
+            @Override
+            public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
+                alert.hide();
+                if (onComplete!=null) onComplete.run();
+                return true;
+            }
+        });
+        stage.addActor(alert);
+    }
+
     public static String resolutionTour(int playerScore, int monsterScore, Monster monster, Citadel game){
         String msg = "The " + monster.getName();
         if(playerScore == monsterScore){

@@ -29,11 +29,55 @@ public class Item implements Comparable{
         HOGWEED,
         HOGWEED_ESSENCE,
         JEWEL_OF_LIGHT,
+        KEY_COPPER,
         NEEDLE_KNIFE,
         POCKET_MYRIADE,
         RING_OF_SWORDSMANSHIP,
         SLUMBERBERRY,
         SWORD;
+
+        public static String getName(Items item) {
+            switch (item) {
+                case ALCHEMIST_HEALING_BALM:
+                    return "Healing Balm";
+                case BERRIES:
+                    return "Berry";
+                case CHARMED_AMULET:
+                    return "Charmed Amulet";
+                case ENCHANTED_BRUSH:
+                    return "Enchanted Brush";
+                case ENCHANTED_THROWING_DAGGER:
+                    return "Enchanted Throwing Dagger";
+                case EXOTIC_FRUITS:
+                    return "Exotic Fruits";
+                case FRUIT_OF_SILENCE:
+                    return "Fruit of Silence";
+                case GRASS:
+                    return "Grass";
+                case HALLUCINATING_POTION:
+                    return "Hallucinating Potion";
+                case HOGWEED:
+                    return "Hogweed";
+                case HOGWEED_ESSENCE:
+                    return "Hogweed Essence";
+                case JEWEL_OF_LIGHT:
+                    return "Jewel of Light";
+                case KEY_COPPER:
+                    return "Copper key";
+                case NEEDLE_KNIFE:
+                    return "Needle knife";
+                case POCKET_MYRIADE:
+                    return "Pocket Myriade";
+                case RING_OF_SWORDSMANSHIP:
+                    return "Ring of Swordsmanship";
+                case SLUMBERBERRY:
+                    return "Slumberberry";
+                case SWORD:
+                    return "Sword";
+                default:
+                    return "Unknown Item";
+            }
+        }
     }
 
     public String getName() {

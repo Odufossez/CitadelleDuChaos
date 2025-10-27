@@ -2,6 +2,7 @@ package com.badlogic.citadel.DialogWindows;
 
 import com.badlogic.citadel.Citadel;
 import com.badlogic.citadel.Item;
+import com.badlogic.citadel.PlayerRelatedMethods.Inventory;
 import com.badlogic.citadel.PlayerRelatedMethods.SpellList;
 import com.badlogic.citadel.Screens.HUD;
 import com.badlogic.citadel.Screens.OnGameScreens.RhinoDoorGameScreen;
@@ -63,20 +64,66 @@ public abstract class DialogBoxMethods {
      * @param hud      the HUD of the game
      * @param stage    the current stgae
      * @param game     the current game (e.g Citadel)
-     * @param toRemove the Item.Items to remove from the inventory
+     * @param item the item to move to/from the inventory
+     * @param add true if the item has to be added to the inventory, false if it has to be removed
      */
-    public static void continueDialogBox(DialogBox from, DialogBox to, HUD hud, Stage stage, Citadel game, Item.Items toRemove) {
-        from.button("Continue", new InputListener() {
-            public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
-                from.hide();
-                game.getPlayer().getInventory().removeFrom(toRemove);
-                stage.addActor(to);
-                to.show(stage);
-                hud.bringToFront();
-                return true;
-            }
-        });
+    public static void continueDialogBox(DialogBox from, DialogBox to, HUD hud, Stage stage, Citadel game,
+                                         Item.Items item, boolean add) {
+        if (add){ //ajouter
+            from.button("Take " + Item.Items.getName(item), new InputListener(){
+                public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
+                    from.hide();
+                    game.getPlayer().getInventory().putIn(item);
+                    stage.addActor(to);
+                    to.show(stage);
+                    hud.bringToFront();
+                    return true;
+                }
+            });
+        } else { //retirer
+            from.button("Give up on " + Item.Items.getName(item), new InputListener() {
+                public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
+                    from.hide();
+                    game.getPlayer().getInventory().removeFrom(item);
+                    stage.addActor(to);
+                    to.show(stage);
+                    hud.bringToFront();
+                    return true;
+                }
+            });
+        }
     }
+
+    public static void continueDialogBox(DialogBox from, DialogBox to, HUD hud, Stage stage, Citadel game, int amount
+        , boolean add){
+        if (add){
+            from.button("Take " + amount + " golds", new InputListener() {
+                public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
+                    from.hide();
+                    game.getPlayer().setGold(game.getPlayer().getGold() + amount);
+                    stage.addActor(to);
+                    to.show(stage);
+                    hud.bringToFront();
+                    return true;
+                }
+            });
+        } else {
+            from.button("Give up on " + amount + " golds", new InputListener() {
+                public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
+                    from.hide();
+                    game.getPlayer().setGold(game.getPlayer().getGold() - amount);
+                    stage.addActor(to);
+                    to.show(stage);
+                    hud.bringToFront();
+                    return true;
+                }
+            });
+        }
+
+
+
+    }
+
 
     /**
      * A method to continue from a dialogbox with only one choice that sets a new screen

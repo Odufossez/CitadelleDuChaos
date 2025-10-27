@@ -94,6 +94,11 @@ public class TheCourtyardGameScreen extends ApplicationAdapter implements Screen
     DialogBox dialogBoxScorpion = new DialogBox("Narrator");
     DialogBox dialogBoxNotInterested = new DialogBox("Narrator"); //149
     DialogBox dialogBoxNotInterested_1 = new DialogBox("Narrator"); //380
+    DialogBox dialogBoxFireCampFight = new DialogBox("Narrator");
+    DialogBox dialogBoxFightGolds = new DialogBox("Narrator");
+    DialogBox dialogBoxFightKey = new DialogBox("Narrator");
+    DialogBox dialogBoxFightOintment = new DialogBox("Narrator");
+    DialogBox dialogBoxEndChoice = new DialogBox("Narrator");
 
     public TheCourtyardGameScreen(Citadel game) {
         this.game = game;
@@ -645,6 +650,12 @@ public class TheCourtyardGameScreen extends ApplicationAdapter implements Screen
             });
         }
 
+        DialogBoxMethods.continueDialogBox(dialogBoxFireCampFight,dialogBoxFightGolds,hud, stage, game, 8 , true ); //8 golds
+        DialogBoxMethods.continueDialogBox(dialogBoxFireCampFight,dialogBoxFightOintment,hud,stage,game,Item.Items.ALCHEMIST_HEALING_BALM,true); //ointment
+        DialogBoxMethods.continueDialogBox(dialogBoxFireCampFight,dialogBoxFightKey,hud,stage,game, Item.Items.KEY_COPPER, true); //key
+
+        DialogBoxMethods.continueDialogBox(dialogBoxFightGolds, );
+
     }
 
     private void dialogLucky(){
@@ -866,7 +877,7 @@ public class TheCourtyardGameScreen extends ApplicationAdapter implements Screen
         hud.bringToFront();
     }
 
-    public DialogBox setupTentacleCrawl(Monster monster, int cptTour){
+    private DialogBox setupTentacleCrawl(Monster monster, int cptTour){
         DialogBox tentacleCrawl = new DialogBox("Grey Tentacle");
         DialogAlert alert = new DialogAlert("Do you want to crawl ?");
 
@@ -1010,11 +1021,96 @@ public class TheCourtyardGameScreen extends ApplicationAdapter implements Screen
 
     //combat feu de camp
     private void combat213(){
+        Monster dwarf = new Monster("Dwarf", 5,6);
+        Monster orc = new Monster("Orc", 5,7);
+        Monster goblin = new Monster("Goblin", 6,4);
 
+        showCombat213(dwarf,orc,goblin);
     }
 
-    private void showCombat213(){
+    private void showCombat213(Monster dwarf, Monster orc, Monster goblin){
+        //Conditions de victoire
+        if (dwarf.isDead() && orc.isDead() && goblin.isDead()){
+            DialogBox victory = new DialogBox("Narrator");
+            victory.text("You have defeated the Dwarfs, Orcs and Goblins!");
+            dialogBoxFireCampFight.text("You feared for a moment that the sounds of the fights could have alert anyone else" +
+                " but as nothing came, you decide to loot your enemies and found 8 gold pieces, a copper key and a jar of " +
+                "a dark, creamy ointment. You can take any two of these.");
+            DialogBoxMethods.continueDialogBox(victory, dialogBoxFireCampFight, hud, stage);
+        }
 
+        //Joueur
+        if (game.getPlayer().isDead()){
+            stage.clear();
+            game.setScreen(new GameOverScreen(game));
+            return;
+        }
+
+        //Combat
+        DialogBox fightBox = new DialogBox("Choose an action");
+
+        if (!dwarf.isDead()){
+            fightBox.button("Attack " + dwarf.getName(), new InputListener() {
+                public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
+                    fightBox.hide();
+                    int scoreDwarf = Dice.doubleDice() + dwarf.getAbility();
+                    int scorePlayer = Dice.doubleDice() + game.getPlayer().getCurrentAbility();
+
+                    Combat.displayAlertResolutionTour(Combat.resolutionTour(scoreDwarf,scorePlayer,dwarf,game), stage, game, hud, ()->{
+                        Combat.displayAlertTouch(Combat.isPlayerTouched(scoreDwarf,scorePlayer), dwarf, stage, game, hud, ()->{
+                            showCombat213(dwarf,orc,goblin);
+                        });
+                    });
+                    hud.bringToFront();
+                    return true;
+                }
+            });
+        }
+
+        if (!orc.isDead()){
+            fightBox.button("Attack " + orc.getName(), new InputListener() {
+                public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
+                    fightBox.hide();
+                    int scoreOrc = Dice.doubleDice() + orc.getAbility();
+                    int scorePlayer = Dice.doubleDice() + game.getPlayer().getCurrentAbility();
+                    Combat.displayAlertResolutionTour(Combat.resolutionTour(scoreOrc,scorePlayer,orc,game), stage, game, hud, ()->{
+                        Combat.displayAlertTouch(Combat.isPlayerTouched(scoreOrc,scorePlayer), orc, stage, game, hud, ()->{
+                            showCombat213(dwarf,orc,goblin);
+                        });
+                    });
+                    hud.bringToFront();
+                    return true;
+                }
+            });
+        }
+
+        if (!goblin.isDead()){
+            fightBox.button("Attack " + goblin.getName(), new InputListener() {
+                public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
+                    fightBox.hide();
+                    int scoreGoblin = Dice.doubleDice() + goblin.getAbility();
+                    int scorePlayer = Dice.doubleDice() + game.getPlayer().getCurrentAbility();
+                    Combat.displayAlertResolutionTour(Combat.resolutionTour(scoreGoblin,scorePlayer,goblin,game), stage, game, hud, ()->{
+                        Combat.displayAlertTouch(Combat.isPlayerTouched(scoreGoblin,scorePlayer), goblin, stage, game, hud, ()->{
+                            showCombat213(dwarf,orc,goblin);
+                        });
+                    });
+                    hud.bringToFront();
+                    return true;
+                }
+            });
+        }
+
+        fightBox.button("Flee to the monument", new InputListener() {
+            public boolean touchDown(InputEvent event, float x, float y, int pointer, int button){
+                fightBox.hide();
+                DialogBox dialogBox = new DialogBox("Narrator");
+                dialogBox.text("You flee to the monument.");
+                DialogBoxMethods.continueDialogBox(dialogBox,dialogBox209,hud,stage);
+                hud.bringToFront();
+                return true;
+            }
+        });
     }
 
     /*--------- MÉTHODES DE SCREEN ----------*/

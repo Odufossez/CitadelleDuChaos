@@ -92,7 +92,7 @@ public class AtTheGateGameScreen extends ApplicationAdapter implements Screen {
 
     private void inputPathHerbalist(){
         DialogBoxMethods.continueDialogBox(dialogBox261,dialogBox261_1,hud,stage);
-        DialogBoxMethods.continueDialogBox(dialogBox261_1,dialogBox261_2,hud,stage,game,Item.Items.GRASS);
+        DialogBoxMethods.continueDialogBox(dialogBox261_1,dialogBox261_2,hud,stage,game,Item.Items.GRASS,false);
         DialogBoxMethods.continueDialogBox(dialogBox261_2,dialogBox261_Wrong,"Pincus" , stage, hud);
         DialogBoxMethods.continueDialogBox(dialogBox261_2,dialogBox261_Kylltrog,"Kylltrog",stage,hud);
         DialogBoxMethods.continueDialogBox(dialogBox261_2,dialogBox261_Blag,"Blag",stage,hud);
