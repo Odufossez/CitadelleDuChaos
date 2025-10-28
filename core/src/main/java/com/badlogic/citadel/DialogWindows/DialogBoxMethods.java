@@ -191,13 +191,7 @@ public abstract class DialogBoxMethods {
                         return true;
                     }
                 });
-                alert.button("No", Color.BLACK, new InputListener() {
-                    public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
-                        alert.hide();
-                        hud.bringToFront();
-                        return true;
-                    }
-                });
+                alertNoButton(alert, stage, hud);
                 alert.show(stage);
                 hud.bringToFront();
                 return true;
@@ -205,5 +199,14 @@ public abstract class DialogBoxMethods {
         });
     }
 
-
+    public static void alertNoButton(DialogAlert alert, Stage stage, HUD hud){
+        alert.button("No", Color.BLACK, new InputListener(){
+            @Override
+            public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
+                alert.hide();
+                hud.bringToFront();
+                return true;
+            }
+        });
+    }
 }
