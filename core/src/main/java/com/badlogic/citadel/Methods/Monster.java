@@ -4,11 +4,13 @@ public class Monster {
     private String name;
     private int ability;
     private int vitality;
+    private int damage;
 
     public Monster(String name, int a, int v) {
         this.name = name;
         this.ability = a;
         this.vitality = v;
+        this.damage = v;
     }
 
     public void setName(String n_name) {
@@ -34,16 +36,27 @@ public class Monster {
 
 
     public void isTouchedInCombat() {
-        int curVit = this.getVitality();
-        setVitality(curVit - 2);
+        damage -= 2;
+        if (damage <= 0){
+            damage = 0;
+        }
     }
+
+    public void setDamage(int d) {
+        damage = d;
+    }
+
+    public int getDamage() {
+        return damage;
+    }
+
 
     /**
      *
      * @return true si le monstre est mort
      */
     public boolean isDead(){
-        return getVitality() <= 0;
+        return damage <= 0;
     }
 
     public String toString(){

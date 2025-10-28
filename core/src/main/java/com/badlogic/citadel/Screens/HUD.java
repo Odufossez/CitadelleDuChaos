@@ -3,6 +3,7 @@ import com.badlogic.citadel.Citadel;
 import com.badlogic.citadel.DialogWindows.DialogAlert;
 import com.badlogic.citadel.DialogWindows.InventoryDialog;
 import com.badlogic.citadel.DialogWindows.SpellBookDialog;
+import com.badlogic.citadel.Methods.Monster;
 import com.badlogic.citadel.PlayerRelatedMethods.Player;
 import com.badlogic.citadel.Methods.ScreenTransitionFade;
 import com.badlogic.citadel.Screens.PregameScreens.MainMenuScreen;
@@ -10,12 +11,12 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.scenes.scene2d.*;
-import com.badlogic.gdx.scenes.scene2d.ui.Label;
-import com.badlogic.gdx.scenes.scene2d.ui.Skin;
-import com.badlogic.gdx.scenes.scene2d.ui.Table;
-import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
+import com.badlogic.gdx.scenes.scene2d.ui.*;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.badlogic.gdx.utils.Disposable;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class HUD implements Disposable {
     private final Citadel game;
@@ -29,8 +30,10 @@ public class HUD implements Disposable {
 
     private TextButton inventoryButton, menuButton, spellbookButton;
     private Table table, tableButtons, hudLayer;
+    private Table enemyHealthTable;
 
     private Label healthLabel, luckLabel, manaLabel;
+    private List<Label> enemyHealthLabels;
 
 
     public HUD(Citadel game , Stage stage) {
@@ -46,6 +49,10 @@ public class HUD implements Disposable {
 
         tableButtons = new Table();
         tableButtons.right().top();
+
+        enemyHealthTable = new Table();
+        enemyHealthTable.top();
+        enemyHealthLabels = new ArrayList<>();
 
         recupDataPlayer();
 
@@ -72,10 +79,10 @@ public class HUD implements Disposable {
         tableButtons.row();
         tableButtons.add(menuButton).padTop(10);
 
-        //ajout des tables à la layer HUD
-        hudLayer.add(table).expand().top().left();
-        hudLayer.add().expand();
-        hudLayer.add(tableButtons).expand().top().right();
+        //on ajoute les tables au HUD
+        hudLayer.add(table).expand().top().left().padLeft(10).padTop(10);
+        hudLayer.add(enemyHealthTable).expandX().top().center();
+        hudLayer.add(tableButtons).expand().top().right().padRight(10).padTop(10);
 
         //ajout de la layer à la stage
         stage.addActor(hudLayer);
@@ -177,6 +184,56 @@ public class HUD implements Disposable {
             }
         });
     }
+
+    public void showEnenmyHealthBars(Monster... monsters){
+        if (enemyHealthTable != null) enemyHealthTable.clear();
+        if (enemyHealthLabels!=null) enemyHealthLabels.clear();
+
+        Skin skin = Skins.PLAIN_JAMES_SKIN;
+        Label.LabelStyle redStyle = new Label.LabelStyle(skin.get(Label.LabelStyle.class));
+        redStyle.fontColor = Color.RED;
+
+        for (Monster monster : monsters) {
+            if (monster != null && !monster.isDead()) {
+                String healthBarText = createHealthBar(monster);
+                Label enemyLabel = new Label(healthBarText, redStyle);
+                enemyHealthLabels.add(enemyLabel);
+                enemyHealthTable.add(enemyLabel).padTop(10);
+                enemyHealthTable.row();
+            }
+        }
+    }
+
+    private static String createHealthBar(Monster monster){
+        int maxEndurance = monster.getVitality();
+        int currEndurance = monster.getDamage();
+        int barLength = 20;
+
+        int filledBars = (int) ((float) currEndurance/maxEndurance*barLength);
+
+        StringBuilder healthbar = new StringBuilder();
+        healthbar.append(monster.getName()).append("\n");
+        healthbar.append("[");
+
+        for(int i = 0; i < barLength; i++){
+            if(i < filledBars){
+                healthbar.append("=");
+            } else {
+                healthbar.append(" ");
+            }
+        }
+
+        healthbar.append("]");
+        healthbar.append(currEndurance).append("/").append(maxEndurance);
+
+        return healthbar.toString();
+    }
+
+    public void hideEnenmyBars(){
+        enemyHealthLabels.clear();
+        enemyHealthLabels.clear();
+    }
+
 
     @Override
     public void dispose() {

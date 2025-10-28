@@ -32,6 +32,8 @@ public class AtTheGateGameScreen extends ApplicationAdapter implements Screen {
     private Skin skin;
     private HUD hud;
 
+    private boolean inFight;
+
     /*----Dialogues for the current scene (event 1)----*/
     private final DialogBox dialogBox1 = new DialogBox("Narrator");
     private final DialogBox dialogBox2 = new DialogBox("Narrator");
@@ -68,6 +70,7 @@ public class AtTheGateGameScreen extends ApplicationAdapter implements Screen {
     @Override
     public void show() {
         Gdx.input.setInputProcessor(stage);
+        inFight = false;
         create();
         input();
     }
@@ -260,6 +263,9 @@ public class AtTheGateGameScreen extends ApplicationAdapter implements Screen {
         Monster guard_Hound_Monkey = new Monster("Hound Monkey" , 6 , 6);
         Monster guard_Monkey_Hound = new Monster("Monkey Hound" , 7 , 4);
 
+        //Afficher les barres de vie
+        hud.showEnenmyHealthBars(guard_Hound_Monkey, guard_Monkey_Hound);
+
         showCombatDialog(guard_Hound_Monkey, guard_Monkey_Hound);
     }
 
@@ -267,6 +273,7 @@ public class AtTheGateGameScreen extends ApplicationAdapter implements Screen {
 
         //si les DEUX monstres sont morts
         if (guard_Hound_Monkey.isDead() && guard_Monkey_Hound.isDead()){
+            hud.hideEnenmyBars();
             DialogBox victoryBox = new DialogBox("Narrator");
             victoryBox.text("You defeated both monsters ! You lure the third guard by calling him from below and " +
                 "manage your way in the citadel.");
@@ -294,6 +301,7 @@ public class AtTheGateGameScreen extends ApplicationAdapter implements Screen {
         //Le combat se fait normalement
         DialogBox fightBox = new DialogBox("Choose an action");
 
+
         //Chien-Singe
         if (!guard_Hound_Monkey.isDead()){
             fightBox.button("Attack "+guard_Hound_Monkey.getName() , new InputListener(){
@@ -316,6 +324,7 @@ public class AtTheGateGameScreen extends ApplicationAdapter implements Screen {
                             alert.hide();
                             if (playerTouched !=0){
                                 displayAlertTouch(playerTouched, guard_Hound_Monkey ,stage , game, hud, () -> {
+                                    hud.showEnenmyHealthBars(guard_Hound_Monkey, guard_Monkey_Hound);
                                     showCombatDialog(guard_Hound_Monkey, guard_Monkey_Hound);
                                 });
                                 playerTouched = 0;
@@ -327,7 +336,6 @@ public class AtTheGateGameScreen extends ApplicationAdapter implements Screen {
                     });
 
                     alert.show(stage);
-                    hud.bringToFront();
                     return true;
                 }
             });
@@ -353,7 +361,8 @@ public class AtTheGateGameScreen extends ApplicationAdapter implements Screen {
                         public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
                             alert.hide();
                             if (playerTouched !=0){
-                                displayAlertTouch(playerTouched, guard_Hound_Monkey ,stage , game, hud, () -> {
+                                displayAlertTouch(playerTouched, guard_Monkey_Hound ,stage , game, hud, () -> {
+                                    hud.showEnenmyHealthBars(guard_Hound_Monkey, guard_Monkey_Hound);
                                     showCombatDialog(guard_Hound_Monkey, guard_Monkey_Hound);
                                 });
                                 playerTouched = 0;
@@ -365,7 +374,6 @@ public class AtTheGateGameScreen extends ApplicationAdapter implements Screen {
                     });
 
                     alert.show(stage);
-                    hud.bringToFront();
                     return true;
                 }
             });
@@ -382,6 +390,7 @@ public class AtTheGateGameScreen extends ApplicationAdapter implements Screen {
                         public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
                             game.getPlayer().getGrimoire().removeFrom(SpellList.Sorts.FORCE);
                             alert.hide();
+                            hud.hideEnenmyBars();
                             fightBox.hide();
                             DialogBox eventForce = new DialogBox("Narrator");
                             eventForce.text("You cast Force on yourself and ready yourself for the next fight.\n" +
@@ -441,6 +450,7 @@ public class AtTheGateGameScreen extends ApplicationAdapter implements Screen {
                         @Override
                         public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
                             game.getPlayer().getGrimoire().removeFrom(SpellList.Sorts.LEVITATION);
+                            hud.hideEnenmyBars();
                             fightBox.hide();
                             alert.hide();
                             DialogBox eventLevitation = new DialogBox("Narrator");

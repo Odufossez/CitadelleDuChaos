@@ -4,7 +4,6 @@ package com.badlogic.citadel.Methods;
 import com.badlogic.citadel.Citadel;
 import com.badlogic.citadel.DialogWindows.DialogAlert;
 import com.badlogic.citadel.Dice;
-import com.badlogic.citadel.PlayerRelatedMethods.Player;
 import com.badlogic.citadel.Screens.HUD;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
@@ -56,7 +55,6 @@ public abstract class  Combat {
                 });
                 stage.addActor(getLuckyResult);
                 getLuckyResult.show(stage);
-                hud.bringToFront();
                 return true;
             }
         });
@@ -71,19 +69,18 @@ public abstract class  Combat {
 
         stage.addActor(getLucky);
         getLucky.show(stage);
-        hud.bringToFront();
     }
 
     private static void resolutionLuckyStrike(int playerTouched, boolean lucky, Monster monster, Citadel game){
         //monstre touché
-        if (playerTouched==2 && lucky) monster.setVitality( monster.getVitality() - 1);
-        else if (playerTouched==2 && !lucky) monster.setVitality( monster.getVitality() + 1);
+        if (playerTouched==2 && lucky) monster.setDamage( monster.getDamage() - 1);
+        else if (playerTouched==2 && !lucky) monster.setDamage( monster.getDamage() + 1);
         //joueur touché
         else if (playerTouched==1 && lucky) game.getPlayer().setCurrentVitality( game.getPlayer().getCurrentVitality() + 1 );
         else if (playerTouched==1 && !lucky) game.getPlayer().setCurrentVitality( game.getPlayer().getCurrentVitality() - 1 );
     }
 
-    public static void displayAlertResolutionTour(String msg, Stage stage, Citadel game, HUD hud, Runnable onComplete){
+    public static void displayAlertResolutionTour(String msg, Stage stage, Runnable onComplete){
         DialogAlert alert = new DialogAlert("   Info !");
         alert.text(msg);
         alert.button("Ok" ,Color.BLACK, new InputListener(){
@@ -96,7 +93,6 @@ public abstract class  Combat {
         });
         stage.addActor(alert);
         alert.show(stage);
-        hud.bringToFront();
     }
 
     public static String resolutionTour(int playerScore, int monsterScore, Monster monster, Citadel game){

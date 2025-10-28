@@ -12,7 +12,7 @@ import static com.badlogic.citadel.Screens.Skins.PLAIN_JAMES_SKIN;
 
 public class DialogBox extends Dialog {
     private final float dialog_width = (float) 1000;
-    private final float dialog_height = (float) 200;
+    private final float dialog_height = (float) 300;
     private final float dialog_padding = 0;
     private final float button_height = (float)(40);
     private final float button_width = (float)(100);
