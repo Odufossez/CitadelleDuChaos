@@ -23,6 +23,9 @@ public class Citadel extends Game {
     public static float density;
     public Player player;
 
+    /*---------------------- Game variables like password and other key informations -----------------------------*/
+    private boolean password; //Scimitar - TheCourtyardGameScreen
+
 
 
     @Override
@@ -48,9 +51,10 @@ public class Citadel extends Game {
         grim.putIn(SpellList.Sorts.TELEPATHIE);
         grim.putIn(SpellList.Sorts.ILLUSION);
         grim.putIn(SpellList.Sorts.FORCE);
-        setScreen(new AtTheGateGameScreen(this));
+        setScreen(new TheCourtyardGameScreen(this));
         /*------ fin du temporaire ---*/
         //setScreen(menuScreen);
+        password = false;
 
     }
 
@@ -59,6 +63,8 @@ public class Citadel extends Game {
         return appPrefs;
     }
     public Player getPlayer(){ return player ;}
+    public boolean getPassword(){return password;}
+    public void setPassword(boolean b){password = b;}
 
 
     public void render(){

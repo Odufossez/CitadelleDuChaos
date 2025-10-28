@@ -227,6 +227,16 @@ public class TheCourtyardGameScreen extends ApplicationAdapter implements Screen
                 dialogBoxWind_1.text("Are you not a bit aggressive ?");
                 dialogBoxWind_2.text("The women defies you, throwing insults at you. She laughs at you when you draw out " +
                     "your sword.");
+                dialogBoxGaz.text("You concentrate and a green fuming gas jets out of your finger towards the creature. She " +
+                    "realizes that a own spinning will suck the gas inside her whirlwind and backs off. When she's far enough" +
+                    " you dash to the Black Tower.");
+                dialogBoxDouble.text("She watches in astonishment as an exact duplicate of herself appears between the two" +
+                    " of you. She backs off a bit when you instruct your creation to attack. But as they get close to one" +
+                    " another, they seem unable to get close to one another. At least, she backed off enough that it allows " +
+                    "you to continue your way towards the tower.");
+                dialogBoxFly.text("Dismayed, she watches you as you float into the air above her. She spins frantically, " +
+                    "trying to suck you down, but you are out of reach. You taunt her with a smile and a wave and float over " +
+                    "towards the Black Tower.");
                 dialogBoxFireCamp.text("A few creatures sit there around a fire camp. An Orc with green skin hands out " +
                     "paltry portions of meat to everyone. A grumpy Dwarf says he has been left out while a couple of " +
                     "Gobelins hold each other lovingly");
@@ -249,6 +259,12 @@ public class TheCourtyardGameScreen extends ApplicationAdapter implements Screen
                     " The Dwarf hits the ground with his club as he approaches you.");
                 dialogBoxScorpion.text("You transform yourself into a giant scorpio. But as it is only an illusion, your " +
                     "hits do not affect the orc and the other two resume their approach");
+                dialogBoxEndChoice.text("After you grabbing your loot, you can continue your way towards the tower or go" +
+                    " see the two men arguing under the torch.");
+                dialogBoxFightOintment.text("You take the ointment, it is an alchemist balm. You are granted two use of " +
+                    "youre magical powers for free !");
+                dialogBoxFightGolds.text("You put the golds on your pocket.");
+                dialogBoxFightKey.text("You grab the copper key. What could it open ?");
                 /*-----------------------------------------------------*/
                 inputCampFire();
                 stage.addActor(dialogBox321);
@@ -611,8 +627,17 @@ public class TheCourtyardGameScreen extends ApplicationAdapter implements Screen
         DialogBoxMethods.continueDialogBox(dialogBoxNotInterested,dialogBox209,"Inspect the monument",stage,hud);
         DialogBoxMethods.continueDialogBox(dialogBoxNotInterested,dialogBoxNotInterested_1,"Sit anyway",stage,hud);
 
-        DialogBoxMethods.continueDialogBox(dialogBoxSitDown,dialogBoxSitDown_1,"Do not wait their reactions. " +
-            "Ask how to enter the Black Tower.",stage,hud);
+        dialogBoxSitDown.button("Do not wait their reactions. Ask how to enter the Black Tower." , new InputListener() {
+            @Override
+            public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
+                dialogBoxSitDown.hide();
+                game.setPassword(true);
+                dialogBoxSitDown_1.show(stage);
+                hud.bringToFront();
+                return true;
+            }
+        });
+
         DialogBoxMethods.continueDialogBox(dialogBoxSitDown_1,dialogBoxSitDown_2,"Ask what is in the flask"
             ,stage,hud);
 
@@ -654,7 +679,17 @@ public class TheCourtyardGameScreen extends ApplicationAdapter implements Screen
         DialogBoxMethods.continueDialogBox(dialogBoxFireCampFight,dialogBoxFightOintment,hud,stage,game,Item.Items.ALCHEMIST_HEALING_BALM,true); //ointment
         DialogBoxMethods.continueDialogBox(dialogBoxFireCampFight,dialogBoxFightKey,hud,stage,game, Item.Items.KEY_COPPER, true); //key
 
-        DialogBoxMethods.continueDialogBox(dialogBoxFightGolds, );
+        DialogBoxMethods.continueDialogBox(dialogBoxFightGolds, dialogBoxEndChoice, hud, stage, game, Item.Items.ALCHEMIST_HEALING_BALM, true ); //gold + ointment
+        DialogBoxMethods.continueDialogBox(dialogBoxFightGolds, dialogBoxEndChoice, hud, stage, game, Item.Items.KEY_COPPER, true ); // gold + key
+
+        DialogBoxMethods.continueDialogBox(dialogBoxFightOintment, dialogBoxEndChoice, hud, stage, game, Item.Items.KEY_COPPER, true ); //ointment + key
+        DialogBoxMethods.continueDialogBox(dialogBoxFightOintment, dialogBoxEndChoice, hud, stage, game, 8, true ); //ointment + golds
+
+        DialogBoxMethods.continueDialogBox(dialogBoxFightKey, dialogBoxEndChoice, hud, stage, game, Item.Items.ALCHEMIST_HEALING_BALM, true ); //key + ointment
+        DialogBoxMethods.continueDialogBox(dialogBoxFightKey, dialogBoxEndChoice, hud, stage, game, 8, true ); //key + golds
+
+        DialogBoxMethods.continueDialogBox(dialogBoxEndChoice, dialogBoxDuo, "Go see the two man" , stage, hud );
+        DialogBoxMethods.continueDialogBox(dialogBoxEndChoice, dialogBoxWind, "Go to the tower", stage, hud );
 
     }
 
@@ -1111,6 +1146,9 @@ public class TheCourtyardGameScreen extends ApplicationAdapter implements Screen
                 return true;
             }
         });
+
+        fightBox.show(stage);
+        hud.bringToFront();
     }
 
     /*--------- MÉTHODES DE SCREEN ----------*/

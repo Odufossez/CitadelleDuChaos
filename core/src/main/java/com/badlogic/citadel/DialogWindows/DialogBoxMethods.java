@@ -36,12 +36,12 @@ public abstract class DialogBoxMethods {
     }
 
     /**
-     *
-     * @param from
-     * @param to
-     * @param text
-     * @param stage
-     * @param hud
+     * A method to generate a dialogBox with a personalised text button
+     * @param from the dialogBox in which the button is integrated
+     * @param to in the dialogBox the button is linked to
+     * @param text the text of the button
+     * @param stage the stage of the game
+     * @param hud the HUD of the game
      */
     public static void continueDialogBox(DialogBox from, DialogBox to, String text, Stage stage, HUD hud){
         from.button(text, new InputListener() {
@@ -199,6 +199,13 @@ public abstract class DialogBoxMethods {
         });
     }
 
+    /**
+     * A method to display a "No" button on a DialogAlert
+     *
+     * @param alert the dialogAlert to add the button to
+     * @param stage the stage of the game
+     * @param hud the HUD of the game
+     */
     public static void alertNoButton(DialogAlert alert, Stage stage, HUD hud){
         alert.button("No", Color.BLACK, new InputListener(){
             @Override

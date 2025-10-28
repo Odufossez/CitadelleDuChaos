@@ -4,6 +4,7 @@ package com.badlogic.citadel.Methods;
 import com.badlogic.citadel.Citadel;
 import com.badlogic.citadel.DialogWindows.DialogAlert;
 import com.badlogic.citadel.Dice;
+import com.badlogic.citadel.PlayerRelatedMethods.Player;
 import com.badlogic.citadel.Screens.HUD;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
@@ -16,10 +17,10 @@ public abstract class  Combat {
         String resultP1 = ""; //lucky or not
         String resultP2 = ""; //who is hit
 
-        if (playerTouched==1){
+        if (playerTouched==1){ //joueur touché
             msg = "Will you taunt the devil to take less damage ? ";
             resultP2 = " were hit for 1 less damage.";
-        } else if (playerTouched==2){
+        } else if (playerTouched==2){ //monstre touché
             msg = "Will you taunt the devil to make more damage ? ";
             resultP2 = " hit the monster for 1 more damage";
         } else {
@@ -29,12 +30,8 @@ public abstract class  Combat {
         boolean lucky = Dice.doubleDice() <= game.getPlayer().getCurrentLuck(); //true = lucky
         if (lucky){
             resultP1 = " You got lucky and ";
-            if (playerTouched==2) monster.setVitality( monster.getVitality() - 1);
-            else game.getPlayer().setCurrentVitality( game.getPlayer().getCurrentVitality() + 1);
         } else {
             resultP1 = " You lost your bet and ";
-            if (playerTouched==2) monster.setVitality( monster.getVitality() + 1);
-            else game.getPlayer().setCurrentVitality( game.getPlayer().getCurrentVitality() - 1 );
         }
 
         String msgFinal = resultP1 + resultP2;
@@ -52,6 +49,7 @@ public abstract class  Combat {
                     @Override
                     public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
                         getLuckyResult.hide();
+                        resolutionLuckyStrike(playerTouched,lucky,monster,game);
                         if(onComplete!=null) onComplete.run();
                         return true;
                     }
@@ -76,6 +74,15 @@ public abstract class  Combat {
         hud.bringToFront();
     }
 
+    private static void resolutionLuckyStrike(int playerTouched, boolean lucky, Monster monster, Citadel game){
+        //monstre touché
+        if (playerTouched==2 && lucky) monster.setVitality( monster.getVitality() - 1);
+        else if (playerTouched==2 && !lucky) monster.setVitality( monster.getVitality() + 1);
+        //joueur touché
+        else if (playerTouched==1 && lucky) game.getPlayer().setCurrentVitality( game.getPlayer().getCurrentVitality() + 1 );
+        else if (playerTouched==1 && !lucky) game.getPlayer().setCurrentVitality( game.getPlayer().getCurrentVitality() - 1 );
+    }
+
     public static void displayAlertResolutionTour(String msg, Stage stage, Citadel game, HUD hud, Runnable onComplete){
         DialogAlert alert = new DialogAlert("   Info !");
         alert.text(msg);
@@ -88,6 +95,8 @@ public abstract class  Combat {
             }
         });
         stage.addActor(alert);
+        alert.show(stage);
+        hud.bringToFront();
     }
 
     public static String resolutionTour(int playerScore, int monsterScore, Monster monster, Citadel game){
