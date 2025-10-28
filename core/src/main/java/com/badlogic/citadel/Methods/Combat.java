@@ -23,6 +23,7 @@ public abstract class  Combat {
             msg = "Will you taunt the devil to make more damage ? ";
             resultP2 = " hit the monster for 1 more damage";
         } else {
+            onComplete.run();
             return;
         }
 
@@ -100,10 +101,10 @@ public abstract class  Combat {
         if(playerScore == monsterScore){
             msg +=  " and you pared your hits !\nNobody was hurt.";
         } else if (playerScore > monsterScore) {
-            msg += " took 2 damage from your hit !";
+            msg += " took 2 damage from your hit ! " + playerScore + " vs " + monsterScore;
             monster.isTouchedInCombat();
         } else {
-            msg += " hits you for 2 damage !";
+            msg += " hits you for 2 damage ! " + playerScore + " vs " + monsterScore;
             game.getPlayer().isTouchedInCombat();
         }
         return msg;

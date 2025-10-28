@@ -14,13 +14,10 @@ import com.badlogic.gdx.*;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
-import com.badlogic.gdx.scenes.scene2d.Event;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.InputListener;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
-
-import java.awt.*;
 
 //251
 public class TheCourtyardGameScreen extends ApplicationAdapter implements Screen {
@@ -118,6 +115,17 @@ public class TheCourtyardGameScreen extends ApplicationAdapter implements Screen
         dialogBox1.text("You are standing in the shadow of the rampart surrounding the courtyard." +
             "How do you want to proceed? You could sneak your way to the next door or cross the courtyard." +
             "Maybe go talk to the bystanders on your left ?");
+        dialogBox209.text("You take a look at the rather odd structure. It is not a fountain but a sort of temple. " +
+            "There is a door on the side. Might be worth a look, or maybe you prefer to continue on your way to the tower.");
+        dialogBoxGreyTentacle.text("Walking the courtyard, you walk along a lump that seems to connect the temple " +
+            "to the tower; like a canalisation right under the dirt.");
+        dialogBoxGreyTentacle_1.text("You examine it closer, maybe it is just a mole gallery ? But when you touch it, " +
+            "it retracts and a grey tentacle appears from the ground and grab you by the leg.");
+        dialogBoxLevitation.text("You cast Levitation and start to float. The tentacle goes up in the air with you " +
+            "and your leg starts to hurt tremendously.");
+        dialogBoxLevitation_1.text("No other choices now but to fight or cast another spell.");
+        dialogBoxFire.text("You cast Fire and the tentacle starts to tremble and release your leg before retreat " +
+            "below the dirt. You rub your numb leg and resume your way towards the tower.");
         dialogBox1.show(stage);
         hud.bringToFront();
     }
@@ -175,17 +183,7 @@ public class TheCourtyardGameScreen extends ApplicationAdapter implements Screen
                     "not touch you if you run fast enough.");
                 dialogBox341.text("You cast Protection on yourself and move forward. Four or five arrows hiss and crash " +
                     "on the shield and you manage to reach the monument unharmed.");
-                dialogBox209.text("You take a look at the rather odd structure. It is not a fountain but a sort of temple. " +
-                    "There is a door on the side. Might be worth a look, or maybe you prefer to continue on your way to the tower.");
-                dialogBoxGreyTentacle.text("Walking the courtyard, you walk along a lump that seems to connect the temple " +
-                    "to the tower; like a canalisation right under the dirt.");
-                dialogBoxGreyTentacle_1.text("You examine it closer, maybe it is just a mole gallery ? But when you touch it, " +
-                    "it retracts and a grey tentacle appears from the ground and grab you by the leg.");
-                dialogBoxLevitation.text("You cast Levitation and start to float. The tentacle goes up in the air with you " +
-                    "and your leg starts to hurt tremendously.");
-                dialogBoxLevitation_1.text("No other choices now but to fight or cast another spell.");
-                dialogBoxFire.text("You cast Fire and the tentacle starts to tremble and release your leg before retreat " +
-                    "below the dirt. You rub your numb leg and resume your way towards the tower.");
+
                 /*------------------------------------------------------*/
                 inputArrows();
                 stage.addActor(dialogBox179);
@@ -273,6 +271,38 @@ public class TheCourtyardGameScreen extends ApplicationAdapter implements Screen
                 return true;
             }
         });
+
+        DialogBoxMethods.continueDialogBox(dialogBox209,"Open the door", stage, new TempleOfTheCourtyardGameScreen(game), game);
+        DialogBoxMethods.continueDialogBox(dialogBox209,dialogBoxGreyTentacle,"Continue my way to the tower", stage, hud);
+        DialogBoxMethods.continueDialogBox(dialogBoxGreyTentacle,dialogBoxGreyTentacle_1,"Take a closer look", stage,hud);
+
+        dialogBoxGreyTentacle_1.button("Draw out your sword" , new InputListener() {
+            public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
+                dialogBoxGreyTentacle_1.hide();
+                combat71();
+                hud.bringToFront();
+                return true;
+            }
+        });
+        if (game.getPlayer().getGrimoire().isInGrimoire(SpellList.Sorts.LEVITATION)){
+            DialogBoxMethods.alertSpellDialog(dialogBoxGreyTentacle_1,dialogBoxLevitation, SpellList.Sorts.LEVITATION,hud,stage,game);
+            DialogBoxMethods.continueDialogBox(dialogBoxLevitation,dialogBoxLevitation_1,"Get back down", stage,hud);
+
+            dialogBoxLevitation_1.button("Draw out my sword" , new InputListener() {
+                public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
+                    dialogBoxLevitation_1.hide();
+                    combat71();
+                    hud.bringToFront();
+                    return true;
+                }
+            });
+        }
+
+        if (game.getPlayer().getGrimoire().isInGrimoire(SpellList.Sorts.FEU)){
+            DialogBoxMethods.alertSpellDialog(dialogBoxGreyTentacle_1,dialogBoxFire, SpellList.Sorts.FEU,hud,stage,game);
+            DialogBoxMethods.alertSpellDialog(dialogBoxLevitation_1,dialogBoxFire, SpellList.Sorts.FEU,hud,stage,game);
+            DialogBoxMethods.continueDialogBox(dialogBoxFire,"Go to the tower's door",stage,new RhinoDoorGameScreen(game),game);
+        }
     }
 
     //222
@@ -667,11 +697,11 @@ public class TheCourtyardGameScreen extends ApplicationAdapter implements Screen
             DialogBoxMethods.alertSpellDialog(dialogBoxSitDown_3,dialogBoxScorpion, SpellList.Sorts.ILLUSION,hud,stage
                 ,game);
             dialogBoxScorpion.button("Draw out my sword", new InputListener(){
-               public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
-                   dialogBoxScorpion.hide();
-                   combat213();
-                   return true;
-               }
+                public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
+                    dialogBoxScorpion.hide();
+                    combat213();
+                    return true;
+                }
             });
         }
 
@@ -799,49 +829,20 @@ public class TheCourtyardGameScreen extends ApplicationAdapter implements Screen
             }
         });
         DialogBoxMethods.continueDialogBox(dialogBox341,dialogBox209,"Hide behind the monument" , stage, hud);
-        DialogBoxMethods.continueDialogBox(dialogBox209,"Open the door",stage,new TempleOfTheCourtyardGameScreen(game),game);
-        DialogBoxMethods.continueDialogBox(dialogBox209,dialogBoxGreyTentacle,"Continue my way to the tower", stage,hud);
-        DialogBoxMethods.continueDialogBox(dialogBoxGreyTentacle,dialogBoxGreyTentacle_1,"Take a closer look", stage,hud);
-
-        dialogBoxGreyTentacle_1.button("Draw out your sword" , new InputListener() {
-            public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
-                dialogBoxGreyTentacle_1.hide();
-                combat71();
-                hud.bringToFront();
-                return true;
-            }
-        });
-        if (game.getPlayer().getGrimoire().isInGrimoire(SpellList.Sorts.LEVITATION)){
-            DialogBoxMethods.alertSpellDialog(dialogBoxGreyTentacle_1,dialogBoxLevitation, SpellList.Sorts.LEVITATION,hud,stage,game);
-            DialogBoxMethods.continueDialogBox(dialogBoxLevitation,dialogBoxLevitation_1,"Get back down", stage,hud);
-
-            dialogBoxLevitation_1.button("Draw out my sword" , new InputListener() {
-                public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
-                    dialogBoxLevitation_1.hide();
-                    combat71();
-                    hud.bringToFront();
-                    return true;
-                }
-            });
-        }
-
-        if (game.getPlayer().getGrimoire().isInGrimoire(SpellList.Sorts.FEU)){
-            DialogBoxMethods.alertSpellDialog(dialogBoxGreyTentacle_1,dialogBoxFire, SpellList.Sorts.FEU,hud,stage,game);
-            DialogBoxMethods.alertSpellDialog(dialogBoxLevitation_1,dialogBoxFire, SpellList.Sorts.FEU,hud,stage,game);
-            DialogBoxMethods.continueDialogBox(dialogBoxFire,"Go to the tower's door",stage,new RhinoDoorGameScreen(game),game);
-        }
     }
 
     //combat grey tentacle
     private void combat71(){
         Monster greyTentacle = new Monster("Grey tentacle" , 15 , 2);
         int compteurTour = 1;
+        hud.showEnenmyHealthBars(greyTentacle);
         showCombatDialogBox71(greyTentacle, compteurTour);
     }
 
     private void showCombatDialogBox71(Monster monster, int cptTour){
         //le monstre est mort
         if (monster.isDead() && cptTour != 4){
+            hud.hideEnenmyBars();
             DialogBox victory = new DialogBox("Narrator");
             victory.text("You have defeated the Grey Tentacle.\n" +
                 "You continue your way to the Tower.");
@@ -873,7 +874,6 @@ public class TheCourtyardGameScreen extends ApplicationAdapter implements Screen
                         public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
                             alert.hide();
                             tentacleCrawl.show(stage);
-                            hud.bringToFront();
                             return true;
                         }
                     });
@@ -942,6 +942,7 @@ public class TheCourtyardGameScreen extends ApplicationAdapter implements Screen
         Monster tallMan = new Monster("Tall man", 8,8);
         Monster ally = new Monster("Small man", 7,6);
 
+        hud.showEnenmyHealthBars(tallMan , ally);
         showDialogBox205(tallMan,ally);
     }
 
@@ -997,17 +998,16 @@ public class TheCourtyardGameScreen extends ApplicationAdapter implements Screen
                     fightBox2.button("Continue" , new InputListener() {
                         public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
                             fightBox2.hide();
+                            hud.showEnenmyHealthBars(monster , ally);
                             showDialogBox205(monster,ally);
                             return true;
                         }
                     });
                     fightBox2.show(stage);
-                    hud.bringToFront();
                     return true;
                 }
             });
             alert.show(stage);
-            hud.bringToFront();
         } else {
             DialogAlert alert = new DialogAlert("   Info !");
             alert.text("    The tall man attacks you !");
@@ -1028,29 +1028,26 @@ public class TheCourtyardGameScreen extends ApplicationAdapter implements Screen
                                     int playerTouched = Combat.isPlayerTouched(scorePlayer,scoreMonster);
                                     if (playerTouched != 0){
                                         Combat.displayAlertTouch(playerTouched,monster,stage,game,hud, ()->{
+                                            hud.showEnenmyHealthBars(monster , ally);
                                             showDialogBox205(monster,ally);
                                         });
                                         playerTouched = 0;
                                     } else {
+                                        //si pas touché, pas besoin de mettre à jour
                                         showDialogBox205(monster,ally);
                                     }
-
-                                    hud.bringToFront();
                                     return true;
                                 }
                             });
                             alert.show(stage);
-                            hud.bringToFront();
                             return true;
                         }
                     });
                     fightBox.show(stage);
-                    hud.bringToFront();
                     return true;
                 }
             });
             alert.show(stage);
-            hud.bringToFront();
         }
     }
 
@@ -1060,12 +1057,14 @@ public class TheCourtyardGameScreen extends ApplicationAdapter implements Screen
         Monster orc = new Monster("Orc", 5,7);
         Monster goblin = new Monster("Goblin", 6,4);
 
+        hud.showEnenmyHealthBars(dwarf , orc , goblin);
         showCombat213(dwarf,orc,goblin);
     }
 
     private void showCombat213(Monster dwarf, Monster orc, Monster goblin){
         //Conditions de victoire
         if (dwarf.isDead() && orc.isDead() && goblin.isDead()){
+            hud.hideEnenmyBars();
             DialogBox victory = new DialogBox("Narrator");
             victory.text("You have defeated the Dwarfs, Orcs and Goblins!");
             dialogBoxFireCampFight.text("You feared for a moment that the sounds of the fights could have alert anyone else" +
@@ -1091,12 +1090,12 @@ public class TheCourtyardGameScreen extends ApplicationAdapter implements Screen
                     int scoreDwarf = Dice.doubleDice() + dwarf.getAbility();
                     int scorePlayer = Dice.doubleDice() + game.getPlayer().getCurrentAbility();
 
-                    Combat.displayAlertResolutionTour(Combat.resolutionTour(scoreDwarf,scorePlayer,dwarf,game), stage, game, hud, ()->{
+                    Combat.displayAlertResolutionTour(Combat.resolutionTour(scoreDwarf,scorePlayer,dwarf,game), stage, ()->{
                         Combat.displayAlertTouch(Combat.isPlayerTouched(scoreDwarf,scorePlayer), dwarf, stage, game, hud, ()->{
+                            hud.showEnenmyHealthBars(dwarf , orc , goblin);
                             showCombat213(dwarf,orc,goblin);
                         });
                     });
-                    hud.bringToFront();
                     return true;
                 }
             });
@@ -1108,12 +1107,12 @@ public class TheCourtyardGameScreen extends ApplicationAdapter implements Screen
                     fightBox.hide();
                     int scoreOrc = Dice.doubleDice() + orc.getAbility();
                     int scorePlayer = Dice.doubleDice() + game.getPlayer().getCurrentAbility();
-                    Combat.displayAlertResolutionTour(Combat.resolutionTour(scoreOrc,scorePlayer,orc,game), stage, game, hud, ()->{
+                    Combat.displayAlertResolutionTour(Combat.resolutionTour(scoreOrc,scorePlayer,orc,game), stage, ()->{
                         Combat.displayAlertTouch(Combat.isPlayerTouched(scoreOrc,scorePlayer), orc, stage, game, hud, ()->{
+                            hud.showEnenmyHealthBars(dwarf , orc , goblin);
                             showCombat213(dwarf,orc,goblin);
                         });
                     });
-                    hud.bringToFront();
                     return true;
                 }
             });
@@ -1125,12 +1124,12 @@ public class TheCourtyardGameScreen extends ApplicationAdapter implements Screen
                     fightBox.hide();
                     int scoreGoblin = Dice.doubleDice() + goblin.getAbility();
                     int scorePlayer = Dice.doubleDice() + game.getPlayer().getCurrentAbility();
-                    Combat.displayAlertResolutionTour(Combat.resolutionTour(scoreGoblin,scorePlayer,goblin,game), stage, game, hud, ()->{
+                    Combat.displayAlertResolutionTour(Combat.resolutionTour(scoreGoblin,scorePlayer,goblin,game), stage, ()->{
                         Combat.displayAlertTouch(Combat.isPlayerTouched(scoreGoblin,scorePlayer), goblin, stage, game, hud, ()->{
+                            hud.showEnenmyHealthBars(dwarf , orc , goblin);
                             showCombat213(dwarf,orc,goblin);
                         });
                     });
-                    hud.bringToFront();
                     return true;
                 }
             });
@@ -1139,10 +1138,11 @@ public class TheCourtyardGameScreen extends ApplicationAdapter implements Screen
         fightBox.button("Flee to the monument", new InputListener() {
             public boolean touchDown(InputEvent event, float x, float y, int pointer, int button){
                 fightBox.hide();
+                hud.hideEnenmyBars();
                 DialogBox dialogBox = new DialogBox("Narrator");
                 dialogBox.text("You flee to the monument.");
                 DialogBoxMethods.continueDialogBox(dialogBox,dialogBox209,hud,stage);
-                hud.bringToFront();
+                dialogBox.show(stage);
                 return true;
             }
         });

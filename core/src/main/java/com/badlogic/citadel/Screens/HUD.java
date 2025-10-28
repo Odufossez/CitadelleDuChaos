@@ -231,7 +231,7 @@ public class HUD implements Disposable {
 
     public void hideEnenmyBars(){
         enemyHealthLabels.clear();
-        enemyHealthLabels.clear();
+        enemyHealthTable.clear();
     }
 
 

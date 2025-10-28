@@ -47,7 +47,6 @@ public class InventoryDialog extends Dialog {
         button.padRight(button_pad_h);
 
         getButtonTable().add(button).height(button_height);
-        getButtonTable().row();
     }
 
 
