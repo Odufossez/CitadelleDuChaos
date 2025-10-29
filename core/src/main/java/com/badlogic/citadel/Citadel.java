@@ -6,6 +6,7 @@ import com.badlogic.citadel.PlayerRelatedMethods.SpellBook;
 import com.badlogic.citadel.PlayerRelatedMethods.SpellList;
 import com.badlogic.citadel.Screens.OnGameScreens.AtTheGateGameScreen;
 import com.badlogic.citadel.Screens.OnGameScreens.IntroGameScreen;
+import com.badlogic.citadel.Screens.OnGameScreens.TempleOfTheCourtyardGameScreen;
 import com.badlogic.citadel.Screens.OnGameScreens.TheCourtyardGameScreen;
 import com.badlogic.citadel.Screens.PregameScreens.MainMenuScreen;
 import com.badlogic.gdx.Game;
@@ -37,7 +38,8 @@ public class Citadel extends Game {
         density = Gdx.graphics.getDensity();
 
         //TODO à changer pour la version finale -- player et grimoire virtuel pour les tests
-        player = new Player(10,15,9,0,0);
+        player = new Player(10,15,9,0,2);
+        player.isTouchedInCombat();
 
         SpellBook grim = player.getGrimoire();
         grim.putIn(SpellList.Sorts.HABILITE);
@@ -49,7 +51,7 @@ public class Citadel extends Game {
         grim.putIn(SpellList.Sorts.TELEPATHIE);
         grim.putIn(SpellList.Sorts.ILLUSION);
         grim.putIn(SpellList.Sorts.FORCE);
-        setScreen(new TheCourtyardGameScreen(this));
+        setScreen(new TempleOfTheCourtyardGameScreen(this));
         /*------ fin du temporaire ---*/
         //setScreen(menuScreen);
         password = false;

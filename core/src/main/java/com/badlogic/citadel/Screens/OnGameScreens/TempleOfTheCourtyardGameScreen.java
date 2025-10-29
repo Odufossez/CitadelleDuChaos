@@ -23,7 +23,6 @@ public class TempleOfTheCourtyardGameScreen extends ApplicationAdapter implement
     private Citadel game;
     private Stage stage;
     private HUD hud;
-    private Player player;
 
     DialogBox dialogBox362_1 = new DialogBox("Narrator");
     DialogBox dialogBox362_2 = new DialogBox("Narrator");
@@ -38,7 +37,6 @@ public class TempleOfTheCourtyardGameScreen extends ApplicationAdapter implement
         this.game = game;
         stage = new Stage(new ScreenViewport());
         hud = new HUD(game,stage);
-        player = game.getPlayer();
     }
 
     @Override
@@ -46,6 +44,7 @@ public class TempleOfTheCourtyardGameScreen extends ApplicationAdapter implement
         Gdx.input.setInputProcessor(stage);
         create();
         input();
+        dialogBox362_1.show(stage);
     }
 
     public void create(){

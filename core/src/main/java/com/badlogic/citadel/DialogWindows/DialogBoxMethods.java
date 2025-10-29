@@ -156,7 +156,6 @@ public abstract class DialogBoxMethods {
         }
     }
 
-
     /**
      * A method to continue from a dialogbox with only one choice that sets a new screen
      *
