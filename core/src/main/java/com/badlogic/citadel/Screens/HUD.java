@@ -28,6 +28,10 @@ public class HUD implements Disposable {
     private int maxLuck;
     private int mana , maxMana;
 
+    private InventoryDialog inventoryDialog;
+    private SpellBookDialog spellBookDialog;
+    private DialogAlert menuAlert;
+
     private TextButton inventoryButton, menuButton, spellbookButton;
     private Table table, tableButtons, hudLayer;
     private Table enemyHealthTable;
@@ -110,77 +114,101 @@ public class HUD implements Disposable {
         maxLuck = ply.getLuck();
     }
 
+    private void backButton(Dialog dialog , Runnable onBack){
+        dialog.button("Back",new InputListener(){
+            @Override
+            public boolean touchDown(InputEvent event, float x , float y, int pointer, int button){
+                dialog.hide();
+                onBack.run();
+                return true;
+            }
+        });
+    }
+
     public void input(final Stage stage){
         inventoryButton.addListener(new ChangeListener() {
             @Override
             public void changed(ChangeEvent event, Actor actor) { //todo pas possible d'ouvrir en double
-                InventoryDialog inventoryDialog = new InventoryDialog(game);
-                inventoryDialog.button("Back", new InputListener(){
-                    @Override
-                    public boolean touchDown(InputEvent event, float x , float y, int pointer, int button){
-                        inventoryDialog.hide();
-                        return true;
-                    }
-                });
-                inventoryDialog.getButtonTable().row();
-                inventoryDialog.show(stage);
-                bringToFront();
+                if (inventoryDialog != null) {
+                    inventoryDialog.hide();
+                    inventoryDialog = null;
+                }
+                else{
+                    inventoryDialog = new InventoryDialog(game);
+                    backButton(inventoryDialog , () ->{
+                        inventoryDialog = null;
+                    });
+                    inventoryDialog.getButtonTable().row();
+                    inventoryDialog.show(stage);
+                    bringToFront();
+                }
+
             }
         });
 
         spellbookButton.addListener(new ChangeListener() {
-           @Override
-           public void changed(ChangeEvent event, Actor actor) { //todo pas possible d'ouvrir en double
-               SpellBookDialog spellBookDialog = new SpellBookDialog(game);
-               spellBookDialog.button("Back", new InputListener(){
-                   @Override
-                   public boolean touchDown(InputEvent event, float x , float y, int pointer, int button){
-                       spellBookDialog.hide();
-                       return true;
-                   }
-               });
-               spellBookDialog.getButtonTable().row();
-               spellBookDialog.show(stage);
-               bringToFront();
-           }
+            @Override
+            public void changed(ChangeEvent event, Actor actor) { //todo pas possible d'ouvrir en double
+                if (spellBookDialog != null) {
+                    spellBookDialog.hide();
+                    spellBookDialog = null;
+                } else {
+                    spellBookDialog = new SpellBookDialog(game);
+                    backButton(spellBookDialog , () ->{
+                        spellBookDialog = null;
+                    });
+                    spellBookDialog.getButtonTable().row();
+                    spellBookDialog.show(stage);
+                    bringToFront();
+                }
+
+            }
         });
 
         menuButton.addListener(new ChangeListener() {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
-                DialogAlert menuAlert = new DialogAlert("Menu"); //TODO pass possible d'ouvrir en double
-                menuAlert.button("Main menu", Color.BLACK, new InputListener(){ //TODO AN "ARE YOU SURE"
-                    @Override
-                    public boolean touchDown(InputEvent event, float x , float y, int pointer, int button){
-                        stage.clear();
-                        Screen next = new MainMenuScreen(game);
-                        game.setScreen(new ScreenTransitionFade(game,game.getScreen(), next , 1));
-                        return true;
-                    }
-                });
-                menuAlert.getButtonTable().row();
+                if (menuAlert != null){
+                    menuAlert.hide();
+                    menuAlert = null;
+                } else {
+                    menuAlert = new DialogAlert("Menu"); //TODO pass possible d'ouvrir en double
+                    menuAlert.button("Main menu", Color.BLACK, new InputListener(){ //TODO AN "ARE YOU SURE"
+                        @Override
+                        public boolean touchDown(InputEvent event, float x , float y, int pointer, int button){
+                            stage.clear();
+                            Screen next = new MainMenuScreen(game);
+                            game.setScreen(new ScreenTransitionFade(game,game.getScreen(), next , 1));
+                            return true;
+                        }
+                    });
 
-                menuAlert.button("Quit", Color.BLACK ,new InputListener(){ //TODO AN "ARE YOU SURE"
-                    @Override
-                    public boolean touchDown(InputEvent event, float x , float y, int pointer, int button){
-                        Gdx.app.exit();
-                        return true;
-                    }
-                });
-                menuAlert.getButtonTable().row();
+                    menuAlert.getButtonTable().row();
 
-                menuAlert.button("Back", Color.BLACK ,new InputListener(){
-                    @Override
-                    public boolean touchDown(InputEvent event, float x , float y, int pointer, int button){
-                        menuAlert.hide();
-                        return true;
-                    }
-                });
-                menuAlert.getButtonTable().row();
+                    menuAlert.button("Quit", Color.BLACK ,new InputListener(){ //TODO AN "ARE YOU SURE"
+                        @Override
+                        public boolean touchDown(InputEvent event, float x , float y, int pointer, int button){
+                            Gdx.app.exit();
+                            return true;
+                        }
+                    });
+                    menuAlert.getButtonTable().row();
 
-                stage.addActor(menuAlert);
-                menuAlert.show(stage);
-                bringToFront();
+                    menuAlert.button("Back", Color.BLACK ,new InputListener(){
+                        @Override
+                        public boolean touchDown(InputEvent event, float x , float y, int pointer, int button){
+                            menuAlert.hide();
+                            return true;
+                        }
+                    });
+                    menuAlert.getButtonTable().row();
+
+                    stage.addActor(menuAlert);
+                    menuAlert.show(stage);
+                    bringToFront();
+                }
+
+
             }
         });
     }
