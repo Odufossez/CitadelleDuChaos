@@ -17,7 +17,7 @@ public class DialogAlert extends Dialog {
 
     private float dialog_width = (float) (600);
     private float dialog_height = (float) (200);
-    private final float dialog_padding = (float) (0);
+    private final float dialog_padding = (float) (10);
     private final float button_height = (float) (60);
     private final float button_width = (float) (150);
     private final float button_pad_h = (float) (10);
@@ -32,8 +32,9 @@ public class DialogAlert extends Dialog {
         padLeft(dialog_padding);
         padRight(dialog_padding);
         padBottom(dialog_padding);
-        getButtonTable().defaults().height(button_height);
-        getContentTable().defaults().width(dialog_width);
+
+        getContentTable().defaults().width(dialog_width - dialog_padding * 2);
+
 
         setModal(true);
         setMovable(false);

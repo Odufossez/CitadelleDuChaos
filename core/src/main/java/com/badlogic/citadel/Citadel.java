@@ -4,6 +4,8 @@ import com.badlogic.citadel.Methods.AppPreferences;
 import com.badlogic.citadel.PlayerRelatedMethods.Player;
 import com.badlogic.citadel.PlayerRelatedMethods.SpellBook;
 import com.badlogic.citadel.PlayerRelatedMethods.SpellList;
+import com.badlogic.citadel.Screens.OnGameScreens.AtTheGateGameScreen;
+import com.badlogic.citadel.Screens.OnGameScreens.IntroGameScreen;
 import com.badlogic.citadel.Screens.OnGameScreens.TheCourtyardGameScreen;
 import com.badlogic.citadel.Screens.PregameScreens.MainMenuScreen;
 import com.badlogic.gdx.Game;
