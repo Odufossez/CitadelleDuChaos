@@ -128,7 +128,7 @@ public class HUD implements Disposable {
     public void input(final Stage stage){
         inventoryButton.addListener(new ChangeListener() {
             @Override
-            public void changed(ChangeEvent event, Actor actor) { //todo pas possible d'ouvrir en double
+            public void changed(ChangeEvent event, Actor actor) {
                 if (inventoryDialog != null) {
                     inventoryDialog.hide();
                     inventoryDialog = null;
@@ -148,7 +148,7 @@ public class HUD implements Disposable {
 
         spellbookButton.addListener(new ChangeListener() {
             @Override
-            public void changed(ChangeEvent event, Actor actor) { //todo pas possible d'ouvrir en double
+            public void changed(ChangeEvent event, Actor actor) {
                 if (spellBookDialog != null) {
                     spellBookDialog.hide();
                     spellBookDialog = null;
@@ -172,7 +172,7 @@ public class HUD implements Disposable {
                     menuAlert.hide();
                     menuAlert = null;
                 } else {
-                    menuAlert = new DialogAlert("Menu"); //TODO pass possible d'ouvrir en double
+                    menuAlert = new DialogAlert("Menu");
                     menuAlert.button("Main menu", Color.BLACK, new InputListener(){ //TODO AN "ARE YOU SURE"
                         @Override
                         public boolean touchDown(InputEvent event, float x , float y, int pointer, int button){

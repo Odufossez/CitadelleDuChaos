@@ -555,6 +555,15 @@ public class TheCourtyardGameScreen extends ApplicationAdapter implements Screen
         DialogBoxMethods.continueDialogBox(dialogBoxNotInterested,dialogBox209,"Inspect the monument",stage,hud);
         DialogBoxMethods.continueDialogBox(dialogBoxNotInterested,dialogBoxNotInterested_1,"Sit anyway",stage,hud);
 
+        dialogBoxNotInterested_1.button("Defend yourself" , new InputListener() {
+            public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
+                dialogBoxNotInterested_1.hide();
+                combat213();
+                hud.bringToFront();
+                return true;
+            }
+        });
+
         dialogBoxSitDown.button("Do not wait their reactions. Ask how to enter the Black Tower." , new InputListener() {
             @Override
             public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
@@ -863,6 +872,8 @@ public class TheCourtyardGameScreen extends ApplicationAdapter implements Screen
                 " but as nothing came, you decide to loot your enemies and found 8 gold pieces, a copper key and a jar of " +
                 "a dark, creamy ointment. You can take any two of these.");
             DialogBoxMethods.continueDialogBox(victory, dialogBoxFireCampFight, hud, stage);
+            victory.show(stage);
+            return;
         }
 
         //Joueur
@@ -882,7 +893,7 @@ public class TheCourtyardGameScreen extends ApplicationAdapter implements Screen
                     int scoreDwarf = Dice.doubleDice() + dwarf.getAbility();
                     int scorePlayer = Dice.doubleDice() + game.getPlayer().getCurrentAbility();
 
-                    Combat.displayAlertResolutionTour(Combat.resolutionTour(scoreDwarf,scorePlayer,dwarf,game), stage, ()->{
+                    Combat.displayAlertResolutionTour(Combat.resolutionTour(scorePlayer,scoreDwarf,dwarf,game), stage, ()->{
                         Combat.displayAlertTouch(Combat.isPlayerTouched(scoreDwarf,scorePlayer), dwarf, stage, game, hud, ()->{
                             hud.showEnenmyHealthBars(dwarf , orc , goblin);
                             showCombat213(dwarf,orc,goblin);
@@ -899,7 +910,7 @@ public class TheCourtyardGameScreen extends ApplicationAdapter implements Screen
                     fightBox.hide();
                     int scoreOrc = Dice.doubleDice() + orc.getAbility();
                     int scorePlayer = Dice.doubleDice() + game.getPlayer().getCurrentAbility();
-                    Combat.displayAlertResolutionTour(Combat.resolutionTour(scoreOrc,scorePlayer,orc,game), stage, ()->{
+                    Combat.displayAlertResolutionTour(Combat.resolutionTour(scorePlayer,scoreOrc,orc,game), stage, ()->{
                         Combat.displayAlertTouch(Combat.isPlayerTouched(scoreOrc,scorePlayer), orc, stage, game, hud, ()->{
                             hud.showEnenmyHealthBars(dwarf , orc , goblin);
                             showCombat213(dwarf,orc,goblin);
@@ -916,7 +927,7 @@ public class TheCourtyardGameScreen extends ApplicationAdapter implements Screen
                     fightBox.hide();
                     int scoreGoblin = Dice.doubleDice() + goblin.getAbility();
                     int scorePlayer = Dice.doubleDice() + game.getPlayer().getCurrentAbility();
-                    Combat.displayAlertResolutionTour(Combat.resolutionTour(scoreGoblin,scorePlayer,goblin,game), stage, ()->{
+                    Combat.displayAlertResolutionTour(Combat.resolutionTour(scorePlayer,scoreGoblin,goblin,game), stage, ()->{
                         Combat.displayAlertTouch(Combat.isPlayerTouched(scoreGoblin,scorePlayer), goblin, stage, game, hud, ()->{
                             hud.showEnenmyHealthBars(dwarf , orc , goblin);
                             showCombat213(dwarf,orc,goblin);

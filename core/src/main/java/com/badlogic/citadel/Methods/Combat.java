@@ -16,22 +16,30 @@ public abstract class  Combat {
         String resultP1 = ""; //lucky or not
         String resultP2 = ""; //who is hit
 
-        if (playerTouched==1){ //joueur touché
-            msg = "Will you taunt the devil to take less damage ? ";
-            resultP2 = " were hit for 1 less damage.";
-        } else if (playerTouched==2){ //monstre touché
-            msg = "Will you taunt the devil to make more damage ? ";
-            resultP2 = " hit the monster for 1 more damage";
-        } else {
-            onComplete.run();
-            return;
-        }
-
         boolean lucky = Dice.doubleDice() <= game.getPlayer().getCurrentLuck(); //true = lucky
         if (lucky){
             resultP1 = " You got lucky and ";
         } else {
             resultP1 = " You lost your bet and ";
+        }
+
+        if (playerTouched==1){ //joueur touché
+            msg = "Will you taunt the devil to take less damage ? ";
+            if (!lucky) {
+                resultP2 = " were hit for 1 more damage";
+            } else {
+                resultP2 = " were hit for 1 less damage.";
+            }
+        } else if (playerTouched==2){ //monstre touché
+            msg = "Will you taunt the devil to make more damage ? ";
+            if (lucky) {
+                resultP2 = " hit the monster for 1 more damage";
+            } else {
+                resultP2 = " hit the monster for 1 less damage";
+            }
+        } else {
+            onComplete.run();
+            return;
         }
 
         String msgFinal = resultP1 + resultP2;
