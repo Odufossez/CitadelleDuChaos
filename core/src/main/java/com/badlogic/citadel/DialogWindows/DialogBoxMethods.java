@@ -2,18 +2,14 @@ package com.badlogic.citadel.DialogWindows;
 
 import com.badlogic.citadel.Citadel;
 import com.badlogic.citadel.Item;
-import com.badlogic.citadel.PlayerRelatedMethods.Inventory;
 import com.badlogic.citadel.PlayerRelatedMethods.SpellList;
 import com.badlogic.citadel.Screens.HUD;
-import com.badlogic.citadel.Screens.OnGameScreens.RhinoDoorGameScreen;
-import com.badlogic.gdx.ApplicationAdapter;
+import com.badlogic.citadel.Screens.OnGameScreens.GameOverScreen;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.InputListener;
 import com.badlogic.gdx.scenes.scene2d.Stage;
-
-import java.awt.*;
 
 public abstract class DialogBoxMethods {
 
@@ -36,7 +32,7 @@ public abstract class DialogBoxMethods {
     }
 
     /**
-     * A method to generate a dialogBox with a personalised text button
+     * A method to generate a dialogBox with a personalized text button
      * @param from the dialogBox in which the button is integrated
      * @param to in the dialogBox the button is linked to
      * @param text the text of the button
@@ -53,6 +49,7 @@ public abstract class DialogBoxMethods {
                 return true;
             }
         });
+
     }
 
     /**
@@ -94,6 +91,44 @@ public abstract class DialogBoxMethods {
         }
     }
 
+    /**
+     * Method to go to a new screen while adding or removing an item from the inventory
+     *
+     * @param from the dialogbox that displays the button
+     * @param to the screen to display after
+     * @param hud the hud of the game
+     * @param stage the current stage
+     * @param game the current game (e.g Citadel)
+     * @param item the item to move to/from the inventory
+     * @param add true if the item has to be added to the inventory, false if it has to be removed
+     */
+    public static void continueDialogBox(DialogBox from, Screen to, HUD hud, Stage stage, Citadel game,
+                                         Item.Items item, boolean add) {
+        if (add){ //ajouter
+            from.button("Take " + Item.Items.getName(item), new InputListener(){
+                public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
+                    from.hide();
+                    game.getPlayer().getInventory().putIn(item);
+                    stage.clear();
+                    game.setScreen(to);
+                    hud.bringToFront();
+                    return true;
+                }
+            });
+        } else { //retirer
+            from.button("Give up on " + Item.Items.getName(item), new InputListener() {
+                public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
+                    from.hide();
+                    game.getPlayer().getInventory().removeFrom(item);
+                    stage.clear();
+                    game.setScreen(to);
+                    hud.bringToFront();
+                    return true;
+                }
+            });
+        }
+    }
+
     public static void continueDialogBox(DialogBox from, DialogBox to, HUD hud, Stage stage, Citadel game, int amount
         , boolean add){
         if (add){
@@ -119,9 +154,6 @@ public abstract class DialogBoxMethods {
                 }
             });
         }
-
-
-
     }
 
 
@@ -215,5 +247,21 @@ public abstract class DialogBoxMethods {
                 return true;
             }
         });
+    }
+
+    public static void alertPlayerPV(int amountPV,Stage stage ,Citadel game, Runnable onOk){
+        DialogAlert alert = new DialogAlert("You have lost " + amountPV + "PV");
+        alert.button("Ok", Color.BLACK, new InputListener(){
+            public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
+                alert.hide();
+                game.getPlayer().setCurrentVitality(game.getPlayer().getCurrentVitality() - amountPV);
+                if (game.getPlayer().isDead()) {
+                    game.setScreen(new GameOverScreen(game));
+                }
+                onOk.run();
+                return true;
+            }
+        });
+        alert.show(stage);
     }
 }

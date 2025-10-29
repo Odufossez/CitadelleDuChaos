@@ -14,9 +14,6 @@ public class InventoryDialog extends Dialog {
     private Player ply;
     private ArrayList<Item> inventory;
 
-    private float dialog_width = (float) (600);
-    private float dialog_height = (float) (1000);
-    private final float dialog_padding = (float) (0);
     private final float button_height = (float) (60);
     private final float button_width = (float) (150);
     private final float button_pad_h = (float) (10);
@@ -47,6 +44,7 @@ public class InventoryDialog extends Dialog {
         button.padRight(button_pad_h);
 
         getButtonTable().add(button).height(button_height);
+        getButtonTable().top().left();
     }
 
 

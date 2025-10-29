@@ -11,8 +11,8 @@ import com.badlogic.gdx.utils.Align;
 import static com.badlogic.citadel.Screens.Skins.PLAIN_JAMES_SKIN;
 
 public class DialogBox extends Dialog {
-    private final float dialog_width = (float) 1000;
-    private final float dialog_height = (float) 300;
+    private final float dialog_width = (float) 1100;
+    private final float dialog_height = (float) 250;
     private final float dialog_padding = 0;
     private final float button_height = (float)(40);
     private final float button_width = (float)(100);
@@ -45,7 +45,7 @@ public class DialogBox extends Dialog {
 
         this.getTitleTable().padLeft(20);
         getContentTable().defaults().width(dialog_width - dialog_padding * 2);
-        getContentTable().defaults().pad(10,30,10,10); //padding sur le contenu du dialog
+        getContentTable().defaults().pad(5,30,10,15); //padding sur le contenu du dialog
         this.setWidth(this.getPrefWidth());
 
         setModal(true);

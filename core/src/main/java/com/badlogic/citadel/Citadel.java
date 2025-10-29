@@ -35,10 +35,8 @@ public class Citadel extends Game {
         density = Gdx.graphics.getDensity();
 
         //TODO à changer pour la version finale -- player et grimoire virtuel pour les tests
-        player = new Player(10,15,9,0,10);
-        player.setCurrentMagic(9);
-        player.setCurrentLuck(10);
-        player.setCurrentVitality(15);
+        player = new Player(10,15,9,0,0);
+
         SpellBook grim = player.getGrimoire();
         grim.putIn(SpellList.Sorts.HABILITE);
         grim.putIn(SpellList.Sorts.CHANCE);

@@ -151,7 +151,10 @@ public class Player {
         this.luck = luck;
         currentLuck = luck;
     }
-    public void decreaseLuck(){this.currentLuck--;}
+    public void decreaseLuck(){
+        this.currentLuck--;
+        if (currentLuck<0) currentLuck=0;
+    }
     public void setCurrentLuck(int luck){
         currentLuck=luck;
     }

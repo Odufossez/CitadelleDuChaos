@@ -19,6 +19,8 @@ import com.badlogic.gdx.scenes.scene2d.InputListener;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 
+import static com.badlogic.citadel.DialogWindows.DialogBoxMethods.*;
+
 //251
 public class TheCourtyardGameScreen extends ApplicationAdapter implements Screen {
     Citadel game;
@@ -38,6 +40,12 @@ public class TheCourtyardGameScreen extends ApplicationAdapter implements Screen
     DialogBox dialogBox222_Weakness = new DialogBox("Narrator");
     DialogBox dialogBoxTumbling = new DialogBox("Narrator");
 
+    DialogBox dialogBoxWell = new DialogBox("Narrator");
+    DialogBox dialogBoxWell_Levitation = new DialogBox("Narrator");
+    DialogBox dialogBoxWell_Force = new DialogBox("Narrator");
+    DialogBox dialogBoxWell_Recast = new DialogBox("Narrator");
+    DialogBox dialogBoxWell_CallHelp = new DialogBox("Narrator");
+    DialogBox dialogBoxTree = new DialogBox("Narrator");
     DialogBox getLucky = new DialogBox("Narrator");
 
     DialogBox dialogBox179 = new DialogBox("Narrator");
@@ -112,8 +120,8 @@ public class TheCourtyardGameScreen extends ApplicationAdapter implements Screen
 
     @Override
     public void create() {
-        dialogBox1.text("You are standing in the shadow of the rampart surrounding the courtyard." +
-            "How do you want to proceed? You could sneak your way to the next door or cross the courtyard." +
+        dialogBox1.text("You are standing in the shadow of the rampart surrounding the courtyard. " +
+            "How do you want to proceed? You could sneak your way to the next door or cross the courtyard. " +
             "Maybe go talk to the bystanders on your left ?");
         dialogBox209.text("You take a look at the rather odd structure. It is not a fountain but a sort of temple. " +
             "There is a door on the side. Might be worth a look, or maybe you prefer to continue on your way to the tower.");
@@ -126,6 +134,23 @@ public class TheCourtyardGameScreen extends ApplicationAdapter implements Screen
         dialogBoxLevitation_1.text("No other choices now but to fight or cast another spell.");
         dialogBoxFire.text("You cast Fire and the tentacle starts to tremble and release your leg before retreat " +
             "below the dirt. You rub your numb leg and resume your way towards the tower.");
+        dialogBoxTree.text("In the far corner of the courtyard, you come across a peculiar bush with branches twisting out" +
+            " from the central stalk, as if in agony. The leaves are diamond shaped, with small berries underneath, flat and " +
+            "tablet-like. You may keep some and creep further long the wall to the main entrance.");
+        dialogBoxWell.text("You fall to the bottom of a deep pit. Possibly a filled-in well. You appear to be intact, but " +
+            "how are you going to get out? To dig footholes would take far too long. You could cast a spell to assist or " +
+            "call for help.");
+        dialogBoxWell_Force.text("You feel the strength surging through your body. You draw out your sword and dig into the " +
+            "earthy walls. By making a foothole, then stepping on to it as you dig the next, you make up your way up the shaft " +
+            "quite quickly. Halfway up, however, your strength begins to ebb and you realize you are returning back to normal. " +
+            "You may either recast Strength or fall back again and call out for help.");
+        dialogBoxWell_Recast.text("As you recast the spell, your strength returns to enable you to finish off the steps. " +
+            "As you reach the top, the effects wear off once more.");
+        dialogBoxWell_CallHelp.text("After several minutes of shouting, you hear voices in a strange tongue corning tongue " +
+            "coming closer. To your relief you see four heads peering into the pit. You yell at them to get some rope. They " +
+            "chatter and disappear. Eventually you hear them coming back. They stand once more at the top of the pit and " +
+            "throw down to you, not a rescue rope, but the contents of a cauldron of boiling oil !");
+        dialogBoxWell_Levitation.text("You cast Levitation and get out of the pit easily.");
         dialogBox1.show(stage);
         hud.bringToFront();
     }
@@ -137,10 +162,10 @@ public class TheCourtyardGameScreen extends ApplicationAdapter implements Screen
                 dialogBox1.hide();
 
                 //Les dialogues de cette branche
-                dialogBox222.text("As you scoot your way to the door along the rampart, you see a man lying down." +
+                dialogBox222.text("As you scoot your way to the door along the rampart, you see a man lying down. " +
                     "His voice low, but he is asking for help. He seems to be suffering. What to do ?");
                 dialogBox222_Help.text("It is an old man. Seems a mass has hit him on the head. You don't have any healing" +
-                    " potion or remedy but you could try an other way. Or move on.");
+                    " potion\nor remedy but you could try an other way. Or move on.");
                 dialogBox222_Help2.text("He seems to recover."); //383
                 dialogBox222_Help3.text("Thank you. I taught I would die here ! Beware of the Ganjees ! They are really" +
                     " dangerous !");
@@ -319,25 +344,11 @@ public class TheCourtyardGameScreen extends ApplicationAdapter implements Screen
         dialogBox222_Help3.button("Ask about the Citadel" , new InputListener() {
             public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
                 dialogBox222_Help3.hide();
-                DialogAlert alert = new DialogAlert("You have lost 2 HP !");
-                alert.button("Ok" , new InputListener() {
-                    @Override
-                    public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
-                        alert.hide();
-                        game.getPlayer().isTouchedInCombat();
-                        if (game.getPlayer().isDead()) {
-                            game.setScreen(new GameOverScreen(game));
-                            hud.bringToFront();
-                            return true;
-                        }
-                        hud.bringToFront();
-                        return true;
-                    }
+                alertPlayerPV(2,stage,game, ()->{
+                    stage.addActor(dialogBox222_Help4);
+                    dialogBox222_Help4.show(stage);
+                    hud.bringToFront();
                 });
-                alert.show(stage);
-                stage.addActor(dialogBox222_Help4);
-                dialogBox222_Help4.show(stage);
-                hud.bringToFront();
                 return true;
             }
         });
@@ -345,23 +356,11 @@ public class TheCourtyardGameScreen extends ApplicationAdapter implements Screen
         dialogBox222_Help4.button("Draw out your sword" , new InputListener() {
             public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
                 dialogBox222_Help4.hide();
-                game.getPlayer().isTouchedInCombat();
-                DialogAlert alert = new DialogAlert("You have lost 2 HP !");
-                alert.button("Ok" , new InputListener() {
-                    public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
-                        alert.hide();
-                        if (game.getPlayer().isDead()) {
-                            game.setScreen(new GameOverScreen(game));
-                            hud.bringToFront();
-                            return true;
-                        }
-                        return true;
-                    }
+                alertPlayerPV(2,stage,game, ()->{
+                    stage.addActor(dialogBox222_Sword);
+                    dialogBox222_Sword.show(stage);
+                    hud.bringToFront();
                 });
-                alert.show(stage);
-                stage.addActor(dialogBox222_Sword);
-                dialogBox222_Sword.show(stage);
-                hud.bringToFront();
                 return true;
             }
         });
@@ -373,70 +372,26 @@ public class TheCourtyardGameScreen extends ApplicationAdapter implements Screen
                     alert.button("Yes" , Color.BLACK , new InputListener() {
                         public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
                             game.getPlayer().getGrimoire().removeFrom(SpellList.Sorts.ILLUSION);
-                            game.getPlayer().isTouchedInCombat();
-                            DialogAlert alertPV = new DialogAlert("You have lost 2 HP !");
-                            alertPV.button("Ok" , new InputListener() {
-                                @Override
-                                public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
-                                    alertPV.hide();
-                                    if (game.getPlayer().isDead()) {
-                                        game.setScreen(new GameOverScreen(game));
-                                        hud.bringToFront();
-                                    }
-                                    return true;
-                                }
+                            alertPlayerPV(2,stage,game, ()->{
+                                alert.hide();
+                                dialogBox222_Help4.hide();
+                                stage.addActor(dialogBox222_Illusion);
+                                dialogBox222_Illusion.show(stage);
                             });
-                            stage.addActor(alertPV);
-                            alertPV.show(stage);
-                            alert.hide();
-                            dialogBox222_Help4.hide();
-                            stage.addActor(dialogBox222_Illusion);
-                            dialogBox222_Illusion.show(stage);
                             return true;
                         }
                     });
-                    alert.button("No" , Color.BLACK , new InputListener() {
-                        public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
-                            alert.hide();
-                            hud.bringToFront();
-                            return true;
-                        }
-                    });
+                    alertNoButton(alert,stage,hud);
                     alert.show(stage);
                     hud.bringToFront();
                     return true;
                 }
             });
-        } // ne pas changer, usage particulier
+        }
         if (game.getPlayer().getGrimoire().isInGrimoire(SpellList.Sorts.PROTECTION)){
-            dialogBox222_Help4.button("Cast Protection" , new InputListener() {
-                public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
-                    DialogAlert alert = new DialogAlert("Do you want to cast Protection ?");
-                    alert.text("    An usage of Protection will be remove from your spellbook.");
-                    alert.button("Yes" , Color.BLACK , new InputListener() {
-                        public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
-                            game.getPlayer().getGrimoire().removeFrom(SpellList.Sorts.PROTECTION);
-                            alert.hide();
-                            dialogBox222_Help4.hide();
-                            stage.addActor(dialogBox222_Protection);
-                            dialogBox222_Protection.show(stage);
-                            hud.bringToFront();
-                            return true;
-                        }
-                    });
-                    alert.button("No" , Color.BLACK , new InputListener() {
-                        public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
-                            alert.hide();
-                            hud.bringToFront();
-                            return true;
-                        }
-                    });
-                    alert.show(stage);
-                    hud.bringToFront();
-                    return true;
-                }
-            });
-        } // ne pas changer, usage particulier
+            alertSpellDialog(dialogBox222_Help4,dialogBox222_Protection, SpellList.Sorts.PROTECTION,hud,stage,game);
+        }
+        // ne pas changer, usage particulier
         if (game.getPlayer().getGrimoire().isInGrimoire(SpellList.Sorts.FAIBLESSE)){
             dialogBox222_Help4.button("Cast Weakness" , new InputListener() {
                 public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
@@ -446,68 +401,35 @@ public class TheCourtyardGameScreen extends ApplicationAdapter implements Screen
                         public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
                             game.getPlayer().getGrimoire().removeFrom(SpellList.Sorts.FAIBLESSE);
                             game.getPlayer().setCurrentVitality(game.getPlayer().getCurrentVitality() - 1);
-                            DialogAlert alertPV = new DialogAlert("You have lost 1 HP !");
-                            alertPV.button("Ok" , new InputListener() {
-                                @Override
-                                public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
-                                    alertPV.hide();
-                                    if (game.getPlayer().isDead()) {
-                                        game.setScreen(new GameOverScreen(game));
-                                        hud.bringToFront();
-                                    }
-                                    return true;
-                                }
+                            alertPlayerPV(1,stage,game, ()->{
+                                dialogBox222_Help4.hide();
+                                stage.addActor(dialogBox222_Weakness);
+                                dialogBox222_Weakness.show(stage);
+                                hud.bringToFront();
                             });
-                            alertPV.show(stage);
-                            alert.hide();
-                            dialogBox222_Help4.hide();
-                            stage.addActor(dialogBox222_Weakness);
-                            dialogBox222_Weakness.show(stage);
-                            hud.bringToFront();
                             return true;
                         }
                     });
-                    alert.button("No" , Color.BLACK , new InputListener() {
-                        public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
-                            alert.hide();
-                            hud.bringToFront();
-                            return true;
-                        }
-                    });
+                    alertNoButton(alert,stage,hud);
                     alert.show(stage);
                     hud.bringToFront();
                     return true;
                 }
             });
-        } // ne pas changer, usage particulier
-
+        }
+        // ne pas changer, usage particulier
         dialogBoxTumbling.button("Get lucky" , new InputListener() {
             public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
                 dialogBoxTumbling.hide();
-                if (game.getPlayer().getCurrentLuck() >= Dice.doubleDice()){
+                if (game.getPlayer().getCurrentLuck() >= Dice.doubleDice()){ //79
                     getLucky.text("You manage to steady your balance. You are now safe and can continue your journey.\n" +
                         "(You lost a point of luck.)");
-                    getLucky.button("Continue" , new InputListener() {
-                        public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
-                            getLucky.hide();
-                            stage.clear();
-                            game.setScreen(new TreeGameScreen(game));
-                            hud.bringToFront();
-                            return true;
-                        }
-                    });
-                }else{
+                    DialogBoxMethods.continueDialogBox(getLucky,dialogBoxTree,hud,stage);
+                }else{ //100
                     getLucky.text("You slip and fall on the well.");
-                    getLucky.button("Continue" , new InputListener() {
-                        public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
-                            getLucky.hide();
-                            stage.clear();
-                            game.setScreen(new WellGameScreen(game));
-                            hud.bringToFront();
-                            return true;
-                        }
-                    });
+                    DialogBoxMethods.continueDialogBox(getLucky,dialogBoxWell,hud,stage);
                 }
+                game.getPlayer().decreaseLuck();
                 stage.addActor(getLucky);
                 getLucky.show(stage);
                 hud.bringToFront();
@@ -515,8 +437,24 @@ public class TheCourtyardGameScreen extends ApplicationAdapter implements Screen
             }
         });
 
+        if (game.getPlayer().getGrimoire().isInGrimoire(SpellList.Sorts.LEVITATION)){
+            alertSpellDialog(dialogBoxWell,dialogBoxWell_Levitation, SpellList.Sorts.LEVITATION,hud,stage,game);
+            DialogBoxMethods.continueDialogBox(dialogBoxWell_Levitation,dialogBoxTree,hud,stage);
+        }
+
+        if (game.getPlayer().getGrimoire().isInGrimoire(SpellList.Sorts.FORCE)){
+            alertSpellDialog(dialogBoxWell,dialogBoxWell_Force, SpellList.Sorts.FORCE,hud,stage,game);
+            alertSpellDialog(dialogBoxWell_Force,dialogBoxWell_Recast, SpellList.Sorts.FORCE,hud,stage,game);
+            DialogBoxMethods.continueDialogBox(dialogBoxWell_Recast,dialogBoxTree,hud,stage);
+        }
+
+        DialogBoxMethods.continueDialogBox(dialogBoxWell,dialogBoxWell_CallHelp, "Call out for help" , stage,hud);
+        DialogBoxMethods.continueDialogBox(dialogBoxWell_CallHelp,stage, new GameOverScreen(game),game);
+
         DialogBoxMethods.continueDialogBox(dialogBox222_Illusion,dialogBox222_Sword,hud,stage);
         DialogBoxMethods.continueDialogBox(dialogBox222_Weakness,dialogBoxTumbling,hud,stage);
+
+        continueDialogBox(dialogBoxTree,new RhinoDoorGameScreen(game),hud,stage,game, Item.Items.BERRIES,true);
     }
 
     //321
