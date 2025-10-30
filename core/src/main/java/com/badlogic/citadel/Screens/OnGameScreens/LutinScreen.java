@@ -23,35 +23,35 @@ public class LutinScreen extends ApplicationAdapter implements Screen {
     private Stage stage;
     private HUD hud;
 
-    private DialogBox dialogBox210 = new DialogBox("Narrator");
-    private DialogBox dialogBox192 = new DialogBox("Narrator");
-    private DialogBox dialogBox359 = new DialogBox("Narrator");
-    private DialogBox dialogBox029 = new DialogBox("Narrator");
-    private DialogBox dialogBox029_1 = new DialogBox("O'Seamus The Leprechaun");
-    private DialogBox dialogBox029_2 = new DialogBox("Narrator");
-    private DialogBox dialogBox271 = new DialogBox("Narrator");
-    private DialogBox dialogBox131 = new DialogBox("Narrator");
-    private DialogBox dialogBox271_1 = new DialogBox("Narrator");
-    private DialogBox dialogBox271_2 = new DialogBox("O'Seamus The Leprechaun");
-    private DialogBox dialogBox348 = new DialogBox("Narrator");
-    private DialogBox dialogBox348_1 = new DialogBox("O'Seamus The Leprechaun");
-    private DialogBox dialogBox207 = new DialogBox("Narrator");
-    private DialogBox dialogBox022 = new DialogBox("Narrator");
-    private DialogBox dialogBox354 = new DialogBox("Narrator");
-    private DialogBox dialogBox068 = new DialogBox("O'Seamus The Leprechaun");
-    private DialogBox dialogBox188 = new DialogBox("Narrator");
-    private DialogBox dialogBox301 = new DialogBox("Narrator");
-    private DialogBox dialogBox159 = new DialogBox("Narrator");
-    private DialogBox dialogBox051 = new DialogBox("Narrator");
-    private DialogBox dialogBox280 = new DialogBox("Narrator");
-    private DialogBox dialogBox323 = new DialogBox("Narrator");
-    private DialogBox dialogBox323_1 = new DialogBox("Narrator");
-    private DialogBox dialogBox323_2 = new DialogBox("Narrator");
-    private DialogBox dialogBox323_3 = new DialogBox("O'Seamus The Leprechaun");
-    private DialogBox dialogBox386 = new DialogBox("Narrator");
-    private DialogBox dialogBox204 = new DialogBox("Narrator");
-    private DialogBox dialogBox108 = new DialogBox("Narrator");
-    private DialogBox dialogBox338 = new DialogBox("Narrator");
+    private final DialogBox dialogBox210 = new DialogBox("Narrator");
+    private final DialogBox dialogBox192 = new DialogBox("Narrator");
+    private final DialogBox dialogBox359 = new DialogBox("Narrator");
+    private final DialogBox dialogBox029 = new DialogBox("Narrator");
+    private final DialogBox dialogBox029_1 = new DialogBox("O'Seamus The Leprechaun");
+    private final DialogBox dialogBox029_2 = new DialogBox("Narrator");
+    private final DialogBox dialogBox271 = new DialogBox("Narrator");
+    private final DialogBox dialogBox131 = new DialogBox("Narrator");
+    private final DialogBox dialogBox271_1 = new DialogBox("Narrator");
+    private final DialogBox dialogBox271_2 = new DialogBox("O'Seamus The Leprechaun");
+    private final DialogBox dialogBox348 = new DialogBox("Narrator");
+    private final DialogBox dialogBox348_1 = new DialogBox("O'Seamus The Leprechaun");
+    private final DialogBox dialogBox207 = new DialogBox("Narrator");
+    private final DialogBox dialogBox022 = new DialogBox("Narrator");
+    private final DialogBox dialogBox354 = new DialogBox("Narrator");
+    private final DialogBox dialogBox068 = new DialogBox("O'Seamus The Leprechaun");
+    private final DialogBox dialogBox188 = new DialogBox("Narrator");
+    private final DialogBox dialogBox301 = new DialogBox("Narrator");
+    private final DialogBox dialogBox159 = new DialogBox("Narrator");
+    private final DialogBox dialogBox051 = new DialogBox("Narrator");
+    private final DialogBox dialogBox280 = new DialogBox("Narrator");
+    private final DialogBox dialogBox323 = new DialogBox("Narrator");
+    private final DialogBox dialogBox323_1 = new DialogBox("Narrator");
+    private final DialogBox dialogBox323_2 = new DialogBox("Narrator");
+    private final DialogBox dialogBox323_3 = new DialogBox("O'Seamus The Leprechaun");
+    private final DialogBox dialogBox386 = new DialogBox("Narrator");
+    private final DialogBox dialogBox204 = new DialogBox("Narrator");
+    private final DialogBox dialogBox108 = new DialogBox("Narrator");
+    private final DialogBox dialogBox338 = new DialogBox("Narrator");
 
     public LutinScreen(Citadel game) {
         this.game = game;
@@ -199,6 +199,7 @@ public class LutinScreen extends ApplicationAdapter implements Screen {
                 game.getPlayer().getInventory().putIn(Item.Items.SILVER_MIRROR);
                 game.getPlayer().setWeaponBonus(1);
                 alertNotification("You obtain two items" , "You obtain a silver mirror and a sword+1",stage,hud, ()->{
+
                     dialogBox323_2.hide();
                     dialogBox323_3.show(stage);
                     hud.bringToFront();
@@ -210,7 +211,7 @@ public class LutinScreen extends ApplicationAdapter implements Screen {
         continueDialogBox(dialogBox323_3, "The copper-handled door", stage, new CaveVinGameScreen(game),game);
         continueDialogBox(dialogBox323_3, dialogBox338,"The bronze-handled door", stage,hud);
 
-        continueDialogBox(dialogBox386,dialogBox204, "Wade accross the sewer" , stage, hud);
+        continueDialogBox(dialogBox386,dialogBox204, "Wade across the sewer" , stage, hud);
         continueDialogBox(dialogBox386,dialogBox108, "Use the rope\nand swing across" , stage, hud);
 
         continueDialogBox(dialogBox204,stage,new PassageRiverGameScreen(game),game);
