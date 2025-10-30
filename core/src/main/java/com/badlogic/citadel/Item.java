@@ -33,6 +33,7 @@ public class Item implements Comparable{
         NEEDLE_KNIFE,
         POCKET_MYRIADE,
         RING_OF_SWORDSMANSHIP,
+        SILVER_MIRROR,
         SLUMBERBERRY,
         SWORD;
 
@@ -70,6 +71,8 @@ public class Item implements Comparable{
                     return "Pocket Myriade";
                 case RING_OF_SWORDSMANSHIP:
                     return "Ring of Swordsmanship";
+                case SILVER_MIRROR:
+                    return "Silver mirror";
                 case SLUMBERBERRY:
                     return "Slumberberry";
                 case SWORD:

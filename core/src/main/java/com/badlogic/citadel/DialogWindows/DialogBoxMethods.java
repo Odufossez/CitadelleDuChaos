@@ -197,6 +197,7 @@ public abstract class DialogBoxMethods {
     }
 
 
+
     /**
      * A method to display a Dialogalert like a pop up when a spell is about to be used
      *
@@ -262,5 +263,17 @@ public abstract class DialogBoxMethods {
             }
         });
         alert.show(stage);
+    }
+
+    public static void alertNotification(String title, String message, Stage stage, HUD hud, Runnable onOk){
+        DialogAlert alert = new DialogAlert(title);
+        alert.text(message);
+        alert.button("Ok", Color.BLACK, new InputListener(){
+            public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
+                alert.hide();
+                onOk.run();
+                return true;
+            }
+        });
     }
 }

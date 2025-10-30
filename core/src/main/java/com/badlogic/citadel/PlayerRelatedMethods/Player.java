@@ -18,6 +18,7 @@ public class Player {
     private  int indiceSave;
     private boolean isInCombat;
     private Inventory inventaire;
+    private int weaponBonus;
 
     /**
      * Constructor
@@ -48,6 +49,7 @@ public class Player {
         gold = p_gold;
         inventaire = new Inventory();
         inventaire.putIn(Item.Items.GRASS); //item par défaut dans l'inventaire
+        weaponBonus = 0;
 
         //In combat
         setIsInCombat(false);
@@ -213,6 +215,13 @@ public class Player {
         this.isInCombat = state;
     }
 
+    public void setWeaponBonus(int bonus){
+        weaponBonus = bonus;
+    }
+
+    public int getWeaponBonus(){
+        return weaponBonus;
+    }
 
 
 

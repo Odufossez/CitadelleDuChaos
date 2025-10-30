@@ -27,6 +27,7 @@ public class HUD implements Disposable {
     private int luck;
     private int maxLuck;
     private int mana , maxMana;
+    private int ability, maxAbility;
 
     private InventoryDialog inventoryDialog;
     private SpellBookDialog spellBookDialog;
@@ -36,7 +37,7 @@ public class HUD implements Disposable {
     private Table table, tableButtons, hudLayer;
     private Table enemyHealthTable;
 
-    private Label healthLabel, luckLabel, manaLabel;
+    private Label healthLabel, luckLabel, manaLabel, abilityLabel;
     private List<Label> enemyHealthLabels;
 
 
@@ -66,6 +67,7 @@ public class HUD implements Disposable {
         healthLabel = new Label("Health : " + currentHealth + "/" + maxHealth , whiteStyle);
         luckLabel = new Label("Luck : " + luck + "/" + maxLuck , whiteStyle);
         manaLabel = new Label("Mana : " + mana + "/" + maxMana , whiteStyle);
+        abilityLabel = new Label("Ability : " + ability + "/"+ maxAbility , whiteStyle);
 
         inventoryButton = new TextButton("Inventory" , skin);
         menuButton = new TextButton("Menu" , skin);
@@ -76,6 +78,8 @@ public class HUD implements Disposable {
         table.add(luckLabel).padTop(10);
         table.row();
         table.add(manaLabel).padTop(10);
+        table.row();
+        table.add(abilityLabel).padTop(10);
 
         tableButtons.add(inventoryButton).padTop(10);
         tableButtons.row();
@@ -112,6 +116,10 @@ public class HUD implements Disposable {
         //LP
         luck = ply.getCurrentLuck();
         maxLuck = ply.getLuck();
+
+        //AP
+        ability = ply.getCurrentAbility();
+        maxAbility = ply.getAbility();
     }
 
     private void backButton(Dialog dialog , Runnable onBack){
