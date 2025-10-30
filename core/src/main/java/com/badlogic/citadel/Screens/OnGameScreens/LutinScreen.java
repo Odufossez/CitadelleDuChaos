@@ -167,12 +167,12 @@ public class LutinScreen extends ApplicationAdapter implements Screen {
 
         continueDialogBox(dialogBox348,dialogBox348_1, hud,stage);
         continueDialogBox(dialogBox348_1,dialogBox207, "The brass-\nhandled door" , stage, hud);
-        continueDialogBox(dialogBox348_1,dialogBox022, "The copper-\nhandlded door" , stage, hud);
+        continueDialogBox(dialogBox348_1,dialogBox022, "The copper-\nhandled door" , stage, hud);
         continueDialogBox(dialogBox348_1,dialogBox354, "The bronze-\nhandled door" , stage, hud);
         continueDialogBox(dialogBox348_1,dialogBox068, "Ask for\nhis opinion", stage, hud);
 
         continueDialogBox(dialogBox068,dialogBox207, "The brass-\nhandled door" , stage, hud);
-        continueDialogBox(dialogBox068,dialogBox022, "The copper-\nhandlded door" , stage, hud);
+        continueDialogBox(dialogBox068,dialogBox022, "The copper-\nhandled door" , stage, hud);
         continueDialogBox(dialogBox068,dialogBox354, "The bronze-\nhandled door" , stage, hud);
 
         continueDialogBox(dialogBox207,dialogBox188, hud, stage);
