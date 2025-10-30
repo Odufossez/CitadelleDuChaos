@@ -275,5 +275,6 @@ public abstract class DialogBoxMethods {
                 return true;
             }
         });
+        alert.show(stage);
     }
 }

@@ -282,5 +282,6 @@ public class HUD implements Disposable {
         healthLabel.setText("Health : " + currentHealth + "/" + maxHealth);
         luckLabel.setText("Luck : " + luck + "/" + maxLuck);
         manaLabel.setText("Mana : " + mana + "/" + maxMana);
+        abilityLabel.setText("Ability : " + ability + "/"+ maxAbility);
     }
 }

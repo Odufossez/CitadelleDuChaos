@@ -188,6 +188,11 @@ public class Player {
     public void setCurrentAbility(int currentAbility){
         this.currentAbility = currentAbility;
     }
+    public void modifyCurrentAbility(int mod){
+        currentAbility += mod;
+        if (currentAbility<0) currentAbility=0;
+        if (currentAbility>ability) currentAbility=ability;
+    }
     public int getAbility(){return ability;}
     public void setAbility(int ability) {
         this.ability = ability;

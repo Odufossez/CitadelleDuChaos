@@ -77,7 +77,7 @@ public class LutinScreen extends ApplicationAdapter implements Screen {
         dialogBox029_1.text("Good mornin' to yer ! I'm O'Seamus, the Leprechaun!");
         dialogBox029_2.text("He chuckles, and holds his hand out to you. He seems friendly enough. Will you shake his hand ?");
         dialogBox271.text("You grasp his hand and introduce yourself - and cry out as the nerves down your arm go numb! " +
-            "O'Seamus bursts out laughing. You are becoming angry, but the little man continues to shake your hand and laugh.");
+            "O'Seamus bursts out laughing. You are becoming angry, but the little man continues to shake your hand and laugh. ");
         dialogBox271_1.text("A laugh comes from behind you and you look round to see him floating in the air, grinning. But " +
             "you are still shaking his hand in front of you... or are you ? In fact, you now realize you are frantically " +
             "shaking hands with a stuffed dummy which is flopping around on the end of your arm as you shake it. You throw it " +
@@ -152,7 +152,7 @@ public class LutinScreen extends ApplicationAdapter implements Screen {
         dialogBox029_2.button("Handshake O'Seamus The Leprechaun" , new InputListener() {
             public boolean touchDown(InputEvent event, float x, float y, int pointer, int button){
                 dialogBox029_2.hide();
-                game.getPlayer().setCurrentAbility(game.getPlayer().getCurrentAbility() - 1);
+                game.getPlayer().modifyCurrentAbility(-1);
                 dialogBox271.show(stage);
                 hud.bringToFront();
                 return true;
@@ -166,14 +166,14 @@ public class LutinScreen extends ApplicationAdapter implements Screen {
         continueDialogBox(dialogBox131,dialogBox348, "Ask for directions", stage, hud);
 
         continueDialogBox(dialogBox348,dialogBox348_1, hud,stage);
-        continueDialogBox(dialogBox348_1,dialogBox207, "The brass-handled door" , stage, hud);
-        continueDialogBox(dialogBox348_1,dialogBox022, "The copper-handlded door" , stage, hud);
-        continueDialogBox(dialogBox348_1,dialogBox354, "The bronze-handled door" , stage, hud);
-        continueDialogBox(dialogBox348_1,dialogBox068, "Ask for his opinion", stage, hud);
+        continueDialogBox(dialogBox348_1,dialogBox207, "The brass-\nhandled door" , stage, hud);
+        continueDialogBox(dialogBox348_1,dialogBox022, "The copper-\nhandlded door" , stage, hud);
+        continueDialogBox(dialogBox348_1,dialogBox354, "The bronze-\nhandled door" , stage, hud);
+        continueDialogBox(dialogBox348_1,dialogBox068, "Ask for\nhis opinion", stage, hud);
 
-        continueDialogBox(dialogBox068,dialogBox207, "The brass-handled door" , stage, hud);
-        continueDialogBox(dialogBox068,dialogBox022, "The copper-handlded door" , stage, hud);
-        continueDialogBox(dialogBox068,dialogBox354, "The bronze-handled door" , stage, hud);
+        continueDialogBox(dialogBox068,dialogBox207, "The brass-\nhandled door" , stage, hud);
+        continueDialogBox(dialogBox068,dialogBox022, "The copper-\nhandlded door" , stage, hud);
+        continueDialogBox(dialogBox068,dialogBox354, "The bronze-\nhandled door" , stage, hud);
 
         continueDialogBox(dialogBox207,dialogBox188, hud, stage);
         continueDialogBox(dialogBox022,dialogBox188, hud, stage);
