@@ -11,6 +11,8 @@ import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.InputListener;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 
+import static com.badlogic.citadel.Dice.doubleDice;
+
 public abstract class DialogBoxMethods {
 
     /**
@@ -276,5 +278,23 @@ public abstract class DialogBoxMethods {
             }
         });
         alert.show(stage);
+    }
+
+    public static void dialogGetLucky(DialogBox from, DialogBox lucky, DialogBox unlucky, Stage stage, HUD hud ,Citadel game){
+        from.button("Get Lucky !" , new InputListener() {
+            public boolean touchDown(InputEvent event, float x, float y, int pointer, int button){
+                DialogBox result;
+                if (game.getPlayer().getCurrentLuck() >= doubleDice()){
+                    result = lucky;
+                } else {
+                    result = unlucky;
+                }
+                game.getPlayer().decreaseLuck();
+                from.hide();
+                result.show(stage);
+                hud.bringToFront();
+                return true;
+            }
+        });
     }
 }
