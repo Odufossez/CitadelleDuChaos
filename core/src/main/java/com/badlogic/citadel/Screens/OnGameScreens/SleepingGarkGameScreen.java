@@ -104,9 +104,6 @@ public class SleepingGarkGameScreen extends ApplicationAdapter implements Screen
         continueDialogBox(dialogBox352,dialogBox352_1,hud,stage);
         continueDialogBox(dialogBox352_1,dialogBox352_2,hud,stage);
 
-
-        continueDialogBox(dialogBox203,dialogBox294,"Rush to the door",stage,hud);
-
         continueDialogBox(dialogBox352_2,dialogBox203,"Rush to\nthe door",stage,hud);
         continueDialogBox(dialogBox352_2,dialogBox016,"Draw out\nmy sword",stage,hud);
         continueDialogBox(dialogBox352_2,dialogBox216,"Excuse you",stage,hud);
@@ -191,6 +188,8 @@ public class SleepingGarkGameScreen extends ApplicationAdapter implements Screen
             gark = new Monster("Gark" , 7 , 11);
             garkDouble = new Monster("Gark" , 7 , 11);
         }
+
+        hud.showEnenmyHealthBars(gark);
 
         showCombatDialog(gark,garkDouble,cptTour);
     }

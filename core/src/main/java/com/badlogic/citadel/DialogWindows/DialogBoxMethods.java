@@ -234,7 +234,7 @@ public abstract class DialogBoxMethods {
      * @param stage the current stage
      */
     public static void alertSpellDialog(DialogBox from, DialogBox to, SpellList.Sorts sort, HUD hud, Stage stage, Citadel game) {
-        from.button("Cast " + SpellList.getName(sort), new InputListener() {
+        from.button("Cast\n" + SpellList.getName(sort), new InputListener() {
             public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
                 DialogAlert alert = new DialogAlert("Do you want to cast " + SpellList.getName(sort) + "?");
                 alert.text("An usage of " + SpellList.getName(sort) + " will be remove from your spellbook");
@@ -258,7 +258,7 @@ public abstract class DialogBoxMethods {
     }
 
     public static void alertSpellDialog(DialogBox from, DialogBox to, SpellList.Sorts sort, HUD hud, Stage stage, Citadel game, Runnable onOk) {
-        from.button("Cast " + SpellList.getName(sort), new InputListener() {
+        from.button("Cast\n" + SpellList.getName(sort), new InputListener() {
             public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
                 DialogAlert alert = new DialogAlert("Do you want to cast " + SpellList.getName(sort) + "?");
                 alert.text("An usage of " + SpellList.getName(sort) + " will be remove from your spellbook");
@@ -270,6 +270,29 @@ public abstract class DialogBoxMethods {
                         from.hide();
                         stage.addActor(to);
                         to.show(stage);
+                        hud.bringToFront();
+                        return true;
+                    }
+                });
+                alertNoButton(alert, stage, hud);
+                alert.show(stage);
+                hud.bringToFront();
+                return true;
+            }
+        });
+    }
+
+    public static void alertSpellDialog(DialogBox from, SpellList.Sorts sort, HUD hud, Stage stage, Citadel game, Runnable onOk) {
+        from.button("Cast\n" + SpellList.getName(sort), new InputListener() {
+            public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
+                DialogAlert alert = new DialogAlert("Do you want to cast " + SpellList.getName(sort) + "?");
+                alert.text("An usage of " + SpellList.getName(sort) + " will be remove from your spellbook");
+                alert.button("Yes", com.badlogic.gdx.graphics.Color.BLACK, new InputListener() {
+                    public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
+                        game.getPlayer().getGrimoire().removeFrom(sort);
+                        onOk.run();
+                        alert.hide();
+                        from.hide();
                         hud.bringToFront();
                         return true;
                     }

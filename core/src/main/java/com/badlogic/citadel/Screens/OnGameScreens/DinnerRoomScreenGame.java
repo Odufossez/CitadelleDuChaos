@@ -4,18 +4,19 @@ import com.badlogic.citadel.Citadel;
 import com.badlogic.gdx.ApplicationAdapter;
 import com.badlogic.gdx.Screen;
 
-//196
-public class FoodSafeScreenGame extends ApplicationAdapter implements Screen {
-    public FoodSafeScreenGame(Citadel game) {
+public class DinnerRoomScreenGame extends ApplicationAdapter implements Screen {
+
+    public DinnerRoomScreenGame (Citadel game){
 
     }
+
     @Override
     public void show() {
 
     }
 
     @Override
-    public void render(float v) {
+    public void render(float delta) {
 
     }
 
