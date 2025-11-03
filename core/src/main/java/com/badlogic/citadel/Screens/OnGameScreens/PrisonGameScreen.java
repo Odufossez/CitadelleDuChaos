@@ -2,7 +2,6 @@ package com.badlogic.citadel.Screens.OnGameScreens;
 
 import com.badlogic.citadel.Citadel;
 import com.badlogic.citadel.DialogWindows.DialogBox;
-import com.badlogic.citadel.DialogWindows.DialogBoxMethods;
 import com.badlogic.citadel.Dice;
 import com.badlogic.citadel.Methods.Combat;
 import com.badlogic.citadel.Methods.Monster;
@@ -108,7 +107,7 @@ public class PrisonGameScreen extends ApplicationAdapter implements Screen {
         continueDialogBox(dialogBox397,dialogBox283,"Do not use\na spell",stage, hud);
         continueDialogBox(dialogBox069,dialogBox283,"Do not use\na spell",stage, hud);
         continueDialogBox(dialogBox123,dialogBox283,"Do not use\na spell",stage, hud);
-        continueDialogBox(dialogBox283,stage,new GameOverScreen(game),game);
+        continueDialogBox(dialogBox283,stage,new GameOverScreen(game),game, null);
 
         if (game.getPlayer().getGrimoire().isInGrimoire(SpellList.Sorts.OR_DU_SOT)){
             alertSpellDialog(dialogBox397,dialogBox211,SpellList.Sorts.OR_DU_SOT,hud,stage,game);
@@ -147,8 +146,8 @@ public class PrisonGameScreen extends ApplicationAdapter implements Screen {
             });
         }
         continueDialogBox(dialogBox246,"Get ready to fight",hud,this::combatCalacorm);
-        continueDialogBox(dialogBox268,stage,new LutinScreen(game),game);
-        continueDialogBox(dialogBox116,stage,new LutinScreen(game),game);
+        continueDialogBox(dialogBox268,stage,new LutinScreen(game),game, null);
+        continueDialogBox(dialogBox116,stage,new LutinScreen(game),game, null);
 
     }
 

@@ -214,8 +214,8 @@ public class LutinScreen extends ApplicationAdapter implements Screen {
         continueDialogBox(dialogBox386,dialogBox204, "Wade across the sewer" , stage, hud);
         continueDialogBox(dialogBox386,dialogBox108, "Use the rope\nand swing across" , stage, hud);
 
-        continueDialogBox(dialogBox204,stage,new PassageRiverGameScreen(game),game);
-        continueDialogBox(dialogBox108,stage,new PassageRiverGameScreen(game),game);
+        continueDialogBox(dialogBox204,stage,new PassageRiverGameScreen(game),game, null);
+        continueDialogBox(dialogBox108,stage,new PassageRiverGameScreen(game),game, null);
     }
 
     @Override

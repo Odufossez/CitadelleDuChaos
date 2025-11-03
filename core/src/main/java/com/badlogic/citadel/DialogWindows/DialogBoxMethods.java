@@ -189,12 +189,14 @@ public abstract class DialogBoxMethods {
      * @param stage      the current stage
      * @param nextScreen the new screen to display
      * @param game       the current game
+     * @param onOk
      */
-    public static void continueDialogBox(DialogBox from, Stage stage, Screen nextScreen, Citadel game) {
+    public static void continueDialogBox(DialogBox from, Stage stage, Screen nextScreen, Citadel game, Runnable onOk) {
         from.button("Continue", new InputListener() {
             public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
                 from.hide();
                 stage.clear();
+                onOk.run();
                 game.setScreen(nextScreen);
                 return true;
             }

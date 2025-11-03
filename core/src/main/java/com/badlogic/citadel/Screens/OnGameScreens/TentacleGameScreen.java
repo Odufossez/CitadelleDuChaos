@@ -104,7 +104,7 @@ public class TentacleGameScreen extends ApplicationAdapter implements Screen {
             DialogBox victory = new DialogBox("Narrator");
             victory.text("You have defeated the Grey Tentacle.\n" +
                 "You continue your way to the Tower.");
-            DialogBoxMethods.continueDialogBox(victory,stage,new RhinoDoorGameScreen(game),game);
+            DialogBoxMethods.continueDialogBox(victory,stage,new RhinoDoorGameScreen(game),game, null);
             return;
         }
 
@@ -112,7 +112,7 @@ public class TentacleGameScreen extends ApplicationAdapter implements Screen {
         if (cptTour == 4){
             DialogBox defeat = new DialogBox("Narrator !");
             defeat.text("You were dragged into the hole by the Grey Tentacle.");
-            DialogBoxMethods.continueDialogBox(defeat,stage,new GameOverScreen(game),game);
+            DialogBoxMethods.continueDialogBox(defeat,stage,new GameOverScreen(game),game, null);
             return;
         }
 

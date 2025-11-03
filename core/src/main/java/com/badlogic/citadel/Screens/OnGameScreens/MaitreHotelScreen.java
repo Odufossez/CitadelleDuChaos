@@ -1,7 +1,6 @@
 package com.badlogic.citadel.Screens.OnGameScreens;
 
 import com.badlogic.citadel.Citadel;
-import com.badlogic.citadel.DialogWindows.DialogAlert;
 import com.badlogic.citadel.DialogWindows.DialogBox;
 import com.badlogic.citadel.Dice;
 import com.badlogic.citadel.Item;
@@ -149,7 +148,7 @@ public class MaitreHotelScreen extends ApplicationAdapter implements Screen {
         continueDialogBox(dialogBox243, "Go in tiptoeing",stage,new SleepingGarkGameScreen(game),game);
         continueDialogBox(dialogBox243,dialogBox002,"Try the right\nhand passage",stage,hud);
         continueDialogBox(dialogBox002,dialogBox142,"Try opening the door",stage,hud);
-        continueDialogBox(dialogBox142,stage, new PrisonGameScreen(game),game);
+        continueDialogBox(dialogBox142,stage, new PrisonGameScreen(game),game, null);
         continueDialogBox(dialogBox002,dialogBox343,"Continue up the passage",stage,hud);
         continueDialogBox(dialogBox343,dialogBox055,"Left",stage,hud);
         continueDialogBox(dialogBox343,dialogBox249,"Right",stage,hud);
@@ -169,7 +168,7 @@ public class MaitreHotelScreen extends ApplicationAdapter implements Screen {
                     alertPlayerPV(1,stage,game,()->{
                         initialStaminaLost = true;
                         if (game.getPlayer().getCurrentLuck()>=doubleDice()){ //lucky
-                            continueDialogBox(dialogBox231,stage, new FoodSafeScreenGame(game),game);
+                            continueDialogBox(dialogBox231,stage, new FoodSafeScreenGame(game),game, null);
                         } else {//unlucky
                             dialogBox231.getButtonTable().clear();
 
@@ -201,7 +200,7 @@ public class MaitreHotelScreen extends ApplicationAdapter implements Screen {
 
 
 
-        continueDialogBox(dialogBox392,stage, new FoodSafeScreenGame(game),game);
+        continueDialogBox(dialogBox392,stage, new FoodSafeScreenGame(game),game, null);
 
         continueDialogBox(dialogBox005,dialogBox361,"Open the door",stage,hud);
         dialogGetLucky(dialogBox361,dialogBox297,dialogBox126,stage,hud,game);

@@ -129,6 +129,7 @@ public class Player {
      */
     public void setCurrentVitality(int vit){
         currentVit = vit;
+        if (currentVit>vitality) currentVit=vitality;
     }
 
     /**

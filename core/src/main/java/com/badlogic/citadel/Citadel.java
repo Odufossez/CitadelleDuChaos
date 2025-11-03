@@ -23,7 +23,7 @@ public class Citadel extends Game {
 
     /*---------------------- Game variables like password and other key informations -----------------------------*/
     private boolean password; //Scimitar - TheCourtyardGameScreen
-
+    private boolean combinationLock; //217 - LibraryGameScreen
 
 
     @Override
@@ -46,11 +46,11 @@ public class Citadel extends Game {
         grim.putIn(SpellList.Sorts.TELEPATHIE);
         grim.putIn(SpellList.Sorts.FORCE);
         grim.putIn(SpellList.Sorts.FAIBLESSE);
-        setScreen(new SleepingGarkGameScreen(this));
+        setScreen(new LibraryGameScreen(this));
         /*------ fin du temporaire ---*/
         //setScreen(menuScreen);
         password = false;
-
+        combinationLock = false;
     }
 
 
@@ -58,8 +58,12 @@ public class Citadel extends Game {
         return appPrefs;
     }
     public Player getPlayer(){ return player ;}
+
     public boolean getPassword(){return password;}
     public void setPassword(boolean b){password = b;}
+
+    public boolean getCombinationLock(){return combinationLock;}
+    public void setCombinationLock(boolean b){combinationLock = b;}
 
 
     public void render(){

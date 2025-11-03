@@ -409,7 +409,7 @@ public class TheCourtyardGameScreen extends ApplicationAdapter implements Screen
         }
 
         DialogBoxMethods.continueDialogBox(dialogBoxWell,dialogBoxWell_CallHelp, "Call out for help" , stage,hud);
-        DialogBoxMethods.continueDialogBox(dialogBoxWell_CallHelp,stage, new GameOverScreen(game),game);
+        DialogBoxMethods.continueDialogBox(dialogBoxWell_CallHelp,stage, new GameOverScreen(game),game, null);
 
         DialogBoxMethods.continueDialogBox(dialogBox222_Illusion,dialogBox222_Sword,hud,stage);
         DialogBoxMethods.continueDialogBox(dialogBox222_Weakness,dialogBoxTumbling,hud,stage);
@@ -485,15 +485,15 @@ public class TheCourtyardGameScreen extends ApplicationAdapter implements Screen
         });
         if (game.getPlayer().getGrimoire().isInGrimoire(SpellList.Sorts.COPIE_CONFORME)){
             DialogBoxMethods.alertSpellDialog(dialogBoxWind_2,dialogBoxDouble, SpellList.Sorts.COPIE_CONFORME,hud,stage,game);
-            DialogBoxMethods.continueDialogBox(dialogBoxDouble,stage,new RhinoDoorGameScreen(game) , game);
+            DialogBoxMethods.continueDialogBox(dialogBoxDouble,stage,new RhinoDoorGameScreen(game) , game, null);
         }
         if (game.getPlayer().getGrimoire().isInGrimoire(SpellList.Sorts.ILLUSION)){
             DialogBoxMethods.alertSpellDialog(dialogBoxWind_2,dialogBoxGaz, SpellList.Sorts.ILLUSION,hud,stage,game);
-            DialogBoxMethods.continueDialogBox(dialogBoxGaz,stage,new RhinoDoorGameScreen(game) , game);
+            DialogBoxMethods.continueDialogBox(dialogBoxGaz,stage,new RhinoDoorGameScreen(game) , game,null);
         }
         if (game.getPlayer().getGrimoire().isInGrimoire(SpellList.Sorts.LEVITATION)){
             DialogBoxMethods.alertSpellDialog(dialogBoxWind_2,dialogBoxFly, SpellList.Sorts.LEVITATION,hud,stage,game);
-            DialogBoxMethods.continueDialogBox(dialogBoxFly,stage,new RhinoDoorGameScreen(game) , game);
+            DialogBoxMethods.continueDialogBox(dialogBoxFly,stage,new RhinoDoorGameScreen(game) , game,null );
         }
 
         dialogBox161.button("Show her your anger" , new InputListener() {
@@ -514,7 +514,7 @@ public class TheCourtyardGameScreen extends ApplicationAdapter implements Screen
             }
         });
 
-        DialogBoxMethods.continueDialogBox(dialogBox161_1,stage,new RhinoDoorGameScreen(game) , game);
+        DialogBoxMethods.continueDialogBox(dialogBox161_1,stage,new RhinoDoorGameScreen(game) , game, null);
 
         dialogBoxAlive.button("Flip a coin" , new InputListener() {
             DialogAlert alert = new DialogAlert("Result");

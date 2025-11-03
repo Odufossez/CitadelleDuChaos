@@ -4,9 +4,9 @@ import com.badlogic.citadel.Citadel;
 import com.badlogic.gdx.ApplicationAdapter;
 import com.badlogic.gdx.Screen;
 
-//90
-public class WomanByRiverGameScreen extends ApplicationAdapter implements Screen {
-    public WomanByRiverGameScreen(Citadel game) {
+//257
+public class GolemGameScreen extends ApplicationAdapter implements Screen {
+    public GolemGameScreen(Citadel game) {
 
     }
 
@@ -16,7 +16,7 @@ public class WomanByRiverGameScreen extends ApplicationAdapter implements Screen
     }
 
     @Override
-    public void render(float v) {
+    public void render(float delta) {
 
     }
 

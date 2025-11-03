@@ -1,7 +1,6 @@
 package com.badlogic.citadel.Screens.OnGameScreens;
 
 import com.badlogic.citadel.Citadel;
-import com.badlogic.citadel.DialogWindows.DialogAlert;
 import com.badlogic.citadel.DialogWindows.DialogBox;
 import com.badlogic.citadel.Dice;
 import com.badlogic.citadel.Item;
@@ -18,9 +17,6 @@ import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.InputListener;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
-import com.badlogic.citadel.PlayerRelatedMethods.SpellList.Sorts.*;
-
-import java.awt.*;
 
 import static com.badlogic.citadel.DialogWindows.DialogBoxMethods.alertSpellDialog;
 import static com.badlogic.citadel.DialogWindows.DialogBoxMethods.continueDialogBox;
