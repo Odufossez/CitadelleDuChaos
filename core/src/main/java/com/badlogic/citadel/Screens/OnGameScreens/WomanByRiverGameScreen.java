@@ -33,6 +33,8 @@ public class WomanByRiverGameScreen extends ApplicationAdapter implements Screen
     private final DialogBox dialogBox240 = new DialogBox("Narrator");
     private final DialogBox dialogBox194 = new DialogBox("Narrator");
     private final DialogBox dialogBox006 = new DialogBox("Narrator");
+
+    //à enlever
     private final DialogBox dialogBox367 = new DialogBox("Narrator");
     private final DialogBox dialogBox308 = new DialogBox("Narrator");
     private final DialogBox dialogBox121 = new DialogBox("Narrator");
@@ -86,11 +88,6 @@ public class WomanByRiverGameScreen extends ApplicationAdapter implements Screen
             "human creatures with their long dead-faces, gloating over your death.");
         dialogBox006.text("The path runs alongside the river for several metres and then cuts back into the rock. You follow " +
             "the path for some time.");
-        dialogBox367.text("Some way along the passage, you arrive at a four-way junction. You take a path to the north, which " +
-            "eventually leads you to a large wooden door. You can hear nothing by listening at the keyhole.");
-        dialogBox308.text("The handle turns and you step into a dark room.");
-        dialogBox121.text("As you run at the door, it suddenly opens in front of you. Unable to stop, you rush headlong forwards " +
-            "into the room, eventually tripping over and rolling to a stop.");
     }
 
     public void input() {
@@ -129,15 +126,7 @@ public class WomanByRiverGameScreen extends ApplicationAdapter implements Screen
             game.getPlayer().getInventory().removeFrom(Item.Items.SILVER_MIRROR);
         });
         continueDialogBox(dialogBox240,dialogBox006,hud,stage,null);
-        continueDialogBox(dialogBox006,dialogBox367,hud,stage,null);
-
-        continueDialogBox(dialogBox367,dialogBox308,"Open the door slowly",stage,hud);
-        continueDialogBox(dialogBox367,dialogBox121,"Charge the door down",stage,hud);
-
-        continueDialogBox(dialogBox121,stage,new GolemGameScreen(game),game,()->{
-            game.getPlayer().modifyCurrentVitality(-1);
-        });
-        continueDialogBox(dialogBox308,stage,new GolemGameScreen(game),game,null);
+        continueDialogBox(dialogBox006,stage, new CroisementFourWays(game),game,null);
     }
 
     public void dispose() {

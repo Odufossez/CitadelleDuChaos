@@ -68,16 +68,8 @@ public class PassageRiverGameScreen extends ApplicationAdapter implements Screen
             });
         }
 
-        continueDialogBox(dialogBox112,dialogBox367,"Go forwards",stage,hud);
+        continueDialogBox(dialogBox112,"Go forwards",stage,new CroisementFourWays(game),game);
         continueDialogBox(dialogBox112,dialogBox212,"Go left",stage,hud);
-
-        continueDialogBox(dialogBox367,dialogBox121,"Take down the door",stage,hud);
-        continueDialogBox(dialogBox367,dialogBox308,"Try to open it slowly",stage,hud);
-
-        continueDialogBox(dialogBox121,stage,new GolemGameScreen(game),game, ()->{
-            alertPlayerPV(1,stage,game,null);
-        });
-
     }
 
     private void combat73(){
@@ -93,7 +85,7 @@ public class PassageRiverGameScreen extends ApplicationAdapter implements Screen
             hud.hideEnenmyBars();
             DialogBox victory = new DialogBox("Narrator");
             victory.text("You have defeated the Snake.");
-            continueDialogBox(victory,dialogBox112,hud,stage);
+            continueDialogBox(victory,dialogBox112,hud,stage,null);
             return;
         }
 
