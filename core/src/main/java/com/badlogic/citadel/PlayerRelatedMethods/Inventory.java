@@ -27,6 +27,10 @@ public class Inventory {
         inventory.add(i);
     }
 
+    public boolean hasItem(Item.Items i){
+        return inventory.contains(i);
+    }
+
     public ArrayList<Item.Items> getInventory(){
         return inventory;
     }

@@ -30,11 +30,14 @@ public class Item implements Comparable{
         HOGWEED_ESSENCE,
         JEWEL_OF_LIGHT,
         KEY_COPPER,
+        KEY_GREEN,
+        KEY_SILVER,
         NEEDLE_KNIFE,
         POCKET_MYRIADE,
         RING_OF_SWORDSMANSHIP,
         SILVER_MIRROR,
         SLUMBERBERRY,
+        SPIDER_MAN,
         SWORD;
 
         public static String getName(Items item) {
@@ -65,6 +68,10 @@ public class Item implements Comparable{
                     return "Jewel of Light";
                 case KEY_COPPER:
                     return "Copper key";
+                case KEY_GREEN:
+                    return "Green key";
+                case KEY_SILVER:
+                    return "Silver key";
                 case NEEDLE_KNIFE:
                     return "Needle knife";
                 case POCKET_MYRIADE:
@@ -73,6 +80,8 @@ public class Item implements Comparable{
                     return "Ring of Swordsmanship";
                 case SILVER_MIRROR:
                     return "Silver mirror";
+                case SPIDER_MAN:
+                    return "Spider Man";
                 case SLUMBERBERRY:
                     return "Slumberberry";
                 case SWORD:

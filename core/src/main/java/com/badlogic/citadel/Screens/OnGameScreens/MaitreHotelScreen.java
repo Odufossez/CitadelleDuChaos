@@ -140,9 +140,9 @@ public class MaitreHotelScreen extends ApplicationAdapter implements Screen {
 
     public void input(){
         continueDialogBox(dialogBox005,dialogBox040,"Ring the bell" , stage,hud);
-        continueDialogBox(dialogBox040,dialogBox040_1,hud,stage);
-        continueDialogBox(dialogBox040_1,dialogBox040_2,hud,stage);
-        continueDialogBox(dialogBox040_2,dialogBox040_3,hud,stage);
+        continueDialogBox(dialogBox040,dialogBox040_1,hud,stage,null);
+        continueDialogBox(dialogBox040_1,dialogBox040_2,hud,stage,null);
+        continueDialogBox(dialogBox040_2,dialogBox040_3,hud,stage,null);
         continueDialogBox(dialogBox040_3,dialogBox243,"Left",stage,hud);
         continueDialogBox(dialogBox040_3,dialogBox002,"Right",stage,hud);
         continueDialogBox(dialogBox243, "Go in tiptoeing",stage,new SleepingGarkGameScreen(game),game);
@@ -153,7 +153,7 @@ public class MaitreHotelScreen extends ApplicationAdapter implements Screen {
         continueDialogBox(dialogBox343,dialogBox055,"Left",stage,hud);
         continueDialogBox(dialogBox343,dialogBox249,"Right",stage,hud);
         continueDialogBox(dialogBox055,dialogBox010,"Look for a secret passage",stage,hud);
-        continueDialogBox(dialogBox010,dialogBox249,hud, stage);
+        continueDialogBox(dialogBox010,dialogBox249,hud, stage,null);
 
         if (game.getPlayer().getInventory().getInventory().contains(Item.Items.KEY_COPPER)){
             continueDialogBox(dialogBox249,dialogBox392, hud,stage,game, Item.Items.KEY_COPPER,false);
@@ -204,7 +204,7 @@ public class MaitreHotelScreen extends ApplicationAdapter implements Screen {
 
         continueDialogBox(dialogBox005,dialogBox361,"Open the door",stage,hud);
         dialogGetLucky(dialogBox361,dialogBox297,dialogBox126,stage,hud,game);
-        continueDialogBox(dialogBox126,dialogBox316,hud,stage);
+        continueDialogBox(dialogBox126,dialogBox316,hud,stage,null);
 
         if (game.getPlayer().getGrimoire().isInGrimoire(SpellList.Sorts.PROTECTION)){
             alertSpellDialog(dialogBox316, dialogBox220, SpellList.Sorts.PROTECTION, hud, stage, game);
@@ -290,7 +290,7 @@ public class MaitreHotelScreen extends ApplicationAdapter implements Screen {
             hud.hideEnenmyBars();
             DialogBox victoryBox = new DialogBox("Narrator");
             victoryBox.text("You defeated the Wheelies ! You continue your way down the passageway.");
-            continueDialogBox(victoryBox,dialogBox243,hud,stage);
+            continueDialogBox(victoryBox,dialogBox243,hud,stage,null);
             victoryBox.show(stage);
             hud.bringToFront();
             return;

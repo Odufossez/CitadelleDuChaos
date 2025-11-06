@@ -132,6 +132,12 @@ public class Player {
         if (currentVit>vitality) currentVit=vitality;
     }
 
+    public void modifyCurrentVitality(int mod){
+        currentVit += mod;
+        if (currentVit<0) currentVit=0;
+        if (currentVit>vitality) currentVit=vitality;
+    }
+
     /**
      * Mets la valeur de vitalité max à jour
      * @param vitality
@@ -157,6 +163,11 @@ public class Player {
     public void decreaseLuck(){
         this.currentLuck--;
         if (currentLuck<0) currentLuck=0;
+    }
+    public void modifyCurrentLuck(int mod){
+        currentLuck += mod;
+        if (currentLuck<0) currentLuck=0;
+        if (currentLuck>luck) currentLuck=luck;
     }
     public void setCurrentLuck(int luck){
         currentLuck=luck;
