@@ -255,6 +255,7 @@ public class GolemGameScreen extends ApplicationAdapter implements Screen {
         font.draw(game.batch, "Golem Game Screen" , Gdx.graphics.getWidth()*0.25f, Gdx.graphics.getHeight()*0.3f);
         game.batch.end();
         stage.draw();
+
     }
 
     @Override

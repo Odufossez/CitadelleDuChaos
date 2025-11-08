@@ -94,7 +94,7 @@ public class AtTheGateGameScreen extends ApplicationAdapter implements Screen {
     }
 
     private void inputPathHerbalist(){
-        DialogBoxMethods.continueDialogBox(dialogBox261,dialogBox261_1,hud,stage);
+        DialogBoxMethods.continueDialogBox(dialogBox261,dialogBox261_1,hud,stage,null);
         DialogBoxMethods.continueDialogBox(dialogBox261_1,dialogBox261_2,hud,stage,game,Item.Items.GRASS,false);
         DialogBoxMethods.continueDialogBox(dialogBox261_2,dialogBox261_Wrong,"Pincus" , stage, hud);
         DialogBoxMethods.continueDialogBox(dialogBox261_2,dialogBox261_Kylltrog,"Kylltrog",stage,hud);
@@ -126,7 +126,7 @@ public class AtTheGateGameScreen extends ApplicationAdapter implements Screen {
             }
         });
 
-        DialogBoxMethods.continueDialogBox(dialogBox261_Lucky,dialogBoxEnter,hud,stage);
+        DialogBoxMethods.continueDialogBox(dialogBox261_Lucky,dialogBoxEnter,hud,stage,null);
 
         dialogBox261_Unlucky.button("Continue" , new InputListener(){
             public boolean touchDown(InputEvent event, float x, float y, int pointer, int button){
@@ -141,11 +141,11 @@ public class AtTheGateGameScreen extends ApplicationAdapter implements Screen {
         DialogBoxMethods.continueDialogBox(dialogBox261_Blag,dialogBox261_Blag2,"He's guard on the first floor !",
             stage, hud);
 
-        DialogBoxMethods.continueDialogBox(dialogBox261_Blag2,dialogBoxEnter,hud,stage);
+        DialogBoxMethods.continueDialogBox(dialogBox261_Blag2,dialogBoxEnter,hud,stage,null);
     }
 
     private void inputPathMerchant(){
-        DialogBoxMethods.continueDialogBox(dialogBox230,dialogBox230_1,hud,stage);
+        DialogBoxMethods.continueDialogBox(dialogBox230,dialogBox230_1,hud,stage,null);
 
         dialogBox230_1.button("Draw my sword" , new InputListener() {
                 public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
@@ -178,7 +178,7 @@ public class AtTheGateGameScreen extends ApplicationAdapter implements Screen {
 
     private void input() {
         DialogBoxMethods.continueDialogBox(dialogBox1,dialogBox2,"Think about a lie", stage,hud);
-        DialogBoxMethods.continueDialogBox(dialogBox2,dialogBox3,hud,stage);
+        DialogBoxMethods.continueDialogBox(dialogBox2,dialogBox3,hud,stage,null);
         DialogBoxMethods.continueDialogBox(dialogBox3,dialogBox4,"Approach the gate", stage,hud);
 
         dialogBox4.button("I am a herbalist ! " , new InputListener() {

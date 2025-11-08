@@ -189,6 +189,7 @@ public class Player {
 
     public void setGold(int gold) {this.gold = gold;}
     public  int getGold(){return  gold;}
+    public void modifyGold(int mod){gold += mod;}
 
     /**
      * Les méthodes liées à l'habilité

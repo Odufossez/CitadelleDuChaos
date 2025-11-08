@@ -97,8 +97,8 @@ public class SleepingGarkGameScreen extends ApplicationAdapter implements Screen
     }
 
     public void input(){
-        continueDialogBox(dialogBox352,dialogBox352_1,hud,stage);
-        continueDialogBox(dialogBox352_1,dialogBox352_2,hud,stage);
+        continueDialogBox(dialogBox352,dialogBox352_1,hud,stage,null);
+        continueDialogBox(dialogBox352_1,dialogBox352_2,hud,stage,null);
 
         continueDialogBox(dialogBox352_2,dialogBox203,"Rush to\nthe door",stage,hud);
         continueDialogBox(dialogBox352_2,dialogBox016,"Draw out\nmy sword",stage,hud);
@@ -151,8 +151,8 @@ public class SleepingGarkGameScreen extends ApplicationAdapter implements Screen
         if (game.getPlayer().getGold()>=3){
             continueDialogBox(dialogBox016,dialogBox391,hud,stage,game,3,false);
         }
-        continueDialogBox(dialogBox294,dialogBox099,hud,stage);
-        continueDialogBox(dialogBox391,dialogBox099,hud,stage);
+        continueDialogBox(dialogBox294,dialogBox099,hud,stage,null);
+        continueDialogBox(dialogBox391,dialogBox099,hud,stage,null);
 
         continueDialogBox(dialogBox099,"Left",stage,new GameRoomScreenGame(game),game);
         continueDialogBox(dialogBox099,dialogBox038,"Right",stage,hud);
@@ -196,7 +196,7 @@ public class SleepingGarkGameScreen extends ApplicationAdapter implements Screen
             hud.hideEnenmyBars();
             DialogBox victory = new DialogBox("Narrator");
             victory.text("You defeated the " + monster.getName() + " !");
-            continueDialogBox(victory,dialogBox180,hud,stage);
+            continueDialogBox(victory,dialogBox180,hud,stage,null);
             victory.show(stage);
             hud.bringToFront();
             return;

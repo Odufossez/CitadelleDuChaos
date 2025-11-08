@@ -84,11 +84,11 @@ public class RhinoDoorGameScreen extends ApplicationAdapter implements Screen {
         continueDialogBox(dialogBox218,dialogBox118,"Knock on the door",stage,hud);
         if (game.getPassword()){
             continueDialogBox(dialogBox118,dialogBox371,"Scimitar",stage,hud);
-            continueDialogBox(dialogBox371,dialogBoxLucky177, hud, stage);
+            continueDialogBox(dialogBox371,dialogBoxLucky177, hud, stage,null);
         }
         continueDialogBox(dialogBox118,dialogBox255,"Ganjees", stage,hud);
         continueDialogBox(dialogBox118,dialogBox049,"Kraken", stage,hud);
-        continueDialogBox(dialogBox049,dialogBox255,hud,stage);
+        continueDialogBox(dialogBox049,dialogBox255,hud,stage,null);
         if (!knockDownDoor && game.getPlayer().getGrimoire().isInGrimoire(SpellList.Sorts.FORCE)){
             dialogBox218.button("Knock the door down" , new InputListener() {
                 public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
@@ -111,7 +111,7 @@ public class RhinoDoorGameScreen extends ApplicationAdapter implements Screen {
                 }
             });
         }
-        continueDialogBox(dialogBox094,dialogBox118,hud,stage);
+        continueDialogBox(dialogBox094,dialogBox118,hud,stage,null);
 
         dialogBox118.button("Make him believe\nyou are a herbalist",new InputListener(){
             public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
@@ -246,7 +246,7 @@ public class RhinoDoorGameScreen extends ApplicationAdapter implements Screen {
             hud.hideEnenmyBars();
             DialogBox victory = new DialogBox("Narrator");
             victory.text("You defeated the Rhino !");
-            continueDialogBox(victory,dialogBoxLucky177,hud,stage);
+            continueDialogBox(victory,dialogBoxLucky177,hud,stage,null);
             victory.show(stage);
             hud.bringToFront();
             return;

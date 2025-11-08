@@ -344,7 +344,14 @@ public abstract class DialogBoxMethods {
         alert.show(stage);
     }
 
-    public static void alertNotification(String title, String message, Stage stage, HUD hud, Runnable onOk) {
+    /**
+     * A notification for the player, only one button ok to close the alert
+     * @param title
+     * @param message
+     * @param stage
+     * @param onOk
+     */
+    public static void alertNotification(String title, String message, Stage stage, Runnable onOk) {
         DialogAlert alert = new DialogAlert(title);
         alert.text(message);
         alert.button("Ok", Color.BLACK, new InputListener() {
@@ -373,6 +380,27 @@ public abstract class DialogBoxMethods {
                 return true;
             }
         });
+    }
+
+    public static void alertYesNo(String title, String message, Stage stage, Runnable onYes, Runnable onNo){
+        DialogAlert alert = new DialogAlert(title);
+        alert.text(message);
+        alert.button("Yes", Color.BLACK, new InputListener() {
+            public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
+                alert.hide();
+                onYes.run();
+                return true;
+            }
+        });
+        alert.button("No", Color.BLACK, new InputListener() {
+            public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
+                alert.hide();
+                onNo.run();
+                return true;
+            }
+        });
+
+        alert.show(stage);
     }
 
 }

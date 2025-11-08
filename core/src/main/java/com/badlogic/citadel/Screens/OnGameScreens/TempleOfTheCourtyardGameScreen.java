@@ -71,7 +71,7 @@ public class TempleOfTheCourtyardGameScreen extends ApplicationAdapter implement
     }
 
     public void input(){
-        continueDialogBox(dialogBox362_1,dialogBox362_2,hud,stage);
+        continueDialogBox(dialogBox362_1,dialogBox362_2,hud,stage,null);
         continueDialogBox(dialogBox362_2,dialogBox58,"Enter the temple",stage,hud);
         continueDialogBox(dialogBox362_2, "Go back to the courtyard\nand continue my way" , stage, new TentacleGameScreen(game), game);
         continueDialogBox(dialogBox58,dialogBox298,"The clear liquid" ,stage,hud);
@@ -80,7 +80,7 @@ public class TempleOfTheCourtyardGameScreen extends ApplicationAdapter implement
         continueDialogBox(dialogBox58,"No, go back", stage, new TentacleGameScreen(game), game);
         continueDialogBox(dialogBox298,dialogBox58,"No" ,stage,hud);
         continueDialogBox(dialogBox298,dialogBoxDream_1,"Yes" ,stage,hud);
-        continueDialogBox(dialogBoxDream_1,dialogBoxDream_2,hud,stage);
+        continueDialogBox(dialogBoxDream_1,dialogBoxDream_2,hud,stage,null);
         continueDialogBox(dialogBoxDream_2,"Go back to have some fresh air", stage , new TentacleGameScreen(game), game);
 
         dialogBox267.button("Cough, it is disgusting !" , new InputListener() {

@@ -101,10 +101,10 @@ public class LibraryGameScreen extends ApplicationAdapter implements Screen {
         continueDialogBox(dialogBox375,dialogBox263,"The Calacorm",stage,hud);
         continueDialogBox(dialogBox375,dialogBox135,"The Miks",stage,hud);
         continueDialogBox(dialogBox375,dialogBox063,"The Ganjees",stage,hud);
-        continueDialogBox(dialogBox063,dialogBox375, hud, stage);
+        continueDialogBox(dialogBox063,dialogBox375, hud, stage,null);
 
-        continueDialogBox(dialogBox135,dialogBox326,hud,stage);
-        continueDialogBox(dialogBox263,dialogBox326,hud,stage);
+        continueDialogBox(dialogBox135,dialogBox326,hud,stage,null);
+        continueDialogBox(dialogBox263,dialogBox326,hud,stage,null);
 
         continueDialogBox(dialogBox326,dialogBox084,"Browse the library",stage,hud);
         continueDialogBox(dialogBox326,dialogBox031,"Leave the room",stage,hud);

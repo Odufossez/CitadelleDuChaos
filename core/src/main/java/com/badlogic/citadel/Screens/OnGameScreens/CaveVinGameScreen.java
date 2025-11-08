@@ -18,8 +18,6 @@ import com.badlogic.gdx.scenes.scene2d.InputListener;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 
-import javax.swing.plaf.IconUIResource;
-
 import static com.badlogic.citadel.DialogWindows.DialogBoxMethods.alertSpellDialog;
 import static com.badlogic.citadel.DialogWindows.DialogBoxMethods.continueDialogBox;
 import static com.badlogic.citadel.Dice.doubleDice;
@@ -90,7 +88,7 @@ public class CaveVinGameScreen extends ApplicationAdapter implements Screen {
         dialogBox095.text("At the far end of the Wine Cellar is a wooden door, which you try. It opens out into a passageway " +
             "which leads onwards for several metres.");
         dialogBox272.text("You now may investigate the Wine cellar or press on through it to the door at the far end of the room.");
-        dialogBox242.text("The bottle and caskets contain hundreds of differents types of wine. Some are exceedingly old and " +
+        dialogBox242.text("The bottle and caskets contain hundreds of different types of wine. Some are exceedingly old and " +
             "valuable. In one corner of the room there is a table laid out for sampling with two bottles and glasses.");
         dialogBox105.text("The wine it rather bitter and, as you savour it in your mouth, you feel a burning sensation. You " +
             "spit the wine to the ground and, to your amazement, a jet of flame flies from your lips ! You take a sample to " +

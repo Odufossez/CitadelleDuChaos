@@ -144,10 +144,10 @@ public class LutinScreen extends ApplicationAdapter implements Screen {
             alertSpellDialog(dialogBox210, dialogBox192, SpellList.Sorts.PROTECTION, hud, stage, game);
         }
         continueDialogBox(dialogBox210,dialogBox359,"Protect yourself as you can",stage,hud);
-        continueDialogBox(dialogBox192,dialogBox029, hud, stage);
-        continueDialogBox(dialogBox359,dialogBox029, hud, stage);
-        continueDialogBox(dialogBox029,dialogBox029_1, hud, stage);
-        continueDialogBox(dialogBox029_1,dialogBox029_2, hud, stage);
+        continueDialogBox(dialogBox192,dialogBox029, hud, stage,null);
+        continueDialogBox(dialogBox359,dialogBox029, hud, stage,null);
+        continueDialogBox(dialogBox029,dialogBox029_1, hud, stage,null);
+        continueDialogBox(dialogBox029_1,dialogBox029_2, hud, stage,null);
 
         dialogBox029_2.button("Handshake O'Seamus The Leprechaun" , new InputListener() {
             public boolean touchDown(InputEvent event, float x, float y, int pointer, int button){
@@ -159,13 +159,13 @@ public class LutinScreen extends ApplicationAdapter implements Screen {
             }
         });
         continueDialogBox(dialogBox029_2,dialogBox131, "Draw out your sword", stage, hud);
-        continueDialogBox(dialogBox271,dialogBox271_1, hud,stage);
-        continueDialogBox(dialogBox271_1,dialogBox271_2, hud,stage);
+        continueDialogBox(dialogBox271,dialogBox271_1, hud,stage,null);
+        continueDialogBox(dialogBox271_1,dialogBox271_2, hud,stage,null);
         continueDialogBox(dialogBox271_2,dialogBox131, "Draw out my sword", stage, hud);
         continueDialogBox(dialogBox271_2,dialogBox348, "Ask for directions", stage, hud);
         continueDialogBox(dialogBox131,dialogBox348, "Ask for directions", stage, hud);
 
-        continueDialogBox(dialogBox348,dialogBox348_1, hud,stage);
+        continueDialogBox(dialogBox348,dialogBox348_1, hud,stage,null);
         continueDialogBox(dialogBox348_1,dialogBox207, "The brass-\nhandled door" , stage, hud);
         continueDialogBox(dialogBox348_1,dialogBox022, "The copper-\nhandled door" , stage, hud);
         continueDialogBox(dialogBox348_1,dialogBox354, "The bronze-\nhandled door" , stage, hud);
@@ -175,9 +175,9 @@ public class LutinScreen extends ApplicationAdapter implements Screen {
         continueDialogBox(dialogBox068,dialogBox022, "The copper-\nhandled door" , stage, hud);
         continueDialogBox(dialogBox068,dialogBox354, "The bronze-\nhandled door" , stage, hud);
 
-        continueDialogBox(dialogBox207,dialogBox188, hud, stage);
-        continueDialogBox(dialogBox022,dialogBox188, hud, stage);
-        continueDialogBox(dialogBox354,dialogBox188, hud, stage);
+        continueDialogBox(dialogBox207,dialogBox188, hud, stage,null);
+        continueDialogBox(dialogBox022,dialogBox188, hud, stage,null);
+        continueDialogBox(dialogBox354,dialogBox188, hud, stage,null);
 
         if (game.getPlayer().getGrimoire().isInGrimoire(SpellList.Sorts.FORCE)){
             alertSpellDialog(dialogBox188, dialogBox301, SpellList.Sorts.FORCE, hud, stage, game);
@@ -188,17 +188,17 @@ public class LutinScreen extends ApplicationAdapter implements Screen {
             alertSpellDialog(dialogBox051, dialogBox159, SpellList.Sorts.FAIBLESSE, hud, stage, game);
         }
         continueDialogBox(dialogBox188,dialogBox051, "Draw out your sword", stage, hud);
-        continueDialogBox(dialogBox051,dialogBox280, hud, stage);
-        continueDialogBox(dialogBox280,dialogBox323, hud, stage);
-        continueDialogBox(dialogBox301,dialogBox323, hud, stage);
-        continueDialogBox(dialogBox159,dialogBox323, hud, stage);
-        continueDialogBox(dialogBox323,dialogBox323_1, hud, stage);
-        continueDialogBox(dialogBox323_1,dialogBox323_2, hud, stage);
+        continueDialogBox(dialogBox051,dialogBox280, hud, stage,null);
+        continueDialogBox(dialogBox280,dialogBox323, hud, stage,null);
+        continueDialogBox(dialogBox301,dialogBox323, hud, stage,null);
+        continueDialogBox(dialogBox159,dialogBox323, hud, stage,null);
+        continueDialogBox(dialogBox323,dialogBox323_1, hud, stage,null);
+        continueDialogBox(dialogBox323_1,dialogBox323_2, hud, stage,null);
         dialogBox323_2.button("Continue", new InputListener() {
             public boolean touchDown(InputEvent event, float x, float y, int pointer, int button){
                 game.getPlayer().getInventory().putIn(Item.Items.SILVER_MIRROR);
                 game.getPlayer().setWeaponBonus(1);
-                alertNotification("You obtain two items" , "You obtain a silver mirror and a sword+1",stage,hud, ()->{
+                alertNotification("You obtain two items" , "You obtain a silver mirror and a sword+1",stage, ()->{
 
                     dialogBox323_2.hide();
                     dialogBox323_3.show(stage);

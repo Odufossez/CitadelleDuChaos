@@ -157,7 +157,7 @@ public class TentacleGameScreen extends ApplicationAdapter implements Screen {
                 DialogBox escapeBox = new DialogBox("Narrator");
                 escapeBox.text("You try to escape the Grey Tentacle.\n" +
                     "But it does not work.");
-                DialogBoxMethods.continueDialogBox(escapeBox,tentacleCrawl,hud,stage);
+                DialogBoxMethods.continueDialogBox(escapeBox,tentacleCrawl,hud,stage,null);
                 stage.addActor(escapeBox);
                 escapeBox.show(stage);
                 hud.bringToFront();

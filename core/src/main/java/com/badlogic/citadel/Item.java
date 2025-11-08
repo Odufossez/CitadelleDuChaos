@@ -108,42 +108,6 @@ public class Item implements Comparable{
         return numero;
     }
 
-    public void setEtat(boolean etat) {
-        isDansInventaire = etat;
-    }
-
-    public boolean isDansInventaire() {
-        return isDansInventaire;
-    }
-
-    public void setUsages(ArrayList<Integer> uses) {
-        usages = uses;
-    }
-
-    /**
-     * Return true if the item can be useful in this event
-     * usages is a table of int which represent the events where the
-     * item can be use
-     * @param event current event
-     * @return true if the item is useful in the current event
-     */
-    public boolean inEvent(int event){
-        for (int usage: usages) {
-            if (event == usage) {
-                return true;
-            }
-        }
-        return false;
-    }
-
-    public void setButtonUse(TextButton btt){
-        buttonUse = btt;
-    }
-
-    public TextButton getButton(){
-        return buttonUse;
-    }
-
     public String toString() {
         return name;
     }

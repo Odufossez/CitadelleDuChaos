@@ -297,7 +297,7 @@ public class TheCourtyardGameScreen extends ApplicationAdapter implements Screen
         if (game.getPlayer().getGrimoire().isInGrimoire(SpellList.Sorts.ENDURANCE)){
             DialogBoxMethods.alertSpellDialog(dialogBox222_Help,dialogBox222_Help2, SpellList.Sorts.ENDURANCE,hud,stage,game);
         }
-        DialogBoxMethods.continueDialogBox(dialogBox222_Help2,dialogBox222_Help3,hud,stage);
+        DialogBoxMethods.continueDialogBox(dialogBox222_Help2,dialogBox222_Help3,hud,stage,null);
 
         dialogBox222_Help3.button("Ask about the Citadel" , new InputListener() {
             public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
@@ -382,10 +382,10 @@ public class TheCourtyardGameScreen extends ApplicationAdapter implements Screen
                 if (game.getPlayer().getCurrentLuck() >= Dice.doubleDice()){ //79
                     getLucky.text("You manage to steady your balance. You are now safe and can continue your journey.\n" +
                         "(You lost a point of luck.)");
-                    DialogBoxMethods.continueDialogBox(getLucky,dialogBoxTree,hud,stage);
+                    DialogBoxMethods.continueDialogBox(getLucky,dialogBoxTree,hud,stage,null);
                 }else{ //100
                     getLucky.text("You slip and fall on the well.");
-                    DialogBoxMethods.continueDialogBox(getLucky,dialogBoxWell,hud,stage);
+                    DialogBoxMethods.continueDialogBox(getLucky,dialogBoxWell,hud,stage,null);
                 }
                 game.getPlayer().decreaseLuck();
                 stage.addActor(getLucky);
@@ -398,21 +398,21 @@ public class TheCourtyardGameScreen extends ApplicationAdapter implements Screen
         if (game.getPlayer().getGrimoire().isInGrimoire(SpellList.Sorts.LEVITATION)){
             alertSpellDialog(dialogBoxWell,dialogBoxWell_Levitation, SpellList.Sorts.LEVITATION,hud,stage,game);
             alertSpellDialog(dialogBoxWell_Force,dialogBoxWell_Levitation, SpellList.Sorts.LEVITATION,hud,stage,game);
-            DialogBoxMethods.continueDialogBox(dialogBoxWell_Levitation,dialogBoxTree,hud,stage);
+            DialogBoxMethods.continueDialogBox(dialogBoxWell_Levitation,dialogBoxTree,hud,stage,null);
         }
 
         if (game.getPlayer().getGrimoire().isInGrimoire(SpellList.Sorts.FORCE)){
             alertSpellDialog(dialogBoxWell,dialogBoxWell_Force, SpellList.Sorts.FORCE,hud,stage,game);
             alertSpellDialog(dialogBoxWell_Force,dialogBoxWell_Recast, SpellList.Sorts.FORCE,hud,stage,game);
             continueDialogBox(dialogBoxWell_Force,dialogBoxWell_CallHelp, "Call out for help" , stage,hud);
-            DialogBoxMethods.continueDialogBox(dialogBoxWell_Recast,dialogBoxTree,hud,stage);
+            DialogBoxMethods.continueDialogBox(dialogBoxWell_Recast,dialogBoxTree,hud,stage,null);
         }
 
         DialogBoxMethods.continueDialogBox(dialogBoxWell,dialogBoxWell_CallHelp, "Call out for help" , stage,hud);
         DialogBoxMethods.continueDialogBox(dialogBoxWell_CallHelp,stage, new GameOverScreen(game),game, null);
 
-        DialogBoxMethods.continueDialogBox(dialogBox222_Illusion,dialogBox222_Sword,hud,stage);
-        DialogBoxMethods.continueDialogBox(dialogBox222_Weakness,dialogBoxTumbling,hud,stage);
+        DialogBoxMethods.continueDialogBox(dialogBox222_Illusion,dialogBox222_Sword,hud,stage,null);
+        DialogBoxMethods.continueDialogBox(dialogBox222_Weakness,dialogBoxTumbling,hud,stage,null);
 
         continueDialogBox(dialogBoxTree,new RhinoDoorGameScreen(game),hud,stage,game, Item.Items.BERRIES,true);
     }
@@ -423,9 +423,9 @@ public class TheCourtyardGameScreen extends ApplicationAdapter implements Screen
         DialogBoxMethods.continueDialogBox(dialogBox321,dialogBoxDuo,"Talk to the men on the right",stage,hud);
         DialogBoxMethods.continueDialogBox(dialogBoxDuo,dialogBoxDuo_1,"Listen to them",stage,hud);
 
-        DialogBoxMethods.continueDialogBox(dialogBoxDuo_1, dialogBoxDuo_2,hud,stage);
-        DialogBoxMethods.continueDialogBox(dialogBoxDuo_2, dialogBoxDuo_3,hud,stage);
-        DialogBoxMethods.continueDialogBox(dialogBoxDuo_3, dialogBoxDuo_4,hud,stage);
+        DialogBoxMethods.continueDialogBox(dialogBoxDuo_1, dialogBoxDuo_2,hud,stage,null);
+        DialogBoxMethods.continueDialogBox(dialogBoxDuo_2, dialogBoxDuo_3,hud,stage,null);
+        DialogBoxMethods.continueDialogBox(dialogBoxDuo_3, dialogBoxDuo_4,hud,stage,null);
 
         dialogBoxDuo_4.button("5 golden coins" , new InputListener() {
             public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
@@ -457,7 +457,7 @@ public class TheCourtyardGameScreen extends ApplicationAdapter implements Screen
                 DialogBox dialogBox2 = new DialogBox("Tall man");
                 dialogBox.text("TEN ? That's way too much. I pass.");
                 dialogBox2.text("Well. That's unfortunate. I can make it 9 pieces for you.");
-                DialogBoxMethods.continueDialogBox(dialogBox, dialogBox2,hud,stage);
+                DialogBoxMethods.continueDialogBox(dialogBox, dialogBox2,hud,stage,null);
                 if (game.getPlayer().getGrimoire().isInGrimoire(SpellList.Sorts.OR_DU_SOT)) {
                     DialogBoxMethods.alertSpellDialog(dialogBox2,dialogBoxDagger, SpellList.Sorts.OR_DU_SOT,hud,stage,game);
                 }
@@ -470,11 +470,11 @@ public class TheCourtyardGameScreen extends ApplicationAdapter implements Screen
         });
 
         DialogBoxMethods.continueDialogBox(dialogBox186,dialogBoxChatting,"Have a chat with the tall man",stage,hud);
-        DialogBoxMethods.continueDialogBox(dialogBoxChatting,dialogBoxWind,hud,stage);
+        DialogBoxMethods.continueDialogBox(dialogBoxChatting,dialogBoxWind,hud,stage,null);
         DialogBoxMethods.continueDialogBox(dialogBox186,dialogBoxWind,"Continue your way\nto the tower",stage,hud);
 
-        DialogBoxMethods.continueDialogBox(dialogBoxWind,dialogBoxWind_1,hud,stage);
-        DialogBoxMethods.continueDialogBox(dialogBoxWind_1,dialogBoxWind_2,hud,stage);
+        DialogBoxMethods.continueDialogBox(dialogBoxWind,dialogBoxWind_1,hud,stage,null);
+        DialogBoxMethods.continueDialogBox(dialogBoxWind_1,dialogBoxWind_2,hud,stage,null);
         DialogBoxMethods.continueDialogBox(dialogBoxWind_2,dialogBox161,"Ignore her" ,stage,hud);
 
         dialogBoxWind_2.button("Talk to her" , new InputListener() {
@@ -501,7 +501,7 @@ public class TheCourtyardGameScreen extends ApplicationAdapter implements Screen
                 DialogBox dialogBox = new DialogBox("Wind women");
                 dialogBox161.hide();
                 dialogBox.text("Oh I like that way more ! Let's walk together !");
-                DialogBoxMethods.continueDialogBox(dialogBox, dialogBox161_1,hud,stage);
+                DialogBoxMethods.continueDialogBox(dialogBox, dialogBox161_1,hud,stage,null);
                 hud.bringToFront();
                 return true;
             }
@@ -871,7 +871,7 @@ public class TheCourtyardGameScreen extends ApplicationAdapter implements Screen
             dialogBoxFireCampFight.text("You feared for a moment that the sounds of the fights could have alert anyone else" +
                 " but as nothing came, you decide to loot your enemies and found 8 gold pieces, a copper key and a jar of " +
                 "a dark, creamy ointment. You can take any two of these.");
-            DialogBoxMethods.continueDialogBox(victory, dialogBoxFireCampFight, hud, stage);
+            DialogBoxMethods.continueDialogBox(victory, dialogBoxFireCampFight, hud, stage,null);
             victory.show(stage);
             return;
         }
@@ -944,7 +944,7 @@ public class TheCourtyardGameScreen extends ApplicationAdapter implements Screen
                 hud.hideEnenmyBars();
                 DialogBox dialogBox = new DialogBox("Narrator");
                 dialogBox.text("You flee to the monument.");
-                DialogBoxMethods.continueDialogBox(dialogBox,dialogBox209,hud,stage);
+                DialogBoxMethods.continueDialogBox(dialogBox,dialogBox209,hud,stage,null);
                 dialogBox.show(stage);
                 return true;
             }

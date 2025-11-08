@@ -46,7 +46,7 @@ public class Citadel extends Game {
         grim.putIn(SpellList.Sorts.TELEPATHIE);
         grim.putIn(SpellList.Sorts.FORCE);
         grim.putIn(SpellList.Sorts.FAIBLESSE);
-        setScreen(new LibraryGameScreen(this));
+        setScreen(new GameRoomScreenGame(this));
         /*------ fin du temporaire ---*/
         //setScreen(menuScreen);
         password = false;

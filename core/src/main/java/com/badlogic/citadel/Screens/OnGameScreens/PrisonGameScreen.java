@@ -98,7 +98,7 @@ public class PrisonGameScreen extends ApplicationAdapter implements Screen {
     }
 
     public void input(){
-        continueDialogBox(dialogBox234,dialogBox234_1,hud,stage);
+        continueDialogBox(dialogBox234,dialogBox234_1,hud,stage,null);
         continueDialogBox(dialogBox234_1,dialogBox397,"Eat the meal\nhe provided",stage,hud , ()->{
             game.getPlayer().setCurrentVitality(game.getPlayer().getCurrentVitality()+2);
         });
@@ -126,12 +126,12 @@ public class PrisonGameScreen extends ApplicationAdapter implements Screen {
             alertSpellDialog(dialogBox123,dialogBox035,SpellList.Sorts.ILLUSION,hud,stage,game);
         }
 
-        continueDialogBox(dialogBox211,dialogBox211_Calacorm,hud,stage);
+        continueDialogBox(dialogBox211,dialogBox211_Calacorm,hud,stage,null);
         continueDialogBox(dialogBox035,dialogBox364,"Attack the guard",stage,hud);
         continueDialogBox(dialogBox035,dialogBox246,"Turn invisible",stage,hud);
-        continueDialogBox(dialogBox364,dialogBox364_1,hud,stage);
-        continueDialogBox(dialogBox364_1,dialogBox364_2,hud,stage);
-        continueDialogBox(dialogBox364_2,dialogBox174,hud,stage);
+        continueDialogBox(dialogBox364,dialogBox364_1,hud,stage,null);
+        continueDialogBox(dialogBox364_1,dialogBox364_2,hud,stage,null);
+        continueDialogBox(dialogBox364_2,dialogBox174,hud,stage,null);
         continueDialogBox(dialogBox174,dialogBox268,"Take down\nthe door",stage,hud);
 
         if (game.getPlayer().getGrimoire().isInGrimoire(SpellList.Sorts.FORCE)){
@@ -168,7 +168,7 @@ public class PrisonGameScreen extends ApplicationAdapter implements Screen {
             hud.hideEnenmyBars();
             DialogBox victory = new DialogBox("Narrator");
             victory.text("You defeated the Calacorm !");
-            continueDialogBox(victory,dialogBox174,hud,stage);
+            continueDialogBox(victory,dialogBox174,hud,stage,null);
             victory.show(stage);
             hud.bringToFront();
             return;
