@@ -20,6 +20,7 @@ public class Item implements Comparable{
         ALCHEMIST_HEALING_BALM,
         BERRIES,
         CHARMED_AMULET,
+        ENCHANTED_ARMOR,
         ENCHANTED_BRUSH,
         ENCHANTED_THROWING_DAGGER,
         EXOTIC_FRUITS,
@@ -50,6 +51,8 @@ public class Item implements Comparable{
                     return "Berry";
                 case CHARMED_AMULET:
                     return "Charmed Amulet";
+                case ENCHANTED_ARMOR:
+                    return "Enchanted Armor";
                 case ENCHANTED_BRUSH:
                     return "Enchanted Brush";
                 case ENCHANTED_THROWING_DAGGER:

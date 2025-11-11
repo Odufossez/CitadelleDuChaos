@@ -2,19 +2,6 @@ package com.badlogic.citadel.PlayerRelatedMethods;
 
 public class SpellList {
 
-    //TODO COMPLETER?
-    private static final int[] EVENT_COPIE_CONFORME = {};
-    private static final int[] EVENT_FAIBLESSE= {};
-    private static final int[] EVENT_FEU = {};
-    private static final int[] EVENT_FORCE = {};
-    private static final int[] EVENT_ILLUSION = {};
-    private static final int[] EVENT_LEVITATION = {};
-    private static final int[] EVENT_OR_DU_SOT = {};
-    private static final int[] EVENT_PROTECTION = {};
-    private static final int[] EVENT_TELEPATHIE = {};
-
-    private String name;
-
     public enum Sorts {
         CHANCE,
         COPIE_CONFORME,

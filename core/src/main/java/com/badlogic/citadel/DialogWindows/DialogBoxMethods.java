@@ -386,14 +386,14 @@ public abstract class DialogBoxMethods {
         alert.button("Yes", Color.BLACK, new InputListener() {
             public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
                 alert.hide();
-                onYes.run();
+                if (onYes!=null)onYes.run();
                 return true;
             }
         });
         alert.button("No", Color.BLACK, new InputListener() {
             public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
                 alert.hide();
-                onNo.run();
+                if (onNo!=null)onNo.run();
                 return true;
             }
         });
