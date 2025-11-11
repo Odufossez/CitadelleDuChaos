@@ -13,7 +13,6 @@ import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.InputListener;
 import com.badlogic.gdx.scenes.scene2d.Stage;
-import com.badlogic.gdx.scenes.scene2d.ui.Button;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
@@ -30,16 +29,17 @@ public class GameRoomScreenGame extends ApplicationAdapter implements Screen {
     private final Stage stage;
     private final HUD hud;
 
-    private final DialogBox dialogAccueil = new DialogBox("Accueil");
+    private final DialogBox dialogBox052 = new DialogBox("Narrator");
+    private final DialogBox dialogBox052_1 = new DialogBox("Narrator");
+    private final DialogBox dialogBox227 = new DialogBox("Narrator");
+    private final DialogBox dialogBoxPrizes = new DialogBox("Prizes");
+    private final DialogBox dialogGameChose = new DialogBox("Choose a game to play :");
     private final DialogBox dialogExit = new DialogBox("Exit");
 
     //prize
-    private boolean gold;
-    private boolean armor;
-    private boolean spells;
+    private boolean prize;
 
     //Dague-Dingue
-    private boolean ordiPremTour;
     private final DialogBox dialogBoxDagueDingue = new DialogBox("Choose a dagger");
     private final DialogBox dialogBoxPiqueSix = new DialogBox("");
     private final DialogBox dialogBoxRocBombe = new DialogBox("");
@@ -64,28 +64,39 @@ public class GameRoomScreenGame extends ApplicationAdapter implements Screen {
         Gdx.input.setInputProcessor(stage);
         create();
         input();
-        ordiPremTour = true;
 
-        //tous les prix sont dispo
-        gold = true;
-        armor = true;
-        spells = true;
+        //possible de choisir un prix
+        prize = true;
 
-        dialogAccueil.show(stage);
+        dialogBox052.show(stage);
 
     }
 
     public void create() {
-        dialogAccueil.text("Welcome to the Game Room ! Choose a game");
+        dialogBox052.text("The door opens and you stride onwards, slamming it shut behind you. A short distance ahead, you reach a " +
+            "three way junction where you take the northwards passage. This continue for several metres leading to another door. " +
+            "You can hear laughter and merriment on the other side. Cautiously you open the door into a large room where a party of a " +
+            "dozen or so creatures, of all shapes, sizes and colours, are playing games.");
+        dialogGameChose.text("Welcome to the Game Room ! Choose a game");
+        dialogBox052_1.text("As you step into the room, a voice shouts in your direction. Evidently they are expecting someone " +
+            "and have mistaken you for their missing guest.");
         victoryMiniGame.text("You won the mini game !");
 
         buttonLancerDice = new TextButton("Roll the dice", Skins.DEFAULT_SKIN);
     }
 
     public void input() {
-        continueDialogBox(dialogAccueil, "Dague dingue", hud, this::dagueDingue); //todo temporaire nom
-        continueDialogBox(dialogAccueil, "Roc bombe", hud, this::initRocBombe); //todo temporaire nom
-        continueDialogBox(dialogAccueil, "Pique six", hud, this::piqueSix); //todo temporaire nom
+        continueDialogBox(dialogGameChose, "Dague dingue", hud, this::dagueDingue); //todo temporaire nom
+        continueDialogBox(dialogGameChose, "Roc bombe", hud, this::initRocBombe); //todo temporaire nom
+        continueDialogBox(dialogGameChose, "Pique six", hud, this::piqueSix); //todo temporaire nom
+
+        continueDialogBox(victoryMiniGame, dialogGameChose, "Play another game", stage,hud);
+        continueDialogBox(dialogBox052,dialogBox052_1,hud,stage,null);
+        continueDialogBox(dialogBox052_1,dialogBox227,"Reach the door",stage,hud);
+        continueDialogBox(dialogBox227,stage,new PrisonGameScreen(game),game,null);
+        continueDialogBox(dialogBox052_1,dialogGameChose,"Play a game",stage,hud,()->{
+            game.getPlayer().modifyCurrentVitality(2);
+        });
 
         buttonLancerDice.addListener(new InputListener() {
             public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
@@ -134,35 +145,16 @@ public class GameRoomScreenGame extends ApplicationAdapter implements Screen {
     private void dagueDingue() {
         int numeroDague = soloDice();
 
-        if (!ordiPremTour) {
-            joueurTour(numeroDague, () -> {
-                if (ordiTour(numeroDague)) {
-                    alertNotification("Your adversary died ! You won !", "", stage, () -> {
-                        victoryMiniGame.show(stage);
-                    });
-                } else {
-                    alertNotification("Your adversary survived his turn", "", stage, () -> {
-                        ordiPremTour = true;
-                        dagueDingue();
-                    });
-                }
+        if (ordiTour(numeroDague)) {
+            alertNotification("Your adversary died ! You won !", "", stage, () -> {
+                victoryMiniGame.show(stage);
+            });
+        } else {
+            alertNotification("Your adversary survived his turn", "", stage, () -> {
+                joueurTour(numeroDague, this::dagueDingue);
             });
 
-        } else {
-            if (ordiTour(numeroDague)) {
-                alertNotification("Your adversary died ! You won !", "", stage, () -> {
-                    victoryMiniGame.show(stage);
-                });
-            } else {
-                alertNotification("Your adversary survived his turn", "", stage, () -> {
-                    joueurTour(numeroDague, () -> {
-                        ordiPremTour = false;
-                        dagueDingue();
-                    });
-                });
 
-
-            }
         }
     }
 
@@ -185,7 +177,7 @@ public class GameRoomScreenGame extends ApplicationAdapter implements Screen {
                     @Override
                     public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
                         onChose.run();
-                        alertNotification("You survived ! ", "You chose a fake dagger", stage, null);
+                        alertNotification("You survived ! ", "You chose a fake dagger", stage,null);
                         return true;
                     }
                 });

@@ -2,7 +2,6 @@ package com.badlogic.citadel.DialogWindows;
 
 import com.badlogic.citadel.Citadel;
 import com.badlogic.citadel.Item;
-import com.badlogic.citadel.Methods.Monster;
 import com.badlogic.citadel.PlayerRelatedMethods.SpellList;
 import com.badlogic.citadel.Screens.HUD;
 import com.badlogic.citadel.Screens.OnGameScreens.GameOverScreen;
@@ -13,7 +12,6 @@ import com.badlogic.gdx.scenes.scene2d.InputListener;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 
 import static com.badlogic.citadel.Dice.doubleDice;
-import static com.badlogic.citadel.Methods.Combat.*;
 
 public abstract class DialogBoxMethods {
 
@@ -28,7 +26,7 @@ public abstract class DialogBoxMethods {
             public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
                 from.hide();
                 stage.addActor(to);
-                onOk.run();
+                if (onOk!=null)onOk.run();
                 to.show(stage);
                 hud.bringToFront();
                 return true;
@@ -75,7 +73,7 @@ public abstract class DialogBoxMethods {
         from.button(text, new InputListener() {
             public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
                 from.hide();
-                onOk.run();
+                if (onOk!=null)onOk.run();
                 hud.bringToFront();
                 return true;
             }
@@ -200,7 +198,7 @@ public abstract class DialogBoxMethods {
             public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
                 from.hide();
                 stage.clear();
-                onOk.run();
+                if (onOk!=null) onOk.run();
                 game.setScreen(nextScreen);
                 return true;
             }
@@ -337,7 +335,7 @@ public abstract class DialogBoxMethods {
                 if (game.getPlayer().isDead()) {
                     game.setScreen(new GameOverScreen(game));
                 }
-                onOk.run();
+                if(onOk !=null)onOk.run();
                 return true;
             }
         });
@@ -357,7 +355,7 @@ public abstract class DialogBoxMethods {
         alert.button("Ok", Color.BLACK, new InputListener() {
             public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
                 alert.hide();
-                onOk.run();
+                if (onOk != null) onOk.run();
                 return true;
             }
         });
