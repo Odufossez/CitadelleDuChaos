@@ -25,6 +25,7 @@ import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import static com.badlogic.citadel.DialogWindows.DialogBoxMethods.*;
 import static com.badlogic.citadel.Dice.doubleDice;
 import static com.badlogic.citadel.Dice.soloDice;
+import static com.badlogic.citadel.Screens.Skins.DEFAULT_SKIN;
 
 //52
 public class GameRoomScreenGame extends ApplicationAdapter implements Screen {
@@ -63,6 +64,7 @@ public class GameRoomScreenGame extends ApplicationAdapter implements Screen {
     private Table tableSorts;
     private TextButton[] textButtonsSorts;
     private final Label[] nomSorts = new Label[SpellList.Sorts.values().length];
+    private SpellList.Sorts[] sortSelection = new SpellList.Sorts[2];
     private TextButton valider;
 
     public GameRoomScreenGame(Citadel game) {
@@ -96,68 +98,70 @@ public class GameRoomScreenGame extends ApplicationAdapter implements Screen {
         dialogBoxPrizes.text("You have won a prize ! Choose one but choose wisely, you'll only getting one !");
         victoryMiniGame.text("You won the mini game !");
 
-        buttonLancerDice = new TextButton("Roll the dice", Skins.DEFAULT_SKIN);
+        buttonLancerDice = new TextButton("Roll the dice", DEFAULT_SKIN);
+        valider = new TextButton("Confirm selection", DEFAULT_SKIN);
     }
 
     public void input() {
-        continueDialogBox(dialogGameChose,dialogRulesDagueDingue,"Dague dingue",stage,hud);
-        if (game.getPlayer().getGrimoire().isInGrimoire(SpellList.Sorts.ILLUSION)){
-            alertSpellDialog(dialogRulesDagueDingue,dialogIllusion, SpellList.Sorts.ILLUSION,hud,stage,game);
+        continueDialogBox(dialogGameChose, dialogRulesDagueDingue, "Dague dingue", stage, hud);
+        if (game.getPlayer().getGrimoire().isInGrimoire(SpellList.Sorts.ILLUSION)) {
+            alertSpellDialog(dialogRulesDagueDingue, dialogIllusion, SpellList.Sorts.ILLUSION, hud, stage, game);
         }
-        continueDialogBox(dialogRulesDagueDingue, "Play", hud, ()->{
+        continueDialogBox(dialogRulesDagueDingue, "Play", hud, () -> {
             leave = true;
             dagueDingue();
         }); //todo temporaire nom
 
-        continueDialogBox(dialogGameChose,dialogBoxRulesRocBombe,"Roc bombe",stage,hud);
-        continueDialogBox(dialogBoxRulesRocBombe, "Play", hud, ()->{
+        continueDialogBox(dialogGameChose, dialogBoxRulesRocBombe, "Roc bombe", stage, hud);
+        continueDialogBox(dialogBoxRulesRocBombe, "Play", hud, () -> {
             leave = true;
             initRocBombe();
         }); //todo temporaire nom
 
-        continueDialogBox(dialogGameChose,dialogBoxRulesPiqueSix,"Pique six",stage,hud);
-        continueDialogBox(dialogBoxRulesPiqueSix, "Play", hud, ()->{
+        continueDialogBox(dialogGameChose, dialogBoxRulesPiqueSix, "Pique six", stage, hud);
+        continueDialogBox(dialogBoxRulesPiqueSix, "Play", hud, () -> {
             leave = true;
             piqueSix();
         }); //todo temporaire nom
 
-        continueDialogBox(victoryMiniGame, dialogGameChose, "Play another game", stage,hud);
+        continueDialogBox(victoryMiniGame, dialogGameChose, "Play another game", stage, hud);
 
-        continueDialogBox(dialogBoxPrizes,"Two spells",hud,()->{
-            alertYesNo("Do you want to add two more spells?" ,
+        continueDialogBox(dialogBoxPrizes, "Two spells", hud, () -> {
+            alertYesNo("Do you want to add two more spells?",
                 "You will be able to choose two spells from the initial list",
                 stage,
-                ()->{
+                () -> {
                     dialogBoxPrizes.hide();
                     visualSpellChoosing();
-                },null);
+                }, null);
         });
-        continueDialogBox(dialogBoxPrizes,"50 golds",hud,()->{
-            alertYesNo("Do you want 50 gold pieces ?" , "", stage,
-                ()->{
-                game.getPlayer().modifyGold(50);
-                dialogBoxPrizes.hide();
-                dialogGameChose.show(stage);
+        continueDialogBox(dialogBoxPrizes, "50 golds", hud, () -> {
+            alertYesNo("Do you want 50 gold pieces ?", "", stage,
+                () -> {
+                    game.getPlayer().modifyGold(50);
+                    dialogBoxPrizes.hide();
+                    dialogGameChose.show(stage);
                 }
                 , null);
         });
         continueDialogBox(dialogBoxPrizes, "Enchanted armor", hud, () -> {
-            alertYesNo("Do you want to get the enchanted armor ? ", "This enchanted armor remove two points of attack to your adversary.", stage ,
-                ()->{
+            alertYesNo("Do you want to get the enchanted armor ? ", "This enchanted armor remove two points of attack to your adversary.", stage,
+                () -> {
                     game.getPlayer().getInventory().putIn(Item.Items.ENCHANTED_ARMOR);
                     dialogBoxPrizes.hide();
                     dialogGameChose.show(stage);
-                } , null);
+                }, null);
         });
-        if (leave) {
+
+        if (leave && dialogGameChose.isVisible()) {
             continueDialogBox(dialogGameChose, dialogExit, "Leave the room", stage, hud);
         }
-        continueDialogBox(dialogExit, "Leave", stage,new DinnerRoomScreenGame(game),game);
+        continueDialogBox(dialogExit, "Leave", stage, new DinnerRoomScreenGame(game), game);
 
-        continueDialogBox(dialogBox052,dialogBox052_1,hud,stage,null);
-        continueDialogBox(dialogBox052_1,dialogBox227,"Reach the door",stage,hud);
-        continueDialogBox(dialogBox227,stage,new PrisonGameScreen(game),game,null);
-        continueDialogBox(dialogBox052_1,dialogGameChose,"Play a game",stage,hud,()->{
+        continueDialogBox(dialogBox052, dialogBox052_1, hud, stage, null);
+        continueDialogBox(dialogBox052_1, dialogBox227, "Reach the door", stage, hud);
+        continueDialogBox(dialogBox227, stage, new PrisonGameScreen(game), game, null);
+        continueDialogBox(dialogBox052_1, dialogGameChose, "Play a game", stage, hud, () -> {
             game.getPlayer().modifyCurrentVitality(2);
         });
 
@@ -202,6 +206,17 @@ public class GameRoomScreenGame extends ApplicationAdapter implements Screen {
                 return true;
             }
         });
+
+        valider.addListener(new InputListener() {
+            public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
+                game.getPlayer().getGrimoire().putIn(sortSelection[0]);
+                game.getPlayer().getGrimoire().putIn(sortSelection[1]);
+                tableSorts.clear();
+                valider.clear();
+                dialogGameChose.show(stage);
+                return true;
+            }
+        });
     }
 
     //Dague-Dingue
@@ -212,7 +227,7 @@ public class GameRoomScreenGame extends ApplicationAdapter implements Screen {
             alertNotification("Your adversary died ! You won !", "", stage, () -> {
                 if (prize) {
                     prize = false;
-                   dialogBoxPrizes.show(stage);
+                    dialogBoxPrizes.show(stage);
                 } else {
                     victoryMiniGame.show(stage);
                 }
@@ -245,7 +260,7 @@ public class GameRoomScreenGame extends ApplicationAdapter implements Screen {
                     @Override
                     public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
                         onChose.run();
-                        alertNotification("You survived ! ", "You chose a fake dagger", stage,null);
+                        alertNotification("You survived ! ", "You chose a fake dagger", stage, null);
                         return true;
                     }
                 });
@@ -271,13 +286,13 @@ public class GameRoomScreenGame extends ApplicationAdapter implements Screen {
         TextButton[] tableButtonsAdd = initTextButtonAdd();
         TextButton[] tableButtonsLess = initTextButtonLess();
 
-        goldTotal = new Label("Or total : " + game.getPlayer().getGold(), Skins.DEFAULT_SKIN);
+        goldTotal = new Label("Or total : " + game.getPlayer().getGold(), DEFAULT_SKIN);
         goldTotal.setFontScale(1.5f);
         goldTotal.setPosition(Gdx.graphics.getWidth() * 0.5f, Gdx.graphics.getHeight() * 0.75f);
         stage.addActor(goldTotal);
 
         for (int i = 1; i <= 6; i++) {
-            Label num = new Label(Integer.toString(i), Skins.DEFAULT_SKIN);
+            Label num = new Label(Integer.toString(i), DEFAULT_SKIN);
             tablePiqueSix.add(num);
             tablePiqueSix.add(tableButtonsAdd[i - 1]);
             tablePiqueSix.add(tableButtonsLess[i - 1]);
@@ -293,7 +308,7 @@ public class GameRoomScreenGame extends ApplicationAdapter implements Screen {
     private TextButton[] initTextButtonAdd() {
         TextButton[] renvoi = new TextButton[6];
         for (int i = 0; i < 6; i++) {
-            renvoi[i] = new TextButton("More", Skins.DEFAULT_SKIN);
+            renvoi[i] = new TextButton("More", DEFAULT_SKIN);
             int finalI = i;
             renvoi[i].addListener(new InputListener() {
                 @Override
@@ -314,7 +329,7 @@ public class GameRoomScreenGame extends ApplicationAdapter implements Screen {
     private Label[] initLabel() {
         Label[] renvoi = new Label[6];
         for (int i = 0; i < 6; i++) {
-            renvoi[i] = new Label(Integer.toString(tableMises[i]), Skins.DEFAULT_SKIN);
+            renvoi[i] = new Label(Integer.toString(tableMises[i]), DEFAULT_SKIN);
         }
         return renvoi;
     }
@@ -323,7 +338,7 @@ public class GameRoomScreenGame extends ApplicationAdapter implements Screen {
         TextButton[] renvoi = new TextButton[6];
         for (int i = 0; i < 6; i++) {
             int finalI = i;
-            renvoi[i] = new TextButton("Less", Skins.DEFAULT_SKIN);
+            renvoi[i] = new TextButton("Less", DEFAULT_SKIN);
             renvoi[i].addListener(new InputListener() {
                 @Override
                 public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
@@ -416,7 +431,7 @@ public class GameRoomScreenGame extends ApplicationAdapter implements Screen {
         }
     }
 
-    private void visualSpellChoosing(){
+    private void visualSpellChoosing() {
         tableSorts = new Table();
         final int limiteSorts = 2;
         int cpt = 0;
@@ -428,9 +443,9 @@ public class GameRoomScreenGame extends ApplicationAdapter implements Screen {
         }
     }
 
-    private void initLabelSorts(){
+    private void initLabelSorts() {
         for (int i = 0; i < SpellList.Sorts.values().length; i++) {
-            nomSorts[i] = new Label(SpellList.getName(SpellList.Sorts.values()[i]), Skins.DEFAULT_SKIN);
+            nomSorts[i] = new Label(SpellList.getName(SpellList.Sorts.values()[i]), DEFAULT_SKIN);
             nomSorts[i].setFontScale(1.5f);
             nomSorts[i].setPosition(Gdx.graphics.getWidth() * 0.5f, Gdx.graphics.getHeight() * 0.75f + i * 50);
         }
@@ -442,6 +457,7 @@ public class GameRoomScreenGame extends ApplicationAdapter implements Screen {
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
         hud.update(v);
+        hud.bringToFront();
         stage.act(Math.min(Gdx.graphics.getDeltaTime(), 1 / 30f));
         game.batch.begin();
         BitmapFont font = new BitmapFont();
