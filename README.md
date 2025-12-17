@@ -1,4 +1,4 @@
-# CitadelleDuChaos
+# CitadelleDuChaos / The Citadel of Chaos
 
 A [libGDX](https://libgdx.com/) project generated with [gdx-liftoff](https://github.com/libgdx/gdx-liftoff).
 
@@ -13,3 +13,6 @@ But will you be able to penetrate within the Chaos Citadel and defeat Balthus in
 ## About this project
 A personnal project based on a "choose your own adventure" I read as a teenager. Will you be better than me to defeat Balthus ?
 A great challenge about Oriented-Object coding.
+
+## Disclaimer
+Although I practice English a lot, it is not my native language and mistakes might be made. Please, do not hesitate to reporte them so I can correct myself ! 
